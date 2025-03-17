@@ -1,0 +1,19 @@
+package presentacion;
+
+import com.modeliosoft.modelio.javadesigner.annotations.objid;
+import negocio.tSala;
+
+@objid ("9fac9e50-fd83-46b5-81b9-55e898639586")
+public class VistaAltaSalas {
+    @objid ("e49202a9-a954-49d4-8c0c-dc53035b4f52")
+    private String _aforo;
+
+    @objid ("97242ce1-f84f-4c53-8172-13e791ac7375")
+    public tSala tSala;
+
+    @objid ("6895f373-b723-449c-a8c0-034640bf00e6")
+    public VistaAltaSalas(final int aforo) {
+        // TODO Auto-generated return
+    }
+
+}
