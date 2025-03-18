@@ -38,7 +38,6 @@ public class VistaBajaCliente {
 	unroll.addActionListener(
 			new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
-					// TBD (To Be Developed)
 				}
 			}
 			);

@@ -39,6 +39,10 @@ public class VistaCliente {
 		botonRead.setBounds(053, 480, 132, 32);
 		menuPrincipal.getContentPane().add(botonRead);
 		
+		JButton botonUnroll = new JButton();
+		botonUnroll.setText("Dar de baja cliente");
+		botonUnroll.setBounds(053, 480, 132, 32);
+		menuPrincipal.getContentPane().add(botonUnroll);
 		
 
 		menuPrincipal.setVisible (true);
@@ -58,6 +62,16 @@ public class VistaCliente {
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
 						Controlador.accion(Evento.MOSTRAR_CLIENTES);
+					}
+				}
+				);
+		
+		botonUnroll.addActionListener(
+				new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+						menuPrincipal.setVisible (false);
+						VistaBajaCliente vbc = new VistaBajaCliente();
+						Controlador.accion(Evento.ELIMINAR_CLIENTE);
 					}
 				}
 				);
