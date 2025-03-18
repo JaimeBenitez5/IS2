@@ -44,6 +44,10 @@ public class VistaCliente {
 		botonUnroll.setBounds(053, 480, 132, 32);
 		menuPrincipal.getContentPane().add(botonUnroll);
 		
+		JButton modClient = new JButton();
+		botonUnroll.setText("Dar de baja cliente");
+		botonUnroll.setBounds(053, 480, 132, 32);
+		menuPrincipal.getContentPane().add(botonUnroll);
 
 		menuPrincipal.setVisible (true);
 		// ------------------------------------

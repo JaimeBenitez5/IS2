@@ -3,6 +3,8 @@ import java.sql.*;
 
 public class BDConexion {
 	/**Parametros de conexion**/
+	
+	
 	static String bd = "gimnasio";
 	static String login = "root";
 	static String password = "equipo2";
