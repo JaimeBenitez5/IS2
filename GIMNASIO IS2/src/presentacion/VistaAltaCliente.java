@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -16,18 +17,71 @@ import negocio.DTOtCliente;
 
 @objid ("69cff9f9-fddd-46c9-b01f-2aa13f2b2c28")
 public class VistaAltaCliente {
-    @objid ("73d83efe-4a43-4c20-8afc-0a59bd859fef")
-    private String _dni;
+	@objid ("73d83efe-4a43-4c20-8afc-0a59bd859fef")
+	private String _dni;
 
-    @objid ("08d33ec6-61ad-418c-bbc2-fa562a211f8f")
-    private String _nombre;
+	@objid ("08d33ec6-61ad-418c-bbc2-fa562a211f8f")
+	private String _nombre;
 
-    @objid ("5cc10efb-fd15-4cf6-aefa-32bc0ddae10b")
-    public DTOtCliente tCliente;
+	@objid ("5cc10efb-fd15-4cf6-aefa-32bc0ddae10b")
+	public DTOtCliente tCliente;
 
-    @objid ("3175bc60-dc4e-4d25-8fbe-2b50c79d9d60")
-    public VistaAltaCliente(final String dni, final String nombre) {
-    	
-    }
+	@objid ("3175bc60-dc4e-4d25-8fbe-2b50c79d9d60")
+	public VistaAltaCliente() {
+		// ------------------------------------
+		// Diseño de la vista
+		JFrame menuPrincipal = new JFrame();
+		menuPrincipal.setTitle("Menu Alta Cliente");
+		menuPrincipal.setBounds(100, 100, 450, 300);
+		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		menuPrincipal.getContentPane().setLayout(new FlowLayout());
+		// Menu con botones para acceder a la funcionalidad de la
+		// entidad cliente. Solo se muestran los CRUDs Alta y mostrar.
+		
+		JLabel titulo = new JLabel("Añadir cliente");
+		
+		JButton discard = new JButton();
+		discard.setText("Descartar");
+		discard.setBounds(153, 180, 132, 32);
+		menuPrincipal.getContentPane().add(discard);
+
+		JButton save = new JButton();
+		save.setText("Guardar");
+		save.setBounds(253, 380, 132, 32);
+		menuPrincipal.getContentPane().add(save);
+
+
+
+
+		menuPrincipal.setVisible (true);
+		// ------------------------------------
+		// Listener's
+		discard.addActionListener(
+				new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+						// TBD (To Be Developed)
+					}
+				}
+				);
+
+		save.addActionListener(
+				new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+						Controlador.accion(Evento.MOSTRAR_CLIENTES);
+					}
+				}
+				);
+	}
+
+	public static void actualizar(int evento, Object datos) {
+		JTextArea textArea = new JTextArea(datos.toString());
+		textArea.setLineWrap(true);
+		textArea.setEditable(false);
+		textArea.setWrapStyleWord(true);
+		JScrollPane scrollPane = new JScrollPane(textArea);
+		scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
+		JOptionPane.showMessageDialog(null, scrollPane, "CLIENTES", JOptionPane.DEFAULT_OPTION);
+		JOptionPane.showMessageDialog(null, "No se ha podido encontrar ningun cliente");
+	} 
 
 }

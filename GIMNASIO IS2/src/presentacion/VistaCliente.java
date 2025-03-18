@@ -33,6 +33,13 @@ public class VistaCliente {
 		botonReadAll.setText("Mostrar clientes");
 		botonReadAll.setBounds(253, 380, 132, 32);
 		menuPrincipal.getContentPane().add(botonReadAll);
+		
+		JButton botonRead = new JButton();
+		botonRead.setText("Mostrar cliente");
+		botonRead.setBounds(053, 480, 132, 32);
+		menuPrincipal.getContentPane().add(botonRead);
+		
+		
 
 		menuPrincipal.setVisible (true);
 		// ------------------------------------
@@ -40,7 +47,9 @@ public class VistaCliente {
 		botonAlta.addActionListener(
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
-						// TBD (To Be Developed)
+						menuPrincipal.setVisible (false);
+						VistaAltaCliente vac = new VistaAltaCliente();
+						Controlador.accion(Evento.ALTA_CLIENTE);
 					}
 				}
 				);

@@ -24,3 +24,4 @@ public interface DAOCliente {
     List<DTOtCliente> readAllClientes();
 
 }
+
