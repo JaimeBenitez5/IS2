@@ -44,10 +44,15 @@ public class VistaCliente {
 		botonUnroll.setBounds(053, 480, 132, 32);
 		menuPrincipal.getContentPane().add(botonUnroll);
 		
-		JButton modClient = new JButton();
-		botonUnroll.setText("Dar de baja cliente");
-		botonUnroll.setBounds(053, 480, 132, 32);
-		menuPrincipal.getContentPane().add(botonUnroll);
+		JButton botonModClient = new JButton();
+		botonModClient.setText("Dar de baja cliente");
+		botonModClient.setBounds(053, 480, 132, 32);
+		menuPrincipal.getContentPane().add(botonModClient);
+		
+		JButton botonSearch = new JButton();
+		botonSearch.setText("Buscar cliente");
+		botonSearch.setBounds(053, 480, 132, 32);
+		menuPrincipal.getContentPane().add(botonSearch);
 
 		menuPrincipal.setVisible (true);
 		// ------------------------------------
@@ -70,6 +75,39 @@ public class VistaCliente {
 				}
 				);
 		
+		botonUnroll.addActionListener(
+				new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+						menuPrincipal.setVisible (false);
+						VistaBajaCliente vbc = new VistaBajaCliente();
+						Controlador.accion(Evento.ELIMINAR_CLIENTE);
+					}
+				}
+				);
+		
+		botonUnroll.addActionListener(
+				new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+						menuPrincipal.setVisible (false);
+						VistaBajaCliente vbc = new VistaBajaCliente();
+						Controlador.accion(Evento.ELIMINAR_CLIENTE);
+					}
+				}
+				);
+		
+		
+
+		botonUnroll.addActionListener(
+				new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+						menuPrincipal.setVisible (false);
+						VistaBajaCliente vbc = new VistaBajaCliente();
+						Controlador.accion(Evento.ELIMINAR_CLIENTE);
+					}
+				}
+				);
+		
+
 		botonUnroll.addActionListener(
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {

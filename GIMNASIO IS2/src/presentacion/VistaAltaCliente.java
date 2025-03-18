@@ -2,9 +2,14 @@ package presentacion;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,7 +22,7 @@ import negocio.DTOtCliente;
 
 @objid ("69cff9f9-fddd-46c9-b01f-2aa13f2b2c28")
 public class VistaAltaCliente {
-	
+
 	@objid ("3175bc60-dc4e-4d25-8fbe-2b50c79d9d60")
 	public VistaAltaCliente() {
 		// ------------------------------------
@@ -29,9 +34,9 @@ public class VistaAltaCliente {
 		menuPrincipal.getContentPane().setLayout(new FlowLayout());
 		// Menu con botones para acceder a la funcionalidad de la
 		// entidad cliente. Solo se muestran los CRUDs Alta y mostrar.
-		
+
 		JLabel titulo = new JLabel("Añadir cliente");
-		
+
 		JButton discard = new JButton();
 		discard.setText("Descartar");
 		discard.setBounds(153, 180, 132, 32);
@@ -42,7 +47,11 @@ public class VistaAltaCliente {
 		save.setBounds(253, 380, 132, 32);
 		menuPrincipal.getContentPane().add(save);
 
+	
+        JButton back =  new JButton(new ImageIcon("icons/back.png"));
+		back.setActionCommand("back");
 
+		menuPrincipal.getContentPane().add(back);
 
 
 		menuPrincipal.setVisible (true);
@@ -63,8 +72,14 @@ public class VistaAltaCliente {
 					}
 				}
 				);
-	}
+		
+		back.addActionListener( new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
 
+			}
+		}
+				);
+	}
 	public static void actualizar(int evento, Object datos) {
 		JTextArea textArea = new JTextArea(datos.toString());
 		textArea.setLineWrap(true);
@@ -75,5 +90,21 @@ public class VistaAltaCliente {
 		JOptionPane.showMessageDialog(null, scrollPane, "CLIENTES", JOptionPane.DEFAULT_OPTION);
 		JOptionPane.showMessageDialog(null, "No se ha podido encontrar ningun cliente");
 	} 
+	 public static Image resizeImage(Image img, int width, int height) {
+	        BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+	        Graphics2D g2 = resizedImage.createGraphics();
+	        
+	        // Activar renderizado de alta calidad
+	        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+	        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+	        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+	        
+	        // Dibujar la imagen escalada
+	        g2.drawImage(img, 0, 0, width, height, null);
+	        g2.dispose(); // Liberar recursos
+	        
+	        return resizedImage;
+	    }
+	 
 
 }
