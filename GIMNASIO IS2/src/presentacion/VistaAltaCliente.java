@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import negocio.DTOtCliente;
@@ -42,9 +43,21 @@ public class VistaAltaCliente {
 		save.setBounds(253, 380, 132, 32);
 		menuPrincipal.getContentPane().add(save);
 
-
-
-
+		JLabel l= new JLabel("DNI:");
+		l.setAlignmentX(0);
+		JLabel l1= new JLabel("Nombre:");
+		JLabel l2= new JLabel("Dirección:");
+		
+		JTextField dni= new JTextField(30);
+		JTextField nombre= new JTextField(30);
+		JTextField direccion= new JTextField(30);
+		
+		menuPrincipal.add(l);
+		menuPrincipal.add(l1);
+		menuPrincipal.add(l2);
+		menuPrincipal.add(dni);
+		menuPrincipal.add(direccion);
+		menuPrincipal.add(nombre);
 		menuPrincipal.setVisible (true);
 		// ------------------------------------
 		// Listener's

@@ -13,7 +13,7 @@ public class VistaAltaSalas {
 
     @objid ("6895f373-b723-449c-a8c0-034640bf00e6")
     public VistaAltaSalas(final int aforo) {
-        // TODO Auto-generated return
+        
     }
 
 }

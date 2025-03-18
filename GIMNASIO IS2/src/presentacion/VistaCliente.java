@@ -24,6 +24,8 @@ public class VistaCliente {
 		// Menu con botones para acceder a la funcionalidad de la
 		// entidad cliente. Solo se muestran los CRUDs Alta y mostrar.
 
+	
+		
 		JButton botonAlta = new JButton();
 		botonAlta.setText("Alta Cliente");
 		botonAlta.setBounds(153, 180, 132, 32);
