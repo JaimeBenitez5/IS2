@@ -23,7 +23,6 @@ public class VistaMenuPrincipal {
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menuPrincipal.getContentPane().setLayout(new FlowLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(88, 161, 164));
-	
 		
 		JButton botonCliente = new JButton();
 		botonCliente.setText("Clientes");
