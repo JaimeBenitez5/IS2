@@ -17,15 +17,7 @@ import negocio.DTOtCliente;
 
 @objid ("69cff9f9-fddd-46c9-b01f-2aa13f2b2c28")
 public class VistaAltaCliente {
-	@objid ("73d83efe-4a43-4c20-8afc-0a59bd859fef")
-	private String _dni;
-
-	@objid ("08d33ec6-61ad-418c-bbc2-fa562a211f8f")
-	private String _nombre;
-
-	@objid ("5cc10efb-fd15-4cf6-aefa-32bc0ddae10b")
-	public DTOtCliente tCliente;
-
+	
 	@objid ("3175bc60-dc4e-4d25-8fbe-2b50c79d9d60")
 	public VistaAltaCliente() {
 		// ------------------------------------
