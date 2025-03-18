@@ -4,6 +4,11 @@ import java.util.List;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import negocio.DTOtCliente;
 
+
+
+// VEINY AHHH DIH 
+
+
 @objid ("c9382fff-a686-44ed-a6bd-9880fa6e65b9")
 public interface DAOCliente {
     @objid ("0701464f-42e9-4833-b355-cb4c0019bae9")
