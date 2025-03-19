@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -64,14 +65,13 @@ public class VistaCliente {
 		botonMainMenu.setContentAreaFilled(false);
 		menuPrincipal.getContentPane().add(botonMainMenu);
 
-		menuPrincipal.setVisible (true);
+		menuPrincipal.setVisible (true);;
 		// ------------------------------------
 		// Listener's
 		botonAlta.addActionListener(
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
 						menuPrincipal.setVisible (false);
-						VistaAltaCliente vac = new VistaAltaCliente();
 						Controlador.accion(Evento.ALTA_CLIENTE);
 					}
 				}
@@ -80,6 +80,7 @@ public class VistaCliente {
 		botonReadAll.addActionListener(
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
+						menuPrincipal.setVisible (false);
 						Controlador.accion(Evento.MOSTRAR_CLIENTES);
 					}
 				}
@@ -89,7 +90,6 @@ public class VistaCliente {
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
 						menuPrincipal.setVisible (false);
-						VistaBajaCliente vbc = new VistaBajaCliente();
 						Controlador.accion(Evento.ELIMINAR_CLIENTE);
 					}
 				}

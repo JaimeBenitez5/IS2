@@ -70,6 +70,7 @@ public class VistaFacturas {
 		botonReadAll.addActionListener(
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
+						menuPrincipal.setVisible (false);
 						Controlador.accion(Evento.MOSTRAR_CLIENTES);
 					}
 				}

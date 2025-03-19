@@ -4,7 +4,7 @@ import negocio.SAClienteImp;
 import java.util.Collection;
 import java.util.List;
 
-import negocio.DTOtCliente;
+import negocio.tCliente;
 import negocio.SACliente;
 import negocio.tCliente;
 
@@ -13,16 +13,15 @@ public class Controlador{
 		switch (evento) {
 		// CLIENTE
 		case Evento.ALTA_CLIENTE: { // 1 = ALTA_CLIENTES
-			//TBD (To Be Developed)
+			VistaAltaCliente vac = new VistaAltaCliente();
 			break;
 		}
 		case Evento.MOSTRAR_CLIENTES: { // 2 = MOSTRAR_CLIENTES
+			VistaMostrarClientes vmcs = new VistaMostrarClientes();
 			SACliente SACliente = new SAClienteImp();
-			List<DTOtCliente>res = SACliente.leerTodosClientes();
-			if (!res.isEmpty())
-				VistaCliente.actualizar(Evento.RES_MOSTRAR_CLIENTES_OK, res);
-			else
-				VistaCliente.actualizar(Evento.RES_MOSTRAR_CLIENTES_KO, null);
+			List<tCliente>res = SACliente.leerTodosClientes();
+			if (!res.isEmpty()) VistaCliente.actualizar(Evento.RES_MOSTRAR_CLIENTES_OK, res);
+			else VistaCliente.actualizar(Evento.RES_MOSTRAR_CLIENTES_KO, null);
 			break;
 		}
 		case Evento.BUSCAR_CLIENTE: { // 3 = BUSCAR_CLIENTE
@@ -30,7 +29,7 @@ public class Controlador{
 			break;
 		}
 		case Evento.ELIMINAR_CLIENTE: { //4 = ELIMINAR_CLIENTE
-			//TBD
+			VistaBajaCliente vbc = new VistaBajaCliente();
 			break;
 		}
 		case Evento.MODIFICAR_CLIENTE: { // 5 = MODIFICAR_CLIENTE
