@@ -38,6 +38,7 @@ public class BDConexion {
 				String apellido1 = rs.getString ("apellido1");
 				System.out.println ( "(" + idCliente + " " + name + " " + apellido1 + ")");
 			}
+			System.out.println ( "(BALLS)");
 		}
 	}
 	

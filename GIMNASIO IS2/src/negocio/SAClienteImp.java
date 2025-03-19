@@ -8,19 +8,19 @@ import com.modeliosoft.modelio.javadesigner.annotations.objid;
 @objid ("d2157bb0-ce0e-463c-a53f-5149b3c80275")
 public class SAClienteImp implements SACliente {
     @objid ("ce4675dc-94ff-48e6-8c95-167d69434968")
-    public int altaCliente(final DTOtCliente cliente) {
+    public int altaCliente(final tCliente cliente) {
         // TODO Auto-generated return
         return 0;
     }
 
     @objid ("aa2c3fc3-0c75-4838-98c9-2291294245e5")
-    public DTOtCliente leerCliente() {
+    public tCliente leerCliente() {
         // TODO Auto-generated return
         return null;
     }
 
     @objid ("8b08be3c-aaa6-4869-83d5-46e266a9b1a8")
-    public int actualizarCliente(final DTOtCliente cliente) {
+    public int actualizarCliente(final tCliente cliente) {
         // TODO Auto-generated return
         return 0;
     }
@@ -32,7 +32,11 @@ public class SAClienteImp implements SACliente {
     }
 
     @objid ("71ced6f7-0fb3-4f29-a8d3-7a425d2444ed")
-    public List<DTOtCliente> leerTodosClientes() {
+    public List<tCliente> leerTodosClientes() {
+    	
+    	
+    	
+    	
     	DAOCliente clienteDao = new DAOClienteImp();
     	return clienteDao.readAllClientes(); 
     }

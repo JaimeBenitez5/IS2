@@ -9,6 +9,7 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,6 +20,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
+
+import configFiles.BDConexion;
 
 @objid ("69cff9f9-fddd-46c9-b01f-2aa13f2b2c28")
 public class VistaAltaCliente {
@@ -100,7 +103,13 @@ public class VistaAltaCliente {
 		save.addActionListener(
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
-						Controlador.accion(Evento.MOSTRAR_CLIENTES);
+						BDConexion bdConexion = new BDConexion();
+						try {
+							bdConexion.executeQuery();
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
+						//Controlador.accion(Evento.MOSTRAR_CLIENTES);
 					}
 				}
 				);
@@ -132,19 +141,4 @@ public class VistaAltaCliente {
 		JOptionPane.showMessageDialog(null, scrollPane, "CLIENTES", JOptionPane.DEFAULT_OPTION);
 		JOptionPane.showMessageDialog(null, "No se ha podido encontrar ningun cliente");
 	} 
-
-	public static Image resizeImage(Image img, int width, int height) {
-		BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g2 = resizedImage.createGraphics();
-		// Activar renderizado de alta calidad
-		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-		g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		// Dibujar la imagen escalada
-		g2.drawImage(img, 0, 0, width, height, null);
-		g2.dispose(); // Liberar recursos
-
-		return resizedImage;
-	}
-
 }

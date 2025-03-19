@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -27,30 +28,38 @@ public class VistaMenuPrincipal {
 		JButton botonCliente = new JButton();
 		botonCliente.setText("Clientes");
 		botonCliente.setBounds(153, 180, 132, 32);
+		botonCliente.setForeground(Color.WHITE);
+		botonCliente.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonCliente);
 
 		JButton botonFacturas = new JButton();
 		botonFacturas.setText("Facturas");
+		botonFacturas.setForeground(Color.WHITE);
+		botonFacturas.setBackground(new Color(48, 86, 119));
 		botonFacturas.setBounds(253, 380, 132, 32);
+		
 		menuPrincipal.getContentPane().add(botonFacturas);
 		
 		JButton botonEmpleados = new JButton();
 		botonEmpleados.setText("Empleados");
 		botonEmpleados.setBounds(053, 480, 132, 32);
+		botonEmpleados.setForeground(Color.WHITE);
+		botonEmpleados.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonEmpleados);
 		
 		JButton botonSalas = new JButton();
 		botonSalas.setText("Salas");
 		botonSalas.setBounds(053, 480, 132, 32);
+		botonSalas.setForeground(Color.WHITE);
+		botonSalas.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonSalas);
 		
 		ImageIcon logo = new ImageIcon("icons/logo.png");
 		JLabel logoL = new JLabel(logo);
 
 		menuPrincipal.getContentPane().add(logoL);
-		
-
 		menuPrincipal.setVisible (true);
+		
 		// ------------------------------------
 		// Listener's
 		botonCliente.addActionListener(
@@ -58,7 +67,6 @@ public class VistaMenuPrincipal {
 					public void actionPerformed (ActionEvent e) {
 						menuPrincipal.setVisible (false);
 						VistaCliente vc = new VistaCliente();
-						Controlador.accion(Evento.ALTA_CLIENTE);
 					}
 				}
 				);
@@ -69,7 +77,6 @@ public class VistaMenuPrincipal {
 					public void actionPerformed (ActionEvent e) {
 						menuPrincipal.setVisible (false);
 						VistaFacturas vf = new VistaFacturas();
-						Controlador.accion(Evento.ELIMINAR_CLIENTE);
 					}
 				}
 				);
@@ -79,7 +86,6 @@ public class VistaMenuPrincipal {
 					public void actionPerformed (ActionEvent e) {
 						menuPrincipal.setVisible (false);
 						VistaEmpleados ve = new VistaEmpleados();
-						Controlador.accion(Evento.ELIMINAR_CLIENTE);
 					}
 				}
 				);
@@ -89,7 +95,6 @@ public class VistaMenuPrincipal {
 					public void actionPerformed (ActionEvent e) {
 						menuPrincipal.setVisible (false);
 						VistaSalas vs = new VistaSalas();
-						Controlador.accion(Evento.ELIMINAR_CLIENTE);
 					}
 				}
 				);
