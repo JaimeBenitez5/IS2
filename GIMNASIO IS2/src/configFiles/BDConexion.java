@@ -35,10 +35,10 @@ public class BDConexion {
 			while (rs.next ()) {
 				int idCliente = rs.getInt("idCliente");
 				String name = rs.getString ("nombre");
-				String apellido1 = rs.getString ("apellido1");
-				System.out.println ( "(" + idCliente + " " + name + " " + apellido1 + ")");
+				String direccion = rs.getString ("direccion");
+				int activo = rs.getInt("activo");
+				System.out.println ( "(" + idCliente + " " + name + " " + direccion + " " + activo+")");
 			}
-			System.out.println ( "(BALLS)");
 		}
 	}
 	
