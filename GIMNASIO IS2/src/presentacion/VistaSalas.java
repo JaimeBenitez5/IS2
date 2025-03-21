@@ -24,31 +24,39 @@ public class VistaSalas {
 		menuPrincipal.getContentPane().setLayout(new FlowLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(88, 161, 164));
 
-
-
 		JButton botonAlta = new JButton();
 		botonAlta.setText("Alta Sala");
 		botonAlta.setBounds(153, 180, 132, 32);
+		botonAlta.setForeground(Color.WHITE);
+		botonAlta.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonAlta);
 
 		JButton botonReadAll = new JButton();
 		botonReadAll.setText("Mostrar salas");
 		botonReadAll.setBounds(253, 380, 132, 32);
+		botonReadAll.setForeground(Color.WHITE);
+		botonReadAll.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonReadAll);
 
 		JButton botonRead = new JButton();
 		botonRead.setText("Mostrar sala");
 		botonRead.setBounds(053, 480, 132, 32);
+		botonRead.setForeground(Color.WHITE);
+		botonRead.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonRead);
 
 		JButton botonUnroll = new JButton();
 		botonUnroll.setText("Eliminar sala");
 		botonUnroll.setBounds(053, 480, 132, 32);
+		botonUnroll.setForeground(Color.WHITE);
+		botonUnroll.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonUnroll);
 
 		JButton botonModClient = new JButton();
 		botonModClient.setText("Modificar sala");
 		botonModClient.setBounds(053, 480, 132, 32);
+		botonModClient.setForeground(Color.WHITE);
+		botonModClient.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonModClient);
 
 		JButton botonMainMenu =  new JButton(new ImageIcon("icons/main_menu.png"));
@@ -58,7 +66,7 @@ public class VistaSalas {
 		menuPrincipal.getContentPane().add(botonMainMenu);
 
 		menuPrincipal.setVisible (true);
-		// ------------------------------------
+		
 		// Listener's
 		botonAlta.addActionListener(
 				new ActionListener () {

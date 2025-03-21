@@ -31,9 +31,8 @@ public class VistaBajaCliente {
 	unroll.setBounds(153, 180, 132, 32);
 	menuPrincipal.getContentPane().add(unroll);
 
-
 	menuPrincipal.setVisible (true);
-	// ------------------------------------
+	
 	// Listener's
 	unroll.addActionListener(
 			new ActionListener () {

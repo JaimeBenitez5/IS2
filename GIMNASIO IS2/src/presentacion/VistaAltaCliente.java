@@ -86,11 +86,8 @@ public class VistaAltaCliente {
 		botonMainMenu.setContentAreaFilled(false);
 		menuPrincipal.getContentPane().add(botonMainMenu);
 
-
-
-
 		menuPrincipal.setVisible (true);
-		// ------------------------------------
+
 		// Listener's
 		discard.addActionListener(
 				new ActionListener () {

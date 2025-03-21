@@ -17,14 +17,14 @@ import javax.swing.JTextArea;
 
 public class VistaMenuPrincipal {
 	public VistaMenuPrincipal() {
-		
+
 		JFrame menuPrincipal = new JFrame();
 		menuPrincipal.setTitle("Menu Principal");
 		menuPrincipal.setBounds(100, 100, 450, 300);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menuPrincipal.getContentPane().setLayout(new FlowLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(88, 161, 164));
-		
+
 		JButton botonCliente = new JButton();
 		botonCliente.setText("Clientes");
 		botonCliente.setBounds(153, 180, 132, 32);
@@ -37,30 +37,29 @@ public class VistaMenuPrincipal {
 		botonFacturas.setForeground(Color.WHITE);
 		botonFacturas.setBackground(new Color(48, 86, 119));
 		botonFacturas.setBounds(253, 380, 132, 32);
-		
+
 		menuPrincipal.getContentPane().add(botonFacturas);
-		
+
 		JButton botonEmpleados = new JButton();
 		botonEmpleados.setText("Empleados");
 		botonEmpleados.setBounds(053, 480, 132, 32);
 		botonEmpleados.setForeground(Color.WHITE);
 		botonEmpleados.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonEmpleados);
-		
+
 		JButton botonSalas = new JButton();
 		botonSalas.setText("Salas");
 		botonSalas.setBounds(053, 480, 132, 32);
 		botonSalas.setForeground(Color.WHITE);
 		botonSalas.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonSalas);
-		
+
 		ImageIcon logo = new ImageIcon("icons/logo.png");
 		JLabel logoL = new JLabel(logo);
 
 		menuPrincipal.getContentPane().add(logoL);
 		menuPrincipal.setVisible (true);
-		
-		// ------------------------------------
+
 		// Listener's
 		botonCliente.addActionListener(
 				new ActionListener () {
@@ -71,7 +70,7 @@ public class VistaMenuPrincipal {
 				}
 				);
 
-		
+
 		botonFacturas.addActionListener(
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
@@ -80,7 +79,7 @@ public class VistaMenuPrincipal {
 					}
 				}
 				);
-		
+
 		botonEmpleados.addActionListener(
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
@@ -89,7 +88,7 @@ public class VistaMenuPrincipal {
 					}
 				}
 				);
-		
+
 		botonSalas.addActionListener(
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
@@ -98,10 +97,10 @@ public class VistaMenuPrincipal {
 					}
 				}
 				);
-		
+
 
 	}
-	
+
 	public static void actualizar(int evento, Object datos) {
 		if (evento == Evento.RES_MOSTRAR_CLIENTES_OK) {
 			JTextArea textArea = new JTextArea(datos.toString());

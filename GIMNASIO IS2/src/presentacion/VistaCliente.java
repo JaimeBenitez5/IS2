@@ -31,33 +31,44 @@ public class VistaCliente {
 		JButton botonAlta = new JButton();
 		botonAlta.setText("Alta Cliente");
 		botonAlta.setBounds(153, 180, 132, 32);
+		botonAlta.setForeground(Color.WHITE);
+		botonAlta.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonAlta);
 
 		JButton botonReadAll = new JButton();
 		botonReadAll.setText("Mostrar clientes");
 		botonReadAll.setBounds(253, 380, 132, 32);
+		botonReadAll.setForeground(Color.WHITE);
+		botonReadAll.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonReadAll);
 
 		JButton botonRead = new JButton();
 		botonRead.setText("Mostrar cliente");
 		botonRead.setBounds(053, 480, 132, 32);
+		botonRead.setForeground(Color.WHITE);
+		botonRead.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonRead);
 
 		JButton botonUnroll = new JButton();
 		botonUnroll.setText("Dar de baja cliente");
 		botonUnroll.setBounds(053, 480, 132, 32);
+		botonUnroll.setForeground(Color.WHITE);
+		botonUnroll.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonUnroll);
 
 		JButton botonModClient = new JButton();
 		botonModClient.setText("Modificar cliente");
 		botonModClient.setBounds(053, 480, 132, 32);
+		botonModClient.setForeground(Color.WHITE);
+		botonModClient.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonModClient);
 
 		JButton botonSearch = new JButton();
 		botonSearch.setText("Buscar cliente");
 		botonSearch.setBounds(053, 480, 132, 32);
+		botonSearch.setForeground(Color.WHITE);
+		botonSearch.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonSearch);
-
 
 		JButton botonMainMenu =  new JButton(new ImageIcon("icons/main_menu.png"));
 		botonMainMenu.setActionCommand("Ir a menu principal");
@@ -65,8 +76,7 @@ public class VistaCliente {
 		botonMainMenu.setContentAreaFilled(false);
 		menuPrincipal.getContentPane().add(botonMainMenu);
 
-		menuPrincipal.setVisible (true);;
-		// ------------------------------------
+		menuPrincipal.setVisible (true);
 		// Listener's
 		botonAlta.addActionListener(
 				new ActionListener () {

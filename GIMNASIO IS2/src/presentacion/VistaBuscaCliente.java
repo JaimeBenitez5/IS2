@@ -36,34 +36,33 @@ public class VistaBuscaCliente {
 		JButton back = new JButton();
 		back.setActionCommand("back");
 		back.setIcon(new ImageIcon("icons/back.png"));
-		back.addActionListener( new ActionListener () {
-			public void actionPerformed (ActionEvent e) {
-				
-			}
-		}
-		);
-		
 
-		
 		menuPrincipal.setVisible (true);
-		// ------------------------------------
 		// Listener's
+
 		unroll.addActionListener(
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
 					}
 				}
 				);
+
+		back.addActionListener( new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+
+			}
 		}
-	
-		public static void actualizar(int evento, Object datos) {
-			JTextArea textArea = new JTextArea(datos.toString());
-			textArea.setLineWrap(true);
-			textArea.setEditable(false);
-			textArea.setWrapStyleWord(true);
-			JScrollPane scrollPane = new JScrollPane(textArea);
-			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, scrollPane, "CLIENTES", JOptionPane.DEFAULT_OPTION);
+				);
+	}
+
+	public static void actualizar(int evento, Object datos) {
+		JTextArea textArea = new JTextArea(datos.toString());
+		textArea.setLineWrap(true);
+		textArea.setEditable(false);
+		textArea.setWrapStyleWord(true);
+		JScrollPane scrollPane = new JScrollPane(textArea);
+		scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
+		JOptionPane.showMessageDialog(null, scrollPane, "CLIENTES", JOptionPane.DEFAULT_OPTION);
 		JOptionPane.showMessageDialog(null, "No se ha podido encontrar ningun cliente");
-		} 
+	} 
 }

@@ -28,21 +28,29 @@ public class VistaFacturas {
 		JButton botonAlta = new JButton();
 		botonAlta.setText("Crear Factura");
 		botonAlta.setBounds(153, 180, 132, 32);
+		botonAlta.setForeground(Color.WHITE);
+		botonAlta.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonAlta);
 
 		JButton botonReadAll = new JButton();
 		botonReadAll.setText("Mostrar facturas");
 		botonReadAll.setBounds(253, 380, 132, 32);
+		botonReadAll.setForeground(Color.WHITE);
+		botonReadAll.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonReadAll);
 
 		JButton botonRead = new JButton();
 		botonRead.setText("Mostrar factura");
 		botonRead.setBounds(053, 480, 132, 32);
+		botonRead.setForeground(Color.WHITE);
+		botonRead.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonRead);
 
 		JButton botonListByClient = new JButton();
 		botonListByClient.setText("Listar facturas por cliente");
 		botonListByClient.setBounds(053, 480, 132, 32);
+		botonListByClient.setForeground(Color.WHITE);
+		botonListByClient.setBackground(new Color(48, 86, 119));
 		menuPrincipal.getContentPane().add(botonListByClient);
 
 
@@ -54,7 +62,6 @@ public class VistaFacturas {
 
 
 		menuPrincipal.setVisible (true);
-		// ------------------------------------
 		// Listener's
 		botonAlta.addActionListener(
 				new ActionListener () {
