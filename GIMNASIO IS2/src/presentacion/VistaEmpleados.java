@@ -1,123 +1,89 @@
 package presentacion;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import java.awt.*;
+import javax.swing.*;
 
 public class VistaEmpleados {
-	public VistaEmpleados() {
-		// ------------------------------------
-		// Diseño de la vista
-		JFrame menuPrincipal = new JFrame();
-		menuPrincipal.setTitle("Menu CRUDs Empleados");
-		menuPrincipal.setBounds(100, 100, 450, 300);
-		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		menuPrincipal.getContentPane().setLayout(new FlowLayout());
-		menuPrincipal.getContentPane().setBackground(new Color(88, 161, 164));
 
+    public VistaEmpleados() {
+        // ------------------------------------
+        // Diseño de la vista
+        JFrame menuPrincipal = new JFrame("Menú CRUD Empleados");
+        menuPrincipal.setSize(1280, 720);
+        menuPrincipal.setLocationRelativeTo(null);
+        menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Panel principal con margen y disposición en cuadrícula
+        JPanel panel = new JPanel(new GridLayout(3, 2, 20, 20));
+        panel.setBackground(new Color(88, 161, 164));
+        panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
-		JButton botonAlta = new JButton();
-		botonAlta.setText("Alta Empleado");
-		botonAlta.setBounds(153, 180, 132, 32);
-		botonAlta.setForeground(Color.WHITE);
-		botonAlta.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonAlta);
+        // Crear botones
+        JButton botonAlta = crearBoton("Alta Empleado");
+        JButton botonReadAll = crearBoton("Mostrar Empleados");
+        JButton botonRead = crearBoton("Mostrar Empleado");
+        JButton botonUnroll = crearBoton("Eliminar Empleado");
+        JButton botonModClient = crearBoton("Modificar Empleado");
 
-		JButton botonReadAll = new JButton();
-		botonReadAll.setText("Mostrar Empleados");
-		botonReadAll.setBounds(253, 380, 132, 32);
-		botonReadAll.setForeground(Color.WHITE);
-		botonReadAll.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonReadAll);
+        // Botón de regreso al menú principal con icono
+        JButton botonMainMenu = new JButton(new ImageIcon("icons/main_menu.png"));
+        botonMainMenu.setBorderPainted(false);
+        botonMainMenu.setContentAreaFilled(false);
+        botonMainMenu.setActionCommand("Ir a Menú Principal");
 
-		JButton botonRead = new JButton();
-		botonRead.setText("Mostrar Empleado");
-		botonRead.setBounds(053, 480, 132, 32);
-		botonRead.setForeground(Color.WHITE);
-		botonRead.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonRead);
+        // Agregar elementos al panel
+        panel.add(botonAlta);
+        panel.add(botonReadAll);
+        panel.add(botonRead);
+        panel.add(botonUnroll);
+        panel.add(botonModClient);
 
-		JButton botonUnroll = new JButton();
-		botonUnroll.setText("Eliminar Empleado");
-		botonUnroll.setBounds(053, 480, 132, 32);
-		botonUnroll.setForeground(Color.WHITE);
-		botonUnroll.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonUnroll);
+        // Agregar el panel y el botón del menú principal
+        menuPrincipal.add(panel, BorderLayout.CENTER);
+        menuPrincipal.add(botonMainMenu, BorderLayout.SOUTH);
+        menuPrincipal.setVisible(true);
 
-		JButton botonModClient = new JButton();
-		botonModClient.setText("Modificar Empleado");
-		botonModClient.setBounds(053, 480, 132, 32);
-		botonModClient.setForeground(Color.WHITE);
-		botonModClient.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonModClient);
+        // ------------------------------------
+        // Listeners
+        botonAlta.addActionListener(e -> {
+            menuPrincipal.setVisible(false);
+            Controlador.accion(Evento.ALTA_CLIENTE);
+        });
 
-		JButton botonMainMenu =  new JButton(new ImageIcon("icons/main_menu.png"));
-		botonMainMenu.setActionCommand("Ir a menu principal");
-		botonMainMenu.setBorderPainted(false);
-		botonMainMenu.setContentAreaFilled(false);
-		menuPrincipal.getContentPane().add(botonMainMenu);
+        botonReadAll.addActionListener(e -> {
+            Controlador.accion(Evento.MOSTRAR_CLIENTES);
+        });
 
-		menuPrincipal.setVisible (true);
-		// Listener's
-		botonAlta.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-						VistaAltaCliente vac = new VistaAltaCliente();
-						Controlador.accion(Evento.ALTA_CLIENTE);
-					}
-				}
-				);
+        botonUnroll.addActionListener(e -> {
+            menuPrincipal.setVisible(false);
+            Controlador.accion(Evento.ELIMINAR_CLIENTE);
+        });
 
-		botonReadAll.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						Controlador.accion(Evento.MOSTRAR_CLIENTES);
-					}
-				}
-				);
+        botonMainMenu.addActionListener(e -> {
+            menuPrincipal.setVisible(false);
+            new VistaMenuPrincipal();
+        });
+    }
 
-		botonUnroll.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-						VistaBajaCliente vbc = new VistaBajaCliente();
-						Controlador.accion(Evento.ELIMINAR_CLIENTE);
-					}
-				}
-				);
+    // Método para crear botones con formato uniforme
+    private static JButton crearBoton(String texto) {
+        JButton boton = new JButton(texto);
+        boton.setForeground(Color.WHITE);
+        boton.setBackground(new Color(48, 86, 119));
+        return boton;
+    }
 
-
-		botonMainMenu.addActionListener( 
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-						VistaMenuPrincipal vmp = new VistaMenuPrincipal();
-					}
-				}
-				);
-	}
-
-	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_MOSTRAR_CLIENTES_OK) {
-			JTextArea textArea = new JTextArea(datos.toString());
-			textArea.setLineWrap(true);
-			textArea.setEditable(false);
-			textArea.setWrapStyleWord(true);
-			JScrollPane scrollPane = new JScrollPane(textArea);
-			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, scrollPane, "CLIENTES", JOptionPane.DEFAULT_OPTION);
-		} else if (evento == Evento.RES_MOSTRAR_CLIENTES_KO)
-			JOptionPane.showMessageDialog(null, "No se ha podido encontrar ningun cliente");
-	} 
+    public static void actualizar(int evento, Object datos) {
+        if (evento == Evento.RES_MOSTRAR_CLIENTES_OK) {
+            JTextArea textArea = new JTextArea(datos.toString());
+            textArea.setLineWrap(true);
+            textArea.setEditable(false);
+            textArea.setWrapStyleWord(true);
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            scrollPane.setPreferredSize(new Dimension(500, 200));
+            JOptionPane.showMessageDialog(null, scrollPane, "EMPLEADOS", JOptionPane.DEFAULT_OPTION);
+        } else if (evento == Evento.RES_MOSTRAR_CLIENTES_KO) {
+            JOptionPane.showMessageDialog(null, "No se ha podido encontrar ningún empleado");
+        }
+    }
 }

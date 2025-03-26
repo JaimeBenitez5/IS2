@@ -3,9 +3,13 @@ package presentacion;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,47 +21,42 @@ import javax.swing.JTextArea;
 
 public class VistaMenuPrincipal {
 	public VistaMenuPrincipal() {
-
 		JFrame menuPrincipal = new JFrame();
-		menuPrincipal.setTitle("Menu Principal");
-		menuPrincipal.setBounds(100, 100, 450, 300);
+		menuPrincipal.setTitle("Menú Principal");
+		menuPrincipal.setSize(1280, 720);
+		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		menuPrincipal.getContentPane().setLayout(new FlowLayout());
-		menuPrincipal.getContentPane().setBackground(new Color(88, 161, 164));
 
-		JButton botonCliente = new JButton();
-		botonCliente.setText("Clientes");
-		botonCliente.setBounds(153, 180, 132, 32);
-		botonCliente.setForeground(Color.WHITE);
-		botonCliente.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonCliente);
+		// Panel principal con margen
+		JPanel panel = new JPanel(new GridLayout(3, 3, 50, 50)); // Espaciado entre celdas
+		panel.setBackground(new Color(88, 161, 164));
+		panel.setBorder(BorderFactory.createEmptyBorder(200, 200, 200, 200)); // Márgenes exteriores
 
-		JButton botonFacturas = new JButton();
-		botonFacturas.setText("Facturas");
-		botonFacturas.setForeground(Color.WHITE);
-		botonFacturas.setBackground(new Color(48, 86, 119));
-		botonFacturas.setBounds(253, 380, 132, 32);
+		// Botones
+		JButton botonCliente = crearBoton("Clientes");
+		JButton botonFacturas = crearBoton("Facturas");
+		JButton botonSalas = crearBoton("Salas");
+		JButton botonEmpleados = crearBoton("Empleados");
 
-		menuPrincipal.getContentPane().add(botonFacturas);
-
-		JButton botonEmpleados = new JButton();
-		botonEmpleados.setText("Empleados");
-		botonEmpleados.setBounds(053, 480, 132, 32);
-		botonEmpleados.setForeground(Color.WHITE);
-		botonEmpleados.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonEmpleados);
-
-		JButton botonSalas = new JButton();
-		botonSalas.setText("Salas");
-		botonSalas.setBounds(053, 480, 132, 32);
-		botonSalas.setForeground(Color.WHITE);
-		botonSalas.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonSalas);
-
+		// Logo
 		ImageIcon logo = new ImageIcon("icons/logo.png");
-		JLabel logoL = new JLabel(logo);
+		JLabel logoL = new JLabel(logo, JLabel.CENTER);
 
-		menuPrincipal.getContentPane().add(logoL);
+		// Agregar elementos en orden al grid
+		panel.add(botonCliente);
+		panel.add(Box.createRigidArea(new Dimension(80, 1)));
+		panel.add(botonFacturas);
+		panel.add(Box.createRigidArea(new Dimension(80, 1)));
+		panel.add(logoL);
+		panel.add(Box.createRigidArea(new Dimension(80, 1)));
+		panel.add(botonSalas);
+		panel.add(Box.createRigidArea(new Dimension(80, 1)));
+		panel.add(botonEmpleados);
+
+		menuPrincipal.add(panel);
+		menuPrincipal.setVisible(true);
+
+
 		menuPrincipal.setVisible (true);
 
 		// Listener's
@@ -69,7 +68,6 @@ public class VistaMenuPrincipal {
 					}
 				}
 				);
-
 
 		botonFacturas.addActionListener(
 				new ActionListener () {
@@ -97,8 +95,13 @@ public class VistaMenuPrincipal {
 					}
 				}
 				);
+	}
 
-
+	private static JButton crearBoton(String texto) {
+		JButton boton = new JButton(texto);
+		boton.setForeground(Color.WHITE);
+		boton.setBackground(new Color(48, 86, 119));
+		return boton;
 	}
 
 	public static void actualizar(int evento, Object datos) {

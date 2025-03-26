@@ -1,122 +1,91 @@
 package presentacion;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
+import java.awt.*;
+import javax.swing.*;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-
 public class VistaSalas {
-	public VistaSalas() {
-		// ------------------------------------
-		// Diseño de la vista
-		JFrame menuPrincipal = new JFrame();
-		menuPrincipal.setTitle("Menu CRUDs Salas");
-		menuPrincipal.setBounds(100, 100, 450, 300);
-		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		menuPrincipal.getContentPane().setLayout(new FlowLayout());
-		menuPrincipal.getContentPane().setBackground(new Color(88, 161, 164));
+    
+    public VistaSalas() {
+        // ------------------------------------
+        // Diseño de la vista
+        JFrame menuPrincipal = new JFrame();
+        menuPrincipal.setTitle("Menú CRUD Salas");
+        menuPrincipal.setSize(1280, 720);
+        menuPrincipal.setLocationRelativeTo(null);
+        menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JButton botonAlta = new JButton();
-		botonAlta.setText("Alta Sala");
-		botonAlta.setBounds(153, 180, 132, 32);
-		botonAlta.setForeground(Color.WHITE);
-		botonAlta.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonAlta);
+        // Panel principal con margen
+        JPanel panel = new JPanel(new GridLayout(3, 2, 20, 20)); // Espaciado entre celdas
+        panel.setBackground(new Color(88, 161, 164));
+        panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50)); // Márgenes exteriores
 
-		JButton botonReadAll = new JButton();
-		botonReadAll.setText("Mostrar salas");
-		botonReadAll.setBounds(253, 380, 132, 32);
-		botonReadAll.setForeground(Color.WHITE);
-		botonReadAll.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonReadAll);
+        // Botones
+        JButton botonAlta = crearBoton("Alta Sala");
+        JButton botonReadAll = crearBoton("Mostrar Salas");
+        JButton botonRead = crearBoton("Mostrar Sala");
+        JButton botonUnroll = crearBoton("Eliminar Sala");
+        JButton botonModSala = crearBoton("Modificar Sala");
 
-		JButton botonRead = new JButton();
-		botonRead.setText("Mostrar sala");
-		botonRead.setBounds(053, 480, 132, 32);
-		botonRead.setForeground(Color.WHITE);
-		botonRead.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonRead);
+        // Botón de regreso al menú principal con icono
+        JButton botonMainMenu = new JButton(new ImageIcon("icons/main_menu.png"));
+        botonMainMenu.setBorderPainted(false);
+        botonMainMenu.setContentAreaFilled(false);
+        botonMainMenu.setActionCommand("Ir a Menú Principal");
 
-		JButton botonUnroll = new JButton();
-		botonUnroll.setText("Eliminar sala");
-		botonUnroll.setBounds(053, 480, 132, 32);
-		botonUnroll.setForeground(Color.WHITE);
-		botonUnroll.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonUnroll);
+        // Agregar elementos al panel
+        panel.add(botonAlta);
+        panel.add(botonReadAll);
+        panel.add(botonRead);
+        panel.add(botonUnroll);
+        panel.add(botonModSala);
 
-		JButton botonModClient = new JButton();
-		botonModClient.setText("Modificar sala");
-		botonModClient.setBounds(053, 480, 132, 32);
-		botonModClient.setForeground(Color.WHITE);
-		botonModClient.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonModClient);
+        // Agregar el panel y el botón del menú principal
+        menuPrincipal.add(panel, BorderLayout.CENTER);
+        menuPrincipal.add(botonMainMenu, BorderLayout.SOUTH);
+        menuPrincipal.setVisible(true);
 
-		JButton botonMainMenu =  new JButton(new ImageIcon("icons/main_menu.png"));
-		botonMainMenu.setActionCommand("Ir a menu principal");
-		botonMainMenu.setBorderPainted(false);
-		botonMainMenu.setContentAreaFilled(false);
-		menuPrincipal.getContentPane().add(botonMainMenu);
+        // ------------------------------------
+        // Listeners
+        botonAlta.addActionListener(e -> {
+            menuPrincipal.setVisible(false);
+            Controlador.accion(Evento.ALTA_CLIENTE);
+        });
 
-		menuPrincipal.setVisible (true);
-		
-		// Listener's
-		botonAlta.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-						VistaAltaCliente vac = new VistaAltaCliente();
-						Controlador.accion(Evento.ALTA_CLIENTE);
-					}
-				}
-				);
+        botonReadAll.addActionListener(e -> {
+            Controlador.accion(Evento.MOSTRAR_CLIENTES);
+        });
 
-		botonReadAll.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						Controlador.accion(Evento.MOSTRAR_CLIENTES);
-					}
-				}
-				);
+        botonUnroll.addActionListener(e -> {
+            menuPrincipal.setVisible(false);
+            Controlador.accion(Evento.ELIMINAR_CLIENTE);
+        });
 
-		botonUnroll.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-						VistaBajaCliente vbc = new VistaBajaCliente();
-						Controlador.accion(Evento.ELIMINAR_CLIENTE);
-					}
-				}
-				);
+        botonMainMenu.addActionListener(e -> {
+            menuPrincipal.setVisible(false);
+            new VistaMenuPrincipal();
+        });
+    }
 
+    // Método para crear botones con formato
+    private static JButton crearBoton(String texto) {
+        JButton boton = new JButton(texto);
+        boton.setForeground(Color.WHITE);
+        boton.setBackground(new Color(48, 86, 119));
+        return boton;
+    }
 
-		botonMainMenu.addActionListener( 
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-						VistaMenuPrincipal vmp = new VistaMenuPrincipal();
-					}
-				}
-				);
-	}
-
-	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_MOSTRAR_CLIENTES_OK) {
-			JTextArea textArea = new JTextArea(datos.toString());
-			textArea.setLineWrap(true);
-			textArea.setEditable(false);
-			textArea.setWrapStyleWord(true);
-			JScrollPane scrollPane = new JScrollPane(textArea);
-			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, scrollPane, "CLIENTES", JOptionPane.DEFAULT_OPTION);
-		} else if (evento == Evento.RES_MOSTRAR_CLIENTES_KO)
-			JOptionPane.showMessageDialog(null, "No se ha podido encontrar ningun cliente");
-	} 
+    public static void actualizar(int evento, Object datos) {
+        if (evento == Evento.RES_MOSTRAR_CLIENTES_OK) {
+            JTextArea textArea = new JTextArea(datos.toString());
+            textArea.setLineWrap(true);
+            textArea.setEditable(false);
+            textArea.setWrapStyleWord(true);
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            scrollPane.setPreferredSize(new Dimension(500, 200));
+            JOptionPane.showMessageDialog(null, scrollPane, "SALAS", JOptionPane.DEFAULT_OPTION);
+        } else if (evento == Evento.RES_MOSTRAR_CLIENTES_KO) {
+            JOptionPane.showMessageDialog(null, "No se ha podido encontrar ninguna sala");
+        }
+    }
 }

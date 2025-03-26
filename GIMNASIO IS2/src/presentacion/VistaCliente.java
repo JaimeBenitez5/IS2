@@ -1,11 +1,11 @@
 package presentacion;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,105 +15,75 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class VistaCliente {
-
 	public VistaCliente() {
 		// ------------------------------------
 		// Diseño de la vista
 		JFrame menuPrincipal = new JFrame();
-		menuPrincipal.setTitle("Menu CRUDs Cliente");
-		menuPrincipal.setBounds(100, 100, 450, 300);
+		menuPrincipal.setTitle("Menú CRUD Cliente");
+		menuPrincipal.setSize(1280, 720);
+		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		menuPrincipal.getContentPane().setLayout(new FlowLayout());
-		menuPrincipal.getContentPane().setBackground(new Color(88, 161, 164));
 
+		// Panel principal con margen
+		JPanel panel = new JPanel(new GridLayout(3, 2, 20, 20)); // Espaciado entre celdas
+		panel.setBackground(new Color(88, 161, 164));
+		panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50)); // Márgenes exteriores
 
+		// Botones
+		JButton botonAlta = crearBoton("Alta Cliente");
+		JButton botonReadAll = crearBoton("Mostrar Clientes");
+		JButton botonRead = crearBoton("Mostrar Cliente");
+		JButton botonUnroll = crearBoton("Dar de Baja Cliente");
+		JButton botonModClient = crearBoton("Modificar Cliente");
+		JButton botonSearch = crearBoton("Buscar Cliente");
 
-		JButton botonAlta = new JButton();
-		botonAlta.setText("Alta Cliente");
-		botonAlta.setBounds(153, 180, 132, 32);
-		botonAlta.setForeground(Color.WHITE);
-		botonAlta.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonAlta);
-
-		JButton botonReadAll = new JButton();
-		botonReadAll.setText("Mostrar clientes");
-		botonReadAll.setBounds(253, 380, 132, 32);
-		botonReadAll.setForeground(Color.WHITE);
-		botonReadAll.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonReadAll);
-
-		JButton botonRead = new JButton();
-		botonRead.setText("Mostrar cliente");
-		botonRead.setBounds(053, 480, 132, 32);
-		botonRead.setForeground(Color.WHITE);
-		botonRead.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonRead);
-
-		JButton botonUnroll = new JButton();
-		botonUnroll.setText("Dar de baja cliente");
-		botonUnroll.setBounds(053, 480, 132, 32);
-		botonUnroll.setForeground(Color.WHITE);
-		botonUnroll.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonUnroll);
-
-		JButton botonModClient = new JButton();
-		botonModClient.setText("Modificar cliente");
-		botonModClient.setBounds(053, 480, 132, 32);
-		botonModClient.setForeground(Color.WHITE);
-		botonModClient.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonModClient);
-
-		JButton botonSearch = new JButton();
-		botonSearch.setText("Buscar cliente");
-		botonSearch.setBounds(053, 480, 132, 32);
-		botonSearch.setForeground(Color.WHITE);
-		botonSearch.setBackground(new Color(48, 86, 119));
-		menuPrincipal.getContentPane().add(botonSearch);
-
-		JButton botonMainMenu =  new JButton(new ImageIcon("icons/main_menu.png"));
-		botonMainMenu.setActionCommand("Ir a menu principal");
+		// Botón de regreso al menú principal con icono
+		JButton botonMainMenu = new JButton(new ImageIcon("icons/main_menu.png"));
 		botonMainMenu.setBorderPainted(false);
 		botonMainMenu.setContentAreaFilled(false);
-		menuPrincipal.getContentPane().add(botonMainMenu);
+		botonMainMenu.setActionCommand("Ir a Menú Principal");
 
-		menuPrincipal.setVisible (true);
-		// Listener's
-		botonAlta.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-						Controlador.accion(Evento.ALTA_CLIENTE);
-					}
-				}
-				);
+		// Agregar elementos al panel
+		panel.add(botonAlta);
+		panel.add(botonReadAll);
+		panel.add(botonRead);
+		panel.add(botonUnroll);
+		panel.add(botonModClient);
+		panel.add(botonSearch);
 
-		botonReadAll.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-						Controlador.accion(Evento.MOSTRAR_CLIENTES);
-					}
-				}
-				);
+		// Agregar el panel y el botón del menú principal
+		menuPrincipal.add(panel, BorderLayout.CENTER);
+		menuPrincipal.add(botonMainMenu, BorderLayout.SOUTH);
+		menuPrincipal.setVisible(true);
 
-		botonUnroll.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-						Controlador.accion(Evento.ELIMINAR_CLIENTE);
-					}
-				}
-				);
+		// Listeners
+		botonAlta.addActionListener(e -> {
+			menuPrincipal.setVisible(false);
+			Controlador.accion(Evento.ALTA_CLIENTE);
+		});
 
+		botonReadAll.addActionListener(e -> {
+			menuPrincipal.setVisible(false);
+			Controlador.accion(Evento.MOSTRAR_CLIENTES);
+		});
 
-		botonMainMenu.addActionListener( 
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-						VistaMenuPrincipal vmp = new VistaMenuPrincipal();
-					}
-				}
-				);
+		botonUnroll.addActionListener(e -> {
+			menuPrincipal.setVisible(false);
+			Controlador.accion(Evento.ELIMINAR_CLIENTE);
+		});
+
+		botonMainMenu.addActionListener(e -> {
+			menuPrincipal.setVisible(false);
+			new VistaMenuPrincipal();
+		});
+	}
+
+	// Método para crear botones con formato
+	private static JButton crearBoton(String texto) {
+		JButton boton = new JButton(texto);
+		boton.setForeground(Color.WHITE);
+		boton.setBackground(new Color(48, 86, 119));
+		return boton;
 	}
 
 	public static void actualizar(int evento, Object datos) {
