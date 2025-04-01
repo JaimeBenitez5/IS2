@@ -1,7 +1,7 @@
 package presentacion;
 
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
-import negocio.tFacturas;
+import negocio.tFactura;
 
 @objid ("e975df99-37a1-4afb-8d29-b09262385f75")
 public class VistaAltaSuscripcion {
@@ -12,7 +12,7 @@ public class VistaAltaSuscripcion {
     private String _fecha;
 
     @objid ("56f50867-e55d-4996-879d-cf03b3cba963")
-    public tFacturas tFactura;
+    public tFactura tFactura;
 
     @objid ("4c2b3fe1-fba6-40c7-9a2d-11bee9628a51")
     public VistaAltaSuscripcion(final String fecha, final String Importe) {

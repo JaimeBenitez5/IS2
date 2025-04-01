@@ -20,9 +20,8 @@ public class Controlador{
 			VistaMostrarClientes vmcs = new VistaMostrarClientes();
 			SACliente SACliente = new SAClienteImp();
 			List<tCliente>res = SACliente.leerTodosClientes();
-			VistaCliente.actualizar(Evento.RES_MOSTRAR_CLIENTES_OK, res);
-			//if (!res.isEmpty()) VistaCliente.actualizar(Evento.RES_MOSTRAR_CLIENTES_OK, res);
-			//else VistaCliente.actualizar(Evento.RES_MOSTRAR_CLIENTES_KO, null);
+			if (!res.isEmpty()) VistaCliente.actualizar(Evento.RES_MOSTRAR_CLIENTES_OK, res);
+			else VistaCliente.actualizar(Evento.RES_MOSTRAR_CLIENTES_KO, null);
 			break;
 		}
 		case Evento.BUSCAR_CLIENTE: { // 3 = BUSCAR_CLIENTE

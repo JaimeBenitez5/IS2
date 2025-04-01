@@ -8,7 +8,7 @@ import configFiles.BDConexion;
 import negocio.tCliente;
 
 @objid ("5db6cbcc-d2d1-43b5-97ab-d524a2cfb365")
-public class DAOClienteImp implements DAOCliente {
+public class DAOClientesImp implements DAOClientes {
 
 	@objid ("d33cffc0-4796-4963-86bf-890bea10be49")
 	public int createCliente(tCliente cliente) {

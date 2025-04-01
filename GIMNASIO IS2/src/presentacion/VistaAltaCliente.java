@@ -6,10 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,7 +20,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
-import configFiles.BDConexion;
+import negocio.SACliente;
+import negocio.SAClienteImp;
+import negocio.tCliente;
+
 
 @objid ("69cff9f9-fddd-46c9-b01f-2aa13f2b2c28")
 public class VistaAltaCliente {
@@ -146,12 +147,13 @@ public class VistaAltaCliente {
 		save.addActionListener(
 			new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
-					BDConexion bdConexion = new BDConexion();
-					try {
-						bdConexion.executeQuery();
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
+					String dni = dniTF.getText();
+					String nombre = nombreTF.getText();
+					String dir = dirTF.getText();
+					tCliente c = new tCliente(0, dni, nombre, dir, true);
+					SACliente SACliente = new SAClienteImp();
+					int id = SACliente.altaCliente(c);
+					c.setId(id);
 				}
 			}
 		);

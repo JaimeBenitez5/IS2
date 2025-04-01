@@ -7,7 +7,7 @@ import negocio.tCliente;
 
 
 @objid ("c9382fff-a686-44ed-a6bd-9880fa6e65b9")
-public interface DAOCliente {
+public interface DAOClientes {
     @objid ("0701464f-42e9-4833-b355-cb4c0019bae9")
     int createCliente(tCliente cliente);
 
