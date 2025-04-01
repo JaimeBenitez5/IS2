@@ -4,15 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import negocio.tCliente;
 
 public class VistaCliente {
 	public VistaCliente() {
@@ -64,6 +68,7 @@ public class VistaCliente {
 
 		botonReadAll.addActionListener(e -> {
 			menuPrincipal.setVisible(false);
+			new VistaMostrarClientes();
 			Controlador.accion(Evento.MOSTRAR_CLIENTES);
 		});
 
@@ -86,13 +91,19 @@ public class VistaCliente {
 		return boton;
 	}
 
-	public static void actualizar(int evento, Object datos) {
+	public static void actualizar(int evento, List<tCliente> datos) {
 		if (evento == Evento.RES_MOSTRAR_CLIENTES_OK) {
 			JTextArea textArea = new JTextArea(datos.toString());
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
+			
+			for(int i = 0; i<datos.size(); i++) {
+				JLabel cliente = new JLabel(datos.get(i).toString());
+				textArea.add(cliente);
+			}
+			
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
 			JOptionPane.showMessageDialog(null, scrollPane, "CLIENTES", JOptionPane.DEFAULT_OPTION);
 		} else if (evento == Evento.RES_MOSTRAR_CLIENTES_KO)

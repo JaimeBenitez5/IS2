@@ -15,6 +15,7 @@ CREATE TABLE Cliente(
 idCliente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 nombre VARCHAR(255) NOT NULL, 
 direccion VARCHAR(255), 
+dni VARCHAR(9), 
 activo TINYINT(1) NOT NULL DEFAULT 1
 );
 
@@ -107,8 +108,8 @@ INSERT INTO Empleado VALUES ('06013483H', 'Nicolas', 2400, 'Mantenimiento');
 INSERT INTO Empleado VALUES ('1234567A', 'Jaime', 1300, 'Nutricionista'); 
 INSERT INTO Empleado VALUES ('1234567B', 'Juan', 1500, 'Recepcion'); 
 INSERT INTO Empleado VALUES ('1234567C', 'Gabriel', 2100, 'Monitor'); 
-INSERT INTO Cliente (nombre, direccion) VALUES ('Marlon', 'Gran Via 47'); 
-INSERT INTO Cliente (nombre, direccion) VALUES ('Carlos', 'Las Tablas'); 
+INSERT INTO Cliente (nombre, dni, direccion) VALUES ('Marlon', 'AAAAAAAAA' ,'Gran Via 47'); 
+INSERT INTO Cliente (nombre, dni, direccion) VALUES ('Carlos', 'BBBBBBBBB' ,'Las Tablas'); 
 INSERT INTO Sala (aforo) VALUES (100);
 INSERT INTO Sala (aforo) VALUES (150); 
 INSERT INTO Actividad VALUES ('Yoga', '2025-03-19', 1, '1234567C');

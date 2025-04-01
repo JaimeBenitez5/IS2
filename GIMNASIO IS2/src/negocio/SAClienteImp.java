@@ -33,10 +33,6 @@ public class SAClienteImp implements SACliente {
 
     @objid ("71ced6f7-0fb3-4f29-a8d3-7a425d2444ed")
     public List<tCliente> leerTodosClientes() {
-    	
-    	
-    	
-    	
     	DAOCliente clienteDao = new DAOClienteImp();
     	return clienteDao.readAllClientes(); 
     }

@@ -29,7 +29,6 @@ public class VistaMostrarCliente {
 		menuPrincipal.getContentPane().setLayout(new FlowLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(88, 161, 164));
 
-
 		JLabel titulo = new JLabel("Añadir cliente");
 		menuPrincipal.add(titulo);
 
@@ -91,13 +90,7 @@ public class VistaMostrarCliente {
 		save.addActionListener(
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
-						BDConexion bdConexion = new BDConexion();
-						try {
-							bdConexion.executeQuery();
-						} catch (SQLException e1) {
-							e1.printStackTrace();
-						}
-						//Controlador.accion(Evento.MOSTRAR_CLIENTES);
+						Controlador.accion(Evento.MOSTRAR_CLIENTES);
 					}
 				}
 				);

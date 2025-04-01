@@ -15,33 +15,36 @@ public class tCliente {
 
     @objid ("7f407175-0b58-40b9-bda2-4125011a66f2")
     private boolean _activo;
+    
+    private String _dir;
 
     @objid ("bd7cf19c-4e19-42e6-ae94-fca368b783d2")
-    public tCliente(final int id, final String dni, final String nombre, final boolean activo) {
+    public tCliente(final int id, final String dni, final String nombre, final String dir, final boolean activo) {
+    	_id = id;
+    	_dni = dni;
+    	_nombre = nombre;
+    	_activo = activo;
+    	_dir = dir;
     }
 
     @objid ("a9d51b4c-5ce8-464b-b2c1-9e8dd4d4a49f")
     public int getId() {
-        // TODO Auto-generated return
-        return 0;
+        return _id;
     }
 
     @objid ("9f6902e0-9186-464c-ad91-989ee6a69afb")
     public String getDni() {
-        // TODO Auto-generated return
-        return null;
+        return _dni;
     }
 
     @objid ("ac3026ae-a4bd-4715-865b-5aadcdfda583")
     public String getNombre() {
-        // TODO Auto-generated return
-        return null;
+        return _nombre;
     }
 
     @objid ("4587388e-0213-473f-aa52-2ef1b9f3834d")
     public boolean getActivo() {
-        // TODO Auto-generated return
-        return false;
+        return _activo;
     }
 
     @objid ("f531a4eb-b23b-4a4f-a95c-dd7f7352e7ad")
@@ -62,8 +65,7 @@ public class tCliente {
 
     @objid ("153b1d28-d4a2-4e9f-bede-e733c6815673")
     public String toString() {
-        // TODO Auto-generated return
-        return null;
+        return _id + " " + _dni+ " " + _nombre + " " + _dir;
     }
 
 }

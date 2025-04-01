@@ -2,8 +2,6 @@ package presentacion;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,8 +27,11 @@ public class VistaMenuPrincipal {
 
 		// Panel principal con margen
 		JPanel panel = new JPanel(new GridLayout(3, 3, 25, 25)); // Espaciado entre celdas
+		panel.setPreferredSize(new Dimension(400, 400));
 		panel.setBackground(new Color(88, 161, 164));
 		panel.setMinimumSize(new Dimension(400, 400));
+		panel.setPreferredSize(new Dimension(400, 400));
+		panel.setMaximumSize(new Dimension(400, 400));
 		panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Márgenes exteriores
 
 		// Botones
@@ -56,10 +57,7 @@ public class VistaMenuPrincipal {
 
 		menuPrincipal.add(panel);
 		menuPrincipal.setVisible(true);
-
-
-		menuPrincipal.setVisible (true);
-
+		
 		// Listener's
 		botonCliente.addActionListener(
 				new ActionListener () {
@@ -102,6 +100,9 @@ public class VistaMenuPrincipal {
 		JButton boton = new JButton(texto);
 		boton.setForeground(Color.WHITE);
 		boton.setBackground(new Color(48, 86, 119));
+		boton.setPreferredSize(new Dimension(100, 100));
+		boton.setMinimumSize(new Dimension(100, 100));
+		boton.setMaximumSize(new Dimension(100, 100));
 		return boton;
 	}
 

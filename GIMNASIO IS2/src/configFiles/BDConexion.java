@@ -9,18 +9,21 @@ public class BDConexion {
 	static String login = "root";
 	static String password = "equipo2";
 	static String url = "jdbc:mysql://localhost:3306/" + bd;
-	Connection connection = null;
+	private static Connection connection = null;
 	
 	public BDConexion() {
-		try {
-			connection = DriverManager.getConnection (url, login,password);
-		} catch ( SQLException ex) {
-			connection = null ;
-			ex. printStackTrace ();
-			System.out.println (" SQLException : " + ex. getMessage ());System.out.println (" SQLState : " + ex. getSQLState ());System.out.println (" VendorError : " + ex. getErrorCode ());}
+		
 	}
 	
-	public Connection getConnection(){
+	//USADO PATRON SINGLETON
+	public static Connection getConnection(){
+		if(connection == null) {
+			try {
+				connection = DriverManager.getConnection (url, login,password);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return connection;
 	}
 	
