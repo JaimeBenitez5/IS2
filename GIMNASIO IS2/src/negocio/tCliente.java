@@ -41,7 +41,11 @@ public class tCliente {
     public String getNombre() {
         return _nombre;
     }
-
+    
+    public String getDir() {
+        return _dir;
+    }
+    
     @objid ("4587388e-0213-473f-aa52-2ef1b9f3834d")
     public boolean getActivo() {
         return _activo;
@@ -49,18 +53,22 @@ public class tCliente {
 
     @objid ("f531a4eb-b23b-4a4f-a95c-dd7f7352e7ad")
     public void setId(final int id) {
+    	_id = id;
     }
 
     @objid ("4ef64f9e-cade-441a-ade6-76ea975f617d")
     public void setDni(final String dni) {
+    	_dni = dni;
     }
 
     @objid ("af276063-31f1-4f81-97ec-56cea7b90ef5")
     public void setNombre(final String nombre) {
+    	_nombre = nombre;
     }
 
     @objid ("8d3a54ed-af0c-4864-9afc-19d9d8990b28")
     public void setActivo(final boolean activo) {
+    	_activo = activo;
     }
 
     @objid ("153b1d28-d4a2-4e9f-bede-e733c6815673")

@@ -1,6 +1,5 @@
 package negocio;
 
-import java.util.Collection;
 import java.util.List;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
