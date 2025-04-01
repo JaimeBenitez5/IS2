@@ -49,8 +49,17 @@ public class DAOClientesImp implements DAOClientes {
 	}
 
 	@objid ("10927b9e-db74-426b-8da0-8b4adf615314")
-	public int deleteCliente(final String dni) {
-		// TODO Auto-generated return
+	public int deleteCliente(final int id) {
+		String query = "DELETE FROM Cliente WHERE idCliente = ?";
+		try (PreparedStatement st = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+			// Se insertan los valores en la consulta:
+			st.setInt(1, id);
+			// Se invoca a executeUpdate sin parámetro
+			//LO QUE DEVUELVE ESTO ES EL NUMERO DE FILAS QUE HA BORRADO, SI ES 1 ES EXITO
+			return st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
@@ -59,7 +68,7 @@ public class DAOClientesImp implements DAOClientes {
 		ArrayList<tCliente> clientes = new ArrayList<tCliente>();
 		String query = "SELECT * FROM CLIENTE";
 		try ( Statement stmt = BDConexion.getConnection().createStatement ()) {
-			ResultSet rs = stmt.executeQuery (query);
+			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next ()) {
 				int idCliente = rs.getInt("idCliente");
 				String name = rs.getString ("nombre");

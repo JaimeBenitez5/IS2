@@ -63,18 +63,18 @@ public class VistaCliente {
 		// Listeners
 		botonAlta.addActionListener(e -> {
 			menuPrincipal.setVisible(false);
-			Controlador.accion(Evento.ALTA_CLIENTE);
+			Controlador.accion(Evento.ALTA_CLIENTE, null);
 		});
 
 		botonReadAll.addActionListener(e -> {
 			menuPrincipal.setVisible(false);
 			new VistaMostrarClientes();
-			Controlador.accion(Evento.MOSTRAR_CLIENTES);
+			Controlador.accion(Evento.MOSTRAR_CLIENTES, null);
 		});
 
 		botonUnroll.addActionListener(e -> {
 			menuPrincipal.setVisible(false);
-			Controlador.accion(Evento.ELIMINAR_CLIENTE);
+			Controlador.accion(Evento.ELIMINAR_CLIENTE, null);
 		});
 
 		botonMainMenu.addActionListener(e -> {
@@ -83,7 +83,6 @@ public class VistaCliente {
 		});
 	}
 
-	// Método para crear botones con formato
 	private static JButton crearBoton(String texto) {
 		JButton boton = new JButton(texto);
 		boton.setForeground(Color.WHITE);

@@ -1,6 +1,8 @@
 package presentacion;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -8,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,133 +33,90 @@ public class VistaAltaCliente {
 
 	@objid ("3175bc60-dc4e-4d25-8fbe-2b50c79d9d60")
 	public VistaAltaCliente() {
-		JFrame menuPrincipal = new JFrame();
-		menuPrincipal.setTitle("Menu Alta Cliente");
-		menuPrincipal.setBounds(0, 0, 1080, 1920);
-		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		menuPrincipal.getContentPane().setLayout(new FlowLayout());
-		menuPrincipal.getContentPane().setBackground(new Color(88, 161, 164));
+        JFrame menuPrincipal = new JFrame("Menú Alta Cliente");
+        menuPrincipal.setSize(1920, 1080);
+        menuPrincipal.setLocationRelativeTo(null);
+        menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        menuPrincipal.getContentPane().setLayout(new BorderLayout());
+        menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		JPanel panelAltaCliente = new JPanel();
-		menuPrincipal.add(panelAltaCliente);
-		menuPrincipal.setBackground(new Color(88, 161, 164));
-		panelAltaCliente.setLayout(new BoxLayout(panelAltaCliente,BoxLayout.Y_AXIS));
+        JPanel panelAltaCliente = new JPanel();
+        panelAltaCliente.setLayout(new BoxLayout(panelAltaCliente, BoxLayout.Y_AXIS));
+        panelAltaCliente.setBackground(new Color(17, 47, 69));
+        panelAltaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Márgenes exteriores
 
-		JLabel titulo = new JLabel("Añadir cliente");
-		JPanel t= new JPanel();
-		t.setBackground(new Color(88, 161, 164));
-		t.setForeground(new Color(88,161,164));
-		titulo.setBackground(new Color(88, 161, 164));
+        menuPrincipal.add(panelAltaCliente, BorderLayout.CENTER);
 
+        JLabel titulo = new JLabel("Añadir Cliente");
+        titulo.setForeground(Color.WHITE);
+        titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panelAltaCliente.add(titulo);
+        panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		t.add(titulo);
+        JPanel panelCampos = new JPanel(new GridLayout(3, 2, 20, 20));
+        panelCampos.setBackground(new Color(17, 47, 69));
+        panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
+
+        JLabel dni = new JLabel("DNI:");
+        dni.setForeground(Color.WHITE);
+        panelCampos.add(dni);
+        JTextField dniTF = new JTextField(30);
+        panelCampos.add(dniTF);
+        
+        JLabel nombre = new JLabel("Nombre:");
+        nombre.setForeground(Color.WHITE);
+        panelCampos.add(nombre);
+        JTextField nombreTF = new JTextField(30);
+        panelCampos.add(nombreTF);
+
+        JLabel dir = new JLabel("Dirección:");
+        dir.setForeground(Color.WHITE);
+        panelCampos.add(dir);
+        JTextField dirTF = new JTextField(30);
+        panelCampos.add(dirTF);
+
+        panelAltaCliente.add(panelCampos);
+        panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
+
+        JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
+        botones.setBackground(new Color(17, 47, 69));
+
+        JButton back = crearBotonConIcono("icons/back.png");
+        JButton discard = crearBoton("Descartar");
+        JButton save = crearBoton("Guardar");
+        JButton botonMainMenu = crearBotonConIcono("icons/main_menu.png");
+
+        botones.add(back);
+        botones.add(discard);
+        botones.add(Box.createRigidArea(new Dimension(40, 20)));
+        botones.add(save);
+        botones.add(botonMainMenu);
+
+        panelAltaCliente.add(botones);
+        menuPrincipal.setVisible(true);
 		
-		panelAltaCliente.add(t);
-		
-		
-		JPanel panelDNI = new JPanel(new GridLayout(1, 2));
-		panelDNI.setBackground(new Color(88, 161, 164));
-		panelDNI.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
-		panelAltaCliente.add(panelDNI);
-		JPanel empty= new JPanel();
-		empty.setSize(0, 10);;
-		empty.setBackground(new Color(88, 161, 164));
-		panelAltaCliente.add(empty);
-
-
-		JLabel dni = new JLabel("DNI:");
-		panelDNI.add(dni);
-
-		JTextField dniTF= new JTextField(30);
-		panelDNI.add(dniTF);
-
-		JPanel panelNombre = new JPanel(new GridLayout(1, 2));
-		panelNombre.setBackground(new Color(88, 161, 164));
-		panelNombre.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
-		panelAltaCliente.add(panelNombre);
-		JPanel empty1= new JPanel();
-		empty1.setSize(0, 10);;
-		empty1.setBackground(new Color(88, 161, 164));
-		panelAltaCliente.add(empty1);
-
-		JLabel nombreL = new JLabel("Nombre:");
-		panelNombre.add(nombreL);
-
-		JTextField nombreTF= new JTextField(30);
-		panelNombre.add(nombreTF);
-
-		JPanel panelDireccion = new JPanel(new GridLayout(1, 2));
-		panelDireccion.setBackground(new Color(88, 161, 164));
-		panelDireccion.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
-		panelAltaCliente.add(panelDireccion);
-
-		JLabel dirL = new JLabel("Dirección:");
-		panelDireccion.add(dirL);
-
-		JTextField dirTF= new JTextField(30);
-		panelDireccion.add(dirTF);
-
-
-		JPanel botones= new JPanel();
-		botones.setBackground(new Color(88, 161, 164));
-		panelAltaCliente.add(botones);
-		botones.setLayout(new GridLayout(1,5));
-
-		JButton back =  new JButton(new ImageIcon("icons/back.png"));
-		back.setActionCommand("back");
-		back.setBorderPainted(false);
-		back.setContentAreaFilled(false);
-		botones.add(back);
-
-		JButton discard = new JButton();
-		discard.setText("Descartar");
-		discard.setBounds(153, 180, 132, 32);
-		discard.setForeground(Color.WHITE);
-		discard.setBackground(new Color(48, 86, 119));
-		botones.add(discard);
-
-		JPanel espacio = new JPanel();
-		espacio.setPreferredSize(new Dimension(20, 0));
-		espacio.setMaximumSize(new Dimension(20, 0));
-		espacio.setBackground(new Color(88, 161, 164));
-		espacio.setOpaque(true);
-		botones.add(espacio);
-
-		JButton save = new JButton();
-		save.setText("Guardar");
-		save.setBounds(253, 380, 132, 32);
-		save.setForeground(Color.WHITE);
-		save.setBackground(new Color(48, 86, 119));
-		botones.add(save);
-
-		JButton botonMainMenu =  new JButton(new ImageIcon("icons/main_menu.png"));
-		botonMainMenu.setActionCommand("Ir a menu principal");
-		botonMainMenu.setBorderPainted(false);
-		botonMainMenu.setContentAreaFilled(false);
-		botones.add(botonMainMenu);
-
-		menuPrincipal.setVisible (true);
 
 		discard.addActionListener(
-			new ActionListener () {
-				public void actionPerformed (ActionEvent e) {
+				new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+					}
 				}
-			}
-		);
+				);
 
 		save.addActionListener(
-			new ActionListener () {
-				public void actionPerformed (ActionEvent e) {
-					String dni = dniTF.getText();
-					String nombre = nombreTF.getText();
-					String dir = dirTF.getText();
-					tCliente c = new tCliente(0, dni, nombre, dir, true);
-					SACliente SACliente = new SAClienteImp();
-					int id = SACliente.altaCliente(c);
-					c.setId(id);
+				new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+						String dni = dniTF.getText();
+						String nombre = nombreTF.getText();
+						String dir = dirTF.getText();
+						  if (dni.isEmpty() || nombre.isEmpty() || dir.isEmpty()) {
+					            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+					        }
+						tCliente c = new tCliente(dni, nombre, dir);
+						Controlador.accion(Evento.ALTA_CLIENTE, c);
+					}
 				}
-			}
-		);
+				);
 
 		back.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
@@ -175,14 +135,33 @@ public class VistaAltaCliente {
 		menuPrincipal.pack();
 	}
 
-	public static void actualizar(int evento, Object datos) {
-		JTextArea textArea = new JTextArea(datos.toString());
-		textArea.setLineWrap(true);
-		textArea.setEditable(false);
-		textArea.setWrapStyleWord(true);
-		JScrollPane scrollPane = new JScrollPane(textArea);
-		scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-		JOptionPane.showMessageDialog(null, scrollPane, "CLIENTES", JOptionPane.DEFAULT_OPTION);
-		JOptionPane.showMessageDialog(null, "No se ha podido encontrar ningun cliente");
+
+	private static JButton crearBoton(String texto) {
+		JButton boton = new JButton(texto);
+		boton.setForeground(Color.WHITE);
+		boton.setBackground(new Color(67, 75, 172));
+		return boton;
 	}
+	
+	private JButton crearBotonConIcono(String ruta) {
+        JButton boton = new JButton(new ImageIcon(ruta));
+        boton.setBorderPainted(false);
+        boton.setContentAreaFilled(false);
+        return boton;
+    }
+
+	public static void actualizar(int evento, Object datos) {
+		if (evento == Evento.RES_ALTA_CLIENTE_OK) {
+			JTextArea textArea = new JTextArea(datos.toString());
+			textArea.setLineWrap(true);
+			textArea.setEditable(false);
+			textArea.setWrapStyleWord(true);
+			JScrollPane scrollPane = new JScrollPane(textArea);
+			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
+			JOptionPane.showMessageDialog(null, "El cliente se ha insertado correctamente");
+		} else if (evento == Evento.RES_ALTA_CLIENTE_KO)
+			JOptionPane.showMessageDialog(null, "No se ha podido insertar el cliente");
+	}
+	
+	
 }

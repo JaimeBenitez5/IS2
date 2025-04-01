@@ -27,6 +27,14 @@ public class tCliente {
     	_dir = dir;
     }
 
+    public tCliente(final String dni, final String nombre, final String dir) {
+    	_id = 0;
+    	_dni = dni;
+    	_nombre = nombre;
+    	_activo = true;
+    	_dir = dir;
+    }
+    
     @objid ("a9d51b4c-5ce8-464b-b2c1-9e8dd4d4a49f")
     public int getId() {
         return _id;

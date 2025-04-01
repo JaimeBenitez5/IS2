@@ -49,16 +49,16 @@ public class VistaSalas {
         // Listeners
         botonAlta.addActionListener(e -> {
             menuPrincipal.setVisible(false);
-            Controlador.accion(Evento.ALTA_CLIENTE);
+            Controlador.accion(Evento.ALTA_CLIENTE, null);
         });
 
         botonReadAll.addActionListener(e -> {
-            Controlador.accion(Evento.MOSTRAR_CLIENTES);
+            Controlador.accion(Evento.MOSTRAR_CLIENTES, null);
         });
 
         botonUnroll.addActionListener(e -> {
             menuPrincipal.setVisible(false);
-            Controlador.accion(Evento.ELIMINAR_CLIENTE);
+            Controlador.accion(Evento.ELIMINAR_CLIENTE, null);
         });
 
         botonMainMenu.addActionListener(e -> {

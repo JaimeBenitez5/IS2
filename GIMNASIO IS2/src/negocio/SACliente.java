@@ -15,7 +15,7 @@ public interface SACliente {
     int actualizarCliente(final tCliente cliente);
 
     @objid ("9ead1079-1cf0-429d-9471-b44e8503cf18")
-    int borrarCliente(final String dni);
+    int borrarCliente(final int id);
 
     @objid ("56937062-b7ac-4f11-97d6-c9e1cd03e24d")
     List<tCliente> leerTodosClientes();

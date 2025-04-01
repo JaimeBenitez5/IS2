@@ -18,7 +18,7 @@ public interface DAOClientes {
     int updateCliente(final tCliente cliente);
 
     @objid ("8ba5b0b9-8b5a-408f-ac50-2e633ebee280")
-    int deleteCliente(final String dni);
+    int deleteCliente(final int dni);
 
     @objid ("5be71561-e293-481f-9810-a046fa1c0ddc")
     List<tCliente> readAllClientes();

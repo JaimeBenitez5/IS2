@@ -1,19 +1,23 @@
 package presentacion;
 import negocio.SAClienteImp;
 
-import java.util.Collection;
 import java.util.List;
 
 import negocio.tCliente;
 import negocio.SACliente;
-import negocio.tCliente;
 
 public class Controlador{
-	public static void accion(int evento) {
+	public static void accion(int evento, Object datos) {
 		switch (evento) {
 		// CLIENTE
 		case Evento.ALTA_CLIENTE: { // 1 = ALTA_CLIENTES
 			VistaAltaCliente vac = new VistaAltaCliente();
+			if(datos != null) {
+				SACliente SACliente = new SAClienteImp();
+				int id = SACliente.altaCliente((tCliente) datos);
+				((tCliente) datos).setId(id);
+				VistaAltaCliente.actualizar(Evento.RES_ALTA_CLIENTE_OK, id);	
+			}
 			break;
 		}
 		case Evento.MOSTRAR_CLIENTES: { // 2 = MOSTRAR_CLIENTES
@@ -30,6 +34,12 @@ public class Controlador{
 		}
 		case Evento.ELIMINAR_CLIENTE: { //4 = ELIMINAR_CLIENTE
 			VistaBajaCliente vbc = new VistaBajaCliente();
+			if(datos != null) {
+				SACliente SACliente = new SAClienteImp();
+				int exito = SACliente.borrarCliente((int)datos);
+				if (exito == 1) VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_OK, 1);
+				else VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_KO, 1);
+			}
 			break;
 		}
 		case Evento.MODIFICAR_CLIENTE: { // 5 = MODIFICAR_CLIENTE
@@ -38,4 +48,24 @@ public class Controlador{
 		}
 		}
 	}
+//	
+//	public static void accion(int evento, tCliente cliente) {
+//		if(evento == Evento.ALTA_CLIENTE) {
+//			SACliente SACliente = new SAClienteImp();
+//			int id = SACliente.altaCliente(cliente);
+//			cliente.setId(id);
+//			VistaAltaCliente.actualizar(Evento.RES_ALTA_CLIENTE_OK, id);
+//		}
+//	}
+//
+//	public static void accion(int evento, int id) {
+//		if(evento == Evento.ELIMINAR_CLIENTE) {
+//			SACliente SACliente = new SAClienteImp();
+//			int exito = SACliente.borrarCliente(id);
+//			if (exito == 1) VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_OK, 1);
+//			else VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_KO, 1);
+//		}
+//	}
+
+
 }

@@ -90,7 +90,7 @@ public class VistaMostrarCliente {
 		save.addActionListener(
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
-						Controlador.accion(Evento.MOSTRAR_CLIENTES);
+						Controlador.accion(Evento.MOSTRAR_CLIENTES, null);
 					}
 				}
 				);
