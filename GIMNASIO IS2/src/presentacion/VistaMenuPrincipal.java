@@ -28,9 +28,10 @@ public class VistaMenuPrincipal {
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Panel principal con margen
-		JPanel panel = new JPanel(new GridLayout(3, 3, 50, 50)); // Espaciado entre celdas
+		JPanel panel = new JPanel(new GridLayout(3, 3, 25, 25)); // Espaciado entre celdas
 		panel.setBackground(new Color(88, 161, 164));
-		panel.setBorder(BorderFactory.createEmptyBorder(200, 200, 200, 200)); // Márgenes exteriores
+		panel.setMinimumSize(new Dimension(400, 400));
+		panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Márgenes exteriores
 
 		// Botones
 		JButton botonCliente = crearBoton("Clientes");
