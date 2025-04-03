@@ -33,7 +33,7 @@ public class VistaBajaCliente {
 		JPanel panelAltaCliente = new JPanel();
 		panelAltaCliente.setLayout(new BoxLayout(panelAltaCliente, BoxLayout.Y_AXIS));
 		panelAltaCliente.setBackground(new Color(17, 47, 69));
-		panelAltaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Márgenes exteriores
+		panelAltaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
 		menuPrincipal.add(panelAltaCliente, BorderLayout.CENTER);
 

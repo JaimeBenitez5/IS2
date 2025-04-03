@@ -26,7 +26,14 @@ public class tCliente {
     	_activo = activo;
     	_dir = dir;
     }
-
+    
+    public tCliente(final int id, final String dni, final String nombre, final String dir) {
+    	_id = id;
+    	_dni = dni;
+    	_nombre = nombre;
+    	_activo = true;
+    	_dir = dir;
+    }
     public tCliente(final String dni, final String nombre, final String dir) {
     	_id = 0;
     	_dni = dni;

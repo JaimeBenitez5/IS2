@@ -16,13 +16,15 @@ public class SAClienteImp implements SACliente {
     }
 
     @objid ("aa2c3fc3-0c75-4838-98c9-2291294245e5")
-    public tCliente leerCliente() {
-        return null;
+    public tCliente leerCliente(final int id) {
+    	DAOClientes clienteDao = new DAOClientesImp();
+        return clienteDao.readCliente(id);
     }
 
     @objid ("8b08be3c-aaa6-4869-83d5-46e266a9b1a8")
     public int actualizarCliente(final tCliente cliente) {
-        return 0;
+    	DAOClientes clienteDao = new DAOClientesImp();
+        return clienteDao.updateCliente(cliente);
     }
 
     @objid ("ba15c147-35ff-47e1-9f3a-45991d5bf7d7")

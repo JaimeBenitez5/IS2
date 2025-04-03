@@ -11,12 +11,14 @@ public class Controlador{
 		switch (evento) {
 		// CLIENTE
 		case Evento.ALTA_CLIENTE: { // 1 = ALTA_CLIENTES
-			VistaAltaCliente vac = new VistaAltaCliente();
 			if(datos != null) {
 				SACliente SACliente = new SAClienteImp();
 				int id = SACliente.altaCliente((tCliente) datos);
 				((tCliente) datos).setId(id);
 				VistaAltaCliente.actualizar(Evento.RES_ALTA_CLIENTE_OK, id);	
+			}
+			else {
+				VistaAltaCliente vac = new VistaAltaCliente();
 			}
 			break;
 		}
@@ -33,39 +35,29 @@ public class Controlador{
 			break;
 		}
 		case Evento.ELIMINAR_CLIENTE: { //4 = ELIMINAR_CLIENTE
-			VistaBajaCliente vbc = new VistaBajaCliente();
 			if(datos != null) {
 				SACliente SACliente = new SAClienteImp();
 				int exito = SACliente.borrarCliente((int)datos);
-				if (exito == 1) VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_OK, 1);
-				else VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_KO, 1);
+				if (exito == 1) VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_OK, (int)datos);
+				else VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_KO, (int)datos);
+			}
+			else {
+				VistaBajaCliente vbc = new VistaBajaCliente();
 			}
 			break;
 		}
 		case Evento.MODIFICAR_CLIENTE: { // 5 = MODIFICAR_CLIENTE
-			//TBD
+			if(datos != null) {
+				SACliente SACliente = new SAClienteImp();
+				int exito = SACliente.actualizarCliente((tCliente) datos);
+				if(exito == 1) VistaModificarCliente.actualizar(Evento.RES_MODIFICAR_CLIENTE_OK, null);
+				else VistaModificarCliente.actualizar(Evento.RES_MODIFICAR_CLIENTE_KO, null);
+			}
+			else {
+				VistaModificarCliente vmc = new VistaModificarCliente();
+			}
 			break;
 		}
 		}
 	}
-//	
-//	public static void accion(int evento, tCliente cliente) {
-//		if(evento == Evento.ALTA_CLIENTE) {
-//			SACliente SACliente = new SAClienteImp();
-//			int id = SACliente.altaCliente(cliente);
-//			cliente.setId(id);
-//			VistaAltaCliente.actualizar(Evento.RES_ALTA_CLIENTE_OK, id);
-//		}
-//	}
-//
-//	public static void accion(int evento, int id) {
-//		if(evento == Evento.ELIMINAR_CLIENTE) {
-//			SACliente SACliente = new SAClienteImp();
-//			int exito = SACliente.borrarCliente(id);
-//			if (exito == 1) VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_OK, 1);
-//			else VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_KO, 1);
-//		}
-//	}
-
-
 }

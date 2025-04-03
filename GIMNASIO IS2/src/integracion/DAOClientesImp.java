@@ -13,17 +13,12 @@ public class DAOClientesImp implements DAOClientes {
 	@objid ("d33cffc0-4796-4963-86bf-890bea10be49")
 	public int createCliente(tCliente cliente) {
 		String query = "INSERT INTO Cliente (nombre, dni, direccion) VALUES (?, ?, ?)";
-		try (PreparedStatement st = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-			// Se insertan los valores en la consulta:
-			st.setString(1, cliente.getNombre());
-			st.setString(2, cliente.getDni());
-			st.setString(3, cliente.getDir());
-
-			// Se invoca a executeUpdate sin parámetro:
-			st.executeUpdate();
-
-			// Obtener la clave generada (idCliente)
-			try (ResultSet rs = st.getGeneratedKeys()) {
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+			stmt.setString(1, cliente.getNombre());
+			stmt.setString(2, cliente.getDni());
+			stmt.setString(3, cliente.getDir());
+			stmt.executeUpdate();
+			try (ResultSet rs = stmt.getGeneratedKeys()) {
 				if (rs.next()) {
 					int idCliente = rs.getInt(1);
 					return idCliente;
@@ -33,30 +28,56 @@ public class DAOClientesImp implements DAOClientes {
 			e.printStackTrace();
 		}
 		return 0;
-
 	}
 
 	@objid ("069139f7-3a72-4d97-b631-fc04b812eeca")
-	public tCliente readCliente() {
-		// TODO Auto-generated return
+	public tCliente readCliente(final int id) {
+		String query = "SELECT * FROM CLIENTE WHERE idCliente  = ?";
+		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
+			stmt.setInt(1,id);
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()) {
+				int idCliente = rs.getInt("idCliente");
+				String name = rs.getString ("nombre");
+				String dni = rs.getString ("dni");
+				String direccion = rs.getString ("direccion");
+				int activo = rs.getInt("activo");
+				boolean act;
+				if(activo == 1) act = true;
+				else act = false;
+
+				tCliente c = new tCliente(idCliente, dni , name , direccion ,act);
+				return c;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@objid ("720d1674-b5db-4c58-b692-9948ff65f58d")
 	public int updateCliente(final tCliente cliente) {
-		// TODO Auto-generated return
+		String query = "UPDATE CLIENTE SET nombre = ?, dni = ?, direccion = ? WHERE idCliente=?";
+		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
+			stmt.setString(1, cliente.getNombre());
+	        stmt.setString(2, cliente.getDni());
+	        stmt.setString(3, cliente.getDir());
+	        stmt.setInt(4, cliente.getId());
+			//LO QUE DEVUELVE ESTO ES EL NUMERO DE FILAS QUE HA BORRADO, SI ES 1 ES EXITO
+	        return stmt.executeUpdate(); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
 	@objid ("10927b9e-db74-426b-8da0-8b4adf615314")
 	public int deleteCliente(final int id) {
 		String query = "DELETE FROM Cliente WHERE idCliente = ?";
-		try (PreparedStatement st = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-			// Se insertan los valores en la consulta:
-			st.setInt(1, id);
-			// Se invoca a executeUpdate sin parámetro
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+			stmt.setInt(1, id);
 			//LO QUE DEVUELVE ESTO ES EL NUMERO DE FILAS QUE HA BORRADO, SI ES 1 ES EXITO
-			return st.executeUpdate();
+			return stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

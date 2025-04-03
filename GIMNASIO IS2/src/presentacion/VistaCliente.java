@@ -31,7 +31,7 @@ public class VistaCliente {
 		// Panel principal con margen
 		JPanel panel = new JPanel(new GridLayout(3, 2, 20, 20)); // Espaciado entre celdas
 		panel.setBackground(new Color(88, 161, 164));
-		panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50)); // Márgenes exteriores
+		panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Márgenes exteriores
 
 		// Botones
 		JButton botonAlta = crearBoton("Alta Cliente");
@@ -39,8 +39,6 @@ public class VistaCliente {
 		JButton botonRead = crearBoton("Mostrar Cliente");
 		JButton botonUnroll = crearBoton("Dar de Baja Cliente");
 		JButton botonModClient = crearBoton("Modificar Cliente");
-		JButton botonSearch = crearBoton("Buscar Cliente");
-
 		// Botón de regreso al menú principal con icono
 		JButton botonMainMenu = new JButton(new ImageIcon("icons/main_menu.png"));
 		botonMainMenu.setBorderPainted(false);
@@ -53,7 +51,6 @@ public class VistaCliente {
 		panel.add(botonRead);
 		panel.add(botonUnroll);
 		panel.add(botonModClient);
-		panel.add(botonSearch);
 
 		// Agregar el panel y el botón del menú principal
 		menuPrincipal.add(panel, BorderLayout.CENTER);
@@ -71,12 +68,24 @@ public class VistaCliente {
 			new VistaMostrarClientes();
 			Controlador.accion(Evento.MOSTRAR_CLIENTES, null);
 		});
-
+		
+		botonRead.addActionListener(e -> {
+			menuPrincipal.setVisible(false);
+			new VistaMostrarCliente();
+			Controlador.accion(Evento.MOSTRAR_CLIENTE, null);
+		});
+		
 		botonUnroll.addActionListener(e -> {
 			menuPrincipal.setVisible(false);
 			Controlador.accion(Evento.ELIMINAR_CLIENTE, null);
 		});
 
+
+		botonModClient.addActionListener(e -> {
+			menuPrincipal.setVisible(false);
+			Controlador.accion(Evento.MODIFICAR_CLIENTE, null);
+		});
+		
 		botonMainMenu.addActionListener(e -> {
 			menuPrincipal.setVisible(false);
 			new VistaMenuPrincipal();

@@ -9,7 +9,7 @@ public interface SACliente {
     int altaCliente(final tCliente cliente);
 
     @objid ("ef47e726-6daa-402a-b807-b83681b7be9f")
-    tCliente leerCliente();
+    tCliente leerCliente(final int id);
 
     @objid ("e9d51efa-64a0-4945-ae98-28ed826bc6f0")
     int actualizarCliente(final tCliente cliente);

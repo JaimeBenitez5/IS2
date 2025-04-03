@@ -143,7 +143,7 @@ public class VistaAltaCliente {
 		return boton;
 	}
 	
-	private JButton crearBotonConIcono(String ruta) {
+	private static JButton crearBotonConIcono(String ruta) {
         JButton boton = new JButton(new ImageIcon(ruta));
         boton.setBorderPainted(false);
         boton.setContentAreaFilled(false);
