@@ -1,4 +1,4 @@
-package presentacion;
+package presentacion.clientes;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,6 +17,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import configFiles.BDConexion;
+import presentacion.Controlador;
+import presentacion.Evento;
+import presentacion.VistaMenuPrincipal;
 
 public class VistaMostrarCliente {
 	public VistaMostrarCliente() {

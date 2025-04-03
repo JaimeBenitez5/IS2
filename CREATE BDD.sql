@@ -122,9 +122,9 @@ INSERT INTO Actividad_Catalogo VALUES (1, 'Spinning', '2025-03-20', 2);
 INSERT INTO Basica VALUES (2); 
 INSERT INTO Premium VALUES (1, '1234567A', 1); 
 INSERT INTO Factura (Fecha, ImporteTotal) VALUES ('2015-05-01', 12.22);
-SELECT * FROM Salas; 
+SELECT * FROM Sala; 
 SELECT * FROM Cliente; 
-SELECT*FROM Empleados;
+SELECT*FROM Empleado;
 SELECT*FROM Factura;
 
 

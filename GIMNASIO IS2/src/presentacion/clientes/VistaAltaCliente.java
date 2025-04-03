@@ -1,4 +1,4 @@
-package presentacion;
+package presentacion.clientes;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -26,6 +26,10 @@ import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import negocio.SACliente;
 import negocio.SAClienteImp;
 import negocio.tCliente;
+import presentacion.ButtonFactory;
+import presentacion.Controlador;
+import presentacion.Evento;
+import presentacion.VistaMenuPrincipal;
 
 
 @objid ("69cff9f9-fddd-46c9-b01f-2aa13f2b2c28")
@@ -81,10 +85,10 @@ public class VistaAltaCliente {
         JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
         botones.setBackground(new Color(17, 47, 69));
 
-        JButton back = crearBotonConIcono("icons/back.png");
-        JButton discard = crearBoton("Descartar");
-        JButton save = crearBoton("Guardar");
-        JButton botonMainMenu = crearBotonConIcono("icons/main_menu.png");
+        JButton back = ButtonFactory.crearBotonConIcono("icons/back.png");
+        JButton discard = ButtonFactory.crearBoton("Descartar",new Color(67, 75, 172));
+        JButton save = ButtonFactory.crearBoton("Guardar",new Color(67, 75, 172));
+        JButton botonMainMenu = ButtonFactory.crearBotonConIcono("icons/main_menu.png");
 
         botones.add(back);
         botones.add(discard);
@@ -134,21 +138,6 @@ public class VistaAltaCliente {
 		menuPrincipal.setResizable(false);
 		menuPrincipal.pack();
 	}
-
-
-	private static JButton crearBoton(String texto) {
-		JButton boton = new JButton(texto);
-		boton.setForeground(Color.WHITE);
-		boton.setBackground(new Color(67, 75, 172));
-		return boton;
-	}
-	
-	private static JButton crearBotonConIcono(String ruta) {
-        JButton boton = new JButton(new ImageIcon(ruta));
-        boton.setBorderPainted(false);
-        boton.setContentAreaFilled(false);
-        return boton;
-    }
 
 	public static void actualizar(int evento, Object datos) {
 		if (evento == Evento.RES_ALTA_CLIENTE_OK) {

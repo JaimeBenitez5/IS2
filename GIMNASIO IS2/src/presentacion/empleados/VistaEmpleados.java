@@ -1,4 +1,4 @@
-package presentacion;
+package presentacion.empleados;
 
 import java.awt.*;
 import javax.swing.*;

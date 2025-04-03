@@ -1,4 +1,4 @@
-package presentacion;
+package presentacion.clientes;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -19,6 +19,9 @@ import javax.swing.JTextArea;
 import javax.swing.JFrame;
 
 import negocio.tCliente;
+import presentacion.ButtonFactory;
+import presentacion.Evento;
+import presentacion.TablaClientes;
 
 public class VistaMostrarClientes {
 	public VistaMostrarClientes() {
@@ -40,11 +43,11 @@ public class VistaMostrarClientes {
 			panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Márgenes exteriores
 
 			// Botones
-			JButton botonAlta = crearBoton("Alta Cliente");
-			JButton botonReadAll = crearBoton("Mostrar Clientes");
-			JButton botonRead = crearBoton("Mostrar Cliente");
-			JButton botonUnroll = crearBoton("Dar de Baja Cliente");
-			JButton botonModClient = crearBoton("Modificar Cliente");
+			JButton botonAlta = ButtonFactory.crearBoton("Alta Cliente",new Color(88, 161, 164));
+			JButton botonReadAll = ButtonFactory.crearBoton("Mostrar Clientes",new Color(88, 161, 164));
+			JButton botonRead = ButtonFactory.crearBoton("Mostrar Cliente",new Color(88, 161, 164));
+			JButton botonUnroll = ButtonFactory.crearBoton("Dar de Baja Cliente",new Color(88, 161, 164));
+			JButton botonModClient = ButtonFactory.crearBoton("Modificar Cliente",new Color(88, 161, 164));
 			// Botón de regreso al menú principal con icono
 			JButton botonMainMenu = new JButton(new ImageIcon("icons/main_menu.png"));
 			botonMainMenu.setBorderPainted(false);

@@ -1,16 +1,15 @@
-package presentacion;
+package presentacion.facturas;
 
 import java.awt.*;
 import javax.swing.*;
-import java.awt.event.ActionListener;
 
-public class VistaSalas {
-    
-    public VistaSalas() {
+public class VistaFacturas {
+
+    public VistaFacturas() {
         // ------------------------------------
         // Diseño de la vista
         JFrame menuPrincipal = new JFrame();
-        menuPrincipal.setTitle("Menú CRUD Salas");
+        menuPrincipal.setTitle("Menú CRUD Facturas");
         menuPrincipal.setSize(1280, 720);
         menuPrincipal.setLocationRelativeTo(null);
         menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,11 +20,10 @@ public class VistaSalas {
         panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50)); // Márgenes exteriores
 
         // Botones
-        JButton botonAlta = crearBoton("Alta Sala");
-        JButton botonReadAll = crearBoton("Mostrar Salas");
-        JButton botonRead = crearBoton("Mostrar Sala");
-        JButton botonUnroll = crearBoton("Eliminar Sala");
-        JButton botonModSala = crearBoton("Modificar Sala");
+        JButton botonAlta = crearBoton("Crear Factura");
+        JButton botonReadAll = crearBoton("Mostrar Facturas");
+        JButton botonRead = crearBoton("Mostrar Factura");
+        JButton botonListByClient = crearBoton("Listar Facturas por Cliente");
 
         // Botón de regreso al menú principal con icono
         JButton botonMainMenu = new JButton(new ImageIcon("icons/main_menu.png"));
@@ -37,8 +35,7 @@ public class VistaSalas {
         panel.add(botonAlta);
         panel.add(botonReadAll);
         panel.add(botonRead);
-        panel.add(botonUnroll);
-        panel.add(botonModSala);
+        panel.add(botonListByClient);
 
         // Agregar el panel y el botón del menú principal
         menuPrincipal.add(panel, BorderLayout.CENTER);
@@ -53,10 +50,11 @@ public class VistaSalas {
         });
 
         botonReadAll.addActionListener(e -> {
+            menuPrincipal.setVisible(false);
             Controlador.accion(Evento.MOSTRAR_CLIENTES, null);
         });
 
-        botonUnroll.addActionListener(e -> {
+        botonListByClient.addActionListener(e -> {
             menuPrincipal.setVisible(false);
             Controlador.accion(Evento.ELIMINAR_CLIENTE, null);
         });
@@ -83,9 +81,9 @@ public class VistaSalas {
             textArea.setWrapStyleWord(true);
             JScrollPane scrollPane = new JScrollPane(textArea);
             scrollPane.setPreferredSize(new Dimension(500, 200));
-            JOptionPane.showMessageDialog(null, scrollPane, "SALAS", JOptionPane.DEFAULT_OPTION);
+            JOptionPane.showMessageDialog(null, scrollPane, "FACTURAS", JOptionPane.DEFAULT_OPTION);
         } else if (evento == Evento.RES_MOSTRAR_CLIENTES_KO) {
-            JOptionPane.showMessageDialog(null, "No se ha podido encontrar ninguna sala");
+            JOptionPane.showMessageDialog(null, "No se ha podido encontrar ninguna factura");
         }
     }
 }

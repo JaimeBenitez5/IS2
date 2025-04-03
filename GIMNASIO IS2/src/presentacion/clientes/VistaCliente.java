@@ -1,4 +1,4 @@
-package presentacion;
+package presentacion.clientes;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -11,6 +11,10 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import presentacion.Controlador;
+import presentacion.Evento;
+import presentacion.VistaMenuPrincipal;
 
 public class VistaCliente {
 	public VistaCliente() {

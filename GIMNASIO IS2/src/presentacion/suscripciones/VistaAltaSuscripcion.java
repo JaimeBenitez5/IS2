@@ -1,4 +1,4 @@
-package presentacion;
+package presentacion.suscripciones;
 
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import negocio.tFactura;
