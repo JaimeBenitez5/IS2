@@ -18,16 +18,18 @@ import presentacion.Evento;
 import presentacion.VistaMenuPrincipal;
 
 public class VistaCliente {
-	private JFrame GUI;
-	private VistaAltaCliente vac;
-	private VistaMostrarClientes vmcs;
-	
+	private static JFrame GUI = null;
 	
 	public VistaCliente() {
-		GUI = initGUI();
+		
 	}
 	
-	private JFrame initGUI(){
+	public static void open(Frame parent) {
+		if(GUI == null) GUI = initGUI();
+		GUI.setVisible(true);
+	}
+	
+	private static JFrame initGUI(){
 		JFrame menuPrincipal = new JFrame();
 		menuPrincipal.setTitle("Menú CRUD Cliente");
 		menuPrincipal.setSize(1280, 720);
@@ -65,37 +67,28 @@ public class VistaCliente {
 
 		// Listeners
 		botonAlta.addActionListener(e -> {
-			//menuPrincipal.setVisible(false);
-			VistaAltaCliente.open(menuPrincipal);
-			Controlador.accion(Evento.ALTA_CLIENTE, null);
+			Controlador.accion(Evento.VISTA_ALTA_CLIENTE, null);
 		});
 
 		botonReadAll.addActionListener(e -> {
-			menuPrincipal.setVisible(false);
-			new VistaMostrarClientes();
-			Controlador.accion(Evento.MOSTRAR_CLIENTES, null);
+			Controlador.accion(Evento.VISTA_MOSTRAR_CLIENTES, null);
 		});
 		
 		botonRead.addActionListener(e -> {
-			menuPrincipal.setVisible(false);
-			new VistaMostrarCliente();
-			Controlador.accion(Evento.MOSTRAR_CLIENTE, null);
+			Controlador.accion(Evento.VISTA_MOSTRAR_CLIENTE, null);
 		});
 		
 		botonUnroll.addActionListener(e -> {
-			menuPrincipal.setVisible(false);
-			Controlador.accion(Evento.ELIMINAR_CLIENTE, null);
+			Controlador.accion(Evento.VISTA_ELIMINAR_CLIENTE, null);
 		});
 
-
 		botonModClient.addActionListener(e -> {
-			menuPrincipal.setVisible(false);
-			Controlador.accion(Evento.MODIFICAR_CLIENTE, null);
+			Controlador.accion(Evento.VISTA_MODIFICAR_CLIENTE, null);
 		});
 		
 		botonMainMenu.addActionListener(e -> {
 			menuPrincipal.setVisible(false);
-			new VistaMenuPrincipal();
+			Controlador.accion(Evento.VISTA_MENU_PRINCIPAL, null);
 		});
 		
 		return menuPrincipal;
@@ -112,9 +105,4 @@ public class VistaCliente {
 		
 	} 
 	
-	public int open(Frame parent) {
-		GUI.setVisible(true);
-		return 1;
-	}
-
 }

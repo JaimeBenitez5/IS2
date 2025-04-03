@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,9 +35,19 @@ import presentacion.VistaMenuPrincipal;
 
 @objid ("69cff9f9-fddd-46c9-b01f-2aa13f2b2c28")
 public class VistaModificarCliente {
-
+	private static JFrame GUI = null;
 	@objid ("3175bc60-dc4e-4d25-8fbe-2b50c79d9d60")
 	public VistaModificarCliente() {
+		
+	}
+	
+	//faltaria meterle que se centra cuando se abre respecto a la ventana anterior
+		public static void open(Frame parent) {
+			if(GUI == null) GUI = initGUI();
+			GUI.setVisible(true);
+		}
+	
+	private static JFrame initGUI() {
 		JFrame menuPrincipal = new JFrame("Menú Modificar Cliente");
 		menuPrincipal.setSize(1920, 1080);
 		menuPrincipal.setLocationRelativeTo(null);
@@ -60,8 +71,6 @@ public class VistaModificarCliente {
 		JPanel panelCampos = new JPanel(new GridLayout(4, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
-
-		
 
 		JLabel id = new JLabel("ID:");
 		id.setForeground(Color.WHITE);
@@ -94,26 +103,15 @@ public class VistaModificarCliente {
 		botones.setBackground(new Color(17, 47, 69));
 
 		JButton back = ButtonFactory.crearBotonConIcono("icons/back.png");
-		JButton discard = ButtonFactory.crearBoton("Descartar", new Color(67, 75, 172));
 		JButton save = ButtonFactory.crearBoton("Guardar", new Color(67, 75, 172));
 		JButton botonMainMenu = ButtonFactory.crearBotonConIcono("icons/main_menu.png");
 
 		botones.add(back);
-		botones.add(discard);
-		botones.add(Box.createRigidArea(new Dimension(40, 20)));
 		botones.add(save);
 		botones.add(botonMainMenu);
 
 		panelAltaCliente.add(botones);
 		menuPrincipal.setVisible(true);
-
-
-		discard.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-					}
-				}
-				);
 
 		save.addActionListener(
 				new ActionListener () {
@@ -134,21 +132,20 @@ public class VistaModificarCliente {
 		back.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
-				VistaCliente vc = new VistaCliente();
+				Controlador.accion(Evento.VISTA_CLIENTE, null);
 			}
 		});
 
 		botonMainMenu.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
-				VistaMenuPrincipal vmp = new VistaMenuPrincipal();
+				Controlador.accion(Evento.VISTA_MENU_PRINCIPAL, null);
 			}
 		});
 		menuPrincipal.setResizable(false);
 		menuPrincipal.pack();
+		return menuPrincipal;
 	}
-
-
 	
 
 	public static void actualizar(int evento, Object datos) {
@@ -163,6 +160,4 @@ public class VistaModificarCliente {
 		} else if (evento == Evento.RES_MODIFICAR_CLIENTE_KO)
 			JOptionPane.showMessageDialog(null, "No se ha podido modificar el cliente");
 	}
-
-
 }

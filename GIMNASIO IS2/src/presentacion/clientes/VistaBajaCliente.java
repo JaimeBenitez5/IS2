@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,12 +22,24 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import presentacion.ButtonFactory;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.VistaMenuPrincipal;
 
 public class VistaBajaCliente {
+	private static JFrame GUI = null;
 	public VistaBajaCliente() {
+
+	}
+
+	//faltaria meterle que se centra cuando se abre respecto a la ventana anterior
+	public static void open(Frame parent) {
+		if(GUI == null) GUI = initGUI();
+		GUI.setVisible(true);
+	}
+
+	private static JFrame initGUI() {
 		JFrame menuPrincipal = new JFrame("Menú Baja Cliente");
 		menuPrincipal.setSize(1920, 1080);
 		menuPrincipal.setLocationRelativeTo(null);
@@ -63,9 +76,9 @@ public class VistaBajaCliente {
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
 
-		JButton back = crearBotonConIcono("icons/back.png");
-		JButton delete = crearBoton("Dar de baja");
-		JButton botonMainMenu = crearBotonConIcono("icons/main_menu.png");
+		JButton back = ButtonFactory.crearBotonConIcono("icons/back.png");
+		JButton delete = ButtonFactory.crearBoton("Dar de baja",  new Color(67, 75, 172));
+		JButton botonMainMenu = ButtonFactory.crearBotonConIcono("icons/main_menu.png");
 
 		botones.add(back);
 		botones.add(delete);
@@ -99,23 +112,9 @@ public class VistaBajaCliente {
 		});
 		menuPrincipal.setResizable(false);
 		menuPrincipal.pack();
+		return menuPrincipal;
 	}
 
-
-	private static JButton crearBoton(String texto) {
-		JButton boton = new JButton(texto);
-		boton.setForeground(Color.WHITE);
-		boton.setBackground(new Color(67, 75, 172));
-		return boton;
-	}
-
-	private JButton crearBotonConIcono(String ruta) {
-		JButton boton = new JButton(new ImageIcon(ruta));
-		boton.setBorderPainted(false);
-		boton.setContentAreaFilled(false);
-		return boton;
-	}
-	
 	public static void actualizar(int evento, Object datos) {
 		if (evento == Evento.RES_ELIMINAR_CLIENTE_OK) {
 			JTextArea textArea = new JTextArea(datos.toString());

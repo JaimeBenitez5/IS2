@@ -3,6 +3,7 @@ package presentacion.clientes;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -22,9 +23,19 @@ import presentacion.Evento;
 import presentacion.VistaMenuPrincipal;
 
 public class VistaMostrarCliente {
+	private static JFrame GUI = null;
+
 	public VistaMostrarCliente() {
-		// ------------------------------------
-		// Diseño de la vista
+
+	}
+	
+	//faltaria meterle que se centra cuando se abre respecto a la ventana anterior
+	public static void open(Frame parent) {
+		if(GUI == null) GUI = initGUI();
+		GUI.setVisible(true);
+	}
+	
+	private static JFrame initGUI() {
 		JFrame menuPrincipal = new JFrame();
 		menuPrincipal.setTitle("Menu Alta Cliente");
 		menuPrincipal.setBounds(100, 100, 450, 300);
@@ -113,7 +124,9 @@ public class VistaMostrarCliente {
 			}
 		}
 				);
+		return menuPrincipal;
 	}
+
 
 	public static void actualizar(int evento, Object datos) {
 		JTextArea textArea = new JTextArea(datos.toString());

@@ -70,11 +70,7 @@ public class VistaMenuPrincipal {
 		botonCliente.addActionListener(
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-						if(vc == null) {
-							vc = new VistaCliente();
-						}
-						vc.open(menuPrincipal);
+						Controlador.accion(Evento.VISTA_CLIENTE, null);
 					}
 				}
 				);

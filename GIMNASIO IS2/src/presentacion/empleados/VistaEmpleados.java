@@ -3,6 +3,9 @@ package presentacion.empleados;
 import java.awt.*;
 import javax.swing.*;
 
+import presentacion.Controlador;
+import presentacion.Evento;
+
 public class VistaEmpleados {
 
     public VistaEmpleados() {
@@ -61,7 +64,7 @@ public class VistaEmpleados {
 
         botonMainMenu.addActionListener(e -> {
             menuPrincipal.setVisible(false);
-            new VistaMenuPrincipal();
+            Controlador.accion(Evento.VISTA_MENU_PRINCIPAL, null);
         });
     }
 

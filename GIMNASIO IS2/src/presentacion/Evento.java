@@ -1,28 +1,44 @@
 package presentacion;
 
 public class Evento {
-	// Evento Cliente
-	public static final int ALTA_CLIENTE = 100;
-	public static final int ELIMINAR_CLIENTE = 101;
-	public static final int MOSTRAR_CLIENTES = 102;
-	public static final int MODIFICAR_CLIENTE = 103;
-	public static final int MOSTRAR_CLIENTE = 104;
-	public static final int BUSCAR_CLIENTE = 104;
+
+	public static final int VISTA_MENU_PRINCIPAL = 000;
+	// Eventos Cliente
+
+	//Eventos de Vistas
+	public static final int VISTA_CLIENTE = 101;
+	public static final int VISTA_ALTA_CLIENTE = 102;
+	public static final int VISTA_ELIMINAR_CLIENTE = 103;
+	public static final int VISTA_MOSTRAR_CLIENTES = 104;
+	public static final int VISTA_MOSTRAR_CLIENTE = 105;
+	public static final int VISTA_MODIFICAR_CLIENTE = 106;
 	
-	public static final int RES_ALTA_CLIENTE_OK = 400;
-	public static final int RES_ALTA_CLIENTE_KO = 401;
+	// Eventos de Negocio
+	public static final int ALTA_CLIENTE = 110;
+	public static final int ELIMINAR_CLIENTE = 111;
+	public static final int MOSTRAR_CLIENTES = 112;
+	public static final int MODIFICAR_CLIENTE = 13;
+	public static final int MOSTRAR_CLIENTE = 114;
+	public static final int BUSCAR_CLIENTE = 114;
 	
-	public static final int RES_ELIMINAR_CLIENTE_OK = 500;
-	public static final int RES_ELIMINAR_CLIENTE_KO = 501;
+	//Eventos de Respuesta
+	public static final int RES_ALTA_CLIENTE_OK = 120;
+	public static final int RES_ALTA_CLIENTE_KO = 121;
 	
-	public static final int RES_BUSCAR_CLIENTE_OK = 600;
-	public static final int RES_BUSCAR_CLIENTE_KO = 601;
+	public static final int RES_ELIMINAR_CLIENTE_OK = 122;
+	public static final int RES_ELIMINAR_CLIENTE_KO = 123;
 	
-	public static final int RES_MODIFICAR_CLIENTE_OK = 700;
-	public static final int RES_MODIFICAR_CLIENTE_KO = 701;
+	public static final int RES_BUSCAR_CLIENTE_OK = 124;
+	public static final int RES_BUSCAR_CLIENTE_KO = 125;
 	
-	public static final int RES_MOSTRAR_CLIENTES_OK = 800;
-	public static final int RES_MOSTRAR_CLIENTES_KO = 801;
+	public static final int RES_MODIFICAR_CLIENTE_OK = 126;
+	public static final int RES_MODIFICAR_CLIENTE_KO = 127;
+	
+	public static final int RES_MOSTRAR_CLIENTES_OK = 128;
+	public static final int RES_MOSTRAR_CLIENTES_KO = 129;
+	
+	
+	
 	// Evento Producto
 	public static final int ALTA_PRODUCTO = 105;
 	// ..
