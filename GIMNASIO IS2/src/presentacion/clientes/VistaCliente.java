@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import presentacion.ButtonFactory;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.VistaMenuPrincipal;
@@ -20,11 +21,7 @@ import presentacion.VistaMenuPrincipal;
 public class VistaCliente {
 	private static JFrame GUI = null;
 	
-	public VistaCliente() {
-		
-	}
-	
-	public static void open(Frame parent) {
+	public static void open() {
 		if(GUI == null) GUI = initGUI();
 		GUI.setVisible(true);
 	}
@@ -42,16 +39,13 @@ public class VistaCliente {
 		panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Márgenes exteriores
 
 		// Botones
-		JButton botonAlta = crearBoton("Alta Cliente");
-		JButton botonReadAll = crearBoton("Mostrar Clientes");
-		JButton botonRead = crearBoton("Mostrar Cliente");
-		JButton botonUnroll = crearBoton("Dar de Baja Cliente");
-		JButton botonModClient = crearBoton("Modificar Cliente");
-		// Botón de regreso al menú principal con icono
-		JButton botonMainMenu = new JButton(new ImageIcon("icons/main_menu.png"));
-		botonMainMenu.setBorderPainted(false);
-		botonMainMenu.setContentAreaFilled(false);
-		botonMainMenu.setActionCommand("Ir a Menú Principal");
+		Color colorBotones = new Color(48, 86, 119);
+		JButton botonAlta = ButtonFactory.crearBoton("Añadir Cliente", colorBotones);
+		JButton botonReadAll = ButtonFactory.crearBoton("Mostrar Clientes", colorBotones);
+		JButton botonRead = ButtonFactory.crearBoton("Mostrar Cliente", colorBotones);
+		JButton botonUnroll = ButtonFactory.crearBoton("Dar de Baja Cliente", colorBotones);
+		JButton botonModClient = ButtonFactory.crearBoton("Modificar Cliente", colorBotones);
+		JButton botonMainMenu = ButtonFactory.crearBotonConIcono("icons/main_menu.png");
 
 		// Agregar elementos al panel
 		panel.add(botonAlta);

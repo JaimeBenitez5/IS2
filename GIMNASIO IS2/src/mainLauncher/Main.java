@@ -1,15 +1,11 @@
 package mainLauncher;
 
 import presentacion.Controlador;
-import presentacion.VistaMenuPrincipal;
+import presentacion.Evento;
 
 
 public class Main {
-
 	public static void main ( String[] args ) {
-		Controlador ct = new Controlador();
-		VistaMenuPrincipal vmp = new VistaMenuPrincipal();
+		Controlador.accion(Evento.VISTA_MENU_PRINCIPAL, null);
 	}
 }
-
-

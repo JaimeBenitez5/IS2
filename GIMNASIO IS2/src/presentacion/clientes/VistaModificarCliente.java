@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -13,7 +12,6 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,13 +22,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
-import negocio.SACliente;
-import negocio.SAClienteImp;
 import negocio.tCliente;
 import presentacion.ButtonFactory;
 import presentacion.Controlador;
 import presentacion.Evento;
-import presentacion.VistaMenuPrincipal;
 
 
 @objid ("69cff9f9-fddd-46c9-b01f-2aa13f2b2c28")
@@ -41,15 +36,14 @@ public class VistaModificarCliente {
 		
 	}
 	
-	//faltaria meterle que se centra cuando se abre respecto a la ventana anterior
-		public static void open(Frame parent) {
-			if(GUI == null) GUI = initGUI();
-			GUI.setVisible(true);
-		}
+	public static void open() {
+		if(GUI == null) GUI = initGUI();
+		GUI.setVisible(true);
+	}
 	
 	private static JFrame initGUI() {
 		JFrame menuPrincipal = new JFrame("Menú Modificar Cliente");
-		menuPrincipal.setSize(1920, 1080);
+		menuPrincipal.setSize(854, 480);
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
@@ -103,7 +97,7 @@ public class VistaModificarCliente {
 		botones.setBackground(new Color(17, 47, 69));
 
 		JButton back = ButtonFactory.crearBotonConIcono("icons/back.png");
-		JButton save = ButtonFactory.crearBoton("Guardar", new Color(67, 75, 172));
+		JButton save = ButtonFactory.crearBotonConIcono("icons/save.png");
 		JButton botonMainMenu = ButtonFactory.crearBotonConIcono("icons/main_menu.png");
 
 		botones.add(back);

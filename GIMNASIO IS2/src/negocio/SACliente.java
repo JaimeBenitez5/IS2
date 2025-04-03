@@ -8,7 +8,7 @@ public interface SACliente {
     @objid ("94dc1f0b-a91d-43aa-b952-ec72d7096f3d")
     int altaCliente(final tCliente cliente);
 
-    @objid ("ef47e726-6daa-402a-b807-b83681b7be9f")
+    @objid ("ef47e726-6daa-402a-b807-b83681b7be9f") 
     tCliente leerCliente(final int id);
 
     @objid ("e9d51efa-64a0-4945-ae98-28ed826bc6f0")

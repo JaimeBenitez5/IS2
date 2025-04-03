@@ -4,20 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,43 +19,33 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
-import negocio.SACliente;
-import negocio.SAClienteImp;
 import negocio.tCliente;
 import presentacion.ButtonFactory;
 import presentacion.Controlador;
 import presentacion.Evento;
-import presentacion.VistaMenuPrincipal;
 
-
-@objid ("69cff9f9-fddd-46c9-b01f-2aa13f2b2c28")
 public class VistaAltaCliente {
 	private static JFrame GUI = null;
-	@objid ("3175bc60-dc4e-4d25-8fbe-2b50c79d9d60")
-	public VistaAltaCliente() {
 
-	}
-
-	//faltaria meterle que se centra cuando se abre respecto a la ventana anterior
-	public static void open(Frame parent) {
+	public static void open() {
 		if(GUI == null) GUI = initGUI();
 		GUI.setVisible(true);
 	}
 
 	private static JFrame initGUI() {
 		JFrame menuPrincipal = new JFrame("Menú Alta Cliente");
-		menuPrincipal.setSize(1920, 1080);
+		menuPrincipal.setSize(854, 480);
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
+		// Panel principal con margen
 		JPanel panelAltaCliente = new JPanel();
 		panelAltaCliente.setLayout(new BoxLayout(panelAltaCliente, BoxLayout.Y_AXIS));
 		panelAltaCliente.setBackground(new Color(17, 47, 69));
-		panelAltaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Márgenes exteriores
+		panelAltaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
 		menuPrincipal.add(panelAltaCliente, BorderLayout.CENTER);
 
@@ -97,6 +80,7 @@ public class VistaAltaCliente {
 		panelAltaCliente.add(panelCampos);
 		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
 
+		// Botones
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
 
@@ -111,20 +95,23 @@ public class VistaAltaCliente {
 		panelAltaCliente.add(botones);
 		menuPrincipal.setVisible(true);
 
-		save.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						String dni = dniTF.getText();
-						String nombre = nombreTF.getText();
-						String dir = dirTF.getText();
-						if (dni.isEmpty() || nombre.isEmpty() || dir.isEmpty()) {
-							JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-						}
-						tCliente c = new tCliente(dni, nombre, dir);
-						Controlador.accion(Evento.ALTA_CLIENTE, c);
-					}
+		save.addActionListener( new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				String dni = dniTF.getText();
+				String nombre = nombreTF.getText();
+				String dir = dirTF.getText();
+				if (dni.isEmpty() || nombre.isEmpty() || dir.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				);
+				else {
+					dniTF.setText("");
+					nombreTF.setText("");
+					dirTF.setText("");
+					tCliente c = new tCliente(dni, nombre, dir);
+					Controlador.accion(Evento.ALTA_CLIENTE, c);
+				}
+			}
+		});
 
 		back.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
@@ -135,12 +122,9 @@ public class VistaAltaCliente {
 		botonMainMenu.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
-				VistaMenuPrincipal vmp = new VistaMenuPrincipal();
+				Controlador.accion(Evento.VISTA_MENU_PRINCIPAL, null);
 			}
 		});
-
-		menuPrincipal.setResizable(false);
-		menuPrincipal.pack();
 
 		return menuPrincipal;
 	}
@@ -153,8 +137,11 @@ public class VistaAltaCliente {
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, "El cliente se ha insertado correctamente");
-		} else if (evento == Evento.RES_ALTA_CLIENTE_KO)
+			JOptionPane.showMessageDialog(null, "El cliente se ha insertado correctamente con ID: " + datos.toString());
+			GUI.setVisible(false);
+		} 
+		else if (evento == Evento.RES_ALTA_CLIENTE_KO) {
 			JOptionPane.showMessageDialog(null, "No se ha podido insertar el cliente");
+		}
 	}
 }

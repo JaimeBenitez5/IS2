@@ -39,7 +39,24 @@ public class Evento {
 	
 	
 	
-	// Evento Producto
+	// Eventos Facturas
+	//Eventos de Vistas
+		public static final int VISTA_FACTURAS = 201;
+		public static final int VISTA_ALTA_FACTURA = 202;
+		public static final int VISTA_ELIMINAR_FACTURA = 203;
+		public static final int VISTA_MOSTRAR_FACTURAS = 204;
+		public static final int VISTA_MOSTRAR_FACTURA = 205;
+		public static final int VISTA_MODIFICAR_FACTURA = 206;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static final int ALTA_PRODUCTO = 105;
 	// ..
 	public static final int RES_ALTA_PRODUCTO_OK = 402;

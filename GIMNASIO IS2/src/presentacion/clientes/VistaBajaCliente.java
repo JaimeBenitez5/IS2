@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +11,6 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,42 +23,37 @@ import javax.swing.JTextField;
 import presentacion.ButtonFactory;
 import presentacion.Controlador;
 import presentacion.Evento;
-import presentacion.VistaMenuPrincipal;
 
 public class VistaBajaCliente {
 	private static JFrame GUI = null;
-	public VistaBajaCliente() {
 
-	}
-
-	//faltaria meterle que se centra cuando se abre respecto a la ventana anterior
-	public static void open(Frame parent) {
+	public static void open() {
 		if(GUI == null) GUI = initGUI();
 		GUI.setVisible(true);
 	}
 
 	private static JFrame initGUI() {
 		JFrame menuPrincipal = new JFrame("Menú Baja Cliente");
-		menuPrincipal.setSize(1920, 1080);
+		menuPrincipal.setSize(854, 480);
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		JPanel panelAltaCliente = new JPanel();
-		panelAltaCliente.setLayout(new BoxLayout(panelAltaCliente, BoxLayout.Y_AXIS));
-		panelAltaCliente.setBackground(new Color(17, 47, 69));
-		panelAltaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+		JPanel panelBajaCliente = new JPanel();
+		panelBajaCliente.setLayout(new BoxLayout(panelBajaCliente, BoxLayout.Y_AXIS));
+		panelBajaCliente.setBackground(new Color(17, 47, 69));
+		panelBajaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-		menuPrincipal.add(panelAltaCliente, BorderLayout.CENTER);
+		menuPrincipal.add(panelBajaCliente, BorderLayout.CENTER);
 
 		JLabel titulo = new JLabel("Dar de baja Cliente");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelAltaCliente.add(titulo);
-		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
+		panelBajaCliente.add(titulo);
+		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(3, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(1, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
@@ -70,8 +63,8 @@ public class VistaBajaCliente {
 		JTextField idTF = new JTextField(30);
 		panelCampos.add(idTF);
 
-		panelAltaCliente.add(panelCampos);
-		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
+		panelBajaCliente.add(panelCampos);
+		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
 
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
@@ -84,34 +77,31 @@ public class VistaBajaCliente {
 		botones.add(delete);
 		botones.add(botonMainMenu);
 
-		panelAltaCliente.add(botones);
+		panelBajaCliente.add(botones);
 		menuPrincipal.setVisible(true);
 
 
-		delete.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						int id = Integer.parseInt(idTF.getText());
-						Controlador.accion(Evento.ELIMINAR_CLIENTE, id);
-					}
-				}
-				);
+		delete.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				int id = Integer.parseInt(idTF.getText());
+				Controlador.accion(Evento.ELIMINAR_CLIENTE, id);
+			}
+		});
 
 		back.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
-				VistaCliente vc = new VistaCliente();
+				Controlador.accion(Evento.VISTA_CLIENTE, null);
 			}
 		});
 
 		botonMainMenu.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
-				VistaMenuPrincipal vmp = new VistaMenuPrincipal();
+				Controlador.accion(Evento.VISTA_MENU_PRINCIPAL, null);
 			}
 		});
-		menuPrincipal.setResizable(false);
-		menuPrincipal.pack();
+		
 		return menuPrincipal;
 	}
 
@@ -124,7 +114,9 @@ public class VistaBajaCliente {
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
 			JOptionPane.showMessageDialog(null, "El cliente se ha eliminado correctamente");
-		} else if (evento == Evento.RES_ELIMINAR_CLIENTE_KO)
+		} 
+		else if (evento == Evento.RES_ELIMINAR_CLIENTE_KO) {
 			JOptionPane.showMessageDialog(null, "No se ha podido eliminar el cliente");
+		}
 	}
 }
