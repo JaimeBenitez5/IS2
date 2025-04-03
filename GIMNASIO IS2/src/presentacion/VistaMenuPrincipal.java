@@ -17,7 +17,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import presentacion.clientes.VistaAltaCliente;
+import presentacion.clientes.VistaCliente;
+import presentacion.clientes.VistaMostrarClientes;
+
 public class VistaMenuPrincipal {
+
+	private VistaCliente vc;
+	
+	
 	public VistaMenuPrincipal() {
 		JFrame menuPrincipal = new JFrame();
 		menuPrincipal.setTitle("Menú Principal");
@@ -63,7 +71,10 @@ public class VistaMenuPrincipal {
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
 						menuPrincipal.setVisible (false);
-						VistaCliente vc = new VistaCliente();
+						if(vc == null) {
+							vc = new VistaCliente();
+						}
+						vc.open(menuPrincipal);
 					}
 				}
 				);

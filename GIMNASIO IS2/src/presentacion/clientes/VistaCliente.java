@@ -2,6 +2,7 @@ package presentacion.clientes;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
@@ -17,9 +18,16 @@ import presentacion.Evento;
 import presentacion.VistaMenuPrincipal;
 
 public class VistaCliente {
+	private JFrame GUI;
+	private VistaAltaCliente vac;
+	private VistaMostrarClientes vmcs;
+	
+	
 	public VistaCliente() {
-		// ------------------------------------
-		// Diseño de la vista
+		GUI = initGUI();
+	}
+	
+	private JFrame initGUI(){
 		JFrame menuPrincipal = new JFrame();
 		menuPrincipal.setTitle("Menú CRUD Cliente");
 		menuPrincipal.setSize(1280, 720);
@@ -57,7 +65,8 @@ public class VistaCliente {
 
 		// Listeners
 		botonAlta.addActionListener(e -> {
-			menuPrincipal.setVisible(false);
+			//menuPrincipal.setVisible(false);
+			VistaAltaCliente.open(menuPrincipal);
 			Controlador.accion(Evento.ALTA_CLIENTE, null);
 		});
 
@@ -88,8 +97,10 @@ public class VistaCliente {
 			menuPrincipal.setVisible(false);
 			new VistaMenuPrincipal();
 		});
+		
+		return menuPrincipal;
 	}
-
+	
 	private static JButton crearBoton(String texto) {
 		JButton boton = new JButton(texto);
 		boton.setForeground(Color.WHITE);
@@ -100,5 +111,10 @@ public class VistaCliente {
 	public static void actualizar(int evento, Object datos) {
 		
 	} 
+	
+	public int open(Frame parent) {
+		GUI.setVisible(true);
+		return 1;
+	}
 
 }

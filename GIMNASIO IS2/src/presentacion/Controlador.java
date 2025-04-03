@@ -5,6 +5,11 @@ import negocio.SAClienteImp;
 import java.util.List;
 
 import negocio.tCliente;
+import presentacion.clientes.VistaAltaCliente;
+import presentacion.clientes.VistaBajaCliente;
+import presentacion.clientes.VistaCliente;
+import presentacion.clientes.VistaModificarCliente;
+import presentacion.clientes.VistaMostrarClientes;
 import negocio.SACliente;
 
 public class Controlador{
@@ -16,7 +21,7 @@ public class Controlador{
 				SACliente SACliente = new SAClienteImp();
 				int id = SACliente.altaCliente((tCliente) datos);
 				((tCliente) datos).setId(id);
-				VistaAltaCliente.actualizar(Evento.RES_ALTA_CLIENTE_OK, id);	
+				VistaAltaCliente.actualizar(Evento.RES_ALTA_CLIENTE_OK, id);
 			}
 			else {
 				VistaAltaCliente vac = new VistaAltaCliente();
