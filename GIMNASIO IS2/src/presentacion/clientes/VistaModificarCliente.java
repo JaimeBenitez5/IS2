@@ -126,14 +126,14 @@ public class VistaModificarCliente {
 		back.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
-				Controlador.accion(Evento.VISTA_CLIENTE, null);
+				Controlador.mostrarVista(Evento.VISTA_CLIENTE);
 			}
 		});
 
 		botonMainMenu.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
-				Controlador.accion(Evento.VISTA_MENU_PRINCIPAL, null);
+				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
 			}
 		});
 		menuPrincipal.setResizable(false);
@@ -151,6 +151,7 @@ public class VistaModificarCliente {
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
 			JOptionPane.showMessageDialog(null, "El cliente se ha modificado correctamente");
+			GUI.setVisible(false);
 		} else if (evento == Evento.RES_MODIFICAR_CLIENTE_KO)
 			JOptionPane.showMessageDialog(null, "No se ha podido modificar el cliente");
 	}

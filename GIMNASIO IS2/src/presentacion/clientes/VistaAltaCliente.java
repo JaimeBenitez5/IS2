@@ -122,7 +122,7 @@ public class VistaAltaCliente {
 		botonMainMenu.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
-				Controlador.accion(Evento.VISTA_MENU_PRINCIPAL, null);
+				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
 			}
 		});
 

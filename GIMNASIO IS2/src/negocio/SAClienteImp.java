@@ -13,6 +13,7 @@ public class SAClienteImp implements SACliente {
 	// Valida datos antes de interactuar con la base de datos
 	// Llama a los DAOs para acceder a la base de datos
 	// Facilita la escalabilidad y mantenimiento
+	
 	private static DAOClientes clienteDao = new DAOClientesImp();
 
 	@objid ("ce4675dc-94ff-48e6-8c95-167d69434968")

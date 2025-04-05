@@ -14,9 +14,13 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import negocio.tCliente;
 import presentacion.ButtonFactory;
 import presentacion.Controlador;
 import presentacion.Evento;
@@ -81,25 +85,43 @@ public class VistaMostrarCliente {
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				int id = Integer.parseInt(idTF.getText());
-				Controlador.accion(Evento.ELIMINAR_CLIENTE, id);
+				Controlador.accion(Evento.MOSTRAR_CLIENTE, id);
 			}
 		});
 
 		back.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
-				Controlador.accion(Evento.VISTA_CLIENTE, null);
+				Controlador.mostrarVista(Evento.VISTA_CLIENTE);
 			}
 		});
 
 		botonMainMenu.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
-				Controlador.accion(Evento.VISTA_MENU_PRINCIPAL, null);
+				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
 			}
 		});
 		
 		return menuPrincipal;
 	}
-
+	public static void actualizar(int evento, tCliente cliente) {
+		if (evento == Evento.RES_MOSTRAR_CLIENTE_OK) {
+			JTextArea textArea = new JTextArea();
+			textArea.setLineWrap(true);
+			textArea.setEditable(false);
+			textArea.setWrapStyleWord(true);
+			JScrollPane scrollPane = new JScrollPane(textArea);
+			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
+			String id = String.valueOf(cliente.getId());
+			String nombre = cliente.getNombre();
+			String dir = cliente.getDir();
+			String activo = cliente.getActivo() + "";
+			JOptionPane.showMessageDialog(null, "ID: " +id + " Nombre: " + nombre + " Direccion: " + dir + " Activo: " + activo);
+			GUI.setVisible(false);
+		} 
+		else if (evento == Evento.RES_MOSTRAR_CLIENTE_KO) {
+			JOptionPane.showMessageDialog(null, "No se ha podido encontrar el cliente");
+		}
+	}
 }

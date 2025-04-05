@@ -19,7 +19,7 @@ public class Evento {
 	public static final int MOSTRAR_CLIENTES = 112;
 	public static final int MODIFICAR_CLIENTE = 13;
 	public static final int MOSTRAR_CLIENTE = 114;
-	public static final int BUSCAR_CLIENTE = 114;
+	public static final int BUSCAR_CLIENTE = 115;
 	
 	//Eventos de Respuesta
 	public static final int RES_ALTA_CLIENTE_OK = 120;
@@ -37,7 +37,8 @@ public class Evento {
 	public static final int RES_MOSTRAR_CLIENTES_OK = 128;
 	public static final int RES_MOSTRAR_CLIENTES_KO = 129;
 	
-	
+	public static final int RES_MOSTRAR_CLIENTE_OK = 130;
+	public static final int RES_MOSTRAR_CLIENTE_KO = 131;
 	
 	// Eventos Facturas
 	//Eventos de Vistas

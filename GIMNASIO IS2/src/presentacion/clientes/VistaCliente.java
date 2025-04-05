@@ -2,21 +2,16 @@ package presentacion.clientes;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Frame;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import presentacion.ButtonFactory;
 import presentacion.Controlador;
 import presentacion.Evento;
-import presentacion.VistaMenuPrincipal;
 
 public class VistaCliente {
 	private static JFrame GUI = null;
@@ -61,28 +56,28 @@ public class VistaCliente {
 
 		// Listeners
 		botonAlta.addActionListener(e -> {
-			Controlador.accion(Evento.VISTA_ALTA_CLIENTE, null);
+			Controlador.mostrarVista(Evento.VISTA_ALTA_CLIENTE);
 		});
 
 		botonReadAll.addActionListener(e -> {
-			Controlador.accion(Evento.VISTA_MOSTRAR_CLIENTES, null);
+			Controlador.mostrarVista(Evento.VISTA_MOSTRAR_CLIENTES);
 		});
 		
 		botonRead.addActionListener(e -> {
-			Controlador.accion(Evento.VISTA_MOSTRAR_CLIENTE, null);
+			Controlador.mostrarVista(Evento.VISTA_MOSTRAR_CLIENTE);
 		});
 		
 		botonUnroll.addActionListener(e -> {
-			Controlador.accion(Evento.VISTA_ELIMINAR_CLIENTE, null);
+			Controlador.mostrarVista(Evento.VISTA_ELIMINAR_CLIENTE);
 		});
 
 		botonModClient.addActionListener(e -> {
-			Controlador.accion(Evento.VISTA_MODIFICAR_CLIENTE, null);
+			Controlador.mostrarVista(Evento.VISTA_MODIFICAR_CLIENTE);
 		});
 		
 		botonMainMenu.addActionListener(e -> {
 			menuPrincipal.setVisible(false);
-			Controlador.accion(Evento.VISTA_MENU_PRINCIPAL, null);
+			Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
 		});
 		
 		return menuPrincipal;

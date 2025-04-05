@@ -91,14 +91,14 @@ public class VistaBajaCliente {
 		back.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
-				Controlador.accion(Evento.VISTA_CLIENTE, null);
+				Controlador.mostrarVista(Evento.VISTA_CLIENTE);
 			}
 		});
 
 		botonMainMenu.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
-				Controlador.accion(Evento.VISTA_MENU_PRINCIPAL, null);
+				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
 			}
 		});
 		
@@ -114,6 +114,7 @@ public class VistaBajaCliente {
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
 			JOptionPane.showMessageDialog(null, "El cliente se ha eliminado correctamente");
+			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_ELIMINAR_CLIENTE_KO) {
 			JOptionPane.showMessageDialog(null, "No se ha podido eliminar el cliente");

@@ -34,8 +34,8 @@ public class VistaMostrarClientes {
 
 	public static void open() {  
 		if (GUI == null) initGUI();
-		GUI.setVisible(true);
 		Controlador.accion(Evento.MOSTRAR_CLIENTES, null);
+		GUI.setVisible(true);
 	}
 
 	private static void initGUI() {
@@ -49,18 +49,12 @@ public class VistaMostrarClientes {
 		// Panel principal donde se mostrarán los clientes
 		panelMostrarClientes = new JPanel(new BorderLayout());
 		panelMostrarClientes.setBackground(new Color(17, 47, 69));
-
-		// Agregamos un mensaje inicial mientras cargan los datos
-		JLabel mensajeInicial = new JLabel("Cargando clientes...", SwingConstants.CENTER);
-		mensajeInicial.setForeground(Color.WHITE);
-		panelMostrarClientes.add(mensajeInicial, BorderLayout.CENTER);
-
 		GUI.add(panelMostrarClientes, BorderLayout.CENTER);
 
 		// Botones de navegación
 		JPanel botones = new JPanel(new FlowLayout());
 		botones.setBackground(new Color(17, 47, 69));
-		
+
 		JButton back = ButtonFactory.crearBotonConIcono("icons/back.png");
 		JButton botonMainMenu = ButtonFactory.crearBotonConIcono("icons/main_menu.png");
 
@@ -70,42 +64,58 @@ public class VistaMostrarClientes {
 		GUI.add(botones, BorderLayout.SOUTH);
 
 		// Acciones de los botones
-		back.addActionListener(e -> GUI.setVisible(false));
-
-		botonMainMenu.addActionListener(e -> {
-			GUI.setVisible(false);
-			Controlador.accion(Evento.VISTA_MENU_PRINCIPAL, null);
+		back.addActionListener( new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				GUI.setVisible (false);
+			}
 		});
 
+
+		botonMainMenu.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				GUI.setVisible (false);
+				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
+			}
+		});
 		GUI.setVisible(true);
 	}
-	
+
 	public static void actualizar(int evento, List<tCliente> datos) {
 		if (evento == Evento.RES_MOSTRAR_CLIENTES_OK) {
-	        // Limpiar el panel antes de actualizarlo
-	        panelMostrarClientes.removeAll();
+			panelMostrarClientes.removeAll();
+			String[] columnNames = {"ID", "Nombre", "Direccion", "Activo"};
+			String[][] data = new String[datos.size()][4];
 
-	        if (datos == null || datos.isEmpty()) {
-	            JLabel mensaje = new JLabel("No hay clientes disponibles.", SwingConstants.CENTER);
-	            mensaje.setForeground(Color.WHITE);
-	            panelMostrarClientes.add(mensaje, BorderLayout.CENTER);
-	        } else {
-	            String[] columnNames = {"ID", "Nombre"};
-	            String[][] data = new String[datos.size()][2];
+			for (int i = 0; i < datos.size(); i++) {
+				tCliente cliente = datos.get(i);
+				data[i][0] = String.valueOf(cliente.getId());
+				data[i][1] = cliente.getNombre();
+				data[i][2] = cliente.getDir();
+				data[i][3] = cliente.getActivo() + "";
+			}
 
-	            for (int i = 0; i < datos.size(); i++) {
-	                tCliente cliente = datos.get(i);
-	                data[i][0] = String.valueOf(cliente.getId());
-	                data[i][1] = cliente.getNombre();
-	            }
+			JTable tablaClientes = new JTable(data, columnNames);
+			JScrollPane scrollPane = new JScrollPane(tablaClientes);
+			tablaClientes.setBackground(new Color(17, 47, 69));
+			tablaClientes.setForeground(Color.WHITE);
+			tablaClientes.setOpaque(false);
+			tablaClientes.setShowGrid(false);
+			scrollPane.setForeground(new Color(17, 47, 69));
+			scrollPane.setOpaque(false);
+			scrollPane.getViewport().setOpaque(false);
+			panelMostrarClientes.add(scrollPane, BorderLayout.CENTER);
 
-	            JTable tablaClientes = new JTable(data, columnNames);
-	            JScrollPane scrollPane = new JScrollPane(tablaClientes);
-	            panelMostrarClientes.add(scrollPane, BorderLayout.CENTER);
-	        }
-	        // Refrescar la GUI
-	        panelMostrarClientes.revalidate();
-	        panelMostrarClientes.repaint();
-	    }
+			// Refrescar la GUI
+			panelMostrarClientes.revalidate();
+			panelMostrarClientes.repaint();
+		}
+		else if (evento == Evento.RES_MOSTRAR_CLIENTES_KO) {
+			panelMostrarClientes.removeAll();
+			if (datos == null || datos.isEmpty()) {
+				JLabel mensaje = new JLabel("No hay clientes disponibles.", SwingConstants.CENTER);
+				mensaje.setForeground(Color.WHITE);
+				panelMostrarClientes.add(mensaje, BorderLayout.CENTER);
+			} 
+		}
 	}
 }

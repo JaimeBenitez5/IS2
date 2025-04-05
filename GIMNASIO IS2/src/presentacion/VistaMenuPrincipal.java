@@ -69,7 +69,7 @@ public class VistaMenuPrincipal {
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
 						menuPrincipal.setVisible (false);
-						Controlador.accion(Evento.VISTA_CLIENTE, null);
+						Controlador.mostrarVista(Evento.VISTA_CLIENTE);
 					}
 				}
 				);
@@ -78,7 +78,7 @@ public class VistaMenuPrincipal {
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
 						menuPrincipal.setVisible (false);
-						Controlador.accion(Evento.VISTA_FACTURAS, null);
+						Controlador.mostrarVista(Evento.VISTA_FACTURAS);
 					}
 				}
 				);
