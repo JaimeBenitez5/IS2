@@ -3,6 +3,10 @@ package presentacion.facturas;
 import java.awt.*;
 import javax.swing.*;
 
+import presentacion.Controlador;
+import presentacion.Evento;
+import presentacion.VistaMenuPrincipal;
+
 public class VistaFacturas {
 
     public VistaFacturas() {

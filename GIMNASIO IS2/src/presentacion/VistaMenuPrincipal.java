@@ -2,7 +2,6 @@ package presentacion;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,8 +23,7 @@ public class VistaMenuPrincipal {
 	}
 	
 	private static JFrame initGUI() {
-		JFrame menuPrincipal = new JFrame();
-		menuPrincipal.setTitle("Menú Principal");
+		JFrame menuPrincipal = new JFrame("Menú Principal");
 		menuPrincipal.setSize(1280, 720);
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,10 +39,10 @@ public class VistaMenuPrincipal {
 
 		// Botones
 		Color colorBotones = new Color(48, 86, 119);
-		JButton botonCliente = ButtonFactory.crearBoton("Clientes", colorBotones);
-		JButton botonFacturas = ButtonFactory.crearBoton("Facturas",colorBotones);
-		JButton botonSalas = ButtonFactory.crearBoton("Salas", colorBotones);
-		JButton botonEmpleados = ButtonFactory.crearBoton("Empleados",colorBotones);
+		JButton botonCliente = UIElementFactory.crearBoton("Clientes", colorBotones);
+		JButton botonFacturas = UIElementFactory.crearBoton("Facturas",colorBotones);
+		JButton botonSalas = UIElementFactory.crearBoton("Salas", colorBotones);
+		JButton botonEmpleados = UIElementFactory.crearBoton("Empleados",colorBotones);
 
 		// Logo
 		ImageIcon logo = new ImageIcon("icons/logo.png");
@@ -95,6 +93,7 @@ public class VistaMenuPrincipal {
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
 						menuPrincipal.setVisible (false);
+						Controlador.mostrarVista(Evento.VISTA_SALAS);
 					}
 				}
 				);

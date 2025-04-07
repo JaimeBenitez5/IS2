@@ -21,9 +21,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.tCliente;
-import presentacion.ButtonFactory;
 import presentacion.Controlador;
 import presentacion.Evento;
+import presentacion.UIElementFactory;
 
 public class VistaAltaCliente {
 	private static JFrame GUI = null;
@@ -84,9 +84,9 @@ public class VistaAltaCliente {
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
 
-		JButton back = ButtonFactory.crearBotonConIcono("icons/back.png");
-		JButton save = ButtonFactory.crearBotonConIcono("icons/save.png");
-		JButton botonMainMenu = ButtonFactory.crearBotonConIcono("icons/main_menu.png");
+		JButton back = UIElementFactory.crearBotonConIcono("icons/back.png");
+		JButton save = UIElementFactory.crearBotonConIcono("icons/save.png");
+		JButton botonMainMenu = UIElementFactory.crearBotonConIcono("icons/main_menu.png");
 
 		botones.add(back);
 		botones.add(save);

@@ -10,7 +10,7 @@ public interface DAOSalas {
     int altaSala(tSala Sala);
 
     @objid ("c8ef7fae-f1b9-4be6-9388-a49621ca3a1a")
-    tSala leerSala();
+    tSala leerSala(final int id);
 
     @objid ("0733f5c5-45fd-4c61-8c6b-d8ff0289f14f")
     int actualizarSala(final tSala sala);

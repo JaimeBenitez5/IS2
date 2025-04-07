@@ -5,7 +5,7 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-public class ButtonFactory {
+public class UIElementFactory {
 
 	public static JButton crearBoton(String texto, Color color) {
 		JButton boton = new JButton(texto);
@@ -20,4 +20,5 @@ public class ButtonFactory {
 		boton.setContentAreaFilled(false);
 		return boton;
 	}
+	
 }

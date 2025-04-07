@@ -24,9 +24,9 @@ import javax.swing.SwingConstants;
 import javax.swing.JFrame;
 
 import negocio.tCliente;
-import presentacion.ButtonFactory;
 import presentacion.Controlador;
 import presentacion.Evento;
+import presentacion.UIElementFactory;
 
 public class VistaMostrarClientes {
 	private static JFrame GUI = null;
@@ -55,8 +55,8 @@ public class VistaMostrarClientes {
 		JPanel botones = new JPanel(new FlowLayout());
 		botones.setBackground(new Color(17, 47, 69));
 
-		JButton back = ButtonFactory.crearBotonConIcono("icons/back.png");
-		JButton botonMainMenu = ButtonFactory.crearBotonConIcono("icons/main_menu.png");
+		JButton back = UIElementFactory.crearBotonConIcono("icons/back.png");
+		JButton botonMainMenu = UIElementFactory.crearBotonConIcono("icons/main_menu.png");
 
 
 		botones.add(back);

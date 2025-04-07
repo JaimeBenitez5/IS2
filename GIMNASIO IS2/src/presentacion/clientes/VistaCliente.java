@@ -9,9 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import presentacion.ButtonFactory;
 import presentacion.Controlador;
 import presentacion.Evento;
+import presentacion.UIElementFactory;
 
 public class VistaCliente {
 	private static JFrame GUI = null;
@@ -35,12 +35,12 @@ public class VistaCliente {
 
 		// Botones
 		Color colorBotones = new Color(48, 86, 119);
-		JButton botonAlta = ButtonFactory.crearBoton("Añadir Cliente", colorBotones);
-		JButton botonReadAll = ButtonFactory.crearBoton("Mostrar Clientes", colorBotones);
-		JButton botonRead = ButtonFactory.crearBoton("Mostrar Cliente", colorBotones);
-		JButton botonUnroll = ButtonFactory.crearBoton("Dar de Baja Cliente", colorBotones);
-		JButton botonModClient = ButtonFactory.crearBoton("Modificar Cliente", colorBotones);
-		JButton botonMainMenu = ButtonFactory.crearBotonConIcono("icons/main_menu.png");
+		JButton botonAlta = UIElementFactory.crearBoton("Añadir Cliente", colorBotones);
+		JButton botonReadAll = UIElementFactory.crearBoton("Mostrar Clientes", colorBotones);
+		JButton botonRead = UIElementFactory.crearBoton("Mostrar Cliente", colorBotones);
+		JButton botonUnroll = UIElementFactory.crearBoton("Dar de Baja Cliente", colorBotones);
+		JButton botonModClient = UIElementFactory.crearBoton("Modificar Cliente", colorBotones);
+		JButton botonMainMenu = UIElementFactory.crearBotonConIcono("icons/main_menu.png");
 
 		// Agregar elementos al panel
 		panel.add(botonAlta);
@@ -83,13 +83,6 @@ public class VistaCliente {
 		return menuPrincipal;
 	}
 	
-	private static JButton crearBoton(String texto) {
-		JButton boton = new JButton(texto);
-		boton.setForeground(Color.WHITE);
-		boton.setBackground(new Color(48, 86, 119));
-		return boton;
-	}
-
 	public static void actualizar(int evento, Object datos) {
 		
 	} 

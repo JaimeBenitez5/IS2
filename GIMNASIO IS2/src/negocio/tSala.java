@@ -15,7 +15,12 @@ public class tSala {
     	_id = id;
     	_aforo = aforo;
     }
-
+    
+    public tSala( final int aforo) {
+    	_id = 0;
+    	_aforo = aforo;
+    }
+    
     @objid ("7978c70e-d8be-43b0-8ddb-478aea7528d5")
     public int getId() {
     	return _id;

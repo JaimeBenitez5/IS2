@@ -9,7 +9,7 @@ public interface SASalas {
     int altaSala(final tSala sala);
 
     @objid ("a3cdf8d0-0862-4ba4-822c-8f7c2e332aa1")
-    tSala leerSala();
+    public tSala leerSala(final int id);
 
     @objid ("27416893-2654-4eda-90f3-2a26c98b808a")
     int actualizarSala(final tSala sala);

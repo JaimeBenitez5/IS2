@@ -20,9 +20,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import presentacion.ButtonFactory;
 import presentacion.Controlador;
 import presentacion.Evento;
+import presentacion.UIElementFactory;
 
 public class VistaBajaCliente {
 	private static JFrame GUI = null;
@@ -69,9 +69,9 @@ public class VistaBajaCliente {
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
 
-		JButton back = ButtonFactory.crearBotonConIcono("icons/back.png");
-		JButton delete = ButtonFactory.crearBoton("Dar de baja",  new Color(67, 75, 172));
-		JButton botonMainMenu = ButtonFactory.crearBotonConIcono("icons/main_menu.png");
+		JButton back = UIElementFactory.crearBotonConIcono("icons/back.png");
+		JButton delete = UIElementFactory.crearBoton("Dar de baja",  new Color(67, 75, 172));
+		JButton botonMainMenu = UIElementFactory.crearBotonConIcono("icons/main_menu.png");
 
 		botones.add(back);
 		botones.add(delete);
