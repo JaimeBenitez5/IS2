@@ -92,7 +92,6 @@ public class VistaMostrarCliente {
 		back.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
-				Controlador.mostrarVista(Evento.VISTA_CLIENTE);
 			}
 		});
 

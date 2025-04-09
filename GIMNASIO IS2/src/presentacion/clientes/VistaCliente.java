@@ -3,6 +3,8 @@ package presentacion.clientes;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -15,12 +17,12 @@ import presentacion.UIElementFactory;
 
 public class VistaCliente {
 	private static JFrame GUI = null;
-	
+
 	public static void open() {
 		if(GUI == null) GUI = initGUI();
 		GUI.setVisible(true);
 	}
-	
+
 	private static JFrame initGUI(){
 		JFrame menuPrincipal = new JFrame();
 		menuPrincipal.setTitle("Menú CRUD Cliente");
@@ -54,37 +56,43 @@ public class VistaCliente {
 		menuPrincipal.add(botonMainMenu, BorderLayout.SOUTH);
 		menuPrincipal.setVisible(true);
 
-		// Listeners
-		botonAlta.addActionListener(e -> {
-			Controlador.mostrarVista(Evento.VISTA_ALTA_CLIENTE);
+		botonAlta.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				Controlador.mostrarVista(Evento.VISTA_ALTA_CLIENTE);
+			}
 		});
 
-		botonReadAll.addActionListener(e -> {
-			Controlador.mostrarVista(Evento.VISTA_MOSTRAR_CLIENTES);
-		});
-		
-		botonRead.addActionListener(e -> {
-			Controlador.mostrarVista(Evento.VISTA_MOSTRAR_CLIENTE);
-		});
-		
-		botonUnroll.addActionListener(e -> {
-			Controlador.mostrarVista(Evento.VISTA_ELIMINAR_CLIENTE);
+		botonReadAll.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				Controlador.mostrarVista(Evento.VISTA_MOSTRAR_CLIENTES);
+			}
 		});
 
-		botonModClient.addActionListener(e -> {
-			Controlador.mostrarVista(Evento.VISTA_MODIFICAR_CLIENTE);
+		botonRead.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				Controlador.mostrarVista(Evento.VISTA_MOSTRAR_CLIENTE);
+			}
 		});
-		
-		botonMainMenu.addActionListener(e -> {
-			menuPrincipal.setVisible(false);
-			Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
+
+		botonUnroll.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				Controlador.mostrarVista(Evento.VISTA_ELIMINAR_CLIENTE);
+			}
 		});
-		
+
+		botonModClient.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				Controlador.mostrarVista(Evento.VISTA_MODIFICAR_CLIENTE);
+			}
+		});
+
+		botonMainMenu.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				menuPrincipal.setVisible (false);
+				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
+			}
+		});
+
 		return menuPrincipal;
 	}
-	
-	public static void actualizar(int evento, Object datos) {
-		
-	} 
-	
 }

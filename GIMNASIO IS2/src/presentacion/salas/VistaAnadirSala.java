@@ -20,7 +20,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tCliente;
 import negocio.tSala;
 import presentacion.Controlador;
 import presentacion.Evento;
@@ -69,7 +68,6 @@ public class VistaAnadirSala {
 		panelAltaCliente.add(panelCampos);
 		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
 
-		// Botones
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
 
@@ -87,9 +85,9 @@ public class VistaAnadirSala {
 		save.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				int aforo = Integer.parseInt(aforoTF.getText());
-//				if (aforo) {
-//					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-//				}
+				if (aforoTF.getText() == "") {
+					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 				aforoTF.setText("");
 				tSala s = new tSala(aforo);
 				Controlador.accion(Evento.ALTA_SALA, s);

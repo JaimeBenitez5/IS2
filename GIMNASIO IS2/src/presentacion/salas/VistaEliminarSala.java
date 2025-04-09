@@ -33,7 +33,7 @@ public class VistaEliminarSala {
 	}
 
 	private static JFrame initGUI() {
-		JFrame menuPrincipal = new JFrame("Menú Baja Cliente");
+		JFrame menuPrincipal = new JFrame("Menú Eliminar Sala");
 		menuPrincipal.setSize(854, 480);
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,7 +47,7 @@ public class VistaEliminarSala {
 
 		menuPrincipal.add(panelBajaCliente, BorderLayout.CENTER);
 
-		JLabel titulo = new JLabel("Dar de baja Cliente");
+		JLabel titulo = new JLabel("Eliminar Sala");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelBajaCliente.add(titulo);
@@ -84,14 +84,13 @@ public class VistaEliminarSala {
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				int id = Integer.parseInt(idTF.getText());
-				Controlador.accion(Evento.ELIMINAR_CLIENTE, id);
+				Controlador.accion(Evento.ELIMINAR_SALA, id);
 			}
 		});
 
 		back.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
-				Controlador.mostrarVista(Evento.VISTA_CLIENTE);
 			}
 		});
 
@@ -106,18 +105,18 @@ public class VistaEliminarSala {
 	}
 
 	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_ELIMINAR_CLIENTE_OK) {
+		if (evento == Evento.RES_ELIMINAR_SALA_OK) {
 			JTextArea textArea = new JTextArea(datos.toString());
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, "El cliente se ha eliminado correctamente");
+			JOptionPane.showMessageDialog(null, "La sala se ha eliminado correctamente");
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_ELIMINAR_CLIENTE_KO) {
-			JOptionPane.showMessageDialog(null, "No se ha podido eliminar el cliente");
+		else if (evento == Evento.RES_ELIMINAR_SALA_KO) {
+			JOptionPane.showMessageDialog(null, "No se ha podido eliminar la sala");
 		}
 	}
 }

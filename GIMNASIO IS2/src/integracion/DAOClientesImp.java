@@ -2,15 +2,12 @@ package integracion;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 import configFiles.BDConexion;
 import negocio.tCliente;
 
-@objid ("5db6cbcc-d2d1-43b5-97ab-d524a2cfb365")
 public class DAOClientesImp implements DAOClientes {
 
-	@objid ("d33cffc0-4796-4963-86bf-890bea10be49")
 	public int createCliente(tCliente cliente) {
 		String query = "INSERT INTO Cliente (nombre, dni, direccion) VALUES (?, ?, ?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
@@ -30,9 +27,8 @@ public class DAOClientesImp implements DAOClientes {
 		return 0;
 	}
 
-	@objid ("069139f7-3a72-4d97-b631-fc04b812eeca")
 	public tCliente readCliente(final int id) {
-		String query = "SELECT * FROM CLIENTE WHERE idCliente  = ?";
+		String query = "SELECT * FROM CLIENTE WHERE idCliente  = ? AND activo = 1";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1,id);
 			ResultSet rs = stmt.executeQuery();
@@ -55,15 +51,13 @@ public class DAOClientesImp implements DAOClientes {
 		return null;
 	}
 
-	@objid ("720d1674-b5db-4c58-b692-9948ff65f58d")
 	public int updateCliente(final tCliente cliente) {
-		String query = "UPDATE CLIENTE SET nombre = ?, dni = ?, direccion = ? WHERE idCliente=?";
+		String query = "UPDATE CLIENTE SET nombre = ?, dni = ?, direccion = ? WHERE idCliente=? ";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setString(1, cliente.getNombre());
 	        stmt.setString(2, cliente.getDni());
 	        stmt.setString(3, cliente.getDir());
 	        stmt.setInt(4, cliente.getId());
-			//LO QUE DEVUELVE ESTO ES EL NUMERO DE FILAS QUE HA BORRADO, SI ES 1 ES EXITO
 	        return stmt.executeUpdate(); 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -71,12 +65,10 @@ public class DAOClientesImp implements DAOClientes {
 		return 0;
 	}
 
-	@objid ("10927b9e-db74-426b-8da0-8b4adf615314")
 	public int deleteCliente(final int id) {
-		String query = "DELETE FROM Cliente WHERE idCliente = ?";
+		String query = "UPDATE Cliente SET activo = 0 WHERE idCliente = ?";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setInt(1, id);
-			//LO QUE DEVUELVE ESTO ES EL NUMERO DE FILAS QUE HA BORRADO, SI ES 1 ES EXITO
 			return stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -84,10 +76,9 @@ public class DAOClientesImp implements DAOClientes {
 		return 0;
 	}
 
-	@objid ("b2c3cc0f-18df-4728-9309-703997655f53")
 	public List<tCliente> readAllClientes() {
 		ArrayList<tCliente> clientes = new ArrayList<tCliente>();
-		String query = "SELECT * FROM CLIENTE";
+		String query = "SELECT * FROM CLIENTE WHERE activo = 1";
 		try ( Statement stmt = BDConexion.getConnection().createStatement ()) {
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next ()) {

@@ -56,7 +56,6 @@ public class VistaMostrarSalas {
 		botones.add(botonMainMenu);
 		GUI.add(botones, BorderLayout.SOUTH);
 
-		// Acciones de los botones
 		back.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				GUI.setVisible (false);

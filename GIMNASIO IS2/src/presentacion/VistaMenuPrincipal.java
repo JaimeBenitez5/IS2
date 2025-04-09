@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class VistaMenuPrincipal {
+public class VistaMenuPrincipal{
 	private static JFrame GUI = null;
 	
 	public static void open() {
@@ -42,8 +42,9 @@ public class VistaMenuPrincipal {
 		JButton botonCliente = UIElementFactory.crearBoton("Clientes", colorBotones);
 		JButton botonFacturas = UIElementFactory.crearBoton("Facturas",colorBotones);
 		JButton botonSalas = UIElementFactory.crearBoton("Salas", colorBotones);
+		JButton botonActividades = UIElementFactory.crearBoton("Actividades",colorBotones);
 		JButton botonEmpleados = UIElementFactory.crearBoton("Empleados",colorBotones);
-
+		JButton botonCatalogos = UIElementFactory.crearBoton("Catalogos",colorBotones);
 		// Logo
 		ImageIcon logo = new ImageIcon("icons/logo.png");
 		JLabel logoL = new JLabel(logo, JLabel.CENTER);
@@ -52,12 +53,12 @@ public class VistaMenuPrincipal {
 		mainPanel.add(botonCliente);
 		mainPanel.add(Box.createRigidArea(new Dimension(1, 1)));
 		mainPanel.add(botonFacturas);
-		mainPanel.add(Box.createRigidArea(new Dimension(1, 1)));
-		mainPanel.add(logoL);
-		mainPanel.add(Box.createRigidArea(new Dimension(1, 1)));
 		mainPanel.add(botonSalas);
-		mainPanel.add(Box.createRigidArea(new Dimension(1, 1)));
+		mainPanel.add(logoL);
+		mainPanel.add(botonActividades);
 		mainPanel.add(botonEmpleados);
+		mainPanel.add(Box.createRigidArea(new Dimension(1, 1)));
+		mainPanel.add(botonCatalogos);
 
 		menuPrincipal.add(mainPanel);
 		menuPrincipal.setVisible(true);
@@ -67,7 +68,7 @@ public class VistaMenuPrincipal {
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
 						menuPrincipal.setVisible (false);
-						Controlador.mostrarVista(Evento.VISTA_CLIENTE);
+						Controlador.mostrarVista(Evento.VISTA_CLIENTES);
 					}
 				}
 				);
@@ -81,14 +82,6 @@ public class VistaMenuPrincipal {
 				}
 				);
 
-		botonEmpleados.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-					}
-				}
-				);
-
 		botonSalas.addActionListener(
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
@@ -97,7 +90,33 @@ public class VistaMenuPrincipal {
 					}
 				}
 				);
+		botonActividades.addActionListener(
+				new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+						menuPrincipal.setVisible (false);
+						Controlador.mostrarVista(Evento.VISTA_ACTIVIDADES);
+					}
+				}
+				);
+
+		botonEmpleados.addActionListener(
+				new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+						menuPrincipal.setVisible (false);
+						Controlador.mostrarVista(Evento.VISTA_EMPLEADOS);
+					}
+				}
+				);
+
+		botonCatalogos.addActionListener(
+				new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+						menuPrincipal.setVisible (false);
+						Controlador.mostrarVista(Evento.VISTA_CATALOGOS);
+					}
+				}
+				);
+
 		return menuPrincipal;
 	}
-	
 }

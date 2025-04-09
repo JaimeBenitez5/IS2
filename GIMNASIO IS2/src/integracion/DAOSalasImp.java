@@ -6,15 +6,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 import configFiles.BDConexion;
-import negocio.tCliente;
 import negocio.tSala;
 
-@objid ("df2cbaf5-307b-4f5e-9398-8db6fe856b10")
 public class DAOSalasImp implements DAOSalas {
-	@objid ("3df79827-c911-46a2-9aae-c38da28a8512")
+	
 	public int altaSala(tSala sala) {
 		String query = "INSERT INTO Sala (aforo) VALUES (?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
@@ -32,7 +29,6 @@ public class DAOSalasImp implements DAOSalas {
 		return 0;
 	}
 
-	@objid ("5eb32012-231d-4434-8a74-4057f5926f04")
 	public tSala leerSala(final int id) {
 		String query = "SELECT * FROM Sala WHERE idSala  = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
@@ -50,19 +46,52 @@ public class DAOSalasImp implements DAOSalas {
 		return null;
 	}
 
-	@objid ("3c80588f-3bca-4098-aac9-a49c2d8ce1b1")
 	public int actualizarSala(final tSala sala) {
-		// TODO Auto-generated return
+		String query = "UPDATE Sala SET aforo = ? WHERE idSala=?";
+		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
+			stmt.setString(1, String.valueOf(sala.getAforo()));
+			stmt.setInt(2,sala.getId());
+			//LO QUE DEVUELVE ESTO ES EL NUMERO DE FILAS QUE HA BORRADO, SI ES 1 ES EXITO
+	        return stmt.executeUpdate(); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
-	@objid ("93d5cca5-4fa4-4f5b-9c50-5612a7469e3c")
 	public int borrarSala(final int id) {
-		// TODO Auto-generated return
+		//HAY QUE BORRAR ANTES LOS PARES DE ACTIVIDAD Y DE CATALOGO
+		//LLAMAR A LAS SA DE CADA SUBSISTEMA Y BORRARLO EN SU DAO
+		
+		String query1 = "DELETE FROM Actividad_Catalogo WHERE idSala = ?";
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query1, Statement.RETURN_GENERATED_KEYS)) {
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		String query2 = "DELETE FROM Actividad WHERE idSala = ?";
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query2, Statement.RETURN_GENERATED_KEYS)) {
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		String query3 = "DELETE FROM Sala WHERE idSala = ?";
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query3, Statement.RETURN_GENERATED_KEYS)) {
+			stmt.setInt(1, id);
+			//LO QUE DEVUELVE ESTO ES EL NUMERO DE FILAS QUE HA BORRADO, SI ES 1 ES EXITO
+			return stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
-	@objid ("7d2af3f4-2de1-4859-9867-71298a36987c")
 	public List<tSala> leerTodasSalas() {
 		ArrayList<tSala> salas = new ArrayList<tSala>();
 		String query = "SELECT * FROM Sala";
