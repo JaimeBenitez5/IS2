@@ -4,6 +4,7 @@ import java.util.List;
 import negocio.tSala;
 
 public interface DAOSalas {
+	
     int altaSala(tSala Sala);
 
     tSala leerSala(final int id);

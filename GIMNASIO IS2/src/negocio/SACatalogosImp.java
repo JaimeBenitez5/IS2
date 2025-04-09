@@ -1,9 +1,14 @@
 package negocio;
 
 import java.util.List;
+import integracion.DAOCatalogos;
+import integracion.DAOCatalogosImp;
+
 
 public class SACatalogosImp implements SACatalogos {
 
+	private static DAOCatalogos catalogosDAO = new DAOCatalogosImp();
+	
 	public int altaCatalogo(tCatalogo catalogo) {
 		return 0;
 	}

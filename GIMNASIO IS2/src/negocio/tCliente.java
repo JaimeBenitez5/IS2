@@ -22,6 +22,7 @@ public class tCliente {
     	_activo = true;
     	_dir = dir;
     }
+    
     public tCliente(final String dni, final String nombre, final String dir) {
     	_id = 0;
     	_dni = dni;
@@ -69,5 +70,4 @@ public class tCliente {
     public String toString() {
         return _id + " " + _dni+ " " + _nombre + " " + _dir;
     }
-
 }

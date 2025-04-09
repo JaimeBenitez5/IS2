@@ -5,14 +5,14 @@ import java.util.List;
 import negocio.tFactura;
 
 public interface DAOFacturas {
-	
-    int createFactura(tFactura Factura);
+    
+    int altaFactura(tFactura Factura);
 
-    tFactura readFactura();
+    tFactura leerFactura(int id);
 
-    int updateFactura(final tFactura factura);
+    int actualizarFactura(final tFactura factura);
 
-    int deleteFactura(final String idFactura);
+    int borrarFactura(final int id);
 
-    List<tFactura> readAllFacturas();
+    List<tFactura> leerTodasFacturas();
 }

@@ -6,13 +6,13 @@ import negocio.tCatalogo;
 
 public interface DAOCatalogos {
 	
-	int createCatalogo(tCatalogo catalogo);
+	int altaCatalogo(tCatalogo catalogo);
 
-	tCatalogo readCatalogo(final int id);
+	tCatalogo leerCatalogo(final int id);
 
-	int updateCatalogo(final tCatalogo catalogo);
+	int actualizarCatalogo(final tCatalogo catalogo);
 
-	int deleteCatalogo(final int id);
+	int borrarCatalogo(final int id);
 
-	List<tCatalogo> readAllCatalogos();
+	List<tCatalogo> leerTodosCatalogos();
 }

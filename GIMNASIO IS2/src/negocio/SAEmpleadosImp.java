@@ -2,26 +2,31 @@ package negocio;
 
 import java.util.List;
 
+import integracion.DAOEmpleados;
+import integracion.DAOEmpleadosImp;
+
 public class SAEmpleadosImp implements SAEmpleados {
 
-	public int altaEmpleado(final tFactura factura) {
-		return 0;
+	private static DAOEmpleados empleadosDAO = new DAOEmpleadosImp();
+	
+	public int altaEmpleado(final tEmpleado empleado) {
+		return empleadosDAO.altaEmpleado(empleado);
 	}
 
-	public tFactura leerEmpleado() {
-		return null;
+	public tEmpleado leerEmpleado(final int id) {
+		return empleadosDAO.leerEmpleado(id);
 	}
 
-	public int actualizarEmpleado(final tFactura factura) {
-		return 0;
+	public int actualizarEmpleado(final tEmpleado empleado) {
+		return empleadosDAO.actualizarEmpleado(empleado);
 	}
 
-	public int borrarEmpleado(final String id) {
-		return 0;
+	public int borrarEmpleado(final int id) {
+		return empleadosDAO.borrarEmpleado(id);
 	}
 
 	public List<tEmpleado> leerTodosEmpleados() {
-		return null;
+		return empleadosDAO.leerTodosEmpleados();
 	}
 
 }

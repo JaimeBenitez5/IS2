@@ -5,14 +5,15 @@ import negocio.tCliente;
 
 public interface DAOClientes {
 	
-    int createCliente(tCliente cliente);
+    int altaCliente(tCliente cliente);
 
-    tCliente readCliente(final int id);
+    tCliente leerCliente(final int id);
 
-    int updateCliente(final tCliente cliente);
+    int actualizarCliente(final tCliente cliente);
 
-    int deleteCliente(final int id);
+    int borrarCliente(final int id);
 
-    List<tCliente> readAllClientes();
+    List<tCliente> leerTodosClientes();
+    
 }
 

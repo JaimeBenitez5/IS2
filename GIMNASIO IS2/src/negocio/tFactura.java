@@ -38,5 +38,4 @@ public class tFactura {
     public String toString() {
         return _id + " " + _fecha + " " + _importeTotal;
     }
-
 }

@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface SAEmpleados {
 	
-	public int altaEmpleado(final tFactura factura);
+	public int altaEmpleado(final tEmpleado empleado);
 
-	public tFactura leerEmpleado();
+	public tEmpleado leerEmpleado(final int id);
 
-	public int actualizarEmpleado(final tFactura factura);
+	public int actualizarEmpleado(final tEmpleado tEmpleado);
 	
-	public int borrarEmpleado(final String id);
+	public int borrarEmpleado(final int id);
 	
 	public List<tEmpleado> leerTodosEmpleados();
 }

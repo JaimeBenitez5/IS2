@@ -6,23 +6,23 @@ import negocio.tActividad;
 
 public class DAOActividadesImp implements DAOActividades{
 
-	public int createActividad(tActividad actividad) {
+	public int altaActividad(tActividad actividad) {
 		return 0;
 	}
 
-	public tActividad readActividad(int id) {
+	public tActividad leerActividad(int id) {
 		return null;
 	}
 
-	public int updateActividad(tActividad actividad) {
+	public int actualizarActividad(tActividad actividad) {
 		return 0;
 	}
 
-	public int deleteActividad(int id) {
+	public int borrarActividad(int id) {
 		return 0;
 	}
 
-	public List<tActividad> readAllActividades() {
+	public List<tActividad> leerTodasActividades() {
 		return null;
 	}
 

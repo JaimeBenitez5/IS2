@@ -6,13 +6,13 @@ import negocio.tActividad;
 
 public interface DAOActividades {
 	
-	int createActividad(tActividad actividad);
+	int altaActividad(tActividad actividad);
 
-	tActividad readActividad(final int id);
+	tActividad leerActividad(final int id);
 
-	int updateActividad(final tActividad actividad);
+	int actualizarActividad(final tActividad actividad);
 
-	int deleteActividad(final int id);
+	int borrarActividad(final int id);
 
-	List<tActividad> readAllActividades();
+	List<tActividad> leerTodasActividades();
 }

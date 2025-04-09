@@ -6,11 +6,11 @@ public interface SAFactura {
 	
     int altaFactura(final tFactura factura);
 
-    tFactura leerFactura();
+    tFactura leerFactura(final int id);
 
     int actualizarFactura(final tFactura factura);
 
-    int borrarFactura(final String id);
+    int borrarFactura(final int id);
 
     List<tFactura> leerTodasFacturas();
 

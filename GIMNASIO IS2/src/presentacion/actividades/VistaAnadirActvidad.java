@@ -20,7 +20,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tCliente;
 import negocio.tSala;
 import presentacion.Controlador;
 import presentacion.Evento;
@@ -42,19 +41,18 @@ public class VistaAnadirActvidad {
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		// Panel principal con margen
-		JPanel panelAltaCliente = new JPanel();
-		panelAltaCliente.setLayout(new BoxLayout(panelAltaCliente, BoxLayout.Y_AXIS));
-		panelAltaCliente.setBackground(new Color(17, 47, 69));
-		panelAltaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+		JPanel panelAnadirActividad = new JPanel();
+		panelAnadirActividad.setLayout(new BoxLayout(panelAnadirActividad, BoxLayout.Y_AXIS));
+		panelAnadirActividad.setBackground(new Color(17, 47, 69));
+		panelAnadirActividad.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-		menuPrincipal.add(panelAltaCliente, BorderLayout.CENTER);
+		menuPrincipal.add(panelAnadirActividad, BorderLayout.CENTER);
 
 		JLabel titulo = new JLabel("Añadir Actividad");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelAltaCliente.add(titulo);
-		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
+		panelAnadirActividad.add(titulo);
+		panelAnadirActividad.add(Box.createRigidArea(new Dimension(0, 30)));
 
 		JPanel panelCampos = new JPanel(new GridLayout(3, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
@@ -66,8 +64,8 @@ public class VistaAnadirActvidad {
 		JTextField aforoTF = new JTextField(30);
 		panelCampos.add(aforoTF);
 
-		panelAltaCliente.add(panelCampos);
-		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
+		panelAnadirActividad.add(panelCampos);
+		panelAnadirActividad.add(Box.createRigidArea(new Dimension(0, 50)));
 
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
@@ -80,7 +78,7 @@ public class VistaAnadirActvidad {
 		botones.add(save);
 		botones.add(botonMainMenu);
 
-		panelAltaCliente.add(botones);
+		panelAnadirActividad.add(botones);
 		menuPrincipal.setVisible(true);
 
 		save.addActionListener( new ActionListener () {

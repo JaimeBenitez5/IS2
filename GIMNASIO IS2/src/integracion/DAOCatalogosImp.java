@@ -6,23 +6,23 @@ import negocio.tCatalogo;
 
 public class DAOCatalogosImp implements DAOCatalogos{
 
-	public int createCatalogo(tCatalogo catalogo) {
+	public int altaCatalogo(tCatalogo catalogo) {
 		return 0;
 	}
 
-	public tCatalogo readCatalogo(int id) {
+	public tCatalogo leerCatalogo(int id) {
 		return null;
 	}
 
-	public int updateCatalogo(tCatalogo catalogo) {
+	public int actualizarCatalogo(tCatalogo catalogo) {
 		return 0;
 	}
 
-	public int deleteCatalogo(int id) {
+	public int borrarCatalogo(int id) {
 		return 0;
 	}
 
-	public List<tCatalogo> readAllCatalogos() {
+	public List<tCatalogo> leerTodosCatalogos() {
 		return null;
 	}
 

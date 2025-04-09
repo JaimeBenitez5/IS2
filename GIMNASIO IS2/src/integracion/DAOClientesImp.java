@@ -8,7 +8,7 @@ import negocio.tCliente;
 
 public class DAOClientesImp implements DAOClientes {
 
-	public int createCliente(tCliente cliente) {
+	public int altaCliente(tCliente cliente) {
 		String query = "INSERT INTO Cliente (nombre, dni, direccion) VALUES (?, ?, ?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setString(1, cliente.getNombre());
@@ -27,7 +27,7 @@ public class DAOClientesImp implements DAOClientes {
 		return 0;
 	}
 
-	public tCliente readCliente(final int id) {
+	public tCliente leerCliente(final int id) {
 		String query = "SELECT * FROM CLIENTE WHERE idCliente  = ? AND activo = 1";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1,id);
@@ -51,7 +51,7 @@ public class DAOClientesImp implements DAOClientes {
 		return null;
 	}
 
-	public int updateCliente(final tCliente cliente) {
+	public int actualizarCliente(final tCliente cliente) {
 		String query = "UPDATE CLIENTE SET nombre = ?, dni = ?, direccion = ? WHERE idCliente=? ";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setString(1, cliente.getNombre());
@@ -65,7 +65,7 @@ public class DAOClientesImp implements DAOClientes {
 		return 0;
 	}
 
-	public int deleteCliente(final int id) {
+	public int borrarCliente(final int id) {
 		String query = "UPDATE Cliente SET activo = 0 WHERE idCliente = ?";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setInt(1, id);
@@ -76,7 +76,7 @@ public class DAOClientesImp implements DAOClientes {
 		return 0;
 	}
 
-	public List<tCliente> readAllClientes() {
+	public List<tCliente> leerTodosClientes() {
 		ArrayList<tCliente> clientes = new ArrayList<tCliente>();
 		String query = "SELECT * FROM CLIENTE WHERE activo = 1";
 		try ( Statement stmt = BDConexion.getConnection().createStatement ()) {
@@ -98,5 +98,4 @@ public class DAOClientesImp implements DAOClientes {
 		}
 		return clientes;
 	}
-
 }
