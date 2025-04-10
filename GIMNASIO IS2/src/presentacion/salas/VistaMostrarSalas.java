@@ -15,7 +15,6 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.JFrame;
 
-import negocio.tCliente;
 import negocio.tSala;
 import presentacion.Controlador;
 import presentacion.Evento;
@@ -39,12 +38,10 @@ public class VistaMostrarSalas {
 		GUI.getContentPane().setLayout(new BorderLayout());
 		GUI.getContentPane().setBackground(new Color(17, 47, 69));
 
-		// Panel principal donde se mostrarán los clientes
 		panelMostrarSalas = new JPanel(new BorderLayout());
 		panelMostrarSalas.setBackground(new Color(17, 47, 69));
 		GUI.add(panelMostrarSalas, BorderLayout.CENTER);
 
-		// Botones de navegación
 		JPanel botones = new JPanel(new FlowLayout());
 		botones.setBackground(new Color(17, 47, 69));
 
@@ -95,7 +92,6 @@ public class VistaMostrarSalas {
 			scrollPane.getViewport().setOpaque(false);
 			panelMostrarSalas.add(scrollPane, BorderLayout.CENTER);
 
-			// Refrescar la GUI
 			panelMostrarSalas.revalidate();
 			panelMostrarSalas.repaint();
 		}

@@ -46,12 +46,10 @@ public class VistaMostrarClientes {
 		GUI.getContentPane().setLayout(new BorderLayout());
 		GUI.getContentPane().setBackground(new Color(17, 47, 69));
 
-		// Panel principal donde se mostrarán los clientes
 		panelMostrarClientes = new JPanel(new BorderLayout());
 		panelMostrarClientes.setBackground(new Color(17, 47, 69));
 		GUI.add(panelMostrarClientes, BorderLayout.CENTER);
 
-		// Botones de navegación
 		JPanel botones = new JPanel(new FlowLayout());
 		botones.setBackground(new Color(17, 47, 69));
 
@@ -63,7 +61,6 @@ public class VistaMostrarClientes {
 		botones.add(botonMainMenu);
 		GUI.add(botones, BorderLayout.SOUTH);
 
-		// Acciones de los botones
 		back.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				GUI.setVisible (false);
@@ -105,7 +102,6 @@ public class VistaMostrarClientes {
 			scrollPane.getViewport().setOpaque(false);
 			panelMostrarClientes.add(scrollPane, BorderLayout.CENTER);
 
-			// Refrescar la GUI
 			panelMostrarClientes.revalidate();
 			panelMostrarClientes.repaint();
 		}

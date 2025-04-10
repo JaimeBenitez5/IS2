@@ -30,12 +30,10 @@ public class VistaCliente {
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// Panel principal con margen
-		JPanel panel = new JPanel(new GridLayout(3, 2, 20, 20)); // Espaciado entre celdas
+		JPanel panel = new JPanel(new GridLayout(3, 2, 20, 20));
 		panel.setBackground(new Color(88, 161, 164));
-		panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Márgenes exteriores
+		panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-		// Botones
 		Color colorBotones = new Color(48, 86, 119);
 		JButton botonAlta = UIElementFactory.crearBoton("Añadir Cliente", colorBotones);
 		JButton botonReadAll = UIElementFactory.crearBoton("Mostrar Clientes", colorBotones);
@@ -43,15 +41,13 @@ public class VistaCliente {
 		JButton botonUnroll = UIElementFactory.crearBoton("Dar de Baja Cliente", colorBotones);
 		JButton botonModClient = UIElementFactory.crearBoton("Modificar Cliente", colorBotones);
 		JButton botonMainMenu = UIElementFactory.crearBotonConIcono("icons/main_menu.png");
-
-		// Agregar elementos al panel
+		
 		panel.add(botonAlta);
 		panel.add(botonReadAll);
 		panel.add(botonRead);
 		panel.add(botonUnroll);
 		panel.add(botonModClient);
 
-		// Agregar el panel y el botón del menú principal
 		menuPrincipal.add(panel, BorderLayout.CENTER);
 		menuPrincipal.add(botonMainMenu, BorderLayout.SOUTH);
 		menuPrincipal.setVisible(true);

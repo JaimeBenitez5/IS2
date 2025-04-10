@@ -40,18 +40,18 @@ public class VistaEliminarSala {
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		JPanel panelBajaCliente = new JPanel();
-		panelBajaCliente.setLayout(new BoxLayout(panelBajaCliente, BoxLayout.Y_AXIS));
-		panelBajaCliente.setBackground(new Color(17, 47, 69));
-		panelBajaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+		JPanel panelEliminarSala = new JPanel();
+		panelEliminarSala.setLayout(new BoxLayout(panelEliminarSala, BoxLayout.Y_AXIS));
+		panelEliminarSala.setBackground(new Color(17, 47, 69));
+		panelEliminarSala.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-		menuPrincipal.add(panelBajaCliente, BorderLayout.CENTER);
+		menuPrincipal.add(panelEliminarSala, BorderLayout.CENTER);
 
 		JLabel titulo = new JLabel("Eliminar Sala");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelBajaCliente.add(titulo);
-		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
+		panelEliminarSala.add(titulo);
+		panelEliminarSala.add(Box.createRigidArea(new Dimension(0, 30)));
 
 		JPanel panelCampos = new JPanel(new GridLayout(1, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
@@ -63,8 +63,8 @@ public class VistaEliminarSala {
 		JTextField idTF = new JTextField(30);
 		panelCampos.add(idTF);
 
-		panelBajaCliente.add(panelCampos);
-		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
+		panelEliminarSala.add(panelCampos);
+		panelEliminarSala.add(Box.createRigidArea(new Dimension(0, 50)));
 
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
@@ -77,7 +77,7 @@ public class VistaEliminarSala {
 		botones.add(delete);
 		botones.add(botonMainMenu);
 
-		panelBajaCliente.add(botones);
+		panelEliminarSala.add(botones);
 		menuPrincipal.setVisible(true);
 
 

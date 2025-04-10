@@ -41,7 +41,6 @@ public class VistaAltaCliente {
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		// Panel principal con margen
 		JPanel panelAltaCliente = new JPanel();
 		panelAltaCliente.setLayout(new BoxLayout(panelAltaCliente, BoxLayout.Y_AXIS));
 		panelAltaCliente.setBackground(new Color(17, 47, 69));
@@ -80,7 +79,6 @@ public class VistaAltaCliente {
 		panelAltaCliente.add(panelCampos);
 		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
 
-		// Botones
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
 

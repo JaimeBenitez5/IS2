@@ -41,19 +41,18 @@ public class VistaAnadirSala {
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		// Panel principal con margen
-		JPanel panelAltaCliente = new JPanel();
-		panelAltaCliente.setLayout(new BoxLayout(panelAltaCliente, BoxLayout.Y_AXIS));
-		panelAltaCliente.setBackground(new Color(17, 47, 69));
-		panelAltaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+		JPanel panelAnadirSala = new JPanel();
+		panelAnadirSala.setLayout(new BoxLayout(panelAnadirSala, BoxLayout.Y_AXIS));
+		panelAnadirSala.setBackground(new Color(17, 47, 69));
+		panelAnadirSala.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-		menuPrincipal.add(panelAltaCliente, BorderLayout.CENTER);
+		menuPrincipal.add(panelAnadirSala, BorderLayout.CENTER);
 
 		JLabel titulo = new JLabel("Añadir Sala");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelAltaCliente.add(titulo);
-		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
+		panelAnadirSala.add(titulo);
+		panelAnadirSala.add(Box.createRigidArea(new Dimension(0, 30)));
 
 		JPanel panelCampos = new JPanel(new GridLayout(3, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
@@ -65,8 +64,8 @@ public class VistaAnadirSala {
 		JTextField aforoTF = new JTextField(30);
 		panelCampos.add(aforoTF);
 
-		panelAltaCliente.add(panelCampos);
-		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
+		panelAnadirSala.add(panelCampos);
+		panelAnadirSala.add(Box.createRigidArea(new Dimension(0, 50)));
 
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
@@ -79,7 +78,7 @@ public class VistaAnadirSala {
 		botones.add(save);
 		botones.add(botonMainMenu);
 
-		panelAltaCliente.add(botones);
+		panelAnadirSala.add(botones);
 		menuPrincipal.setVisible(true);
 
 		save.addActionListener( new ActionListener () {

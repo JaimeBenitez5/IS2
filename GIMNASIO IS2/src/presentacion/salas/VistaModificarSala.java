@@ -19,15 +19,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 import negocio.tSala;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
 
-
-@objid ("69cff9f9-fddd-46c9-b01f-2aa13f2b2c28")
 public class VistaModificarSala {
 	private static JFrame GUI = null;
 	
@@ -44,18 +41,18 @@ public class VistaModificarSala {
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		JPanel panelAltaCliente = new JPanel();
-		panelAltaCliente.setLayout(new BoxLayout(panelAltaCliente, BoxLayout.Y_AXIS));
-		panelAltaCliente.setBackground(new Color(17, 47, 69));
-		panelAltaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Márgenes exteriores
+		JPanel panelModificarSala = new JPanel();
+		panelModificarSala.setLayout(new BoxLayout(panelModificarSala, BoxLayout.Y_AXIS));
+		panelModificarSala.setBackground(new Color(17, 47, 69));
+		panelModificarSala.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Márgenes exteriores
 
-		menuPrincipal.add(panelAltaCliente, BorderLayout.CENTER);
+		menuPrincipal.add(panelModificarSala, BorderLayout.CENTER);
 
 		JLabel titulo = new JLabel("Modificar Sala");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelAltaCliente.add(titulo);
-		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
+		panelModificarSala.add(titulo);
+		panelModificarSala.add(Box.createRigidArea(new Dimension(0, 30)));
 
 		JPanel panelCampos = new JPanel(new GridLayout(4, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
@@ -73,8 +70,8 @@ public class VistaModificarSala {
 		JTextField aforoTF = new JTextField(30);
 		panelCampos.add(aforoTF);
 
-		panelAltaCliente.add(panelCampos);
-		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
+		panelModificarSala.add(panelCampos);
+		panelModificarSala.add(Box.createRigidArea(new Dimension(0, 50)));
 
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
@@ -87,7 +84,7 @@ public class VistaModificarSala {
 		botones.add(save);
 		botones.add(botonMainMenu);
 
-		panelAltaCliente.add(botones);
+		panelModificarSala.add(botones);
 		menuPrincipal.setVisible(true);
 
 		save.addActionListener(

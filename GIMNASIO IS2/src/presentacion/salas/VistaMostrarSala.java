@@ -41,18 +41,18 @@ public class VistaMostrarSala {
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		JPanel panelBajaCliente = new JPanel();
-		panelBajaCliente.setLayout(new BoxLayout(panelBajaCliente, BoxLayout.Y_AXIS));
-		panelBajaCliente.setBackground(new Color(17, 47, 69));
-		panelBajaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+		JPanel panelMostrarSala = new JPanel();
+		panelMostrarSala.setLayout(new BoxLayout(panelMostrarSala, BoxLayout.Y_AXIS));
+		panelMostrarSala.setBackground(new Color(17, 47, 69));
+		panelMostrarSala.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-		menuPrincipal.add(panelBajaCliente, BorderLayout.CENTER);
+		menuPrincipal.add(panelMostrarSala, BorderLayout.CENTER);
 
 		JLabel titulo = new JLabel("Mostrar Sala");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelBajaCliente.add(titulo);
-		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
+		panelMostrarSala.add(titulo);
+		panelMostrarSala.add(Box.createRigidArea(new Dimension(0, 30)));
 
 		JPanel panelCampos = new JPanel(new GridLayout(1, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
@@ -64,8 +64,8 @@ public class VistaMostrarSala {
 		JTextField idTF = new JTextField(30);
 		panelCampos.add(idTF);
 
-		panelBajaCliente.add(panelCampos);
-		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
+		panelMostrarSala.add(panelCampos);
+		panelMostrarSala.add(Box.createRigidArea(new Dimension(0, 50)));
 
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
@@ -78,7 +78,7 @@ public class VistaMostrarSala {
 		botones.add(delete);
 		botones.add(botonMainMenu);
 
-		panelBajaCliente.add(botones);
+		panelMostrarSala.add(botones);
 		menuPrincipal.setVisible(true);
 
 
