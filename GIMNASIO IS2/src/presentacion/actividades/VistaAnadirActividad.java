@@ -7,7 +7,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -20,12 +19,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tSala;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
+import javax.swing.JFormattedTextField;
+
+import negocio.tActividad;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
 
-public class VistaAnadirActvidad {
+public class VistaAnadirActividad {
 	private static JFrame GUI = null;
 
 	public static void open() {
@@ -58,12 +62,27 @@ public class VistaAnadirActvidad {
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
-		JLabel aforo = new JLabel("Aforo:");
-		aforo.setForeground(Color.WHITE);
-		panelCampos.add(aforo);
-		JTextField aforoTF = new JTextField(30);
-		panelCampos.add(aforoTF);
-
+		JLabel tipoAct = new JLabel("Tipo de actividad:");
+		tipoAct.setForeground(Color.WHITE);
+		panelCampos.add(tipoAct);
+		JTextField tipoActTF = new JTextField(30);
+		panelCampos.add(tipoActTF);
+		
+		JLabel fecha = new JLabel("Fecha:");
+		fecha.setForeground(Color.WHITE);
+		panelCampos.add(fecha);
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		JFormattedTextField fechaTF = new JFormattedTextField(format);
+		fechaTF.setColumns(10);
+		fechaTF.setValue(new java.util.Date());
+		panelCampos.add(fechaTF);
+		
+		JLabel dni = new JLabel("DNI:");
+		dni.setForeground(Color.WHITE);
+		panelCampos.add(dni);
+		JTextField dniTF = new JTextField(30);
+		panelCampos.add(dniTF);
+		
 		panelAnadirActividad.add(panelCampos);
 		panelAnadirActividad.add(Box.createRigidArea(new Dimension(0, 50)));
 
@@ -83,13 +102,19 @@ public class VistaAnadirActvidad {
 
 		save.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int aforo = Integer.parseInt(aforoTF.getText());
-				if (aforoTF.getText() == "") {
+				String tipoAct = tipoActTF.getText();
+				java.util.Date Date = (java.util.Date) fechaTF.getValue();
+				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
+				String dniEmp = dniTF.getText();
+				
+				if (tipoAct == "" || dniEmp == "") {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				aforoTF.setText("");
-				tSala s = new tSala(aforo);
-				Controlador.accion(Evento.ALTA_SALA, s);
+				tipoActTF.setText("");
+				dniTF.setText("");
+				fechaTF.setValue(new java.util.Date());
+				tActividad a = new tActividad(tipoAct, dniEmp, sqlDate);
+				Controlador.accion(Evento.ALTA_ACTIVIDAD, a);
 			}
 		});
 
@@ -110,18 +135,18 @@ public class VistaAnadirActvidad {
 	}
 
 	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_ALTA_SALA_OK) {
+		if (evento == Evento.RES_ALTA_ACTIVIDAD_OK) {
 			JTextArea textArea = new JTextArea(datos.toString());
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, "La sala se ha insertado correctamente con ID: " + datos.toString());
+			JOptionPane.showMessageDialog(null, "La actividad se ha insertado correctamente con ID: " + datos.toString());
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_ALTA_SALA_KO) {
-			JOptionPane.showMessageDialog(null, "No se ha podido insertar la sala");
+		else if (evento == Evento.RES_ALTA_ACTIVIDAD_KO) {
+			JOptionPane.showMessageDialog(null, "No se ha podido insertar la actividad");
 		}
 	}
 }

@@ -6,12 +6,14 @@ public class tActividad {
 	int _id;
 	String _tipoActividad;
 	Date _fecha;
+	int _idSala;
 	String _dniEmpleado;
 
-	public tActividad(final int id, final String tipoActividad, final String dniEmpleado,  final Date fecha) {
+	public tActividad(final int id, final String tipoActividad, final String dniEmpleado,  final int idSala ,final Date fecha) {
 		_id = id;
 		_tipoActividad = tipoActividad;
 		_dniEmpleado = dniEmpleado;
+		_idSala = idSala;
 		_fecha = fecha;
 	}
 
@@ -33,7 +35,10 @@ public class tActividad {
 	public Date get_fecha() {
 		return _fecha;
 	}
-
+	
+	public int getIdSala() {
+		return _idSala;
+	}
 	public void set_fecha(Date fecha) {
 		_fecha = fecha;
 	}
@@ -42,8 +47,12 @@ public class tActividad {
 		return _id;
 	}
 
-	public void set_id(int id) {
+	public void setId(int id) {
 		_id = id;
+	}
+	
+	public void setIdSala(int idSala) {
+		_idSala = idSala;
 	}
 
 	public String get_dniEmpleado() {

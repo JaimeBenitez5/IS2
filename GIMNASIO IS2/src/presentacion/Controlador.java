@@ -3,19 +3,9 @@ package presentacion;
 import java.util.List;
 
 import presentacion.actividades.*;
-import presentacion.catalogos.VistaAnadirCatalogo;
-import presentacion.catalogos.VistaCatalogos;
-import presentacion.catalogos.VistaEliminarCatalogo;
-import presentacion.catalogos.VistaModificarCatalogo;
-import presentacion.catalogos.VistaMostrarCatalogo;
-import presentacion.catalogos.VistaMostrarCatalogos;
+import presentacion.catalogos.*;
 import presentacion.clientes.*;
-import presentacion.empleados.VistaAnadirEmpleado;
-import presentacion.empleados.VistaEliminarEmpleado;
-import presentacion.empleados.VistaEmpleados;
-import presentacion.empleados.VistaModificarEmpleado;
-import presentacion.empleados.VistaMostrarEmpleado;
-import presentacion.empleados.VistaMostrarEmpleados;
+import presentacion.empleados.*;
 import presentacion.salas.*;
 import negocio.*;
 
@@ -94,10 +84,10 @@ public class Controlador{
 		}
 		//ACTIVIDADES
 		case Evento.ALTA_ACTIVIDAD:{
-			int id = SASalas.altaSala((tSala) datos);
-			((tSala) datos).setId(id);
-			if(id != 0) VistaAnadirSala.actualizar(Evento.RES_ALTA_SALA_OK, id);
-			else VistaAnadirSala.actualizar(Evento.RES_ALTA_SALA_KO, id);
+			int id = SAActividades.altaActividad((tActividad) datos);
+			((tActividad) datos).setId(id);
+			if(id != 0) VistaAnadirActividad.actualizar(Evento.RES_ALTA_ACTIVIDAD_OK, id);
+			else VistaAnadirActividad.actualizar(Evento.RES_ALTA_ACTIVIDAD_KO, id);
 			break;
 		}
 		case Evento.MOSTRAR_ACTIVIDAD:{
@@ -190,7 +180,7 @@ public class Controlador{
 			break;
 		}
 		case Evento.VISTA_ANADIR_ACTIVIDAD:{ 
-			VistaAnadirActvidad.open();
+			VistaAnadirActividad.open();
 			break;
 		}
 		case Evento.VISTA_ELIMINAR_ACTIVIDAD:{ 
