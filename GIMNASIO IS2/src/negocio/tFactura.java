@@ -1,11 +1,13 @@
 package negocio;
 
+import java.sql.Date;
+
 public class tFactura {
     private int _id;
-    private String _fecha;
+    private Date _fecha;
     private double _importeTotal;
 
-    public tFactura(final int id, final String fecha, final double importeTotal) {
+    public tFactura(final int id, final Date fecha, final double importeTotal) {
         _id = id;
         _fecha = fecha;
         _importeTotal = importeTotal;
@@ -15,7 +17,7 @@ public class tFactura {
         return _id;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return _fecha;
     }
 
@@ -27,7 +29,7 @@ public class tFactura {
     	_id = id;
     }
 
-    public void setFecha(final String fecha) {
+    public void setFecha(final Date fecha) {
     	_fecha = fecha;
     }
 
