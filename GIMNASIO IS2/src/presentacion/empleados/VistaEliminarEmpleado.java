@@ -84,7 +84,7 @@ public class VistaEliminarEmpleado {
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				int id = Integer.parseInt(idTF.getText());
-				Controlador.accion(Evento.ELIMINAR_CLIENTE, id);
+				Controlador.accion(Evento.ELIMINAR_EMPLEADO, id);
 			}
 		});
 
@@ -105,18 +105,18 @@ public class VistaEliminarEmpleado {
 	}
 
 	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_ELIMINAR_CLIENTE_OK) {
+		if (evento == Evento.RES_ELIMINAR_EMPLEADO_OK) {
 			JTextArea textArea = new JTextArea(datos.toString());
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
-			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, "El cliente se ha eliminado correctamente");
+			scrollPane.setPreferredSize(new Dimension(500, 200));
+			JOptionPane.showMessageDialog(null, "El empleado se ha eliminado correctamente");
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_ELIMINAR_CLIENTE_KO) {
-			JOptionPane.showMessageDialog(null, "No se ha podido eliminar el cliente");
+		else if (evento == Evento.RES_ELIMINAR_EMPLEADO_KO) {
+			JOptionPane.showMessageDialog(null, "No se ha podido eliminar el empleado");
 		}
 	}
 }

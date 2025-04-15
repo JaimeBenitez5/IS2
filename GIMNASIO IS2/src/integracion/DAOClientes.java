@@ -16,4 +16,3 @@ public interface DAOClientes {
     List<tCliente> leerTodosClientes();
     
 }
-

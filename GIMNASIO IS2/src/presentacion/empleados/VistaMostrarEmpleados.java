@@ -15,7 +15,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.JFrame;
 
-import negocio.tCliente;
+import negocio.tEmpleado;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -38,12 +38,10 @@ public class VistaMostrarEmpleados {
 		GUI.getContentPane().setLayout(new BorderLayout());
 		GUI.getContentPane().setBackground(new Color(17, 47, 69));
 
-		// Panel principal donde se mostrarán los clientes
 		panelMostrarClientes = new JPanel(new BorderLayout());
 		panelMostrarClientes.setBackground(new Color(17, 47, 69));
 		GUI.add(panelMostrarClientes, BorderLayout.CENTER);
 
-		// Botones de navegación
 		JPanel botones = new JPanel(new FlowLayout());
 		botones.setBackground(new Color(17, 47, 69));
 
@@ -55,7 +53,6 @@ public class VistaMostrarEmpleados {
 		botones.add(botonMainMenu);
 		GUI.add(botones, BorderLayout.SOUTH);
 
-		// Acciones de los botones
 		back.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				GUI.setVisible (false);
@@ -72,39 +69,38 @@ public class VistaMostrarEmpleados {
 		GUI.setVisible(true);
 	}
 
-	public static void actualizar(int evento, List<tCliente> datos) {
-		if (evento == Evento.RES_MOSTRAR_CLIENTES_OK) {
+	public static void actualizar(int evento, List<tEmpleado> datos) {
+		if (evento == Evento.RES_MOSTRAR_EMPLEADOS_OK) {
 			panelMostrarClientes.removeAll();
-			String[] columnNames = {"ID", "Nombre", "Direccion", "Activo"};
+			String[] columnNames = {"ID", "Nombre", "Sueldo", "Rol"};
 			String[][] data = new String[datos.size()][4];
 
 			for (int i = 0; i < datos.size(); i++) {
-				tCliente cliente = datos.get(i);
-				data[i][0] = String.valueOf(cliente.getId());
-				data[i][1] = cliente.getNombre();
-				data[i][2] = cliente.getDir();
-				data[i][3] = cliente.getActivo() + "";
+				tEmpleado empleado = datos.get(i);
+				data[i][0] = String.valueOf(empleado.getId());
+				data[i][1] = empleado.getNombre();
+				data[i][2] = empleado.getSueldo() + "";
+				data[i][3] = empleado.getRol() + "";
 			}
 
-			JTable tablaClientes = new JTable(data, columnNames);
-			JScrollPane scrollPane = new JScrollPane(tablaClientes);
-			tablaClientes.setBackground(new Color(17, 47, 69));
-			tablaClientes.setForeground(Color.WHITE);
-			tablaClientes.setOpaque(false);
-			tablaClientes.setShowGrid(false);
+			JTable tablaEmpleados = new JTable(data, columnNames);
+			JScrollPane scrollPane = new JScrollPane(tablaEmpleados);
+			tablaEmpleados.setBackground(new Color(17, 47, 69));
+			tablaEmpleados.setForeground(Color.WHITE);
+			tablaEmpleados.setOpaque(false);
+			tablaEmpleados.setShowGrid(false);
 			scrollPane.setForeground(new Color(17, 47, 69));
 			scrollPane.setOpaque(false);
 			scrollPane.getViewport().setOpaque(false);
 			panelMostrarClientes.add(scrollPane, BorderLayout.CENTER);
 
-			// Refrescar la GUI
 			panelMostrarClientes.revalidate();
 			panelMostrarClientes.repaint();
 		}
-		else if (evento == Evento.RES_MOSTRAR_CLIENTES_KO) {
+		else if (evento == Evento.RES_MOSTRAR_EMPLEADOS_KO) {
 			panelMostrarClientes.removeAll();
 			if (datos == null || datos.isEmpty()) {
-				JLabel mensaje = new JLabel("No hay clientes disponibles.", SwingConstants.CENTER);
+				JLabel mensaje = new JLabel("No hay empleados disponibles.", SwingConstants.CENTER);
 				mensaje.setForeground(Color.WHITE);
 				panelMostrarClientes.add(mensaje, BorderLayout.CENTER);
 			} 

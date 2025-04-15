@@ -18,7 +18,7 @@ public class tCatalogo {
     	return _id;
     }
 
-    public int getnumActividades() {
+    public int getNumActividades() {
         return _numActividades;
     }
 
@@ -26,7 +26,7 @@ public class tCatalogo {
     	_id = id;
     }
 
-    public void setnumActividades(final int numActividades) {
+    public void setNumActividades(final int numActividades) {
     	_numActividades = numActividades;
     }
 

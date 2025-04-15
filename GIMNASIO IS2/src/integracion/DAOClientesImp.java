@@ -1,4 +1,5 @@
 package integracion;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +38,7 @@ public class DAOClientesImp implements DAOClientes {
 				String name = rs.getString ("nombre");
 				String dni = rs.getString ("dni");
 				String direccion = rs.getString ("direccion");
-				int activo = rs.getInt("activo");
-				boolean act;
-				if(activo == 1) act = true;
-				else act = false;
-
-				tCliente c = new tCliente(idCliente, dni , name , direccion ,act);
+				tCliente c = new tCliente(idCliente, dni , name, direccion, true);
 				return c;
 			}
 		} catch (SQLException e) {
@@ -66,7 +62,7 @@ public class DAOClientesImp implements DAOClientes {
 	}
 
 	public int borrarCliente(final int id) {
-		String query = "UPDATE Cliente SET activo = 0 WHERE idCliente = ?";
+		String query = "UPDATE Cliente SET activo = 0 WHERE idCliente = ? AND activo = 1";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setInt(1, id);
 			return stmt.executeUpdate();
@@ -98,4 +94,5 @@ public class DAOClientesImp implements DAOClientes {
 		}
 		return clientes;
 	}
+	
 }

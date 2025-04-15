@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tCliente;
+import negocio.tEmpleado;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -85,7 +85,7 @@ public class VistaMostrarEmpleado {
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				int id = Integer.parseInt(idTF.getText());
-				Controlador.accion(Evento.MOSTRAR_CLIENTE, id);
+				Controlador.accion(Evento.MOSTRAR_EMPLEADO, id);
 			}
 		});
 
@@ -105,23 +105,23 @@ public class VistaMostrarEmpleado {
 		return menuPrincipal;
 	}
 	
-	public static void actualizar(int evento, tCliente cliente) {
-		if (evento == Evento.RES_MOSTRAR_CLIENTE_OK) {
+	public static void actualizar(int evento, tEmpleado empleado) {
+		if (evento == Evento.RES_MOSTRAR_EMPLEADO_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
-			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			String id = String.valueOf(cliente.getId());
-			String nombre = cliente.getNombre();
-			String dir = cliente.getDir();
-			String activo = cliente.getActivo() + "";
-			JOptionPane.showMessageDialog(null, "ID: " +id + " Nombre: " + nombre + " Direccion: " + dir + " Activo: " + activo);
+			scrollPane.setPreferredSize(new Dimension(500, 200));
+			String id = String.valueOf(empleado.getId());
+			String nombre = empleado.getNombre();
+			double sueldo = empleado.getSueldo();
+			int rol = empleado.getRol();
+			JOptionPane.showMessageDialog(null, "ID: " + id + " Nombre: " + nombre + " Sueldo: " + sueldo + " Rol: " + rol );
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_MOSTRAR_CLIENTE_KO) {
-			JOptionPane.showMessageDialog(null, "No se ha podido encontrar el cliente");
+		else if (evento == Evento.RES_MOSTRAR_EMPLEADO_KO) {
+			JOptionPane.showMessageDialog(null, "No se ha podido encontrar el empleado");
 		}
 	}
 }

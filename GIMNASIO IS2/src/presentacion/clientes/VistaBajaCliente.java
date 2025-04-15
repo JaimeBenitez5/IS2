@@ -84,6 +84,7 @@ public class VistaBajaCliente {
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				int id = Integer.parseInt(idTF.getText());
+				idTF.setText("");
 				Controlador.accion(Evento.ELIMINAR_CLIENTE, id);
 			}
 		});

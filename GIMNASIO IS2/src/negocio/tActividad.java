@@ -3,65 +3,57 @@ package negocio;
 import java.sql.Date;
 
 public class tActividad {
-	int _id;
 	String _tipoActividad;
 	Date _fecha;
 	int _idSala;
-	String _dniEmpleado;
+	int _idEmpleado;
 
-	public tActividad(final int id, final String tipoActividad, final String dniEmpleado,  final int idSala ,final Date fecha) {
-		_id = id;
+	public tActividad(final String tipoActividad, final int idEmpleado,  final int idSala ,final Date fecha) {
 		_tipoActividad = tipoActividad;
-		_dniEmpleado = dniEmpleado;
+		_idEmpleado = idEmpleado;
 		_idSala = idSala;
 		_fecha = fecha;
 	}
 
-	public tActividad( final String tipoActividad, final String dniEmpleado,  final Date fecha) {
-		_id = 0;
+	public tActividad(final String tipoActividad, final int idEmpleado,  final Date fecha) {
 		_tipoActividad = tipoActividad;
-		_dniEmpleado = dniEmpleado;
+		_idEmpleado = idEmpleado;
 		_fecha = fecha;
 	}
 
-	public String get_tipoActividad() {
-		return _tipoActividad;
-	}
-
-	public void set_tipoActividad(String tipoActividad) {
-		_tipoActividad = tipoActividad;
-	}
-
-	public Date get_fecha() {
-		return _fecha;
-	}
-	
 	public int getIdSala() {
 		return _idSala;
 	}
-	public void set_fecha(Date fecha) {
-		_fecha = fecha;
-	}
-
-	public int get_id() {
-		return _id;
-	}
-
-	public void setId(int id) {
-		_id = id;
+	
+	public String getTipoActividad() {
+		return _tipoActividad;
 	}
 	
+	public int getIdEmpleado() {
+		return _idEmpleado;
+	}
+	
+	public Date getFecha() {
+		return _fecha;
+	}
+
 	public void setIdSala(int idSala) {
 		_idSala = idSala;
 	}
-
-	public String get_dniEmpleado() {
-		return _dniEmpleado;
+	
+	public void setTipoActividad(String tipoActividad) {
+		_tipoActividad = tipoActividad;
 	}
 
-	public void set_dniEmpleado(String dniEmpleado) {
-		_dniEmpleado = dniEmpleado;
+	public void setDniEmpleado(int dniEmpleado) {
+		_idEmpleado = dniEmpleado;
 	}
-
-
+	
+	public void setFecha(Date fecha) {
+		_fecha = fecha;
+	}
+	
+	public String toString() {
+        return  _tipoActividad + " " + _idSala + " " + _idEmpleado + " " + _fecha;
+    }
 }

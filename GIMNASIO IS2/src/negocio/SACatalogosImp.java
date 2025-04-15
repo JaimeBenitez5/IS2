@@ -4,29 +4,34 @@ import java.util.List;
 import integracion.DAOCatalogos;
 import integracion.DAOCatalogosImp;
 
-
 public class SACatalogosImp implements SACatalogos {
 
-	private static DAOCatalogos catalogosDAO = new DAOCatalogosImp();
+	private static DAOCatalogos catalogosDAO = null;
 	
-	public int altaCatalogo(tCatalogo catalogo) {
-		return 0;
+	//USADO PATRON SINGLETON
+	public static DAOCatalogos getDAOCatalogos(){
+		if(catalogosDAO == null) catalogosDAO = new DAOCatalogosImp();
+		return catalogosDAO;
 	}
 	
-	public tCliente leerCatalogo(int id) {
-		return null;
+	public int altaCatalogo(tCatalogo catalogo) {
+		return getDAOCatalogos().altaCatalogo(catalogo);
+	}
+
+	public tCatalogo leerCatalogo(int id) {
+		return getDAOCatalogos().leerCatalogo(id);
 	}
 
 	public int actualizarCatalogo(tCatalogo catalogo) {
-		return 0;
+		return getDAOCatalogos().actualizarCatalogo(catalogo);
 	}
 
 	public int borrarCatalogo(int id) {
-		return 0;
+		return getDAOCatalogos().borrarCatalogo(id);
 	}
 
 	public List<tCatalogo> leerTodosCatalogos() {
-		return null;
+		return getDAOCatalogos().leerTodosCatalogos();
 	}
 
 }

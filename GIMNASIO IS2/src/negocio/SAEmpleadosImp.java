@@ -1,32 +1,37 @@
 package negocio;
 
 import java.util.List;
-
 import integracion.DAOEmpleados;
 import integracion.DAOEmpleadosImp;
 
 public class SAEmpleadosImp implements SAEmpleados {
 
-	private static DAOEmpleados empleadosDAO = new DAOEmpleadosImp();
+	private static DAOEmpleados empleadosDAO = null;
+
+	//USADO PATRON SINGLETON
+	public static DAOEmpleados getDAOEmpleados(){
+		if(empleadosDAO == null) empleadosDAO = new DAOEmpleadosImp();
+		return empleadosDAO;
+	}
 	
 	public int altaEmpleado(final tEmpleado empleado) {
-		return empleadosDAO.altaEmpleado(empleado);
+		return getDAOEmpleados().altaEmpleado(empleado);
 	}
 
 	public tEmpleado leerEmpleado(final int id) {
-		return empleadosDAO.leerEmpleado(id);
+		return getDAOEmpleados().leerEmpleado(id);
 	}
 
 	public int actualizarEmpleado(final tEmpleado empleado) {
-		return empleadosDAO.actualizarEmpleado(empleado);
+		return getDAOEmpleados().actualizarEmpleado(empleado);
 	}
 
 	public int borrarEmpleado(final int id) {
-		return empleadosDAO.borrarEmpleado(id);
+		return getDAOEmpleados().borrarEmpleado(id);
 	}
 
 	public List<tEmpleado> leerTodosEmpleados() {
-		return empleadosDAO.leerTodosEmpleados();
+		return getDAOEmpleados().leerTodosEmpleados();
 	}
 
 }

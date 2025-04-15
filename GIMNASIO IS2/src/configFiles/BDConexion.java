@@ -3,17 +3,11 @@ import java.sql.*;
 
 public class BDConexion {
 	/**Parametros de conexion**/
-	
-	
 	static String bd = "gimnasio";
 	static String login = "root";
 	static String password = "equipo2";
 	static String url = "jdbc:mysql://localhost:3306/" + bd;
 	private static Connection connection = null;
-	
-	public BDConexion() {
-		
-	}
 	
 	//USADO PATRON SINGLETON
 	public static Connection getConnection(){
@@ -31,6 +25,7 @@ public class BDConexion {
 		connection = null;
 	}
 	
+	//EJEMPLOS DE LA PROFE
 	public void executeQuery() throws SQLException {
 		String query = "SELECT * FROM CLIENTE";
 		try ( Statement stmt = connection.createStatement ()) {

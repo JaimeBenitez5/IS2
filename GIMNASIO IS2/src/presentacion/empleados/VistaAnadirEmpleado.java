@@ -7,11 +7,13 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,7 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tCliente;
+import negocio.tEmpleado;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -41,21 +43,20 @@ public class VistaAnadirEmpleado {
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		// Panel principal con margen
-		JPanel panelAltaCliente = new JPanel();
-		panelAltaCliente.setLayout(new BoxLayout(panelAltaCliente, BoxLayout.Y_AXIS));
-		panelAltaCliente.setBackground(new Color(17, 47, 69));
-		panelAltaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+		JPanel panelAltaEmpleado = new JPanel();
+		panelAltaEmpleado.setLayout(new BoxLayout(panelAltaEmpleado, BoxLayout.Y_AXIS));
+		panelAltaEmpleado.setBackground(new Color(17, 47, 69));
+		panelAltaEmpleado.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-		menuPrincipal.add(panelAltaCliente, BorderLayout.CENTER);
+		menuPrincipal.add(panelAltaEmpleado, BorderLayout.CENTER);
 
 		JLabel titulo = new JLabel("Añadir Empleado");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelAltaCliente.add(titulo);
-		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
+		panelAltaEmpleado.add(titulo);
+		panelAltaEmpleado.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(3, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(4, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
@@ -70,17 +71,18 @@ public class VistaAnadirEmpleado {
 		panelCampos.add(nombre);
 		JTextField nombreTF = new JTextField(30);
 		panelCampos.add(nombreTF);
+		
+		//FALTA QUE NO TE DEJE ESCRIBIR LETRAS, SOLO NUMEROS
+		JLabel sueldo = new JLabel("Sueldo:");
+		sueldo.setForeground(Color.WHITE);
+		panelCampos.add(sueldo);
+		JFormattedTextField sueldoTF = new JFormattedTextField(NumberFormat.getIntegerInstance());
+		sueldoTF.setColumns(8);
+		panelCampos.add(sueldoTF);
+		
+		panelAltaEmpleado.add(panelCampos);
+		panelAltaEmpleado.add(Box.createRigidArea(new Dimension(0, 50)));
 
-		JLabel dir = new JLabel("Dirección:");
-		dir.setForeground(Color.WHITE);
-		panelCampos.add(dir);
-		JTextField dirTF = new JTextField(30);
-		panelCampos.add(dirTF);
-
-		panelAltaCliente.add(panelCampos);
-		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
-
-		// Botones
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
 
@@ -92,23 +94,25 @@ public class VistaAnadirEmpleado {
 		botones.add(save);
 		botones.add(botonMainMenu);
 
-		panelAltaCliente.add(botones);
+		panelAltaEmpleado.add(botones);
 		menuPrincipal.setVisible(true);
 
 		save.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				String dni = dniTF.getText();
 				String nombre = nombreTF.getText();
-				String dir = dirTF.getText();
-				if (dni.isEmpty() || nombre.isEmpty() || dir.isEmpty()) {
+				int sueldo = Integer.parseInt(sueldoTF.getText());
+				int rol = 0;
+				//FALTA EL ROL QUE DEPENDE DE COMO LO HAGAMOS, PODRIA SER UN COMBO-BOX
+				if (dni.isEmpty() || nombre.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
 					dniTF.setText("");
 					nombreTF.setText("");
-					dirTF.setText("");
-					tCliente c = new tCliente(dni, nombre, dir);
-					Controlador.accion(Evento.ALTA_CLIENTE, c);
+					sueldoTF.setText("");
+					tEmpleado emp = new tEmpleado(dni, nombre, sueldo, rol);
+					Controlador.accion(Evento.ALTA_EMPLEADO, emp);
 				}
 			}
 		});
@@ -129,19 +133,19 @@ public class VistaAnadirEmpleado {
 		return menuPrincipal;
 	}
 
-	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_ALTA_CLIENTE_OK) {
-			JTextArea textArea = new JTextArea(datos.toString());
+	public static void actualizar(int evento, tEmpleado empleado) {
+		if (evento == Evento.RES_ALTA_EMPLEADO_OK) {
+			JTextArea textArea = new JTextArea(empleado.toString());
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
-			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, "El cliente se ha insertado correctamente con ID: " + datos.toString());
+			scrollPane.setPreferredSize(new Dimension(500, 200));
+			JOptionPane.showMessageDialog(null, "El empleado se ha insertado correctamente con ID: " + empleado.toString());
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_ALTA_CLIENTE_KO) {
-			JOptionPane.showMessageDialog(null, "No se ha podido insertar el cliente");
+		else if (evento == Evento.RES_ALTA_EMPLEADO_KO) {
+			JOptionPane.showMessageDialog(null, "No se ha podido insertar el empleado");
 		}
 	}
 }

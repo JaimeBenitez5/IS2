@@ -6,26 +6,32 @@ import integracion.DAOClientesImp;
 
 public class SAClienteImp implements SACliente {
 	
-	private static DAOClientes clienteDao = new DAOClientesImp();//usar singleton
-
+	private static DAOClientes clientesDao = null;
+	
+	//USADO PATRON SINGLETON
+	public static DAOClientes getDAOClientes(){
+		if(clientesDao == null) clientesDao = new DAOClientesImp();
+		return clientesDao;
+	}
+	
 	public int altaCliente(final tCliente cliente) {
-		return clienteDao.altaCliente(cliente); 
+		return getDAOClientes().altaCliente(cliente); 
 	}
 
 	public tCliente leerCliente(final int id) {
-		return clienteDao.leerCliente(id);
+		return getDAOClientes().leerCliente(id);
 	}
 
 	public int actualizarCliente(final tCliente cliente) {
-		return clienteDao.actualizarCliente(cliente);
+		return getDAOClientes().actualizarCliente(cliente);
 	}
 
 	public int borrarCliente(final int id) {
-		return clienteDao.borrarCliente(id);
+		return getDAOClientes().borrarCliente(id);
 	}
 	
 	public List<tCliente> leerTodosClientes() {
-		return clienteDao.leerTodosClientes(); 
+		return getDAOClientes().leerTodosClientes(); 
 	}
 
 }

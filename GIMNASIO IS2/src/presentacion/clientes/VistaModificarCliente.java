@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -117,7 +116,10 @@ public class VistaModificarCliente {
 						if (dni.isEmpty() || nombre.isEmpty() || dir.isEmpty()) {
 							JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 						}
-						tCliente c = new tCliente(id,dni, nombre, dir);
+						tCliente c = new tCliente(id, dni, nombre, dir);
+						dniTF.setText("");
+						nombreTF.setText("");
+						dirTF.setText("");
 						Controlador.accion(Evento.MODIFICAR_CLIENTE, c);
 					}
 				}

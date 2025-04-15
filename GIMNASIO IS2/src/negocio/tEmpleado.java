@@ -4,10 +4,10 @@ public class tEmpleado {
 	private int _id;
 	private String _dni;
 	private String _nombre;
-	private int _sueldo;
+	private double _sueldo;
 	private int _rol;
     
-    public tEmpleado(final int id, final String dni, final String nombre, final int sueldo, final int rol) {
+    public tEmpleado(final int id, final String dni, final String nombre, final double sueldo, final int rol) {
     	_id = id;
     	_dni = dni;
     	_nombre = nombre;
@@ -15,7 +15,7 @@ public class tEmpleado {
     	_rol = rol;
     }
     
-    public tEmpleado(final String dni, final String nombre, final int sueldo, final int rol) {
+    public tEmpleado(final String dni, final String nombre, final double sueldo, final int rol) {
     	_id = 0;
     	_dni = dni;
     	_nombre = nombre;
@@ -35,7 +35,7 @@ public class tEmpleado {
         return _nombre;
     }
     
-    public int getSueldo() {
+    public double getSueldo() {
     	return _sueldo;
     }
     
@@ -55,7 +55,7 @@ public class tEmpleado {
     	_nombre = nombre;
     }
     
-    public void setSueldo(final int sueldo) {
+    public void setSueldo(final double sueldo) {
     	_sueldo = sueldo;
     }
     

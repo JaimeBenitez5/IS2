@@ -11,7 +11,6 @@ import java.util.List;
 import configFiles.BDConexion;
 import negocio.tFactura;
 
-
 public class DAOFacturasImp implements DAOFacturas {
 
 	public int altaFactura(tFactura Factura) {
