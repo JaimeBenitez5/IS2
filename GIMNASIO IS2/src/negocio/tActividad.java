@@ -14,10 +14,10 @@ public class tActividad {
 		_idSala = idSala;
 		_fecha = fecha;
 	}
-
-	public tActividad(final String tipoActividad, final int idEmpleado,  final Date fecha) {
+	
+	public tActividad(final String tipoActividad , final int idSala ,final Date fecha) {
 		_tipoActividad = tipoActividad;
-		_idEmpleado = idEmpleado;
+		_idSala = idSala;
 		_fecha = fecha;
 	}
 
@@ -45,8 +45,8 @@ public class tActividad {
 		_tipoActividad = tipoActividad;
 	}
 
-	public void setDniEmpleado(int dniEmpleado) {
-		_idEmpleado = dniEmpleado;
+	public void setIdEmpleado(int idEmpleado) {
+		_idEmpleado = idEmpleado;
 	}
 	
 	public void setFecha(Date fecha) {

@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,21 +19,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 import negocio.tCliente;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
 
-
-@objid ("69cff9f9-fddd-46c9-b01f-2aa13f2b2c28")
 public class VistaModificarCatalogo {
 	private static JFrame GUI = null;
-	@objid ("3175bc60-dc4e-4d25-8fbe-2b50c79d9d60")
-	public VistaModificarCatalogo() {
-		
-	}
 	
 	public static void open() {
 		if(GUI == null) GUI = initGUI();

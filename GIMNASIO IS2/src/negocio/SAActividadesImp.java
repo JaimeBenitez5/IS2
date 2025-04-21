@@ -10,12 +10,12 @@ public class SAActividadesImp implements SAActividades {
 	private static DAOActividades actividadesDao = null;
 	
 	//USADO PATRON SINGLETON
-	public static DAOActividades getDAOActividad(){
+	private static DAOActividades getDAOActividad(){
 		if(actividadesDao == null) actividadesDao = new DAOActividadesImp();
 		return actividadesDao;
 	}
 	
-	public int altaActividad(tActividad actividad) {
+	public int altaActividad(final tActividad actividad) {
 		return getDAOActividad().altaActividad(actividad);
 	}
 

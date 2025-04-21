@@ -71,18 +71,18 @@ public class VistaMostrarSala {
 		botones.setBackground(new Color(17, 47, 69));
 
 		JButton back = UIElementFactory.crearBotonConIcono("icons/back.png");
-		JButton delete = UIElementFactory.crearBoton("Mostrar",  new Color(67, 75, 172));
+		JButton mostrar = UIElementFactory.crearBoton("Mostrar",  new Color(67, 75, 172));
 		JButton botonMainMenu = UIElementFactory.crearBotonConIcono("icons/main_menu.png");
 
 		botones.add(back);
-		botones.add(delete);
+		botones.add(mostrar);
 		botones.add(botonMainMenu);
 
 		panelMostrarSala.add(botones);
 		menuPrincipal.setVisible(true);
 
 
-		delete.addActionListener(new ActionListener () {
+		mostrar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				int id = Integer.parseInt(idTF.getText());
 				idTF.setText("");
@@ -90,13 +90,13 @@ public class VistaMostrarSala {
 			}
 		});
 
-		back.addActionListener( new ActionListener () {
+		back.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 			}
 		});
 
-		botonMainMenu.addActionListener( new ActionListener () {
+		botonMainMenu.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
@@ -106,7 +106,7 @@ public class VistaMostrarSala {
 		return menuPrincipal;
 	}
 	
-	public static void actualizar(int evento, tSala sala) {
+	public static void actualizar(int evento, tSala s) {
 		if (evento == Evento.RES_MOSTRAR_SALA_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
@@ -114,8 +114,8 @@ public class VistaMostrarSala {
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			String id = String.valueOf(sala.getId());
-			int aforo = sala.getAforo();
+			String id = String.valueOf(s.getId());
+			int aforo = s.getAforo();
 			JOptionPane.showMessageDialog(null, "ID: " +id + " Aforo: " + aforo);
 			GUI.setVisible(false);
 		} 

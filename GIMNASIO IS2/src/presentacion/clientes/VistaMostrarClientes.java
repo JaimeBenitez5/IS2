@@ -53,7 +53,7 @@ public class VistaMostrarClientes {
 		botones.add(botonMainMenu);
 		GUI.add(botones, BorderLayout.SOUTH);
 
-		back.addActionListener( new ActionListener () {
+		back.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				GUI.setVisible (false);
 			}

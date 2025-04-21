@@ -81,7 +81,7 @@ public class VistaAnadirSala {
 		panelAnadirSala.add(botones);
 		menuPrincipal.setVisible(true);
 
-		save.addActionListener( new ActionListener () {
+		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				int aforo = Integer.parseInt(aforoTF.getText());
 				if (aforoTF.getText() == "") {
@@ -93,13 +93,13 @@ public class VistaAnadirSala {
 			}
 		});
 
-		back.addActionListener( new ActionListener () {
+		back.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 			}
 		});
 
-		botonMainMenu.addActionListener( new ActionListener () {
+		botonMainMenu.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);

@@ -93,7 +93,7 @@ public class VistaAltaCliente {
 		panelAltaCliente.add(botones);
 		menuPrincipal.setVisible(true);
 
-		save.addActionListener( new ActionListener () {
+		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				String dni = dniTF.getText();
 				String nombre = nombreTF.getText();
@@ -111,13 +111,13 @@ public class VistaAltaCliente {
 			}
 		});
 
-		back.addActionListener( new ActionListener () {
+		back.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 			}
 		});
 
-		botonMainMenu.addActionListener( new ActionListener () {
+		botonMainMenu.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);

@@ -27,12 +27,12 @@ import presentacion.UIElementFactory;
 
 public class VistaModificarSala {
 	private static JFrame GUI = null;
-	
+
 	public static void open() {
 		if(GUI == null) GUI = initGUI();
 		GUI.setVisible(true);
 	}
-	
+
 	private static JFrame initGUI() {
 		JFrame menuPrincipal = new JFrame("Menú Modificar Sala");
 		menuPrincipal.setSize(854, 480);
@@ -44,7 +44,7 @@ public class VistaModificarSala {
 		JPanel panelModificarSala = new JPanel();
 		panelModificarSala.setLayout(new BoxLayout(panelModificarSala, BoxLayout.Y_AXIS));
 		panelModificarSala.setBackground(new Color(17, 47, 69));
-		panelModificarSala.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Márgenes exteriores
+		panelModificarSala.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
 		menuPrincipal.add(panelModificarSala, BorderLayout.CENTER);
 
@@ -87,34 +87,33 @@ public class VistaModificarSala {
 		panelModificarSala.add(botones);
 		menuPrincipal.setVisible(true);
 
-		save.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						int id = Integer.parseInt(idTF.getText());
-						int aforo = Integer.parseInt(aforoTF.getText());
-						tSala s = new tSala(id, aforo);
-						Controlador.accion(Evento.MODIFICAR_SALA, s);
-					}
-				}
-				);
+		save.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				int id = Integer.parseInt(idTF.getText());
+				int aforo = Integer.parseInt(aforoTF.getText());
+				tSala s = new tSala(id, aforo);
+				Controlador.accion(Evento.MODIFICAR_SALA, s);
+			}
+		});
 
-		back.addActionListener( new ActionListener () {
+		back.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 			}
 		});
 
-		botonMainMenu.addActionListener( new ActionListener () {
+		botonMainMenu.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
 			}
 		});
+		
 		menuPrincipal.setResizable(false);
 		menuPrincipal.pack();
 		return menuPrincipal;
 	}
-	
+
 
 	public static void actualizar(int evento, Object datos) {
 		if (evento == Evento.RES_MODIFICAR_SALA_OK) {

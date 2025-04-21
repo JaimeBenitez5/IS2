@@ -10,152 +10,173 @@ import presentacion.salas.*;
 import negocio.*;
 
 public class Controlador{
-
+	//patron singleton
+	private static SAClientes SAClientes;
+	private static SASalas SASalas;
+	private static SAActividades SAActividades;
+	private static SACatalogos SACatalogos;
+	private static SAEmpleados SAEmpleados;
+	
+	private static SAClientes getSAClientes(){
+		if(SAClientes == null) SAClientes = new SAClientesImp();
+		return SAClientes;
+	}
+	private static SASalas getSASalas() {
+		if (SASalas == null) SASalas = new SASalasImp();
+		return SASalas;
+	}
+	private static SAActividades getSAActividades() {
+		if (SAActividades == null) SAActividades = new SAActividadesImp();
+		return SAActividades;
+	}
+	private static SACatalogos getSACatalogos() {
+		if (SACatalogos == null) SACatalogos = new SACatalogosImp();
+		return SACatalogos;
+	}
+	private static SAEmpleados getSAEmpleados() {
+		if (SAEmpleados == null) SAEmpleados = new SAEmpleadosImp();
+		return SAEmpleados;
+	}
+	
 	public static void accion(int evento, Object datos) { 
-		SACliente SACliente = new SAClienteImp();
-		SASalas SASalas = new SASalasImp();
-		SAActividades SAActividades = new SAActividadesImp();
-		SACatalogos SACatalogos = new SACatalogosImp();
-		SAEmpleados SAEmpleados = new SAEmpleadosImp();
-		//usar patron creacional para crear los sa
 		switch(evento) {
 		//CLIENTES
 		case Evento.ALTA_CLIENTE:{
-			int id = SACliente.altaCliente((tCliente) datos);
+			int id = getSAClientes().altaCliente((tCliente) datos);
 			((tCliente) datos).setId(id);
 			if(id != 0) VistaAltaCliente.actualizar(Evento.RES_ALTA_CLIENTE_OK, id);
 			else VistaAltaCliente.actualizar(Evento.RES_ALTA_CLIENTE_KO, id);
 			break;
 		}
 		case Evento.MOSTRAR_CLIENTES:{
-			List<tCliente> res = SACliente.leerTodosClientes();
+			List<tCliente> res = getSAClientes().leerTodosClientes();
 			if (!res.isEmpty()) VistaMostrarClientes.actualizar(Evento.RES_MOSTRAR_CLIENTES_OK, res);
 			else VistaMostrarClientes.actualizar(Evento.RES_MOSTRAR_CLIENTES_KO, null);
 			break;
 		}
 		case Evento.MOSTRAR_CLIENTE:{
-			tCliente cliente = SACliente.leerCliente((int)datos);
+			tCliente cliente = getSAClientes().leerCliente((int)datos);
 			if (cliente != null) VistaMostrarCliente.actualizar(Evento.RES_MOSTRAR_CLIENTE_OK, cliente);
 			else VistaMostrarCliente.actualizar(Evento.RES_MOSTRAR_CLIENTE_KO, null);
 			break;
 		}
 		case Evento.ELIMINAR_CLIENTE:{
-			int exito = SACliente.borrarCliente((int) datos);
+			int exito = getSAClientes().borrarCliente((int) datos);
 			if (exito != 0) VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_OK, (int) datos);
 			else VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_KO, null);
 			break;
 		}
 		case Evento.MODIFICAR_CLIENTE:{
-			int exitoModificar = SACliente.actualizarCliente((tCliente) datos);
+			int exitoModificar = getSAClientes().actualizarCliente((tCliente) datos);
 			if (exitoModificar == 1) VistaModificarCliente.actualizar(Evento.RES_MODIFICAR_CLIENTE_OK, null);
 			else VistaModificarCliente.actualizar(Evento.RES_MODIFICAR_CLIENTE_KO, null);
 			break;
 		}
 		//SALAS
 		case Evento.ALTA_SALA:{
-			int id = SASalas.altaSala((tSala) datos);
+			int id = getSASalas().altaSala((tSala) datos);
 			((tSala) datos).setId(id);
 			if(id != 0) VistaAnadirSala.actualizar(Evento.RES_ALTA_SALA_OK, id);
 			else VistaAnadirSala.actualizar(Evento.RES_ALTA_SALA_KO, id);
 			break;
 		}
 		case Evento.MOSTRAR_SALA:{
-			tSala s = SASalas.leerSala((int) datos);
+			tSala s = getSASalas().leerSala((int) datos);
 			VistaMostrarSala.actualizar(Evento.RES_MOSTRAR_SALA_OK, s);
 			break;
 		}
 		case Evento.MOSTRAR_SALAS:{
-			List<tSala> res = SASalas.leerTodasSalas();
+			List<tSala> res = getSASalas().leerTodasSalas();
 			if (!res.isEmpty()) VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_OK, res);
 			else VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_KO, null);
 			break;
 		}
 		case Evento.ELIMINAR_SALA:{
-			int exito = SASalas.borrarSala((int) datos);
+			int exito = getSASalas().borrarSala((int) datos);
 			if (exito == 1) VistaEliminarSala.actualizar(Evento.RES_ELIMINAR_SALA_OK, (int) datos);
 			else VistaEliminarSala.actualizar(Evento.RES_ELIMINAR_SALA_KO, null);
 			break;
 		}
 		case Evento.MODIFICAR_SALA:{
-			int exitoModificar = SASalas.actualizarSala((tSala) datos);
+			int exitoModificar = getSASalas().actualizarSala((tSala) datos);
 			if (exitoModificar == 1) VistaModificarSala.actualizar(Evento.RES_MODIFICAR_SALA_OK, null);
 			else VistaModificarSala.actualizar(Evento.RES_MODIFICAR_SALA_KO, null);
 			break;
 		}
 		//ACTIVIDADES
 		case Evento.ALTA_ACTIVIDAD:{
-			int id = SAActividades.altaActividad((tActividad) datos);
-			((tActividad) datos).setId(id);
-			if(id != 0) VistaAnadirActividad.actualizar(Evento.RES_ALTA_ACTIVIDAD_OK, id);
-			else VistaAnadirActividad.actualizar(Evento.RES_ALTA_ACTIVIDAD_KO, id);
+			int exitoInsertar = getSAActividades().altaActividad((tActividad) datos);
+			if(exitoInsertar == 1) VistaAnadirActividad.actualizar(Evento.RES_ALTA_ACTIVIDAD_OK, null);
+			else VistaAnadirActividad.actualizar(Evento.RES_ALTA_ACTIVIDAD_KO, null);
 			break;
 		}
 		case Evento.MOSTRAR_ACTIVIDAD:{
-			tSala s = SASalas.leerSala((int) datos);
-			VistaMostrarSala.actualizar(Evento.RES_MOSTRAR_SALA_OK, s);
+			//NO TIENE MUCHO SENTIDO, LO TENEMOS YA TODO MENOS EL ID DE EMPLEADO QUE ENCIMA HASTA PUEDE SER NULO, PERO ES ASI LA BD
+			tActividad a = getSAActividades().leerActividad(((tActividad) datos).getTipoActividad(), ((tActividad) datos).getFecha(), ((tActividad) datos).getIdSala());
+			VistaMostrarActividad.actualizar(Evento.RES_MOSTRAR_ACTIVIDAD_OK, a);
 			break;
 		}
 		case Evento.MOSTRAR_ACTIVIDADES:{
-			List<tSala> res = SASalas.leerTodasSalas();
-			if (!res.isEmpty()) VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_OK, res);
-			else VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_KO, null);
+			List<tActividad> res = getSAActividades().leerTodasActividades();
+			if (!res.isEmpty()) VistaMostrarActividades.actualizar(Evento.RES_MOSTRAR_ACTIVIDADES_OK, res);
+			else VistaMostrarActividades.actualizar(Evento.RES_MOSTRAR_ACTIVIDADES_KO, null);
 			break;
 		}
 		case Evento.ELIMINAR_ACTIVIDAD:{
-			int exito = SASalas.borrarSala((int) datos);
-			if (exito == 1) VistaEliminarSala.actualizar(Evento.RES_ELIMINAR_SALA_OK, (int) datos);
-			else VistaEliminarSala.actualizar(Evento.RES_ELIMINAR_SALA_KO, null);
+			int exito = getSAActividades().borrarActividad(((tActividad) datos).getTipoActividad(), ((tActividad) datos).getFecha(), ((tActividad) datos).getIdSala());
+			if (exito == 1) VistaEliminarActividad.actualizar(Evento.RES_ELIMINAR_ACTIVIDAD_OK, (int) datos);
+			else VistaEliminarActividad.actualizar(Evento.RES_ELIMINAR_ACTIVIDAD_KO, null);
 			break;
 		}
 		case Evento.MODIFICAR_ACTIVIDAD:{
-			int exitoModificar = SASalas.actualizarSala((tSala) datos);
-			if (exitoModificar == 1) VistaModificarSala.actualizar(Evento.RES_MODIFICAR_SALA_OK, null);
-			else VistaModificarSala.actualizar(Evento.RES_MODIFICAR_SALA_KO, null);
+			int exitoModificar = getSAActividades().actualizarActividad((tActividad) datos);
+			if (exitoModificar == 1) VistaModificarActividad.actualizar(Evento.RES_MODIFICAR_ACTIVIDAD_OK, null);
+			else VistaModificarActividad.actualizar(Evento.RES_MODIFICAR_ACTIVIDAD_KO, null);
 			break;
 		}
-		//CATALOGOS
-		case Evento.ALTA_CATALOGO: {
-			int id = SACatalogos.altaCatalogo((tCatalogo) datos);
-			((tCatalogo) datos).setId(id);
-			if (id != 0)
-				VistaAnadirCatalogo.actualizar(Evento.RES_ALTA_CATALOGO_OK, id);
-			else
-				VistaAnadirCatalogo.actualizar(Evento.RES_ALTA_CATALOGO_KO, id);
-			break;
-		}
-
-		case Evento.MOSTRAR_CATALOGO: {
-			tCatalogo c = SACatalogos.leerCatalogo((int) datos);
-			VistaMostrarCatalogo.actualizar(Evento.RES_MOSTRAR_CATALOGO_OK, c);
-			break;
-		}
-
-		case Evento.MOSTRAR_CATALOGOS: {
-			List<tCatalogo> res = SACatalogos.leerTodosCatalogos();
-			if (!res.isEmpty())
-				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_OK, res);
-			else
-				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_KO, null);
-			break;
-		}
-
-		case Evento.ELIMINAR_CATALOGO: {
-			int exito = SACatalogos.borrarCatalogo((int) datos);
-			if (exito == 1)
-				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_OK, (int) datos);
-			else
-				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_KO, null);
-			break;
-		}
-
-		case Evento.MODIFICAR_CATALOGO: {
-			int exitoModificar = SACatalogos.actualizarCatalogo((tCatalogo) datos);
-			if (exitoModificar == 1)
-				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_OK, null);
-			else
-				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_KO, null);
-			break;
-		}
+//		//CATALOGOS
+//		case Evento.ALTA_CATALOGO: {
+//			int id = getSACatalogos().altaCatalogo((tCatalogo) datos);
+//			((tCatalogo) datos).setId(id);
+//			if (id != 0)
+//				VistaAnadirCatalogo.actualizar(Evento.RES_ALTA_CATALOGO_OK, id);
+//			else
+//				VistaAnadirCatalogo.actualizar(Evento.RES_ALTA_CATALOGO_KO, id);
+//			break;
+//		}
+//
+//		case Evento.MOSTRAR_CATALOGO: {
+//			tCatalogo c = getSACatalogos().leerCatalogo((int) datos);
+//			VistaMostrarCatalogo.actualizar(Evento.RES_MOSTRAR_CATALOGO_OK, c);
+//			break;
+//		}
+//
+//		case Evento.MOSTRAR_CATALOGOS: {
+//			List<tCatalogo> res = getSACatalogos().leerTodosCatalogos();
+//			if (!res.isEmpty())
+//				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_OK, res);
+//			else
+//				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_KO, null);
+//			break;
+//		}
+//
+//		case Evento.ELIMINAR_CATALOGO: {
+//			int exito = getSACatalogos().borrarCatalogo((int) datos);
+//			if (exito == 1)
+//				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_OK, (int) datos);
+//			else
+//				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_KO, null);
+//			break;
+//		}
+//
+//		case Evento.MODIFICAR_CATALOGO: {
+//			int exitoModificar = getSACatalogos().actualizarCatalogo((tCatalogo) datos);
+//			if (exitoModificar == 1)
+//				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_OK, null);
+//			else
+//				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_KO, null);
+//			break;
+//		}
 		}
 	}
 

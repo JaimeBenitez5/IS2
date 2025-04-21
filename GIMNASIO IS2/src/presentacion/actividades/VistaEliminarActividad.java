@@ -7,11 +7,14 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,6 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import negocio.tActividad;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -40,31 +44,46 @@ public class VistaEliminarActividad {
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		JPanel panelBajaCliente = new JPanel();
-		panelBajaCliente.setLayout(new BoxLayout(panelBajaCliente, BoxLayout.Y_AXIS));
-		panelBajaCliente.setBackground(new Color(17, 47, 69));
-		panelBajaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+		JPanel panelEliminarActividad = new JPanel();
+		panelEliminarActividad.setLayout(new BoxLayout(panelEliminarActividad, BoxLayout.Y_AXIS));
+		panelEliminarActividad.setBackground(new Color(17, 47, 69));
+		panelEliminarActividad.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-		menuPrincipal.add(panelBajaCliente, BorderLayout.CENTER);
+		menuPrincipal.add(panelEliminarActividad, BorderLayout.CENTER);
 
 		JLabel titulo = new JLabel("Eliminar Actividad");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelBajaCliente.add(titulo);
-		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
+		panelEliminarActividad.add(titulo);
+		panelEliminarActividad.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(1, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(3, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
-		JLabel id = new JLabel("ID:");
-		id.setForeground(Color.WHITE);
-		panelCampos.add(id);
-		JTextField idTF = new JTextField(30);
-		panelCampos.add(idTF);
+		JLabel tipoAct = new JLabel("Tipo de actividad:");
+		tipoAct.setForeground(Color.WHITE);
+		panelCampos.add(tipoAct);
+		JTextField tipoActTF = new JTextField(30);
+		panelCampos.add(tipoActTF);
+		
+		JLabel fecha = new JLabel("Fecha:");
+		fecha.setForeground(Color.WHITE);
+		panelCampos.add(fecha);
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		JFormattedTextField fechaTF = new JFormattedTextField(format);
+		fechaTF.setColumns(10);
+		fechaTF.setValue(new java.util.Date());
+		panelCampos.add(fechaTF);
+		
+		JLabel idSala = new JLabel("ID Sala:");
+		idSala.setForeground(Color.WHITE);
+		panelCampos.add(idSala);
+		JTextField idSalaTF = new JTextField(30);
+		panelCampos.add(idSalaTF);
 
-		panelBajaCliente.add(panelCampos);
-		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
+		panelEliminarActividad.add(panelCampos);
+		panelEliminarActividad.add(Box.createRigidArea(new Dimension(0, 50)));
 
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
@@ -77,24 +96,28 @@ public class VistaEliminarActividad {
 		botones.add(delete);
 		botones.add(botonMainMenu);
 
-		panelBajaCliente.add(botones);
+		panelEliminarActividad.add(botones);
 		menuPrincipal.setVisible(true);
 
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int id = Integer.parseInt(idTF.getText());
-				Controlador.accion(Evento.ELIMINAR_SALA, id);
+				String tipoAct = tipoActTF.getText();
+				java.util.Date Date = (java.util.Date) fechaTF.getValue();
+				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
+				int idSala = Integer.parseInt(idSalaTF.getText());
+				tActividad a = new tActividad(tipoAct, idSala, sqlDate);
+				Controlador.accion(Evento.ELIMINAR_ACTIVIDAD, a);
 			}
 		});
 
-		back.addActionListener( new ActionListener () {
+		back.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 			}
 		});
 
-		botonMainMenu.addActionListener( new ActionListener () {
+		botonMainMenu.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
@@ -105,18 +128,18 @@ public class VistaEliminarActividad {
 	}
 
 	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_ELIMINAR_SALA_OK) {
+		if (evento == Evento.RES_ELIMINAR_ACTIVIDAD_OK) {
 			JTextArea textArea = new JTextArea(datos.toString());
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, "La sala se ha eliminado correctamente");
+			JOptionPane.showMessageDialog(null, "La actividad se ha eliminado correctamente");
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_ELIMINAR_SALA_KO) {
-			JOptionPane.showMessageDialog(null, "No se ha podido eliminar la sala");
+		else if (evento == Evento.RES_ELIMINAR_ACTIVIDAD_KO) {
+			JOptionPane.showMessageDialog(null, "No se ha podido eliminar la actividad");
 		}
 	}
 }

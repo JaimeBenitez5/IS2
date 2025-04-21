@@ -2,7 +2,7 @@ package negocio;
 
 import java.util.List;
 
-public interface SACliente {
+public interface SAClientes {
 	
     int altaCliente(final tCliente cliente);
 

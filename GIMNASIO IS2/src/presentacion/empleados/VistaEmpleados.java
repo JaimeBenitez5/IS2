@@ -39,14 +39,14 @@ public class VistaEmpleados {
 		JButton botonReadAll = UIElementFactory.crearBoton("Mostrar Empleados", colorBotones);
 		JButton botonRead = UIElementFactory.crearBoton("Mostrar Empleado", colorBotones);
 		JButton botonUnroll = UIElementFactory.crearBoton("Dar de Baja Empleado", colorBotones);
-		JButton botonModClient = UIElementFactory.crearBoton("Modificar Empleado", colorBotones);
+		JButton botonModEmp = UIElementFactory.crearBoton("Modificar Empleado", colorBotones);
 		JButton botonMainMenu = UIElementFactory.crearBotonConIcono("icons/main_menu.png");
 
 		panel.add(botonAlta);
 		panel.add(botonReadAll);
 		panel.add(botonRead);
 		panel.add(botonUnroll);
-		panel.add(botonModClient);
+		panel.add(botonModEmp);
 
 		menuPrincipal.add(panel, BorderLayout.CENTER);
 		menuPrincipal.add(botonMainMenu, BorderLayout.SOUTH);
@@ -76,7 +76,7 @@ public class VistaEmpleados {
 			}
 		});
 
-		botonModClient.addActionListener(new ActionListener () {
+		botonModEmp.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				Controlador.mostrarVista(Evento.VISTA_MODIFICAR_EMPLEADO);
 			}

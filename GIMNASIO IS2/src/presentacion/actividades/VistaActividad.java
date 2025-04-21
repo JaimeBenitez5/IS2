@@ -91,9 +91,4 @@ public class VistaActividad {
 		
 		return menuPrincipal;
 	}
-	
-	public static void actualizar(int evento, Object datos) {
-		
-	} 
-	
 }

@@ -40,18 +40,18 @@ public class VistaEliminarEmpleado {
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		JPanel panelBajaCliente = new JPanel();
-		panelBajaCliente.setLayout(new BoxLayout(panelBajaCliente, BoxLayout.Y_AXIS));
-		panelBajaCliente.setBackground(new Color(17, 47, 69));
-		panelBajaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+		JPanel panelBajaEmpleado = new JPanel();
+		panelBajaEmpleado.setLayout(new BoxLayout(panelBajaEmpleado, BoxLayout.Y_AXIS));
+		panelBajaEmpleado.setBackground(new Color(17, 47, 69));
+		panelBajaEmpleado.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-		menuPrincipal.add(panelBajaCliente, BorderLayout.CENTER);
+		menuPrincipal.add(panelBajaEmpleado, BorderLayout.CENTER);
 
 		JLabel titulo = new JLabel("Dar de baja Empleado");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelBajaCliente.add(titulo);
-		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
+		panelBajaEmpleado.add(titulo);
+		panelBajaEmpleado.add(Box.createRigidArea(new Dimension(0, 30)));
 
 		JPanel panelCampos = new JPanel(new GridLayout(1, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
@@ -63,8 +63,8 @@ public class VistaEliminarEmpleado {
 		JTextField idTF = new JTextField(30);
 		panelCampos.add(idTF);
 
-		panelBajaCliente.add(panelCampos);
-		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
+		panelBajaEmpleado.add(panelCampos);
+		panelBajaEmpleado.add(Box.createRigidArea(new Dimension(0, 50)));
 
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
@@ -77,7 +77,7 @@ public class VistaEliminarEmpleado {
 		botones.add(delete);
 		botones.add(botonMainMenu);
 
-		panelBajaCliente.add(botones);
+		panelBajaEmpleado.add(botones);
 		menuPrincipal.setVisible(true);
 
 
@@ -88,13 +88,13 @@ public class VistaEliminarEmpleado {
 			}
 		});
 
-		back.addActionListener( new ActionListener () {
+		back.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 			}
 		});
 
-		botonMainMenu.addActionListener( new ActionListener () {
+		botonMainMenu.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);

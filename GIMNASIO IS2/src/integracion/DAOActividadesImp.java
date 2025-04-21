@@ -14,19 +14,13 @@ import negocio.tActividad;
 public class DAOActividadesImp implements DAOActividades{
 
 	public int altaActividad(tActividad actividad) {
-		String query = "INSERT INTO Actividad (tipoActividad, fecha, idSala, dniEmpleado) VALUES (?, ?, ?, ?)";
+		String query = "INSERT INTO Actividad (tipoActividad, fecha, idSala, idEmpleado) VALUES (?, ?, ?, ?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setString(1, actividad.getTipoActividad());
 			stmt.setDate(2, actividad.getFecha());
 			stmt.setInt(3, actividad.getIdSala());
 			stmt.setInt(4, actividad.getIdEmpleado());
-			stmt.executeUpdate();
-			try (ResultSet rs = stmt.getGeneratedKeys()) {
-				if (rs.next()) {
-					int idActividad = rs.getInt(1);
-					return idActividad;
-				}
-			}
+			return stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

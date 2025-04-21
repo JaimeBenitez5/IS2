@@ -4,7 +4,7 @@ import java.util.List;
 import integracion.DAOClientes;
 import integracion.DAOClientesImp;
 
-public class SAClienteImp implements SACliente {
+public class SAClientesImp implements SAClientes {
 	
 	private static DAOClientes clientesDao = null;
 	

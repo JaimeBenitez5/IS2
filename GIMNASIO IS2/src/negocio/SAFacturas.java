@@ -2,7 +2,7 @@ package negocio;
 
 import java.util.List;
 
-public interface SAFactura {
+public interface SAFacturas {
 	
     int altaFactura(final tFactura factura);
 

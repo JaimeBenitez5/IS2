@@ -15,18 +15,18 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.JFrame;
 
-import negocio.tSala;
+import negocio.tActividad;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
 
 public class VistaMostrarActividades {
 	private static JFrame GUI = null;
-	private static JPanel panelMostrarSalas;
+	private static JPanel panelMostrarActividades;
 
 	public static void open() {  
 		if (GUI == null) initGUI();
-		Controlador.accion(Evento.MOSTRAR_SALAS, null);
+		Controlador.accion(Evento.MOSTRAR_ACTIVIDADES, null);
 		GUI.setVisible(true);
 	}
 
@@ -38,29 +38,24 @@ public class VistaMostrarActividades {
 		GUI.getContentPane().setLayout(new BorderLayout());
 		GUI.getContentPane().setBackground(new Color(17, 47, 69));
 
-		// Panel principal donde se mostrarán los clientes
-		panelMostrarSalas = new JPanel(new BorderLayout());
-		panelMostrarSalas.setBackground(new Color(17, 47, 69));
-		GUI.add(panelMostrarSalas, BorderLayout.CENTER);
+		panelMostrarActividades = new JPanel(new BorderLayout());
+		panelMostrarActividades.setBackground(new Color(17, 47, 69));
+		GUI.add(panelMostrarActividades, BorderLayout.CENTER);
 
-		// Botones de navegación
 		JPanel botones = new JPanel(new FlowLayout());
 		botones.setBackground(new Color(17, 47, 69));
-
 		JButton back = UIElementFactory.crearBotonConIcono("icons/back.png");
 		JButton botonMainMenu = UIElementFactory.crearBotonConIcono("icons/main_menu.png");
-
 
 		botones.add(back);
 		botones.add(botonMainMenu);
 		GUI.add(botones, BorderLayout.SOUTH);
 
-		back.addActionListener( new ActionListener () {
+		back.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				GUI.setVisible (false);
 			}
 		});
-
 
 		botonMainMenu.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
@@ -71,39 +66,44 @@ public class VistaMostrarActividades {
 		GUI.setVisible(true);
 	}
 
-	public static void actualizar(int evento, List<tSala> datos) {
-		if (evento == Evento.RES_MOSTRAR_SALAS_OK) {
-			panelMostrarSalas.removeAll();
-			String[] columnNames = {"ID", "Aforo"};
-			String[][] data = new String[datos.size()][2];
+	public static void actualizar(int evento, List<tActividad> res) {
+		if (evento == Evento.RES_MOSTRAR_ACTIVIDADES_OK) {
+			panelMostrarActividades.removeAll();
+			String[] columnNames = {"Tipo de actividad", "ID de Sala" , "Fecha", "ID de Empleado"};
+			String[][] data = new String[res.size()][4];
 
-			for (int i = 0; i < datos.size(); i++) {
-				tSala sala = datos.get(i);
-				data[i][0] = String.valueOf(sala.getId());
-				data[i][1] = String.valueOf(sala.getAforo());
+			for (int i = 0; i < res.size(); i++) {
+				tActividad a = res.get(i);
+				java.sql.Date sqlDate = a.getFecha();
+				java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
+				
+				data[i][0] = a.getTipoActividad();
+				data[i][1] = String.valueOf(a.getIdSala());
+				data[i][2] = String.valueOf(utilDate);
+				data[i][3] = String.valueOf(a.getIdEmpleado());
 			}
 
-			JTable tablaSalas = new JTable(data, columnNames);
-			JScrollPane scrollPane = new JScrollPane(tablaSalas);
-			tablaSalas.setBackground(new Color(17, 47, 69));
-			tablaSalas.setForeground(Color.WHITE);
-			tablaSalas.setOpaque(false);
-			tablaSalas.setShowGrid(false);
+			JTable tablaActividades = new JTable(data, columnNames);
+			JScrollPane scrollPane = new JScrollPane(tablaActividades);
+			tablaActividades.setBackground(new Color(17, 47, 69));
+			tablaActividades.setForeground(Color.WHITE);
+			tablaActividades.setOpaque(false);
+			tablaActividades.setShowGrid(false);
 			scrollPane.setForeground(new Color(17, 47, 69));
 			scrollPane.setOpaque(false);
 			scrollPane.getViewport().setOpaque(false);
-			panelMostrarSalas.add(scrollPane, BorderLayout.CENTER);
+			panelMostrarActividades.add(scrollPane, BorderLayout.CENTER);
 
 			// Refrescar la GUI
-			panelMostrarSalas.revalidate();
-			panelMostrarSalas.repaint();
+			panelMostrarActividades.revalidate();
+			panelMostrarActividades.repaint();
 		}
-		else if (evento == Evento.RES_MOSTRAR_SALAS_KO) {
-			panelMostrarSalas.removeAll();
-			if (datos == null || datos.isEmpty()) {
-				JLabel mensaje = new JLabel("No hay salas disponibles.", SwingConstants.CENTER);
+		else if (evento == Evento.RES_MOSTRAR_ACTIVIDADES_KO) {
+			panelMostrarActividades.removeAll();
+			if (res == null || res.isEmpty()) {
+				JLabel mensaje = new JLabel("No hay actividades disponibles.", SwingConstants.CENTER);
 				mensaje.setForeground(Color.WHITE);
-				panelMostrarSalas.add(mensaje, BorderLayout.CENTER);
+				panelMostrarActividades.add(mensaje, BorderLayout.CENTER);
 			} 
 		}
 	}

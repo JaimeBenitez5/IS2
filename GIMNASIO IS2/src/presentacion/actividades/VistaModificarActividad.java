@@ -7,11 +7,14 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,78 +22,74 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
-import negocio.tCliente;
+import negocio.tActividad;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
 
-
-@objid ("69cff9f9-fddd-46c9-b01f-2aa13f2b2c28")
 public class VistaModificarActividad {
 	private static JFrame GUI = null;
-	@objid ("3175bc60-dc4e-4d25-8fbe-2b50c79d9d60")
-	public VistaModificarActividad() {
-		
-	}
-	
+
 	public static void open() {
 		if(GUI == null) GUI = initGUI();
 		GUI.setVisible(true);
 	}
-	
+
 	private static JFrame initGUI() {
-		JFrame menuPrincipal = new JFrame("Menú Modificar Cliente");
+		JFrame menuPrincipal = new JFrame("Menú Modificar Actividad");
 		menuPrincipal.setSize(854, 480);
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		JPanel panelAltaCliente = new JPanel();
-		panelAltaCliente.setLayout(new BoxLayout(panelAltaCliente, BoxLayout.Y_AXIS));
-		panelAltaCliente.setBackground(new Color(17, 47, 69));
-		panelAltaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Márgenes exteriores
+		JPanel panelModActividad = new JPanel();
+		panelModActividad.setLayout(new BoxLayout(panelModActividad, BoxLayout.Y_AXIS));
+		panelModActividad.setBackground(new Color(17, 47, 69));
+		panelModActividad.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-		menuPrincipal.add(panelAltaCliente, BorderLayout.CENTER);
+		menuPrincipal.add(panelModActividad, BorderLayout.CENTER);
 
 		JLabel titulo = new JLabel("Modificar Actividad");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelAltaCliente.add(titulo);
-		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
+		panelModActividad.add(titulo);
+		panelModActividad.add(Box.createRigidArea(new Dimension(0, 30)));
 
 		JPanel panelCampos = new JPanel(new GridLayout(4, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
-		JLabel id = new JLabel("ID:");
-		id.setForeground(Color.WHITE);
-		panelCampos.add(id);
-		JTextField idTF = new JTextField(30);
-		panelCampos.add(idTF);
+		JLabel tipoAct = new JLabel("Tipo de actividad:");
+		tipoAct.setForeground(Color.WHITE);
+		panelCampos.add(tipoAct);
+		JTextField tipoActTF = new JTextField(30);
+		panelCampos.add(tipoActTF);
 
-		JLabel dni = new JLabel("DNI:");
-		dni.setForeground(Color.WHITE);
-		panelCampos.add(dni);
-		JTextField dniTF = new JTextField(30);
-		panelCampos.add(dniTF);
+		JLabel fecha = new JLabel("Fecha:");
+		fecha.setForeground(Color.WHITE);
+		panelCampos.add(fecha);
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		JFormattedTextField fechaTF = new JFormattedTextField(format);
+		fechaTF.setColumns(10);
+		fechaTF.setValue(new java.util.Date());
+		panelCampos.add(fechaTF);
 
-		JLabel nombre = new JLabel("Nombre:");
-		nombre.setForeground(Color.WHITE);
-		panelCampos.add(nombre);
-		JTextField nombreTF = new JTextField(30);
-		panelCampos.add(nombreTF);
+		JLabel idSala = new JLabel("ID Sala:");
+		idSala.setForeground(Color.WHITE);
+		panelCampos.add(idSala);
+		JTextField idSalaTF = new JTextField(30);
+		panelCampos.add(idSalaTF);
 
-		JLabel dir = new JLabel("Dirección:");
-		dir.setForeground(Color.WHITE);
-		panelCampos.add(dir);
-		JTextField dirTF = new JTextField(30);
-		panelCampos.add(dirTF);
+		JLabel idEmp = new JLabel("ID Empleado:");
+		idEmp.setForeground(Color.WHITE);
+		panelCampos.add(idEmp);
+		JTextField idEmpTF = new JTextField(30);
+		panelCampos.add(idEmpTF);
 
-		panelAltaCliente.add(panelCampos);
-		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
+		panelModActividad.add(panelCampos);
+		panelModActividad.add(Box.createRigidArea(new Dimension(0, 50)));
 
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
@@ -103,32 +102,34 @@ public class VistaModificarActividad {
 		botones.add(save);
 		botones.add(botonMainMenu);
 
-		panelAltaCliente.add(botones);
+		panelModActividad.add(botones);
 		menuPrincipal.setVisible(true);
 
-		save.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						int id = Integer.parseInt(idTF.getText());
-						String dni = dniTF.getText();
-						String nombre = nombreTF.getText();
-						String dir = dirTF.getText();
-						if (dni.isEmpty() || nombre.isEmpty() || dir.isEmpty()) {
-							JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-						}
-						tCliente c = new tCliente(id,dni, nombre, dir);
-						Controlador.accion(Evento.MODIFICAR_CLIENTE, c);
-					}
+		save.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				String tipoAct = tipoActTF.getText();
+				java.util.Date Date = (java.util.Date) fechaTF.getValue();
+				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
+				int idSala = Integer.parseInt(idSalaTF.getText());
+				int idEmp = Integer.parseInt(idEmpTF.getText());
+				if (tipoAct == "") {
+					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				);
+				tipoActTF.setText("");
+				idEmpTF.setText("");
+				fechaTF.setValue(new java.util.Date());
+				tActividad a = new tActividad(tipoAct, idEmp, idSala, sqlDate);
+				Controlador.accion(Evento.MODIFICAR_ACTIVIDAD, a);
+			}
+		});
 
-		back.addActionListener( new ActionListener () {
+		back.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 			}
 		});
 
-		botonMainMenu.addActionListener( new ActionListener () {
+		botonMainMenu.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
@@ -138,19 +139,19 @@ public class VistaModificarActividad {
 		menuPrincipal.pack();
 		return menuPrincipal;
 	}
-	
+
 
 	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_MODIFICAR_CLIENTE_OK) {
+		if (evento == Evento.RES_MODIFICAR_ACTIVIDAD_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, "El cliente se ha modificado correctamente");
+			JOptionPane.showMessageDialog(null, "La actividad se ha modificado correctamente");
 			GUI.setVisible(false);
-		} else if (evento == Evento.RES_MODIFICAR_CLIENTE_KO)
-			JOptionPane.showMessageDialog(null, "No se ha podido modificar el cliente");
+		} else if (evento == Evento.RES_MODIFICAR_ACTIVIDAD_KO)
+			JOptionPane.showMessageDialog(null, "No se ha podido modificar la actividad");
 	}
 }

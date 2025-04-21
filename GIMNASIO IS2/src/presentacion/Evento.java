@@ -134,7 +134,7 @@ public class Evento {
 	public static final int RES_MOSTRAR_ACTIVIDADES_OK = 428;
 	public static final int RES_MOSTRAR_ACTIVIDADES_KO = 429;
 
-	public static final int RES_MOSTRAR_ACTIVIDA_OK = 430;
+	public static final int RES_MOSTRAR_ACTIVIDAD_OK = 430;
 	public static final int RES_MOSTRAR_ACTIVIDAD_KO = 431;
 	
 	// Eventos Catálogos

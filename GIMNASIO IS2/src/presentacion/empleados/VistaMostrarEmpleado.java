@@ -41,18 +41,18 @@ public class VistaMostrarEmpleado {
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		JPanel panelBajaCliente = new JPanel();
-		panelBajaCliente.setLayout(new BoxLayout(panelBajaCliente, BoxLayout.Y_AXIS));
-		panelBajaCliente.setBackground(new Color(17, 47, 69));
-		panelBajaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+		JPanel panelMostrarEmpleados = new JPanel();
+		panelMostrarEmpleados.setLayout(new BoxLayout(panelMostrarEmpleados, BoxLayout.Y_AXIS));
+		panelMostrarEmpleados.setBackground(new Color(17, 47, 69));
+		panelMostrarEmpleados.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-		menuPrincipal.add(panelBajaCliente, BorderLayout.CENTER);
+		menuPrincipal.add(panelMostrarEmpleados, BorderLayout.CENTER);
 
 		JLabel titulo = new JLabel("Mostrar Empleado");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelBajaCliente.add(titulo);
-		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
+		panelMostrarEmpleados.add(titulo);
+		panelMostrarEmpleados.add(Box.createRigidArea(new Dimension(0, 30)));
 
 		JPanel panelCampos = new JPanel(new GridLayout(1, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
@@ -64,38 +64,38 @@ public class VistaMostrarEmpleado {
 		JTextField idTF = new JTextField(30);
 		panelCampos.add(idTF);
 
-		panelBajaCliente.add(panelCampos);
-		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
+		panelMostrarEmpleados.add(panelCampos);
+		panelMostrarEmpleados.add(Box.createRigidArea(new Dimension(0, 50)));
 
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
 
 		JButton back = UIElementFactory.crearBotonConIcono("icons/back.png");
-		JButton delete = UIElementFactory.crearBoton("Mostrar",  new Color(67, 75, 172));
+		JButton mostrar = UIElementFactory.crearBoton("Mostrar",  new Color(67, 75, 172));
 		JButton botonMainMenu = UIElementFactory.crearBotonConIcono("icons/main_menu.png");
 
 		botones.add(back);
-		botones.add(delete);
+		botones.add(mostrar);
 		botones.add(botonMainMenu);
 
-		panelBajaCliente.add(botones);
+		panelMostrarEmpleados.add(botones);
 		menuPrincipal.setVisible(true);
 
 
-		delete.addActionListener(new ActionListener () {
+		mostrar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				int id = Integer.parseInt(idTF.getText());
 				Controlador.accion(Evento.MOSTRAR_EMPLEADO, id);
 			}
 		});
 
-		back.addActionListener( new ActionListener () {
+		back.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 			}
 		});
 
-		botonMainMenu.addActionListener( new ActionListener () {
+		botonMainMenu.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);

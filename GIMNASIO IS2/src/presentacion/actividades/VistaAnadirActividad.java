@@ -58,7 +58,7 @@ public class VistaAnadirActividad {
 		panelAnadirActividad.add(titulo);
 		panelAnadirActividad.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(3, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(4, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
@@ -77,11 +77,17 @@ public class VistaAnadirActividad {
 		fechaTF.setValue(new java.util.Date());
 		panelCampos.add(fechaTF);
 		
-		JLabel dni = new JLabel("DNI:");
-		dni.setForeground(Color.WHITE);
-		panelCampos.add(dni);
-		JTextField dniTF = new JTextField(30);
-		panelCampos.add(dniTF);
+		JLabel idSala = new JLabel("ID Sala:");
+		idSala.setForeground(Color.WHITE);
+		panelCampos.add(idSala);
+		JTextField idSalaTF = new JTextField(30);
+		panelCampos.add(idSalaTF);
+		
+		JLabel idEmp = new JLabel("ID Empleado:");
+		idEmp.setForeground(Color.WHITE);
+		panelCampos.add(idEmp);
+		JTextField idEmpTF = new JTextField(30);
+		panelCampos.add(idEmpTF);
 		
 		panelAnadirActividad.add(panelCampos);
 		panelAnadirActividad.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -100,25 +106,27 @@ public class VistaAnadirActividad {
 		panelAnadirActividad.add(botones);
 		menuPrincipal.setVisible(true);
 
-		save.addActionListener( new ActionListener () {
+		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				String tipoAct = tipoActTF.getText();
 				java.util.Date Date = (java.util.Date) fechaTF.getValue();
 				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
-				String dniEmp = dniTF.getText();
+				int idSala = Integer.parseInt(idSalaTF.getText());
+				int idEmp = Integer.parseInt(idEmpTF.getText());
 				
-				if (tipoAct == "" || dniEmp == "") {
+				if (tipoAct == "") {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				tipoActTF.setText("");
-				dniTF.setText("");
+				idEmpTF.setText("");
 				fechaTF.setValue(new java.util.Date());
-				tActividad a = new tActividad(tipoAct, dniEmp, sqlDate);
+				tActividad a = new tActividad(tipoAct, idSala, sqlDate);
+				if(idEmp != 0) a.setIdEmpleado(idEmp);
 				Controlador.accion(Evento.ALTA_ACTIVIDAD, a);
 			}
 		});
 
-		back.addActionListener( new ActionListener () {
+		back.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 			}
@@ -136,13 +144,13 @@ public class VistaAnadirActividad {
 
 	public static void actualizar(int evento, Object datos) {
 		if (evento == Evento.RES_ALTA_ACTIVIDAD_OK) {
-			JTextArea textArea = new JTextArea(datos.toString());
+			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, "La actividad se ha insertado correctamente con ID: " + datos.toString());
+			JOptionPane.showMessageDialog(null, "La actividad se ha insertado correctamente.");
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_ALTA_ACTIVIDAD_KO) {

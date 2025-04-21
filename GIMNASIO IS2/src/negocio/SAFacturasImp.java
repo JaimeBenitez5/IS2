@@ -4,7 +4,7 @@ import java.util.List;
 import integracion.DAOFacturas;
 import integracion.DAOFacturasImp;
 
-public class SAFacturasImp implements SAFactura {
+public class SAFacturasImp implements SAFacturas {
 
 	private static DAOFacturas facturasDAO = null;
 
