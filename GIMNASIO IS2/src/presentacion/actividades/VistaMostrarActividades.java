@@ -93,8 +93,6 @@ public class VistaMostrarActividades {
 			scrollPane.setOpaque(false);
 			scrollPane.getViewport().setOpaque(false);
 			panelMostrarActividades.add(scrollPane, BorderLayout.CENTER);
-
-			// Refrescar la GUI
 			panelMostrarActividades.revalidate();
 			panelMostrarActividades.repaint();
 		}

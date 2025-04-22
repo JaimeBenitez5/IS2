@@ -15,7 +15,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
-import negocio.tCliente;
 import negocio.tFactura;
 import presentacion.Controlador;
 import presentacion.Evento;
@@ -45,7 +44,6 @@ public class VistaMostrarFacturas {
 
 		JPanel botones = new JPanel(new FlowLayout());
 		botones.setBackground(new Color(17, 47, 69));
-
 		JButton back = UIElementFactory.crearBotonConIcono("icons/back.png");
 		JButton botonMainMenu = UIElementFactory.crearBotonConIcono("icons/main_menu.png");
 
@@ -73,15 +71,16 @@ public class VistaMostrarFacturas {
 	public static void actualizar(int evento, List<tFactura> res) {
 		if (evento == Evento.RES_MOSTRAR_FACTURAS_OK) {
 			panelMostrarFacturas.removeAll();
-			String[] columnNames = {"ID", "Nombre", "Direccion", "Activo"};
-			String[][] data = new String[res.size()][4];
+			String[] columnNames = {"ID", "Fecha", "Importe"};
+			String[][] data = new String[res.size()][3];
 
 			for (int i = 0; i < res.size(); i++) {
-				tCliente cliente = res.get(i);
-				data[i][0] = String.valueOf(cliente.getId());
-				data[i][1] = cliente.getNombre();
-				data[i][2] = cliente.getDir();
-				data[i][3] = cliente.getActivo() + "";
+				tFactura f = res.get(i);
+				java.sql.Date sqlDate = f.getFecha();
+				java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
+				data[i][0] = String.valueOf(f.getId());
+				data[i][1] =  String.valueOf(utilDate);
+				data[i][2] = String.valueOf(f.getImporte());
 			}
 
 			JTable tablaClientes = new JTable(data, columnNames);
@@ -94,14 +93,13 @@ public class VistaMostrarFacturas {
 			scrollPane.setOpaque(false);
 			scrollPane.getViewport().setOpaque(false);
 			panelMostrarFacturas.add(scrollPane, BorderLayout.CENTER);
-
 			panelMostrarFacturas.revalidate();
 			panelMostrarFacturas.repaint();
 		}
 		else if (evento == Evento.RES_MOSTRAR_FACTURAS_KO) {
 			panelMostrarFacturas.removeAll();
 			if (res == null || res.isEmpty()) {
-				JLabel mensaje = new JLabel("No hay clientes disponibles.", SwingConstants.CENTER);
+				JLabel mensaje = new JLabel("No hay facturas disponibles.", SwingConstants.CENTER);
 				mensaje.setForeground(Color.WHITE);
 				panelMostrarFacturas.add(mensaje, BorderLayout.CENTER);
 			} 

@@ -61,30 +61,27 @@ public class DAOSalasImp implements DAOSalas {
 	public int borrarSala(final int id) {
 		//HAY QUE BORRAR ANTES LOS PARES DE ACTIVIDAD Y DE CATALOGO
 		//LLAMAR A LAS SA DE CADA SUBSISTEMA Y BORRARLO EN SU DAO
-		tSala s = leerSala(id);
-		if(s != null) {
-			String query1 = "DELETE FROM Actividad_Catalogo WHERE idSala = ?";
-			try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query1, Statement.RETURN_GENERATED_KEYS)) {
-				stmt.setInt(1, id);
-				stmt.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		String query1 = "DELETE FROM Actividad_Catalogo WHERE idSala = ?";
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query1, Statement.RETURN_GENERATED_KEYS)) {
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-			String query2 = "DELETE FROM Actividad WHERE idSala = ?";
-			try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query2, Statement.RETURN_GENERATED_KEYS)) {
-				stmt.setInt(1, id);
-				stmt.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			String query3 = "DELETE FROM Sala WHERE idSala = ?";
-			try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query3, Statement.RETURN_GENERATED_KEYS)) {
-				stmt.setInt(1, id);
-				return stmt.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		String query2 = "DELETE FROM Actividad WHERE idSala = ?";
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query2, Statement.RETURN_GENERATED_KEYS)) {
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		String query3 = "DELETE FROM Sala WHERE idSala = ?";
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query3, Statement.RETURN_GENERATED_KEYS)) {
+			stmt.setInt(1, id);
+			return stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return 0;
 	}

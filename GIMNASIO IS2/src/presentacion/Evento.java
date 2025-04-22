@@ -50,20 +50,16 @@ public class Evento {
 	public static final int MOSTRAR_FACTURA = 212;
 	public static final int MODIFICAR_FACTURA = 213;
 	public static final int MOSTRAR_FACTURAS = 214;
-	public static final int BUSCAR_FACTURA = 215;
 	public static final int MOSTRAR_FACTURAS_CLIENTE = 216;
 	//Eventos de Respuesta
-	public static final int RES_ALTA_FACTURAS_OK = 220;
-	public static final int RES_ALTA_FACTURAS_KO = 221;
+	public static final int RES_ALTA_FACTURA_OK = 220;
+	public static final int RES_ALTA_FACTURA_KO = 221;
 
-	public static final int RES_ELIMINAR_FACTURAS_OK = 222;
-	public static final int RES_ELIMINAR_FACTURAS_KO = 223;
+	public static final int RES_ELIMINAR_FACTURA_OK = 222;
+	public static final int RES_ELIMINAR_FACTURA_KO = 223;
 
-	public static final int RES_BUSCAR_FACTURAS_OK = 224;
-	public static final int RES_BUSCAR_FACTURAS_KO = 225;
-
-	public static final int RES_MODIFICAR_FACTURAS_OK = 226;
-	public static final int RES_MODIFICAR_FACTURAS_KO = 227;
+	public static final int RES_MODIFICAR_FACTURA_OK = 226;
+	public static final int RES_MODIFICAR_FACTURA_KO = 227;
 
 	public static final int RES_MOSTRAR_FACTURA_OK = 228;
 	public static final int RES_MOSTRAR_FACTURA_KO = 229;

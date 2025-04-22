@@ -7,14 +7,13 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import java.sql.Date;
-import java.time.LocalDate;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,13 +22,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tCliente;
 import negocio.tFactura;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
 
-public class VistaAltaFacturas {
+public class VistaAltaFactura {
 	
 	private static JFrame GUI = null;
 
@@ -72,7 +70,10 @@ public class VistaAltaFacturas {
 		JLabel fecha = new JLabel("Fecha:");
 		fecha.setForeground(Color.WHITE);
 		panelCampos.add(fecha);
-		JTextField fechaTF = new JTextField(30);
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		JFormattedTextField fechaTF = new JFormattedTextField(format);
+		fechaTF.setColumns(10);
+		fechaTF.setValue(new java.util.Date());
 		panelCampos.add(fechaTF);
 
 		JLabel numFactura = new JLabel("Número de factura:");
@@ -100,23 +101,18 @@ public class VistaAltaFacturas {
 
 		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String importe = importeTF.getText();
-				String fecha = fechaTF.getText();
-				String num = numFactTF.getText();
-				if (importe.isEmpty() || fecha.isEmpty() || num.isEmpty()) {
+				double importe = Double.parseDouble(importeTF.getText());
+				java.util.Date Date = (java.util.Date) fechaTF.getValue();
+				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
+				int num = Integer.parseInt(numFactTF.getText());
+				if (importe == 0) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
 					importeTF.setText("");
 					fechaTF.setText("");
 					numFactTF.setText("");
-					String[] partes = fecha.split("/");
-					int dia = Integer.parseInt(partes[0]);
-					int mes = Integer.parseInt(partes[1]);
-					int anio = Integer.parseInt(partes[2]);
-					LocalDate localDate = LocalDate.of(anio, mes, dia);
-					Date fechaSQL = Date.valueOf(localDate);
-					tFactura c = new tFactura(Integer.parseInt(num),fechaSQL,Double.parseDouble(importe));
+					tFactura c = new tFactura(num, sqlDate, importe);
 					Controlador.accion(Evento.ALTA_FACTURA, c);
 				}
 			}
@@ -139,18 +135,18 @@ public class VistaAltaFacturas {
 	}
 
 	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_ALTA_CLIENTE_OK) {
+		if (evento == Evento.RES_ALTA_FACTURA_OK) {
 			JTextArea textArea = new JTextArea(datos.toString());
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, "El cliente se ha insertado correctamente con ID: " + datos.toString());
+			JOptionPane.showMessageDialog(null, "La factura se ha insertado correctamente con ID: " + datos.toString());
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_ALTA_CLIENTE_KO) {
-			JOptionPane.showMessageDialog(null, "No se ha podido insertar el cliente");
+		else if (evento == Evento.RES_ALTA_FACTURA_KO) {
+			JOptionPane.showMessageDialog(null, "No se ha podido insertar la factura");
 		}
 	}
 }

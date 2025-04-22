@@ -103,10 +103,10 @@ public class VistaMostrarFactura {
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
 			}
 		});
-		
+
 		return menuPrincipal;
 	}
-	
+
 	public static void actualizar(int evento, tFactura factura) {
 		if (evento == Evento.RES_MOSTRAR_FACTURA_OK) {
 			JTextArea textArea = new JTextArea();
@@ -115,11 +115,14 @@ public class VistaMostrarFactura {
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
+
+			java.sql.Date sqlDate = factura.getFecha();
+			java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
 			String id = String.valueOf(factura.getId());
-			String nombre = factura.getNombre();
-			String dir = factura.getDir();
-			String activo = factura.getActivo() + "";
-			JOptionPane.showMessageDialog(null, "ID: " +id + " Nombre: " + nombre + " Direccion: " + dir + " Activo: " + activo);
+			String fecha =  String.valueOf(utilDate);
+			String importe = String.valueOf(factura.getImporte());
+
+			JOptionPane.showMessageDialog(null, "ID: " + id + " Fecha: " + fecha + " Importe: " + importe);
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_MOSTRAR_FACTURA_KO) {

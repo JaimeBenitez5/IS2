@@ -23,11 +23,17 @@ public class SASalasImp implements SASalas {
 	}
 
 	public int actualizarSala(final tSala sala) {
-		return getDAOSalas().actualizarSala(sala);
+		tSala s = leerSala(sala.getId());
+		int exito = 0;
+		if(s != null) exito = getDAOSalas().actualizarSala(sala);
+		return exito;
 	}
 
 	public int borrarSala(final int id) {
-		return getDAOSalas().borrarSala(id);
+		tSala s = leerSala(id);
+		int exito = 0;
+		if(s != null) exito = getDAOSalas().borrarSala(id);
+		return exito;
 	}
 
 	public List<tSala> leerTodasSalas() {

@@ -6,7 +6,7 @@ import presentacion.actividades.*;
 import presentacion.catalogos.*;
 import presentacion.clientes.*;
 import presentacion.empleados.*;
-import presentacion.facturas.VistaAltaFacturas;
+import presentacion.facturas.VistaAltaFactura;
 import presentacion.facturas.VistaEliminarFactura;
 import presentacion.facturas.VistaFacturas;
 import presentacion.facturas.VistaMostrarFactura;
@@ -23,11 +23,6 @@ public class Controlador{
 	private static SAEmpleados SAEmpleados;
 	private static SAFacturas SAFacturas;
 	
-	private static SAFacturas getSAFacturas(){
-		if(SAFacturas == null) SAFacturas = new SAFacturasImp();
-		return SAFacturas;
-	}
-	
 	private static SAClientes getSAClientes(){
 		if(SAClientes == null) SAClientes = new SAClientesImp();
 		return SAClientes;
@@ -40,6 +35,10 @@ public class Controlador{
 		if (SAActividades == null) SAActividades = new SAActividadesImp();
 		return SAActividades;
 	}
+	private static SAFacturas getSAFacturas(){
+		if(SAFacturas == null) SAFacturas = new SAFacturasImp();
+		return SAFacturas;
+	}
 	private static SACatalogos getSACatalogos() {
 		if (SACatalogos == null) SACatalogos = new SACatalogosImp();
 		return SACatalogos;
@@ -51,34 +50,6 @@ public class Controlador{
 	
 	public static void accion(int evento, Object datos) { 
 		switch(evento) {
-		//FACTURAS
-		case Evento.ALTA_FACTURA:{
-			int id = getSAFacturas().altaFactura((tFactura) datos);
-			((tFactura) datos).setId(id);
-			if(id != 0) VistaAltaFacturas.actualizar(Evento.RES_ALTA_FACTURAS_OK, id);
-			else VistaAltaFacturas.actualizar(Evento.RES_ALTA_FACTURAS_KO, id);
-			break;
-		}
-		case Evento.MOSTRAR_FACTURAS:{
-			List<tFactura> res = getSAFacturas().leerTodasFacturas();
-			if (!res.isEmpty()) VistaMostrarFacturas.actualizar(Evento.RES_MOSTRAR_FACTURA_OK, res);
-			else VistaMostrarFacturas.actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, null);
-			break;
-		}
-		case Evento.ELIMINAR_FACTURA:{
-			int id = getSAFacturas().altaFactura((tFactura) datos);
-			((tFactura) datos).setId(id);
-			if(id != 0) VistaAltaFacturas.actualizar(Evento.RES_ELIMINAR_FACTURAS_OK, id);
-			else VistaAltaFacturas.actualizar(Evento.RES_ELIMINAR_FACTURAS_KO, id);
-			break;
-		}
-		
-		case Evento.MOSTRAR_FACTURA:{
-			tFactura factura = getSAFacturas().leerFactura((int)datos);
-			if (factura != null) VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_OK, factura);
-			else VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_KO, null);
-			break;
-		}
 		//CLIENTES
 		case Evento.ALTA_CLIENTE:{
 			int id = getSAClientes().altaCliente((tCliente) datos);
@@ -173,6 +144,33 @@ public class Controlador{
 			else VistaModificarActividad.actualizar(Evento.RES_MODIFICAR_ACTIVIDAD_KO, null);
 			break;
 		}
+		//FACTURAS
+		case Evento.ALTA_FACTURA:{
+			int id = getSAFacturas().altaFactura((tFactura) datos);
+			((tFactura) datos).setId(id);
+			if(id != 0) VistaAltaFactura.actualizar(Evento.RES_ALTA_FACTURA_OK, id);
+			else VistaAltaFactura.actualizar(Evento.RES_ALTA_FACTURA_KO, id);
+			break;
+		}
+		case Evento.MOSTRAR_FACTURAS:{
+			List<tFactura> res = getSAFacturas().leerTodasFacturas();
+			if (!res.isEmpty()) VistaMostrarFacturas.actualizar(Evento.RES_MOSTRAR_FACTURAS_OK, res);
+			else VistaMostrarFacturas.actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, null);
+			break;
+		}
+		case Evento.ELIMINAR_FACTURA:{
+			int exito = getSAFacturas().borrarFactura((int) datos);
+			if(exito == 1) VistaEliminarFactura.actualizar(Evento.RES_ELIMINAR_FACTURA_OK, datos);
+			else VistaEliminarFactura.actualizar(Evento.RES_ELIMINAR_FACTURA_KO, null);
+			break;
+		}
+		
+		case Evento.MOSTRAR_FACTURA:{
+			tFactura factura = getSAFacturas().leerFactura((int)datos);
+			if (factura != null) VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_OK, factura);
+			else VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_KO, null);
+			break;
+		}
 //		//CATALOGOS
 //		case Evento.ALTA_CATALOGO: {
 //			int id = getSACatalogos().altaCatalogo((tCatalogo) datos);
@@ -231,7 +229,7 @@ public class Controlador{
 			break;
 		}
 		case Evento.VISTA_ALTA_FACTURA:{ 
-			VistaAltaFacturas.open();
+			VistaAltaFactura.open();
 			break;
 		}
 		case Evento.VISTA_MOSTRAR_FACTURAS:{ 

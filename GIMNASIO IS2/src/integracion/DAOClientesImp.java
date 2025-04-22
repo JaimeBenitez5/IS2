@@ -10,25 +10,21 @@ import negocio.tCliente;
 public class DAOClientesImp implements DAOClientes {
 
 	public int altaCliente(tCliente cliente) {
-		tCliente c = leerCliente(cliente.getId());
-		if(c == null){
-			String query = "INSERT INTO Cliente (nombre, dni, direccion) VALUES (?, ?, ?)";
-			try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-				stmt.setString(1, cliente.getNombre());
-				stmt.setString(2, cliente.getDni());
-				stmt.setString(3, cliente.getDir());
-				stmt.executeUpdate();
-				try (ResultSet rs = stmt.getGeneratedKeys()) {
-					if (rs.next()) {
-						int idCliente = rs.getInt(1);
-						return idCliente;
-					}
+		String query = "INSERT INTO Cliente (nombre, dni, direccion) VALUES (?, ?, ?)";
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+			stmt.setString(1, cliente.getNombre());
+			stmt.setString(2, cliente.getDni());
+			stmt.setString(3, cliente.getDir());
+			stmt.executeUpdate();
+			try (ResultSet rs = stmt.getGeneratedKeys()) {
+				if (rs.next()) {
+					int idCliente = rs.getInt(1);
+					return idCliente;
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		else if (!c.getActivo()) c.setActivo(true);
 		return 0;
 	}
 
@@ -54,12 +50,14 @@ public class DAOClientesImp implements DAOClientes {
 	}
 
 	public int actualizarCliente(final tCliente cliente) {
-		String query = "UPDATE CLIENTE SET nombre = ?, dni = ?, direccion = ? WHERE idCliente=? ";
+		String query = "UPDATE CLIENTE SET nombre = ?, dni = ?, direccion = ?, activo = ? WHERE idCliente=? ";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setString(1, cliente.getNombre());
 			stmt.setString(2, cliente.getDni());
 			stmt.setString(3, cliente.getDir());
 			stmt.setInt(4, cliente.getId());
+			int activo = cliente.getActivo() == true ? 1 : 0;
+			stmt.setInt(5, activo);
 			return stmt.executeUpdate(); 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -68,15 +66,12 @@ public class DAOClientesImp implements DAOClientes {
 	}
 
 	public int borrarCliente(final int id) {
-		tCliente c = leerCliente(id);
-		if(c != null && c.getActivo()) {
-			String query = "UPDATE Cliente SET activo = 0 WHERE idCliente = ?";
-			try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-				stmt.setInt(1, id);
-				return stmt.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		String query = "UPDATE Cliente SET activo = 0 WHERE idCliente = ?";
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+			stmt.setInt(1, id);
+			return stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -103,5 +98,4 @@ public class DAOClientesImp implements DAOClientes {
 		}
 		return clientes;
 	}
-
 }

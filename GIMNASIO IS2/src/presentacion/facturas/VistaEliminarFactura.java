@@ -107,18 +107,18 @@ public class VistaEliminarFactura {
 	}
 
 	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_ELIMINAR_FACTURAS_OK) {
+		if (evento == Evento.RES_ELIMINAR_FACTURA_OK) {
 			JTextArea textArea = new JTextArea(datos.toString());
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, "El cliente se ha eliminado correctamente");
+			JOptionPane.showMessageDialog(null, "La factura se ha eliminado correctamente");
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_ELIMINAR_FACTURAS_KO) {
-			JOptionPane.showMessageDialog(null, "No se ha podido eliminar el cliente");
+		else if (evento == Evento.RES_ELIMINAR_FACTURA_KO) {
+			JOptionPane.showMessageDialog(null, "No se ha podido eliminar la factura");
 		}
 	}
 }
