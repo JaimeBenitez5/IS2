@@ -48,7 +48,7 @@ public class VistaFacturasDeCliente {
 
 		menuPrincipal.add(panelBajaCliente, BorderLayout.CENTER);
 
-		JLabel titulo = new JLabel("Mostrar Cliente");
+		JLabel titulo = new JLabel("Mostrar Facturas de Cliente");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelBajaCliente.add(titulo);
@@ -86,7 +86,7 @@ public class VistaFacturasDeCliente {
 			public void actionPerformed (ActionEvent e) {
 				int id = Integer.parseInt(idTF.getText());
 				idTF.setText("");
-				Controlador.accion(Evento.MOSTRAR_CLIENTE, id);
+				Controlador.accion(Evento.MOSTRAR_FACTURAS_CLIENTE, id);
 			}
 		});
 
@@ -107,7 +107,7 @@ public class VistaFacturasDeCliente {
 	}
 	
 	public static void actualizar(int evento, tCliente cliente) {
-		if (evento == Evento.RES_MOSTRAR_CLIENTE_OK) {
+		if (evento == Evento.RES_MOSTRAR_FACTURAS_CLIENTE_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
@@ -121,7 +121,7 @@ public class VistaFacturasDeCliente {
 			JOptionPane.showMessageDialog(null, "ID: " +id + " Nombre: " + nombre + " Direccion: " + dir + " Activo: " + activo);
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_MOSTRAR_CLIENTE_KO) {
+		else if (evento == Evento.RES_MOSTRAR_FACTURAS_CLIENTE_KO) {
 			JOptionPane.showMessageDialog(null, "No se ha podido encontrar el cliente");
 		}
 	}
