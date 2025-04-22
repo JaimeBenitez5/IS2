@@ -1,15 +1,15 @@
 package negocio;
 
-public class tCatalogo {
+public class DTOtCatalogo {
 	private int _id;
 	private int _numActividades;
     
-    public tCatalogo(final int id, final int numActividades) {
+    public DTOtCatalogo(final int id, final int numActividades) {
     	_id = id;
     	_numActividades = numActividades;
     }
     
-    public tCatalogo(final int numActividades) {
+    public DTOtCatalogo(final int numActividades) {
     	_id = 0;
     	_numActividades = numActividades;
     }

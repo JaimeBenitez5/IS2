@@ -57,11 +57,11 @@ public class VistaBajaCliente {
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
-		JLabel id = new JLabel("ID:");
-		id.setForeground(Color.WHITE);
-		panelCampos.add(id);
-		JTextField idTF = new JTextField(30);
-		panelCampos.add(idTF);
+		JLabel dni = new JLabel("DNI:");
+		dni.setForeground(Color.WHITE);
+		panelCampos.add(dni);
+		JTextField dniTF = new JTextField(30);
+		panelCampos.add(dniTF);
 
 		panelBajaCliente.add(panelCampos);
 		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -83,9 +83,9 @@ public class VistaBajaCliente {
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int id = Integer.parseInt(idTF.getText());
-				idTF.setText("");
-				Controlador.accion(Evento.ELIMINAR_CLIENTE, id);
+				String dni = dniTF.getText();
+				dniTF.setText("");
+				Controlador.accion(Evento.ELIMINAR_CLIENTE, dni);
 			}
 		});
 
@@ -107,7 +107,7 @@ public class VistaBajaCliente {
 
 	public static void actualizar(int evento, Object datos) {
 		if (evento == Evento.RES_ELIMINAR_CLIENTE_OK) {
-			JTextArea textArea = new JTextArea(datos.toString());
+			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);

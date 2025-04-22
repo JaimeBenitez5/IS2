@@ -22,7 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tEmpleado;
+import negocio.DTOtEmpleado;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -111,7 +111,7 @@ public class VistaAnadirEmpleado {
 					dniTF.setText("");
 					nombreTF.setText("");
 					sueldoTF.setText("");
-					tEmpleado emp = new tEmpleado(dni, nombre, sueldo, rol);
+					DTOtEmpleado emp = new DTOtEmpleado(dni, nombre, sueldo, rol);
 					Controlador.accion(Evento.ALTA_EMPLEADO, emp);
 				}
 			}
@@ -133,7 +133,7 @@ public class VistaAnadirEmpleado {
 		return menuPrincipal;
 	}
 
-	public static void actualizar(int evento, tEmpleado empleado) {
+	public static void actualizar(int evento, DTOtEmpleado empleado) {
 		if (evento == Evento.RES_ALTA_EMPLEADO_OK) {
 			JTextArea textArea = new JTextArea(empleado.toString());
 			textArea.setLineWrap(true);

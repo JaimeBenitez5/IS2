@@ -1,15 +1,15 @@
 package negocio;
 
-public class tSala {
+public class DTOtSala {
     private int _id;
     private int _aforo;
     
-    public tSala(final int id, final int aforo) {
+    public DTOtSala(final int id, final int aforo) {
     	_id = id;
     	_aforo = aforo;
     }
     
-    public tSala( final int aforo) {
+    public DTOtSala( final int aforo) {
     	_id = 0;
     	_aforo = aforo;
     }

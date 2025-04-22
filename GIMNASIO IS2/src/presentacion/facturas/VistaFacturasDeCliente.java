@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tCliente;
+import negocio.DTOtCliente;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -58,11 +58,11 @@ public class VistaFacturasDeCliente {
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
-		JLabel id = new JLabel("ID:");
-		id.setForeground(Color.WHITE);
-		panelCampos.add(id);
-		JTextField idTF = new JTextField(30);
-		panelCampos.add(idTF);
+		JLabel dni = new JLabel("DNI:");
+		dni.setForeground(Color.WHITE);
+		panelCampos.add(dni);
+		JTextField dniTF = new JTextField(30);
+		panelCampos.add(dniTF);
 
 		panelBajaCliente.add(panelCampos);
 		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -84,19 +84,19 @@ public class VistaFacturasDeCliente {
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int id = Integer.parseInt(idTF.getText());
-				idTF.setText("");
+				int id = Integer.parseInt(dniTF.getText());
+				dniTF.setText("");
 				Controlador.accion(Evento.MOSTRAR_FACTURAS_CLIENTE, id);
 			}
 		});
 
-		back.addActionListener( new ActionListener () {
+		back.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 			}
 		});
 
-		botonMainMenu.addActionListener( new ActionListener () {
+		botonMainMenu.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
@@ -106,7 +106,7 @@ public class VistaFacturasDeCliente {
 		return menuPrincipal;
 	}
 	
-	public static void actualizar(int evento, tCliente cliente) {
+	public static void actualizar(int evento, DTOtCliente cliente) {
 		if (evento == Evento.RES_MOSTRAR_FACTURAS_CLIENTE_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
@@ -114,11 +114,11 @@ public class VistaFacturasDeCliente {
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			String id = String.valueOf(cliente.getId());
+			String dni = cliente.getDni();
 			String nombre = cliente.getNombre();
 			String dir = cliente.getDir();
 			String activo = cliente.getActivo() + "";
-			JOptionPane.showMessageDialog(null, "ID: " +id + " Nombre: " + nombre + " Direccion: " + dir + " Activo: " + activo);
+			JOptionPane.showMessageDialog(null, "DNI: " + dni + " Nombre: " + nombre + " Direccion: " + dir + " Activo: " + activo);
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_MOSTRAR_FACTURAS_CLIENTE_KO) {

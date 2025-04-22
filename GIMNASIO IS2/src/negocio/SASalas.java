@@ -4,14 +4,14 @@ import java.util.List;
 
 public interface SASalas {
 	
-    int altaSala(final tSala sala);
+    int altaSala(final DTOtSala sala);
 
-    public tSala leerSala(final int id);
+    public DTOtSala leerSala(final int id);
 
-    int actualizarSala(final tSala sala);
+    int actualizarSala(final DTOtSala sala);
 
     int borrarSala(final int id);
 
-    List<tSala> leerTodasSalas();
+    List<DTOtSala> leerTodasSalas();
 
 }

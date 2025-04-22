@@ -1,18 +1,17 @@
 package integracion;
 
 import java.util.List;
-import negocio.tSala;
+import negocio.DTOtSala;
 
 public interface DAOSalas {
 	
-    int altaSala(tSala Sala);
+    int altaSala(DTOtSala Sala);
 
-    tSala leerSala(final int id);
+    DTOtSala leerSala(final int id);
 
-    int actualizarSala(final tSala sala);
+    int actualizarSala(final DTOtSala sala);
 
     int borrarSala(final int id);
 
-    List<tSala> leerTodasSalas();
-
+    List<DTOtSala> leerTodasSalas();
 }

@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tCliente;
+import negocio.DTOtCliente;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -105,7 +105,7 @@ public class VistaAltaCliente {
 					dniTF.setText("");
 					nombreTF.setText("");
 					dirTF.setText("");
-					tCliente c = new tCliente(dni, nombre, dir);
+					DTOtCliente c = new DTOtCliente(dni, nombre, dir, true);
 					Controlador.accion(Evento.ALTA_CLIENTE, c);
 				}
 			}
@@ -135,11 +135,11 @@ public class VistaAltaCliente {
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, "El cliente se ha insertado correctamente con ID: " + datos.toString());
+			JOptionPane.showMessageDialog(null, "El cliente se ha insertado correctamente con DNI: " + datos.toString());
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_ALTA_CLIENTE_KO) {
-			JOptionPane.showMessageDialog(null, "No se ha podido insertar el cliente");
+			JOptionPane.showMessageDialog(null, "No se ha podido insertar el cliente con DNI: " + datos.toString());
 		}
 	}
 }

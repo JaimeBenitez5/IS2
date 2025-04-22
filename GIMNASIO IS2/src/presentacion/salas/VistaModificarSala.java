@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tSala;
+import negocio.DTOtSala;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -91,7 +91,7 @@ public class VistaModificarSala {
 			public void actionPerformed (ActionEvent e) {
 				int id = Integer.parseInt(idTF.getText());
 				int aforo = Integer.parseInt(aforoTF.getText());
-				tSala s = new tSala(id, aforo);
+				DTOtSala s = new DTOtSala(id, aforo);
 				Controlador.accion(Evento.MODIFICAR_SALA, s);
 			}
 		});

@@ -23,7 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tActividad;
+import negocio.DTOtActividad;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -106,7 +106,7 @@ public class VistaEliminarActividad {
 				java.util.Date Date = (java.util.Date) fechaTF.getValue();
 				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
 				int idSala = Integer.parseInt(idSalaTF.getText());
-				tActividad a = new tActividad(tipoAct, idSala, sqlDate);
+				DTOtActividad a = new DTOtActividad(tipoAct, idSala, sqlDate);
 				Controlador.accion(Evento.ELIMINAR_ACTIVIDAD, a);
 			}
 		});

@@ -2,17 +2,17 @@ package integracion;
 
 import java.util.List;
 
-import negocio.tFactura;
+import negocio.DTOtFactura;
 
 public interface DAOFacturas {
     
-    int altaFactura(tFactura Factura);
+    int altaFactura(DTOtFactura Factura);
 
-    tFactura leerFactura(int id);
+    DTOtFactura leerFactura(int id);
 
-    int actualizarFactura(final tFactura factura);
+    int actualizarFactura(final DTOtFactura factura);
 
     int borrarFactura(final int id);
 
-    List<tFactura> leerTodasFacturas();
+    List<DTOtFactura> leerTodasFacturas();
 }

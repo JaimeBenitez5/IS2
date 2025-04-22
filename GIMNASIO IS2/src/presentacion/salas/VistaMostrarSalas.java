@@ -15,7 +15,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.JFrame;
 
-import negocio.tSala;
+import negocio.DTOtSala;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -69,14 +69,14 @@ public class VistaMostrarSalas {
 		GUI.setVisible(true);
 	}
 
-	public static void actualizar(int evento, List<tSala> datos) {
+	public static void actualizar(int evento, List<DTOtSala> datos) {
 		if (evento == Evento.RES_MOSTRAR_SALAS_OK) {
 			panelMostrarSalas.removeAll();
 			String[] columnNames = {"ID", "Aforo"};
 			String[][] data = new String[datos.size()][2];
 
 			for (int i = 0; i < datos.size(); i++) {
-				tSala sala = datos.get(i);
+				DTOtSala sala = datos.get(i);
 				data[i][0] = String.valueOf(sala.getId());
 				data[i][1] = String.valueOf(sala.getAforo());
 			}

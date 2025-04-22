@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tCliente;
+import negocio.DTOtCliente;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -106,7 +106,7 @@ public class VistaMostrarCliente {
 		return menuPrincipal;
 	}
 	
-	public static void actualizar(int evento, tCliente cliente) {
+	public static void actualizar(int evento, DTOtCliente cliente) {
 		if (evento == Evento.RES_MOSTRAR_CLIENTE_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
@@ -114,11 +114,11 @@ public class VistaMostrarCliente {
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			String id = String.valueOf(cliente.getId());
+			String dni = cliente.getDni();
 			String nombre = cliente.getNombre();
 			String dir = cliente.getDir();
 			String activo = cliente.getActivo() + "";
-			JOptionPane.showMessageDialog(null, "ID: " +id + " Nombre: " + nombre + " Direccion: " + dir + " Activo: " + activo);
+			JOptionPane.showMessageDialog(null, "DNI: " + dni + " Nombre: " + nombre + " Direccion: " + dir + " Activo: " + activo);
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_MOSTRAR_CLIENTE_KO) {

@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tSala;
+import negocio.DTOtSala;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -88,7 +88,7 @@ public class VistaAnadirSala {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				aforoTF.setText("");
-				tSala s = new tSala(aforo);
+				DTOtSala s = new DTOtSala(aforo);
 				Controlador.accion(Evento.ALTA_SALA, s);
 			}
 		});

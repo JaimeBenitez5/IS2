@@ -20,8 +20,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tCliente;
-import negocio.tFactura;
+import negocio.DTOtCliente;
+import negocio.DTOtFactura;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -107,7 +107,7 @@ public class VistaMostrarFactura {
 		return menuPrincipal;
 	}
 
-	public static void actualizar(int evento, tFactura factura) {
+	public static void actualizar(int evento, DTOtFactura factura) {
 		if (evento == Evento.RES_MOSTRAR_FACTURA_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);

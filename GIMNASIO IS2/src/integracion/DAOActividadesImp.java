@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import configFiles.BDConexion;
-import negocio.tActividad;
+import negocio.DTOtActividad;
 
 public class DAOActividadesImp implements DAOActividades{
 
-	public int altaActividad(tActividad actividad) {
+	public int altaActividad(DTOtActividad actividad) {
 		String query = "INSERT INTO Actividad (tipoActividad, fecha, idSala, idEmpleado) VALUES (?, ?, ?, ?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setString(1, actividad.getTipoActividad());
@@ -27,7 +27,7 @@ public class DAOActividadesImp implements DAOActividades{
 		return 0;
 	}
 
-	public tActividad leerActividad(final String tipoActividad, final Date fecha, final int idSala) {
+	public DTOtActividad leerActividad(final String tipoActividad, final Date fecha, final int idSala) {
 		String query = "SELECT * FROM Actividad WHERE tipoActividad  = ? AND fecha = ? AND idSala = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setString(1, tipoActividad);
@@ -36,7 +36,7 @@ public class DAOActividadesImp implements DAOActividades{
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
 				int idEmpleado = rs.getInt("idEmpleado");
-				tActividad a = new tActividad(tipoActividad, idEmpleado, idSala, fecha);
+				DTOtActividad a = new DTOtActividad(tipoActividad, idEmpleado, idSala, fecha);
 				return a;
 			}
 		} catch (SQLException e) {
@@ -45,7 +45,7 @@ public class DAOActividadesImp implements DAOActividades{
 		return null;
 	}
 
-	public int actualizarActividad(tActividad actividad) {
+	public int actualizarActividad(DTOtActividad actividad) {
 		String query = "UPDATE Actividad SET idEmpleado = ? WHERE tipoActividad  = ? AND fecha = ? AND idSala = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1, actividad.getIdEmpleado());
@@ -59,9 +59,20 @@ public class DAOActividadesImp implements DAOActividades{
 		return 0;
 	}
 
+	public int borrarActividadesSala(int idSala) {
+		String query = "DELETE FROM Actividad WHERE idSala = ?";
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+			stmt.setInt(1, idSala);
+			return stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
 	public int borrarActividad(final String tipoActividad, final Date fecha, final int idSala) {
-		String query1 = "DELETE FROM Actividad WHERE tipoActividad = ? AND fecha = ? AND idSala = ?";
-		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query1, Statement.RETURN_GENERATED_KEYS)) {
+		String query = "DELETE FROM Actividad WHERE tipoActividad = ? AND fecha = ? AND idSala = ?";
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setString(1, tipoActividad);
 			stmt.setDate(2, fecha);
 			stmt.setInt(3, idSala);
@@ -72,8 +83,8 @@ public class DAOActividadesImp implements DAOActividades{
 		return 0;
 	}
 
-	public List<tActividad> leerTodasActividades() {
-		ArrayList<tActividad> actividades = new ArrayList<tActividad>();
+	public List<DTOtActividad> leerTodasActividades() {
+		ArrayList<DTOtActividad> actividades = new ArrayList<DTOtActividad>();
 		String query = "SELECT * FROM Actividad";
 		try ( Statement stmt = BDConexion.getConnection().createStatement ()) {
 			ResultSet rs = stmt.executeQuery(query);
@@ -82,7 +93,7 @@ public class DAOActividadesImp implements DAOActividades{
 				int idEmpleado = rs.getInt("idEmpleado");
 				int idSala = rs.getInt("idSala");
 				Date fecha = rs.getDate("fecha");
-				tActividad a = new tActividad(tipoActividad, idEmpleado, idSala, fecha);
+				DTOtActividad a = new DTOtActividad(tipoActividad, idEmpleado, idSala, fecha);
 				actividades.add(a);
 			}
 		} catch (SQLException e) {

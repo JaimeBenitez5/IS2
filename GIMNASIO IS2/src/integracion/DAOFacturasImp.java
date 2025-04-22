@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import configFiles.BDConexion;
-import negocio.tFactura;
+import negocio.DTOtFactura;
 
 public class DAOFacturasImp implements DAOFacturas {
 
-	public int altaFactura(tFactura Factura) {
+	public int altaFactura(DTOtFactura Factura) {
 		String query = "INSERT INTO Factura (fecha, importetotal) VALUES (?, ?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setDate(1, Factura.getFecha());
@@ -31,7 +31,7 @@ public class DAOFacturasImp implements DAOFacturas {
 		return 0;
 	}
 
-	public tFactura leerFactura(int id) {
+	public DTOtFactura leerFactura(int id) {
 		String query = "SELECT * FROM Factura WHERE numFactura = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1,id);
@@ -41,7 +41,7 @@ public class DAOFacturasImp implements DAOFacturas {
 				Date fecha = rs.getDate("fecha");
 				Double importe = rs.getDouble("importeTotal");
 
-				tFactura c = new tFactura(numFactura, fecha , importe);
+				DTOtFactura c = new DTOtFactura(numFactura, fecha , importe);
 				return c;
 			}
 		} catch (SQLException e) {
@@ -50,7 +50,7 @@ public class DAOFacturasImp implements DAOFacturas {
 		return null;
 	}
 
-	public int actualizarFactura(tFactura factura) {
+	public int actualizarFactura(DTOtFactura factura) {
 		String query = "UPDATE Factura SET fecha = ?, importeTotal = ? WHERE numFactura = ? ";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setDate(1, factura.getFecha());
@@ -74,8 +74,8 @@ public class DAOFacturasImp implements DAOFacturas {
 		return 0;
 	}
 
-	public List<tFactura> leerTodasFacturas() {
-		ArrayList<tFactura> facturas = new ArrayList<tFactura>();
+	public List<DTOtFactura> leerTodasFacturas() {
+		ArrayList<DTOtFactura> facturas = new ArrayList<DTOtFactura>();
 		String query = "SELECT * FROM Factura";
 		try ( Statement stmt = BDConexion.getConnection().createStatement ()) {
 			ResultSet rs = stmt.executeQuery(query);
@@ -83,7 +83,7 @@ public class DAOFacturasImp implements DAOFacturas {
 				int numFactura = rs.getInt("numFactura");
 				Date fecha = rs.getDate("fecha");
 				Double imp = rs.getDouble("importeTotal");
-				tFactura f = new tFactura(numFactura, fecha, imp);
+				DTOtFactura f = new DTOtFactura(numFactura, fecha, imp);
 				facturas.add(f);
 			}
 		} catch (SQLException e) {
@@ -92,8 +92,8 @@ public class DAOFacturasImp implements DAOFacturas {
 		return facturas;
 	}
 	
-	public List<tFactura> leerFacturasCliente(int idCliente){
-		ArrayList<tFactura> facturas = new ArrayList<tFactura>();
+	public List<DTOtFactura> leerFacturasCliente(int idCliente){
+		ArrayList<DTOtFactura> facturas = new ArrayList<DTOtFactura>();
 		String query = "SELECT * FROM Factura WHERE numFactura = (SELECT numFactura FROM Compra WHERE idCliente = ?)";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1, idCliente);
@@ -102,7 +102,7 @@ public class DAOFacturasImp implements DAOFacturas {
 				int numFactura = rs.getInt("numFactura");
 				Date fecha = rs.getDate("fecha");
 				Double imp = rs.getDouble("importeTotal");
-				tFactura f = new tFactura(numFactura, fecha, imp);
+				DTOtFactura f = new DTOtFactura(numFactura, fecha, imp);
 				facturas.add(f);
 			}
 		} catch (SQLException e) {
@@ -111,5 +111,4 @@ public class DAOFacturasImp implements DAOFacturas {
 		
 		return facturas;
 	}
-	
 }

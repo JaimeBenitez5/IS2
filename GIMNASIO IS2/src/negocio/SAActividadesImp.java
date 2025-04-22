@@ -10,28 +10,31 @@ public class SAActividadesImp implements SAActividades {
 	private static DAOActividades actividadesDao = null;
 	
 	//USADO PATRON SINGLETON
-	private static DAOActividades getDAOActividad(){
+	public static DAOActividades getDAOActividad(){
 		if(actividadesDao == null) actividadesDao = new DAOActividadesImp();
 		return actividadesDao;
 	}
 	
-	public int altaActividad(final tActividad actividad) {
+	public int altaActividad(final DTOtActividad actividad) {
 		return getDAOActividad().altaActividad(actividad);
 	}
 
-	public tActividad leerActividad(final String tipoActividad, final Date fecha, final int idSala) {
+	public DTOtActividad leerActividad(final String tipoActividad, final Date fecha, final int idSala) {
 		return getDAOActividad().leerActividad(tipoActividad, fecha, idSala);
 	}
 
-	public int actualizarActividad(tActividad actividad) {
+	public int actualizarActividad(DTOtActividad actividad) {
 		return getDAOActividad().actualizarActividad(actividad);
 	}
-
+	
+	public int borrarActividadesSala(int idSala) {
+		return getDAOActividad().borrarActividadesSala(idSala);
+	}
 	public int borrarActividad(final String tipoActividad, final Date fecha, final int idSala) {
 		return getDAOActividad().borrarActividad(tipoActividad, fecha, idSala);
 	}
 
-	public List<tActividad> leerTodasActividades() {
+	public List<DTOtActividad> leerTodasActividades() {
 		return getDAOActividad().leerTodasActividades();
 	}
 

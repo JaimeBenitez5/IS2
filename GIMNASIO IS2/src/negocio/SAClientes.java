@@ -4,14 +4,14 @@ import java.util.List;
 
 public interface SAClientes {
 	
-    int altaCliente(final tCliente cliente);
+    int altaCliente(final DTOtCliente cliente);
 
-    tCliente leerCliente(final int id);
+    DTOtCliente leerCliente(final String dni);
 
-    int actualizarCliente(final tCliente cliente);
+    int actualizarCliente(final DTOtCliente cliente);
 
-    int borrarCliente(final int id);
+    int borrarCliente(final String dni);
 
-    List<tCliente> leerTodosClientes();
+    List<DTOtCliente> leerTodosClientes();
 
 }

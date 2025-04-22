@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface SAEmpleados {
 	
-	public int altaEmpleado(final tEmpleado empleado);
+	public int altaEmpleado(final DTOtEmpleado empleado);
 
-	public tEmpleado leerEmpleado(final int id);
+	public DTOtEmpleado leerEmpleado(final int id);
 
-	public int actualizarEmpleado(final tEmpleado tEmpleado);
+	public int actualizarEmpleado(final DTOtEmpleado tEmpleado);
 	
 	public int borrarEmpleado(final int id);
 	
-	public List<tEmpleado> leerTodosEmpleados();
+	public List<DTOtEmpleado> leerTodosEmpleados();
 }

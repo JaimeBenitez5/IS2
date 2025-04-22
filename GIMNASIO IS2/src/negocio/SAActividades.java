@@ -5,13 +5,15 @@ import java.util.List;
 
 public interface SAActividades {
 	
-	int altaActividad(final tActividad actividad);
+	int altaActividad(final DTOtActividad actividad);
 
-	tActividad leerActividad(final String tipoActividad, final Date fecha, final int idSala);
+	DTOtActividad leerActividad(final String tipoActividad, final Date fecha, final int idSala);
 
-    int actualizarActividad(final tActividad actividad);
-
+    int actualizarActividad(final DTOtActividad actividad);
+    
+    int borrarActividadesSala(int idSala);
+    
     int borrarActividad(final String tipoActividad, final Date fecha, final int idSala);
 
-    List<tActividad> leerTodasActividades();
+    List<DTOtActividad> leerTodasActividades();
 }

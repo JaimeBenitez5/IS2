@@ -4,14 +4,14 @@ import java.util.List;
 
 public interface SAFacturas {
 	
-    int altaFactura(final tFactura factura);
+    int altaFactura(final DTOtFactura factura);
 
-    tFactura leerFactura(final int id);
+    DTOtFactura leerFactura(final int id);
 
-    int actualizarFactura(final tFactura factura);
+    int actualizarFactura(final DTOtFactura factura);
 
     int borrarFactura(final int id);
 
-    List<tFactura> leerTodasFacturas();
+    List<DTOtFactura> leerTodasFacturas();
 
 }

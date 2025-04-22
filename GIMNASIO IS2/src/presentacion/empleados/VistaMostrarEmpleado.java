@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tEmpleado;
+import negocio.DTOtEmpleado;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -105,7 +105,7 @@ public class VistaMostrarEmpleado {
 		return menuPrincipal;
 	}
 	
-	public static void actualizar(int evento, tEmpleado empleado) {
+	public static void actualizar(int evento, DTOtEmpleado empleado) {
 		if (evento == Evento.RES_MOSTRAR_EMPLEADO_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);

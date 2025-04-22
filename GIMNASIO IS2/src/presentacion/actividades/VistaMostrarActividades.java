@@ -15,7 +15,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.JFrame;
 
-import negocio.tActividad;
+import negocio.DTOtActividad;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -66,14 +66,14 @@ public class VistaMostrarActividades {
 		GUI.setVisible(true);
 	}
 
-	public static void actualizar(int evento, List<tActividad> res) {
+	public static void actualizar(int evento, List<DTOtActividad> res) {
 		if (evento == Evento.RES_MOSTRAR_ACTIVIDADES_OK) {
 			panelMostrarActividades.removeAll();
 			String[] columnNames = {"Tipo de actividad", "ID de Sala" , "Fecha", "ID de Empleado"};
 			String[][] data = new String[res.size()][4];
 
 			for (int i = 0; i < res.size(); i++) {
-				tActividad a = res.get(i);
+				DTOtActividad a = res.get(i);
 				java.sql.Date sqlDate = a.getFecha();
 				java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
 				

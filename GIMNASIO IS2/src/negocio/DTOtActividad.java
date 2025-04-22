@@ -2,20 +2,20 @@ package negocio;
 
 import java.sql.Date;
 
-public class tActividad {
+public class DTOtActividad {
 	String _tipoActividad;
 	Date _fecha;
 	int _idSala;
 	int _idEmpleado;
 
-	public tActividad(final String tipoActividad, final int idEmpleado,  final int idSala ,final Date fecha) {
+	public DTOtActividad(final String tipoActividad, final int idEmpleado,  final int idSala ,final Date fecha) {
 		_tipoActividad = tipoActividad;
 		_idEmpleado = idEmpleado;
 		_idSala = idSala;
 		_fecha = fecha;
 	}
 	
-	public tActividad(final String tipoActividad , final int idSala ,final Date fecha) {
+	public DTOtActividad(final String tipoActividad , final int idSala ,final Date fecha) {
 		_tipoActividad = tipoActividad;
 		_idSala = idSala;
 		_fecha = fecha;

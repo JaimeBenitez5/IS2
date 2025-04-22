@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tCliente;
+import negocio.DTOtCliente;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -109,7 +109,7 @@ public class VistaModificarCatalogo {
 						if (dni.isEmpty() || nombre.isEmpty() || dir.isEmpty()) {
 							JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 						}
-						tCliente c = new tCliente(id,dni, nombre, dir);
+						DTOtCliente c = new DTOtCliente(id,dni, nombre, dir);
 						Controlador.accion(Evento.MODIFICAR_CLIENTE, c);
 					}
 				}

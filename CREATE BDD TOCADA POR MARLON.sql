@@ -12,10 +12,9 @@ DROP TABLE IF EXISTS Factura;
 DROP TABLE IF EXISTS Empleado; 
 
 CREATE TABLE Cliente(
-idCliente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+dniCliente VARCHAR(9) PRIMARY KEY,
 nombre VARCHAR(255) NOT NULL, 
 direccion VARCHAR(255), 
-dni VARCHAR(9), 
 activo TINYINT(1) NOT NULL DEFAULT 1
 );
 
@@ -94,13 +93,13 @@ FOREIGN KEY (tipoActividad, fechaActividad, idSala) REFERENCES Actividad(tipoAct
 
 CREATE TABLE Compra(
 numSuscripcion INT PRIMARY KEY, 
-idCliente INT NOT NULL, 
+dniCliente VARCHAR(9) NOT NULL, 
 fecha DATE, 
 metodoPago VARCHAR(255) CHECK (metodoPago IN ('Efectivo', 'Tarjeta', 'Transferencia Bancaria', 'Bizum')),
 numFactura INT NOT NULL, 
 idEmpleado INT NOT NULL,
 FOREIGN KEY (numSuscripcion) REFERENCES Suscripcion(numSuscripcion), 
-FOREIGN KEY (idCliente) REFERENCES Cliente (idCliente),
+FOREIGN KEY (dniCliente) REFERENCES Cliente (dniCliente),
 FOREIGN KEY (numFactura) REFERENCES Factura (numFactura), 
 FOREIGN KEY (idEmpleado) REFERENCES Empleado(idEmpleado)
 );
@@ -109,8 +108,8 @@ INSERT INTO Empleado (dni, nombre, sueldo, rol) VALUES ('06013483H', 'Nicolas', 
 INSERT INTO Empleado (dni, nombre, sueldo, rol) VALUES ('1234567A', 'Jaime', 1300, 'Nutricionista'); 
 INSERT INTO Empleado (dni, nombre, sueldo, rol) VALUES ('1234567B', 'Juan', 1500, 'Recepcion'); 
 INSERT INTO Empleado (dni, nombre, sueldo, rol) VALUES ('1234567C', 'Gabriel', 2100, 'Monitor'); 
-INSERT INTO Cliente (nombre, dni, direccion) VALUES ('Marlon', 'AAAAAAAAA' ,'Gran Via 47'); 
-INSERT INTO Cliente (nombre, dni, direccion) VALUES ('Carlos', 'BBBBBBBBB' ,'Las Tablas'); 
+INSERT INTO Cliente (nombre, dniCliente, direccion) VALUES ('Marlon', 'AAAAAAAAA' ,'Gran Via 47'); 
+INSERT INTO Cliente (nombre, dniCliente, direccion) VALUES ('Carlos', 'BBBBBBBBB' ,'Las Tablas'); 
 INSERT INTO Sala (aforo) VALUES (100);
 INSERT INTO Sala (aforo) VALUES (150); 
 INSERT INTO Actividad VALUES ('Yoga', '2025-03-19', 1, 1);

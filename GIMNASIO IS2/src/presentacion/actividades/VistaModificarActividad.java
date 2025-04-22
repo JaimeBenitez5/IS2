@@ -23,7 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tActividad;
+import negocio.DTOtActividad;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -118,7 +118,7 @@ public class VistaModificarActividad {
 				tipoActTF.setText("");
 				idEmpTF.setText("");
 				fechaTF.setValue(new java.util.Date());
-				tActividad a = new tActividad(tipoAct, idEmp, idSala, sqlDate);
+				DTOtActividad a = new DTOtActividad(tipoAct, idEmp, idSala, sqlDate);
 				Controlador.accion(Evento.MODIFICAR_ACTIVIDAD, a);
 			}
 		});

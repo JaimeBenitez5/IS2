@@ -14,15 +14,15 @@ public class SAFacturasImp implements SAFacturas {
 		return facturasDAO;
 	}
 	
-	public int altaFactura(final tFactura factura) {
+	public int altaFactura(final DTOtFactura factura) {
 		return getDAOFacturas().altaFactura(factura);
 	}
 
-	public tFactura leerFactura(final int id) {
+	public DTOtFactura leerFactura(final int id) {
 		return getDAOFacturas().leerFactura(id);
 	}
 
-	public int actualizarFactura(final tFactura factura) {
+	public int actualizarFactura(final DTOtFactura factura) {
 		return getDAOFacturas().actualizarFactura(factura);
 	}
 
@@ -30,7 +30,7 @@ public class SAFacturasImp implements SAFacturas {
 		return getDAOFacturas().borrarFactura(id);
 	}
 
-	public List<tFactura> leerTodasFacturas() {
+	public List<DTOtFactura> leerTodasFacturas() {
 		return getDAOFacturas().leerTodasFacturas();
 	}
 

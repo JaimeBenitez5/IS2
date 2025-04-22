@@ -5,42 +5,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 import configFiles.BDConexion;
-import negocio.tCliente;
+import negocio.DTOtCliente;
 
 public class DAOClientesImp implements DAOClientes {
 
-	public int altaCliente(tCliente cliente) {
-		String query = "INSERT INTO Cliente (nombre, dni, direccion) VALUES (?, ?, ?)";
+	public int altaCliente(DTOtCliente cliente) {
+		String query = "INSERT INTO Cliente (dniCliente, nombre, direccion) VALUES (?, ?, ?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-			stmt.setString(1, cliente.getNombre());
-			stmt.setString(2, cliente.getDni());
+			stmt.setString(1, cliente.getDni());
+			stmt.setString(2, cliente.getNombre());
 			stmt.setString(3, cliente.getDir());
-			stmt.executeUpdate();
-			try (ResultSet rs = stmt.getGeneratedKeys()) {
-				if (rs.next()) {
-					int idCliente = rs.getInt(1);
-					return idCliente;
-				}
-			}
+			return stmt.executeUpdate();
+//			stmt.executeUpdate();
+//			try (ResultSet rs = stmt.getGeneratedKeys()) {
+//				if (rs.next()) {
+//					String dni = rs.getString(1);
+//					return dni;
+//				}
+//			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return 0;
 	}
 
-	public tCliente leerCliente(final int id) {
-		String query = "SELECT * FROM Cliente WHERE idCliente  = ?";
+	public DTOtCliente leerCliente(final String dni) {
+		String query = "SELECT * FROM Cliente WHERE dniCliente  = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
-			stmt.setInt(1,id);
+			stmt.setString(1,dni);
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
-				int idCliente = rs.getInt("idCliente");
 				String name = rs.getString ("nombre");
-				String dni = rs.getString ("dni");
 				String direccion = rs.getString ("direccion");
 				int activo = rs.getInt("activo");
 				boolean act = activo == 1 ? true : false;
-				tCliente c = new tCliente(idCliente, dni , name, direccion, act);
+				DTOtCliente c = new DTOtCliente(dni, name, direccion, act);
 				return c;
 			}
 		} catch (SQLException e) {
@@ -49,26 +48,13 @@ public class DAOClientesImp implements DAOClientes {
 		return null;
 	}
 
-	public int actualizarCliente(final tCliente cliente) {
-		String query = "UPDATE CLIENTE SET nombre = ?, dni = ?, direccion = ?, activo = ? WHERE idCliente=? ";
+	public int actualizarCliente(final DTOtCliente cliente) {
+		String query = "UPDATE CLIENTE SET nombre = ?, direccion = ?, activo = ? WHERE dniCliente = ? ";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setString(1, cliente.getNombre());
-			stmt.setString(2, cliente.getDni());
-			stmt.setString(3, cliente.getDir());
-			stmt.setInt(4, cliente.getId());
+			stmt.setString(2, cliente.getDir());
 			int activo = cliente.getActivo() == true ? 1 : 0;
-			stmt.setInt(5, activo);
-			return stmt.executeUpdate(); 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
-
-	public int borrarCliente(final int id) {
-		String query = "UPDATE Cliente SET activo = 0 WHERE idCliente = ?";
-		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-			stmt.setInt(1, id);
+			stmt.setInt(3, activo);
 			return stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -76,21 +62,31 @@ public class DAOClientesImp implements DAOClientes {
 		return 0;
 	}
 
-	public List<tCliente> leerTodosClientes() {
-		ArrayList<tCliente> clientes = new ArrayList<tCliente>();
+	public int borrarCliente(final String dni) {
+		String query = "UPDATE Cliente SET activo = 0 WHERE dniCliente = ?";
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+			stmt.setString(1, dni);
+			return stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public List<DTOtCliente> leerTodosClientes() {
+		ArrayList<DTOtCliente> clientes = new ArrayList<DTOtCliente>();
 		String query = "SELECT * FROM CLIENTE";
 		try ( Statement stmt = BDConexion.getConnection().createStatement ()) {
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next ()) {
-				int idCliente = rs.getInt("idCliente");
 				String name = rs.getString ("nombre");
-				String dni = rs.getString ("dni");
+				String dni = rs.getString ("dniCliente");
 				String direccion = rs.getString ("direccion");
 				int activo = rs.getInt("activo");
 				boolean act;
 				if(activo == 1) act = true;
 				else act = false;
-				tCliente c = new tCliente(idCliente, dni , name , direccion ,act);
+				DTOtCliente c = new DTOtCliente(dni , name , direccion ,act);
 				clientes.add(c);
 			}
 		} catch (SQLException e) {

@@ -3,17 +3,19 @@ package integracion;
 import java.sql.Date;
 import java.util.List;
 
-import negocio.tActividad;
+import negocio.DTOtActividad;
 
 public interface DAOActividades {
 	
-	int altaActividad(tActividad actividad);
+	int altaActividad(DTOtActividad actividad);
 
-	tActividad leerActividad(final String tipoActividad, final Date fecha, final int idSala);
+	DTOtActividad leerActividad(final String tipoActividad, final Date fecha, final int idSala);
 
-	int actualizarActividad(final tActividad actividad);
+	int actualizarActividad(final DTOtActividad actividad);
+	
+	int borrarActividadesSala(int idSala);
 
 	int borrarActividad(final String tipoActividad, final Date fecha, final int idSala);
 
-	List<tActividad> leerTodasActividades();
+	List<DTOtActividad> leerTodasActividades();
 }

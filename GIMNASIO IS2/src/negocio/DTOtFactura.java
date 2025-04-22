@@ -2,12 +2,12 @@ package negocio;
 
 import java.sql.Date;
 
-public class tFactura {
+public class DTOtFactura {
     private int _id;
     private Date _fecha;
     private double _importeTotal;
 
-    public tFactura(final int id, final Date fecha, final double importeTotal) {
+    public DTOtFactura(final int id, final Date fecha, final double importeTotal) {
         _id = id;
         _fecha = fecha;
         _importeTotal = importeTotal;

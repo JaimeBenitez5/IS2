@@ -15,7 +15,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.JFrame;
 
-import negocio.tCliente;
+import negocio.DTOtCliente;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -69,15 +69,15 @@ public class VistaMostrarClientes {
 		GUI.setVisible(true);
 	}
 
-	public static void actualizar(int evento, List<tCliente> datos) {
+	public static void actualizar(int evento, List<DTOtCliente> datos) {
 		if (evento == Evento.RES_MOSTRAR_CLIENTES_OK) {
 			panelMostrarClientes.removeAll();
-			String[] columnNames = {"ID", "Nombre", "Direccion", "Activo"};
+			String[] columnNames = {"DNI", "Nombre", "Direccion", "Activo"};
 			String[][] data = new String[datos.size()][4];
 
 			for (int i = 0; i < datos.size(); i++) {
-				tCliente cliente = datos.get(i);
-				data[i][0] = String.valueOf(cliente.getId());
+				DTOtCliente cliente = datos.get(i);
+				data[i][0] = cliente.getDni();
 				data[i][1] = cliente.getNombre();
 				data[i][2] = cliente.getDir();
 				data[i][3] = cliente.getActivo() + "";

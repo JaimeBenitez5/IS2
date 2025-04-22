@@ -2,17 +2,19 @@ package integracion;
 
 import java.util.List;
 
-import negocio.tCatalogo;
+import negocio.DTOtCatalogo;
 
 public interface DAOCatalogos {
 	
-	int altaCatalogo(tCatalogo catalogo);
+	int altaCatalogo(DTOtCatalogo catalogo);
 
-	tCatalogo leerCatalogo(final int id);
+	DTOtCatalogo leerCatalogo(final int id);
 
-	int actualizarCatalogo(final tCatalogo catalogo);
-
+	int actualizarCatalogo(final DTOtCatalogo catalogo);
+	
+	int borrarCatalogosSala(final int idSala);
+	
 	int borrarCatalogo(final int id);
 
-	List<tCatalogo> leerTodosCatalogos();
+	List<DTOtCatalogo> leerTodosCatalogos();
 }

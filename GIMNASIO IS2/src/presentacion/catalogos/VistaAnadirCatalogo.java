@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tCliente;
+import negocio.DTOtCliente;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -107,7 +107,7 @@ public class VistaAnadirCatalogo {
 					dniTF.setText("");
 					nombreTF.setText("");
 					dirTF.setText("");
-					tCliente c = new tCliente(dni, nombre, dir);
+					DTOtCliente c = new DTOtCliente(dni, nombre, dir);
 					Controlador.accion(Evento.ALTA_CLIENTE, c);
 				}
 			}

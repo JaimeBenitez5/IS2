@@ -22,7 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tFactura;
+import negocio.DTOtFactura;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -112,7 +112,7 @@ public class VistaAltaFactura {
 					importeTF.setText("");
 					fechaTF.setText("");
 					numFactTF.setText("");
-					tFactura c = new tFactura(num, sqlDate, importe);
+					DTOtFactura c = new DTOtFactura(num, sqlDate, importe);
 					Controlador.accion(Evento.ALTA_FACTURA, c);
 				}
 			}

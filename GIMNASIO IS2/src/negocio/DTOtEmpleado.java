@@ -1,13 +1,13 @@
 package negocio;
 
-public class tEmpleado {
+public class DTOtEmpleado {
 	private int _id;
 	private String _dni;
 	private String _nombre;
 	private double _sueldo;
 	private int _rol;
     
-    public tEmpleado(final int id, final String dni, final String nombre, final double sueldo, final int rol) {
+    public DTOtEmpleado(final int id, final String dni, final String nombre, final double sueldo, final int rol) {
     	_id = id;
     	_dni = dni;
     	_nombre = nombre;
@@ -15,7 +15,7 @@ public class tEmpleado {
     	_rol = rol;
     }
     
-    public tEmpleado(final String dni, final String nombre, final double sueldo, final int rol) {
+    public DTOtEmpleado(final String dni, final String nombre, final double sueldo, final int rol) {
     	_id = 0;
     	_dni = dni;
     	_nombre = nombre;

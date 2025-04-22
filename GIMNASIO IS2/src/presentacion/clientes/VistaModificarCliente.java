@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tCliente;
+import negocio.DTOtCliente;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -54,15 +54,9 @@ public class VistaModificarCliente {
 		panelAltaCliente.add(titulo);
 		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(4, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(3, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
-
-		JLabel id = new JLabel("ID:");
-		id.setForeground(Color.WHITE);
-		panelCampos.add(id);
-		JTextField idTF = new JTextField(30);
-		panelCampos.add(idTF);
 
 		JLabel dni = new JLabel("DNI:");
 		dni.setForeground(Color.WHITE);
@@ -102,14 +96,13 @@ public class VistaModificarCliente {
 		save.addActionListener(
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
-						int id = Integer.parseInt(idTF.getText());
 						String dni = dniTF.getText();
 						String nombre = nombreTF.getText();
 						String dir = dirTF.getText();
 						if (dni.isEmpty() || nombre.isEmpty() || dir.isEmpty()) {
 							JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 						}
-						tCliente c = new tCliente(id, dni, nombre, dir);
+						DTOtCliente c = new DTOtCliente(dni, nombre, dir, true);
 						dniTF.setText("");
 						nombreTF.setText("");
 						dirTF.setText("");

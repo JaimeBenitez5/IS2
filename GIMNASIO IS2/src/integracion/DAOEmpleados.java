@@ -2,17 +2,17 @@ package integracion;
 
 import java.util.List;
 
-import negocio.tEmpleado;
+import negocio.DTOtEmpleado;
 
 public interface DAOEmpleados {
 
-    int altaEmpleado(tEmpleado empleado);
+    int altaEmpleado(DTOtEmpleado empleado);
 
-    tEmpleado leerEmpleado(final int id);
+    DTOtEmpleado leerEmpleado(final int id);
 
-    int actualizarEmpleado(final tEmpleado empleado);
+    int actualizarEmpleado(final DTOtEmpleado empleado);
 
     int borrarEmpleado(final int id);
 
-    List<tEmpleado> leerTodosEmpleados();
+    List<DTOtEmpleado> leerTodosEmpleados();
 }

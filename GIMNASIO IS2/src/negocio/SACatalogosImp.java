@@ -14,23 +14,27 @@ public class SACatalogosImp implements SACatalogos {
 		return catalogosDAO;
 	}
 	
-	public int altaCatalogo(tCatalogo catalogo) {
+	public int altaCatalogo(DTOtCatalogo catalogo) {
 		return getDAOCatalogos().altaCatalogo(catalogo);
 	}
 
-	public tCatalogo leerCatalogo(int id) {
+	public DTOtCatalogo leerCatalogo(int id) {
 		return getDAOCatalogos().leerCatalogo(id);
 	}
 
-	public int actualizarCatalogo(tCatalogo catalogo) {
+	public int actualizarCatalogo(DTOtCatalogo catalogo) {
 		return getDAOCatalogos().actualizarCatalogo(catalogo);
 	}
-
+	
+	public int borrarCatalogosSala(int idSala) {
+		return getDAOCatalogos().borrarCatalogosSala(idSala);
+	}
+	
 	public int borrarCatalogo(int id) {
 		return getDAOCatalogos().borrarCatalogo(id);
 	}
 
-	public List<tCatalogo> leerTodosCatalogos() {
+	public List<DTOtCatalogo> leerTodosCatalogos() {
 		return getDAOCatalogos().leerTodosCatalogos();
 	}
 

@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tSala;
+import negocio.DTOtSala;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -106,7 +106,7 @@ public class VistaMostrarSala {
 		return menuPrincipal;
 	}
 	
-	public static void actualizar(int evento, tSala s) {
+	public static void actualizar(int evento, DTOtSala s) {
 		if (evento == Evento.RES_MOSTRAR_SALA_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);

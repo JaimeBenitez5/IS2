@@ -22,7 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tEmpleado;
+import negocio.DTOtEmpleado;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -127,7 +127,7 @@ public class VistaModificarEmpleado {
 				nombreTF.setText("");
 				dirTF.setText("");
 				sueldoTF.setText("");
-				tEmpleado emp = new tEmpleado(id, dni, nombre, sueldo, rol);
+				DTOtEmpleado emp = new DTOtEmpleado(id, dni, nombre, sueldo, rol);
 				Controlador.accion(Evento.MODIFICAR_EMPLEADO, emp);
 			}
 		});

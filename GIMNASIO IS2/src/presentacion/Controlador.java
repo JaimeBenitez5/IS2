@@ -52,51 +52,50 @@ public class Controlador{
 		switch(evento) {
 		//CLIENTES
 		case Evento.ALTA_CLIENTE:{
-			int id = getSAClientes().altaCliente((tCliente) datos);
-			((tCliente) datos).setId(id);
-			if(id != 0) VistaAltaCliente.actualizar(Evento.RES_ALTA_CLIENTE_OK, id);
-			else VistaAltaCliente.actualizar(Evento.RES_ALTA_CLIENTE_KO, id);
+			int exito = getSAClientes().altaCliente((DTOtCliente) datos);
+			if(exito == 1) VistaAltaCliente.actualizar(Evento.RES_ALTA_CLIENTE_OK, ((DTOtCliente) datos).getDni());
+			else VistaAltaCliente.actualizar(Evento.RES_ALTA_CLIENTE_KO, ((DTOtCliente) datos).getDni());
 			break;
 		}
 		case Evento.MOSTRAR_CLIENTES:{
-			List<tCliente> res = getSAClientes().leerTodosClientes();
+			List<DTOtCliente> res = getSAClientes().leerTodosClientes();
 			if (!res.isEmpty()) VistaMostrarClientes.actualizar(Evento.RES_MOSTRAR_CLIENTES_OK, res);
 			else VistaMostrarClientes.actualizar(Evento.RES_MOSTRAR_CLIENTES_KO, null);
 			break;
 		}
 		case Evento.MOSTRAR_CLIENTE:{
-			tCliente cliente = getSAClientes().leerCliente((int)datos);
+			DTOtCliente cliente = getSAClientes().leerCliente((String)datos);
 			if (cliente != null) VistaMostrarCliente.actualizar(Evento.RES_MOSTRAR_CLIENTE_OK, cliente);
 			else VistaMostrarCliente.actualizar(Evento.RES_MOSTRAR_CLIENTE_KO, null);
 			break;
 		}
 		case Evento.ELIMINAR_CLIENTE:{
-			int exito = getSAClientes().borrarCliente((int) datos);
-			if (exito != 0) VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_OK, (int) datos);
+			int exito = getSAClientes().borrarCliente((String) datos);
+			if (exito == 1) VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_OK, null);
 			else VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_KO, null);
 			break;
 		}
 		case Evento.MODIFICAR_CLIENTE:{
-			int exitoModificar = getSAClientes().actualizarCliente((tCliente) datos);
+			int exitoModificar = getSAClientes().actualizarCliente((DTOtCliente) datos);
 			if (exitoModificar == 1) VistaModificarCliente.actualizar(Evento.RES_MODIFICAR_CLIENTE_OK, null);
 			else VistaModificarCliente.actualizar(Evento.RES_MODIFICAR_CLIENTE_KO, null);
-			break;
+			break; 
 		}
 		//SALAS
 		case Evento.ALTA_SALA:{
-			int id = getSASalas().altaSala((tSala) datos);
-			((tSala) datos).setId(id);
+			int id = getSASalas().altaSala((DTOtSala) datos);
+			((DTOtSala) datos).setId(id);
 			if(id != 0) VistaAnadirSala.actualizar(Evento.RES_ALTA_SALA_OK, id);
 			else VistaAnadirSala.actualizar(Evento.RES_ALTA_SALA_KO, id);
 			break;
 		}
 		case Evento.MOSTRAR_SALA:{
-			tSala s = getSASalas().leerSala((int) datos);
+			DTOtSala s = getSASalas().leerSala((int) datos);
 			VistaMostrarSala.actualizar(Evento.RES_MOSTRAR_SALA_OK, s);
 			break;
 		}
 		case Evento.MOSTRAR_SALAS:{
-			List<tSala> res = getSASalas().leerTodasSalas();
+			List<DTOtSala> res = getSASalas().leerTodasSalas();
 			if (!res.isEmpty()) VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_OK, res);
 			else VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_KO, null);
 			break;
@@ -108,52 +107,52 @@ public class Controlador{
 			break;
 		}
 		case Evento.MODIFICAR_SALA:{
-			int exitoModificar = getSASalas().actualizarSala((tSala) datos);
+			int exitoModificar = getSASalas().actualizarSala((DTOtSala) datos);
 			if (exitoModificar == 1) VistaModificarSala.actualizar(Evento.RES_MODIFICAR_SALA_OK, null);
 			else VistaModificarSala.actualizar(Evento.RES_MODIFICAR_SALA_KO, null);
 			break;
 		}
 		//ACTIVIDADES
 		case Evento.ALTA_ACTIVIDAD:{
-			int exitoInsertar = getSAActividades().altaActividad((tActividad) datos);
+			int exitoInsertar = getSAActividades().altaActividad((DTOtActividad) datos);
 			if(exitoInsertar == 1) VistaAnadirActividad.actualizar(Evento.RES_ALTA_ACTIVIDAD_OK, null);
 			else VistaAnadirActividad.actualizar(Evento.RES_ALTA_ACTIVIDAD_KO, null);
 			break;
 		}
 		case Evento.MOSTRAR_ACTIVIDAD:{
 			//NO TIENE MUCHO SENTIDO, LO TENEMOS YA TODO MENOS EL ID DE EMPLEADO QUE ENCIMA HASTA PUEDE SER NULO, PERO ES ASI LA BD
-			tActividad a = getSAActividades().leerActividad(((tActividad) datos).getTipoActividad(), ((tActividad) datos).getFecha(), ((tActividad) datos).getIdSala());
+			DTOtActividad a = getSAActividades().leerActividad(((DTOtActividad) datos).getTipoActividad(), ((DTOtActividad) datos).getFecha(), ((DTOtActividad) datos).getIdSala());
 			VistaMostrarActividad.actualizar(Evento.RES_MOSTRAR_ACTIVIDAD_OK, a);
 			break;
 		}
 		case Evento.MOSTRAR_ACTIVIDADES:{
-			List<tActividad> res = getSAActividades().leerTodasActividades();
+			List<DTOtActividad> res = getSAActividades().leerTodasActividades();
 			if (!res.isEmpty()) VistaMostrarActividades.actualizar(Evento.RES_MOSTRAR_ACTIVIDADES_OK, res);
 			else VistaMostrarActividades.actualizar(Evento.RES_MOSTRAR_ACTIVIDADES_KO, null);
 			break;
 		}
 		case Evento.ELIMINAR_ACTIVIDAD:{
-			int exito = getSAActividades().borrarActividad(((tActividad) datos).getTipoActividad(), ((tActividad) datos).getFecha(), ((tActividad) datos).getIdSala());
+			int exito = getSAActividades().borrarActividad(((DTOtActividad) datos).getTipoActividad(), ((DTOtActividad) datos).getFecha(), ((DTOtActividad) datos).getIdSala());
 			if (exito == 1) VistaEliminarActividad.actualizar(Evento.RES_ELIMINAR_ACTIVIDAD_OK, (int) datos);
 			else VistaEliminarActividad.actualizar(Evento.RES_ELIMINAR_ACTIVIDAD_KO, null);
 			break;
 		}
 		case Evento.MODIFICAR_ACTIVIDAD:{
-			int exitoModificar = getSAActividades().actualizarActividad((tActividad) datos);
+			int exitoModificar = getSAActividades().actualizarActividad((DTOtActividad) datos);
 			if (exitoModificar == 1) VistaModificarActividad.actualizar(Evento.RES_MODIFICAR_ACTIVIDAD_OK, null);
 			else VistaModificarActividad.actualizar(Evento.RES_MODIFICAR_ACTIVIDAD_KO, null);
 			break;
 		}
 		//FACTURAS
 		case Evento.ALTA_FACTURA:{
-			int id = getSAFacturas().altaFactura((tFactura) datos);
-			((tFactura) datos).setId(id);
+			int id = getSAFacturas().altaFactura((DTOtFactura) datos);
+			((DTOtFactura) datos).setId(id);
 			if(id != 0) VistaAltaFactura.actualizar(Evento.RES_ALTA_FACTURA_OK, id);
 			else VistaAltaFactura.actualizar(Evento.RES_ALTA_FACTURA_KO, id);
 			break;
 		}
 		case Evento.MOSTRAR_FACTURAS:{
-			List<tFactura> res = getSAFacturas().leerTodasFacturas();
+			List<DTOtFactura> res = getSAFacturas().leerTodasFacturas();
 			if (!res.isEmpty()) VistaMostrarFacturas.actualizar(Evento.RES_MOSTRAR_FACTURAS_OK, res);
 			else VistaMostrarFacturas.actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, null);
 			break;
@@ -166,7 +165,7 @@ public class Controlador{
 		}
 		
 		case Evento.MOSTRAR_FACTURA:{
-			tFactura factura = getSAFacturas().leerFactura((int)datos);
+			DTOtFactura factura = getSAFacturas().leerFactura((int)datos);
 			if (factura != null) VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_OK, factura);
 			else VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_KO, null);
 			break;

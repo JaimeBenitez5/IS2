@@ -15,7 +15,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.JFrame;
 
-import negocio.tEmpleado;
+import negocio.DTOtEmpleado;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -69,14 +69,14 @@ public class VistaMostrarEmpleados {
 		GUI.setVisible(true);
 	}
 
-	public static void actualizar(int evento, List<tEmpleado> datos) {
+	public static void actualizar(int evento, List<DTOtEmpleado> datos) {
 		if (evento == Evento.RES_MOSTRAR_EMPLEADOS_OK) {
 			panelMostrarClientes.removeAll();
 			String[] columnNames = {"ID", "Nombre", "Sueldo", "Rol"};
 			String[][] data = new String[datos.size()][4];
 
 			for (int i = 0; i < datos.size(); i++) {
-				tEmpleado empleado = datos.get(i);
+				DTOtEmpleado empleado = datos.get(i);
 				data[i][0] = String.valueOf(empleado.getId());
 				data[i][1] = empleado.getNombre();
 				data[i][2] = empleado.getSueldo() + "";

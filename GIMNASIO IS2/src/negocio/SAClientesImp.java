@@ -14,8 +14,8 @@ public class SAClientesImp implements SAClientes {
 		return clientesDao;
 	}
 
-	public int altaCliente(final tCliente cliente) {
-		tCliente c = leerCliente(cliente.getId());
+	public int altaCliente(final DTOtCliente cliente) {
+		DTOtCliente c = leerCliente(cliente.getDni());
 		int exito = 0;
 		if(c == null) exito = getDAOClientes().altaCliente(cliente); 
 		else if (!c.getActivo()) {
@@ -25,22 +25,22 @@ public class SAClientesImp implements SAClientes {
 		return exito;
 	}
 
-	public tCliente leerCliente(final int id) {
-		return getDAOClientes().leerCliente(id);
+	public DTOtCliente leerCliente(final String dni) {
+		return getDAOClientes().leerCliente(dni);
 	}
 	
-	public int actualizarCliente(final tCliente cliente) {
+	public int actualizarCliente(final DTOtCliente cliente) {
 		return getDAOClientes().actualizarCliente(cliente);
 	}
 
-	public int borrarCliente(final int id) {
-		tCliente c = leerCliente(id);
+	public int borrarCliente(final String dni) {
+		DTOtCliente c = leerCliente(dni);
 		int exito = 0;
-		if(c != null && c.getActivo()) exito = getDAOClientes().borrarCliente(id);
+		if(c != null && c.getActivo()) exito = getDAOClientes().borrarCliente(dni);
 		return exito;
 	}
 
-	public List<tCliente> leerTodosClientes() {
+	public List<DTOtCliente> leerTodosClientes() {
 		return getDAOClientes().leerTodosClientes(); 
 	}
 }

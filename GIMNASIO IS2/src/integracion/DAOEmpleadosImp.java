@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import configFiles.BDConexion;
-import negocio.tEmpleado;
+import negocio.DTOtEmpleado;
 
 public class DAOEmpleadosImp implements DAOEmpleados {
 
-	public int altaEmpleado(tEmpleado empleado) {
+	public int altaEmpleado(DTOtEmpleado empleado) {
 		String query = "INSERT INTO Empleado (dni, nombre, sueldo, rol) VALUES (?, ?, ?, ?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setString(1, empleado.getDni());
@@ -32,7 +32,7 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 		return 0;
 	}
 
-	public tEmpleado leerEmpleado(int id) {
+	public DTOtEmpleado leerEmpleado(int id) {
 		String query = "SELECT * FROM Empleado WHERE idEmpleado  = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1,id);
@@ -43,7 +43,7 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 				String dni = rs.getString ("nombre");
 				double sueldo = rs.getDouble("sueldo");
 				int rol = rs.getInt("rol");
-				tEmpleado emp = new tEmpleado(idEmpleado, dni, name, sueldo, rol);
+				DTOtEmpleado emp = new DTOtEmpleado(idEmpleado, dni, name, sueldo, rol);
 				return emp;
 			}
 		} catch (SQLException e) {
@@ -52,7 +52,7 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 		return null;
 	}
 
-	public int actualizarEmpleado(tEmpleado empleado) {
+	public int actualizarEmpleado(DTOtEmpleado empleado) {
 		String query = "UPDATE Empleado SET dni = ?, nombre = ?, sueldo = ?, rol = ? WHERE idEmpleado = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setString(1, empleado.getNombre());
@@ -78,8 +78,8 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 		return 0;
 	}
 
-	public List<tEmpleado> leerTodosEmpleados() {
-		ArrayList<tEmpleado> clientes = new ArrayList<tEmpleado>();
+	public List<DTOtEmpleado> leerTodosEmpleados() {
+		ArrayList<DTOtEmpleado> clientes = new ArrayList<DTOtEmpleado>();
 		String query = "SELECT * FROM CLIENTE WHERE activo = 1";
 		try ( Statement stmt = BDConexion.getConnection().createStatement ()) {
 			ResultSet rs = stmt.executeQuery(query);
@@ -89,7 +89,7 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 				String dni = rs.getString ("nombre");
 				double sueldo = rs.getInt("sueldo");
 				int rol = rs.getInt("rol");
-				tEmpleado emp = new tEmpleado(idEmpleado, dni, name, sueldo, rol);
+				DTOtEmpleado emp = new DTOtEmpleado(idEmpleado, dni, name, sueldo, rol);
 				clientes.add(emp);
 			}
 		} catch (SQLException e) {
@@ -97,5 +97,4 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 		}
 		return clientes;
 	}
-
 }

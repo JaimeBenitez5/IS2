@@ -1,18 +1,18 @@
 package integracion;
 
 import java.util.List;
-import negocio.tCliente;
+import negocio.DTOtCliente;
 
 public interface DAOClientes {
 	
-    int altaCliente(tCliente cliente);
+    int altaCliente(DTOtCliente cliente);
 
-    tCliente leerCliente(final int id);
+    DTOtCliente leerCliente(final String dni);
 
-    int actualizarCliente(final tCliente cliente);
+    int actualizarCliente(final DTOtCliente cliente);
 
-    int borrarCliente(final int id);
+    int borrarCliente(final String dni);
 
-    List<tCliente> leerTodosClientes();
+    List<DTOtCliente> leerTodosClientes();
     
 }

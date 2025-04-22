@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 
 import javax.swing.JFormattedTextField;
 
-import negocio.tActividad;
+import negocio.DTOtActividad;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -120,7 +120,7 @@ public class VistaAnadirActividad {
 				tipoActTF.setText("");
 				idEmpTF.setText("");
 				fechaTF.setValue(new java.util.Date());
-				tActividad a = new tActividad(tipoAct, idSala, sqlDate);
+				DTOtActividad a = new DTOtActividad(tipoAct, idSala, sqlDate);
 				if(idEmp != 0) a.setIdEmpleado(idEmp);
 				Controlador.accion(Evento.ALTA_ACTIVIDAD, a);
 			}

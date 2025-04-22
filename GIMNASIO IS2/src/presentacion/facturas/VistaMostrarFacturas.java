@@ -15,7 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
-import negocio.tFactura;
+import negocio.DTOtFactura;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -68,14 +68,14 @@ public class VistaMostrarFacturas {
 		GUI.setVisible(true);
 	}
 
-	public static void actualizar(int evento, List<tFactura> res) {
+	public static void actualizar(int evento, List<DTOtFactura> res) {
 		if (evento == Evento.RES_MOSTRAR_FACTURAS_OK) {
 			panelMostrarFacturas.removeAll();
 			String[] columnNames = {"ID", "Fecha", "Importe"};
 			String[][] data = new String[res.size()][3];
 
 			for (int i = 0; i < res.size(); i++) {
-				tFactura f = res.get(i);
+				DTOtFactura f = res.get(i);
 				java.sql.Date sqlDate = f.getFecha();
 				java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
 				data[i][0] = String.valueOf(f.getId());

@@ -23,7 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.tActividad;
+import negocio.DTOtActividad;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -112,7 +112,7 @@ public class VistaMostrarActividad {
 				}
 				tipoActTF.setText("");
 				fechaTF.setValue(new java.util.Date());
-				tActividad a = new tActividad(tipoAct, idSala, sqlDate);
+				DTOtActividad a = new DTOtActividad(tipoAct, idSala, sqlDate);
 				Controlador.accion(Evento.MOSTRAR_ACTIVIDAD, a);
 			}
 		});
@@ -133,7 +133,7 @@ public class VistaMostrarActividad {
 		return menuPrincipal;
 	}
 
-	public static void actualizar(int evento, tActividad a) {
+	public static void actualizar(int evento, DTOtActividad a) {
 		if (evento == Evento.RES_MOSTRAR_ACTIVIDAD_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
