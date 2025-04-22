@@ -7,7 +7,9 @@ import presentacion.catalogos.*;
 import presentacion.clientes.*;
 import presentacion.empleados.*;
 import presentacion.facturas.VistaAltaFacturas;
+import presentacion.facturas.VistaEliminarFactura;
 import presentacion.facturas.VistaFacturas;
+import presentacion.facturas.VistaMostrarFactura;
 import presentacion.facturas.VistaMostrarFacturas;
 import presentacion.salas.*;
 import negocio.*;
@@ -58,10 +60,23 @@ public class Controlador{
 			break;
 		}
 		case Evento.MOSTRAR_FACTURAS:{
+			List<tFactura> res = getSAFacturas().leerTodasFacturas();
+			if (!res.isEmpty()) VistaMostrarFacturas.actualizar(Evento.RES_MOSTRAR_FACTURA_OK, res);
+			else VistaMostrarFacturas.actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, null);
+			break;
+		}
+		case Evento.ELIMINAR_FACTURA:{
 			int id = getSAFacturas().altaFactura((tFactura) datos);
 			((tFactura) datos).setId(id);
-			if(id != 0) VistaAltaFacturas.actualizar(Evento.RES_ALTA_FACTURAS_OK, id);
-			else VistaAltaFacturas.actualizar(Evento.RES_ALTA_FACTURAS_KO, id);
+			if(id != 0) VistaAltaFacturas.actualizar(Evento.RES_ELIMINAR_FACTURAS_OK, id);
+			else VistaAltaFacturas.actualizar(Evento.RES_ELIMINAR_FACTURAS_KO, id);
+			break;
+		}
+		
+		case Evento.MOSTRAR_FACTURA:{
+			tFactura factura = getSAFacturas().leerFactura((int)datos);
+			if (factura != null) VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_OK, factura);
+			else VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_KO, null);
 			break;
 		}
 		//CLIENTES
@@ -221,6 +236,16 @@ public class Controlador{
 		}
 		case Evento.VISTA_MOSTRAR_FACTURAS:{ 
 			VistaMostrarFacturas.open();
+			break;
+		}
+		
+		case Evento.VISTA_ELIMINAR_FACTURA:{
+			VistaEliminarFactura.open();
+			break;
+		}
+		
+		case Evento.VISTA_MOSTRAR_FACTURA:{ 
+			VistaMostrarFactura.open();
 			break;
 		}
 		//VISTAS CLIENTES

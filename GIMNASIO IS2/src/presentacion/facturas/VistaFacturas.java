@@ -30,6 +30,7 @@ public class VistaFacturas {
         JButton botonReadAll = crearBoton("Mostrar Facturas");
         JButton botonRead = crearBoton("Mostrar Factura");
         JButton botonListByClient = crearBoton("Listar Facturas por Cliente");
+        JButton botonBorrar = crearBoton("Borrar Factura");
 
         // Botón de regreso al menú principal con icono
         JButton botonMainMenu = new JButton(new ImageIcon("icons/main_menu.png"));
@@ -42,7 +43,7 @@ public class VistaFacturas {
         panel.add(botonReadAll);
         panel.add(botonRead);
         panel.add(botonListByClient);
-
+        panel.add(botonBorrar);
         // Agregar el panel y el botón del menú principal
         menuPrincipal.add(panel, BorderLayout.CENTER);
         menuPrincipal.add(botonMainMenu, BorderLayout.SOUTH);
@@ -62,14 +63,18 @@ public class VistaFacturas {
 
         botonListByClient.addActionListener(e -> {
             menuPrincipal.setVisible(false);
-            Controlador.mostrarVista(Evento.VISTA_ELIMINAR_FACTURA);
+            Controlador.mostrarVista(Evento.VISTA_MOSTRAR_FACTURAS);
         });
         
         botonRead.addActionListener(e -> {
             menuPrincipal.setVisible(false);
             Controlador.mostrarVista(Evento.VISTA_MOSTRAR_FACTURA);
         });
-
+        
+        botonBorrar.addActionListener(e -> {
+            menuPrincipal.setVisible(false);
+            Controlador.mostrarVista(Evento.VISTA_ELIMINAR_FACTURA);
+        });
         botonMainMenu.addActionListener(e -> {
             menuPrincipal.setVisible(false);
             new VistaMenuPrincipal();

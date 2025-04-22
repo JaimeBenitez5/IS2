@@ -1,0 +1,5 @@
+package presentacion.facturas;
+
+public class VistaMostrarFactura {
+
+}

@@ -1,0 +1,365 @@
+package presentacion;
+
+import java.util.List;
+
+import presentacion.actividades.*;
+import presentacion.catalogos.*;
+import presentacion.clientes.*;
+import presentacion.empleados.*;
+import presentacion.facturas.VistaAltaFacturas;
+import presentacion.facturas.VistaEliminarFactura;
+import presentacion.facturas.VistaFacturas;
+import presentacion.facturas.VistaMostrarFacturas;
+import presentacion.salas.*;
+import negocio.*;
+
+public class Controlador{
+	//patron singleton
+	private static SAClientes SAClientes;
+	private static SASalas SASalas;
+	private static SAActividades SAActividades;
+	private static SACatalogos SACatalogos;
+	private static SAEmpleados SAEmpleados;
+	private static SAFacturas SAFacturas;
+	
+	private static SAFacturas getSAFacturas(){
+		if(SAFacturas == null) SAFacturas = new SAFacturasImp();
+		return SAFacturas;
+	}
+	
+	private static SAClientes getSAClientes(){
+		if(SAClientes == null) SAClientes = new SAClientesImp();
+		return SAClientes;
+	}
+	private static SASalas getSASalas() {
+		if (SASalas == null) SASalas = new SASalasImp();
+		return SASalas;
+	}
+	private static SAActividades getSAActividades() {
+		if (SAActividades == null) SAActividades = new SAActividadesImp();
+		return SAActividades;
+	}
+	private static SACatalogos getSACatalogos() {
+		if (SACatalogos == null) SACatalogos = new SACatalogosImp();
+		return SACatalogos;
+	}
+	private static SAEmpleados getSAEmpleados() {
+		if (SAEmpleados == null) SAEmpleados = new SAEmpleadosImp();
+		return SAEmpleados;
+	}
+	
+	public static void accion(int evento, Object datos) { 
+		switch(evento) {
+		//FACTURAS
+		case Evento.ALTA_FACTURA:{
+			int id = getSAFacturas().altaFactura((tFactura) datos);
+			((tFactura) datos).setId(id);
+			if(id != 0) VistaAltaFacturas.actualizar(Evento.RES_ALTA_FACTURAS_OK, id);
+			else VistaAltaFacturas.actualizar(Evento.RES_ALTA_FACTURAS_KO, id);
+			break;
+		}
+		case Evento.MOSTRAR_FACTURAS:{
+			int id = getSAFacturas().altaFactura((tFactura) datos);
+			((tFactura) datos).setId(id);
+			if(id != 0) VistaAltaFacturas.actualizar(Evento.RES_MOSTRAR_FACTURAS_OK, id);
+			else VistaAltaFacturas.actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, id);
+			break;
+		}
+		case Evento.ELIMINAR_FACTURA:{
+			int id = getSAFacturas().altaFactura((tFactura) datos);
+			((tFactura) datos).setId(id);
+			if(id != 0) VistaAltaFacturas.actualizar(Evento.RES_ELIMINAR_FACTURAS_OK, id);
+			else VistaAltaFacturas.actualizar(Evento.RES_ELIMINAR_FACTURAS_KO, id);
+			break;
+		}
+		//CLIENTES
+		case Evento.ALTA_CLIENTE:{
+			int id = getSAClientes().altaCliente((tCliente) datos);
+			((tCliente) datos).setId(id);
+			if(id != 0) VistaAltaCliente.actualizar(Evento.RES_ALTA_CLIENTE_OK, id);
+			else VistaAltaCliente.actualizar(Evento.RES_ALTA_CLIENTE_KO, id);
+			break;
+		}
+		case Evento.MOSTRAR_CLIENTES:{
+			List<tCliente> res = getSAClientes().leerTodosClientes();
+			if (!res.isEmpty()) VistaMostrarClientes.actualizar(Evento.RES_MOSTRAR_CLIENTES_OK, res);
+			else VistaMostrarClientes.actualizar(Evento.RES_MOSTRAR_CLIENTES_KO, null);
+			break;
+		}
+		case Evento.MOSTRAR_CLIENTE:{
+			tCliente cliente = getSAClientes().leerCliente((int)datos);
+			if (cliente != null) VistaMostrarCliente.actualizar(Evento.RES_MOSTRAR_CLIENTE_OK, cliente);
+			else VistaMostrarCliente.actualizar(Evento.RES_MOSTRAR_CLIENTE_KO, null);
+			break;
+		}
+		case Evento.ELIMINAR_CLIENTE:{
+			int exito = getSAClientes().borrarCliente((int) datos);
+			if (exito != 0) VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_OK, (int) datos);
+			else VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_KO, null);
+			break;
+		}
+		case Evento.MODIFICAR_CLIENTE:{
+			int exitoModificar = getSAClientes().actualizarCliente((tCliente) datos);
+			if (exitoModificar == 1) VistaModificarCliente.actualizar(Evento.RES_MODIFICAR_CLIENTE_OK, null);
+			else VistaModificarCliente.actualizar(Evento.RES_MODIFICAR_CLIENTE_KO, null);
+			break;
+		}
+		//SALAS
+		case Evento.ALTA_SALA:{
+			int id = getSASalas().altaSala((tSala) datos);
+			((tSala) datos).setId(id);
+			if(id != 0) VistaAnadirSala.actualizar(Evento.RES_ALTA_SALA_OK, id);
+			else VistaAnadirSala.actualizar(Evento.RES_ALTA_SALA_KO, id);
+			break;
+		}
+		case Evento.MOSTRAR_SALA:{
+			tSala s = getSASalas().leerSala((int) datos);
+			VistaMostrarSala.actualizar(Evento.RES_MOSTRAR_SALA_OK, s);
+			break;
+		}
+		case Evento.MOSTRAR_SALAS:{
+			List<tSala> res = getSASalas().leerTodasSalas();
+			if (!res.isEmpty()) VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_OK, res);
+			else VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_KO, null);
+			break;
+		}
+		case Evento.ELIMINAR_SALA:{
+			int exito = getSASalas().borrarSala((int) datos);
+			if (exito == 1) VistaEliminarSala.actualizar(Evento.RES_ELIMINAR_SALA_OK, (int) datos);
+			else VistaEliminarSala.actualizar(Evento.RES_ELIMINAR_SALA_KO, null);
+			break;
+		}
+		case Evento.MODIFICAR_SALA:{
+			int exitoModificar = getSASalas().actualizarSala((tSala) datos);
+			if (exitoModificar == 1) VistaModificarSala.actualizar(Evento.RES_MODIFICAR_SALA_OK, null);
+			else VistaModificarSala.actualizar(Evento.RES_MODIFICAR_SALA_KO, null);
+			break;
+		}
+		//ACTIVIDADES
+		case Evento.ALTA_ACTIVIDAD:{
+			int exitoInsertar = getSAActividades().altaActividad((tActividad) datos);
+			if(exitoInsertar == 1) VistaAnadirActividad.actualizar(Evento.RES_ALTA_ACTIVIDAD_OK, null);
+			else VistaAnadirActividad.actualizar(Evento.RES_ALTA_ACTIVIDAD_KO, null);
+			break;
+		}
+		case Evento.MOSTRAR_ACTIVIDAD:{
+			//NO TIENE MUCHO SENTIDO, LO TENEMOS YA TODO MENOS EL ID DE EMPLEADO QUE ENCIMA HASTA PUEDE SER NULO, PERO ES ASI LA BD
+			tActividad a = getSAActividades().leerActividad(((tActividad) datos).getTipoActividad(), ((tActividad) datos).getFecha(), ((tActividad) datos).getIdSala());
+			VistaMostrarActividad.actualizar(Evento.RES_MOSTRAR_ACTIVIDAD_OK, a);
+			break;
+		}
+		case Evento.MOSTRAR_ACTIVIDADES:{
+			List<tActividad> res = getSAActividades().leerTodasActividades();
+			if (!res.isEmpty()) VistaMostrarActividades.actualizar(Evento.RES_MOSTRAR_ACTIVIDADES_OK, res);
+			else VistaMostrarActividades.actualizar(Evento.RES_MOSTRAR_ACTIVIDADES_KO, null);
+			break;
+		}
+		case Evento.ELIMINAR_ACTIVIDAD:{
+			int exito = getSAActividades().borrarActividad(((tActividad) datos).getTipoActividad(), ((tActividad) datos).getFecha(), ((tActividad) datos).getIdSala());
+			if (exito == 1) VistaEliminarActividad.actualizar(Evento.RES_ELIMINAR_ACTIVIDAD_OK, (int) datos);
+			else VistaEliminarActividad.actualizar(Evento.RES_ELIMINAR_ACTIVIDAD_KO, null);
+			break;
+		}
+		case Evento.MODIFICAR_ACTIVIDAD:{
+			int exitoModificar = getSAActividades().actualizarActividad((tActividad) datos);
+			if (exitoModificar == 1) VistaModificarActividad.actualizar(Evento.RES_MODIFICAR_ACTIVIDAD_OK, null);
+			else VistaModificarActividad.actualizar(Evento.RES_MODIFICAR_ACTIVIDAD_KO, null);
+			break;
+		}
+//		//CATALOGOS
+//		case Evento.ALTA_CATALOGO: {
+//			int id = getSACatalogos().altaCatalogo((tCatalogo) datos);
+//			((tCatalogo) datos).setId(id);
+//			if (id != 0)
+//				VistaAnadirCatalogo.actualizar(Evento.RES_ALTA_CATALOGO_OK, id);
+//			else
+//				VistaAnadirCatalogo.actualizar(Evento.RES_ALTA_CATALOGO_KO, id);
+//			break;
+//		}
+//
+//		case Evento.MOSTRAR_CATALOGO: {
+//			tCatalogo c = getSACatalogos().leerCatalogo((int) datos);
+//			VistaMostrarCatalogo.actualizar(Evento.RES_MOSTRAR_CATALOGO_OK, c);
+//			break;
+//		}
+//
+//		case Evento.MOSTRAR_CATALOGOS: {
+//			List<tCatalogo> res = getSACatalogos().leerTodosCatalogos();
+//			if (!res.isEmpty())
+//				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_OK, res);
+//			else
+//				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_KO, null);
+//			break;
+//		}
+//
+//		case Evento.ELIMINAR_CATALOGO: {
+//			int exito = getSACatalogos().borrarCatalogo((int) datos);
+//			if (exito == 1)
+//				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_OK, (int) datos);
+//			else
+//				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_KO, null);
+//			break;
+//		}
+//
+//		case Evento.MODIFICAR_CATALOGO: {
+//			int exitoModificar = getSACatalogos().actualizarCatalogo((tCatalogo) datos);
+//			if (exitoModificar == 1)
+//				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_OK, null);
+//			else
+//				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_KO, null);
+//			break;
+//		}
+		}
+	}
+
+	public static void mostrarVista(int evento) {
+		switch(evento) {
+		case Evento.VISTA_MENU_PRINCIPAL:{
+			VistaMenuPrincipal.open();
+			break;
+		}
+		//VISTAS FACTURAS
+		case Evento.VISTA_FACTURAS:{ 
+			VistaFacturas.open();
+			break;
+		}
+		case Evento.VISTA_ALTA_FACTURA:{ 
+			VistaAltaFacturas.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_FACTURAS:{ 
+			VistaMostrarFacturas.open();
+			break;
+		}
+		
+		case Evento.VISTA_ELIMINAR_FACTURA:{
+			VistaEliminarFactura.open();
+		}
+		//VISTAS CLIENTES
+		case Evento.VISTA_CLIENTES:{ 
+			VistaCliente.open();
+			break;
+		}
+		case Evento.VISTA_ALTA_CLIENTE:{	
+			VistaAltaCliente.open();
+			break;
+		}
+		case Evento.VISTA_ELIMINAR_CLIENTE:{
+			VistaBajaCliente.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_CLIENTES:{
+			VistaMostrarClientes.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_CLIENTE:{
+			VistaMostrarCliente.open();
+			break;
+		}
+		case Evento.VISTA_MODIFICAR_CLIENTE:{
+			VistaModificarCliente.open();
+			break;
+		}
+		//VISTAS SALAS
+		case Evento.VISTA_SALAS:{ 
+			VistaSalas.open();
+			break;
+		}
+		case Evento.VISTA_ANADIR_SALAS:{ 
+			VistaAnadirSala.open();
+			break;
+		}
+		case Evento.VISTA_ELIMINAR_SALA:{ 
+			VistaEliminarSala.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_SALAS:{ 
+			VistaMostrarSalas.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_SALA:{ 
+			VistaMostrarSala.open();
+			break;
+		}
+		case Evento.VISTA_MODIFICAR_SALA:{ 
+			VistaModificarSala.open();
+			break;
+		}
+		//VISTAS ACTIVIDADES
+		case Evento.VISTA_ACTIVIDADES:{ 
+			VistaActividad.open();
+			break;
+		}
+		case Evento.VISTA_ANADIR_ACTIVIDAD:{ 
+			VistaAnadirActividad.open();
+			break;
+		}
+		case Evento.VISTA_ELIMINAR_ACTIVIDAD:{ 
+			VistaEliminarActividad.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_ACTIVIDADES:{ 
+			VistaMostrarActividades.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_ACTIVIDAD:{ 
+			VistaMostrarActividad.open();
+			break;
+		}
+		case Evento.VISTA_MODIFICAR_ACTIVIDAD:{ 
+			VistaModificarActividad.open();
+			break;
+		}
+		// VISTAS CATÁLOGOS
+		case Evento.VISTA_CATALOGOS: {
+			VistaCatalogos.open();
+			break;
+		}
+		case Evento.VISTA_ANADIR_CATALOGO: {
+			VistaAnadirCatalogo.open();
+			break;
+		}
+		case Evento.VISTA_ELIMINAR_CATALOGO: {
+			VistaEliminarCatalogo.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_CATALOGOS: {
+			VistaMostrarCatalogos.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_CATALOGO: {
+			VistaMostrarCatalogo.open();
+			break;
+		}
+		case Evento.VISTA_MODIFICAR_CATALOGO: {
+			VistaModificarCatalogo.open();
+			break;
+		}
+		// VISTAS EMPLEADOS
+		case Evento.VISTA_EMPLEADOS: {
+			VistaEmpleados.open();
+			break;
+		}
+		case Evento.VISTA_ANADIR_EMPLEADO: {
+			VistaAnadirEmpleado.open();
+			break;
+		}
+		case Evento.VISTA_ELIMINAR_EMPLEADO: {
+			VistaEliminarEmpleado.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_EMPLEADOS: {
+			VistaMostrarEmpleados.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_EMPLEADO: {
+			VistaMostrarEmpleado.open();
+			break;
+		}
+		case Evento.VISTA_MODIFICAR_EMPLEADO: {
+			VistaModificarEmpleado.open();
+			break;
+		}
+		}
+	}
+}

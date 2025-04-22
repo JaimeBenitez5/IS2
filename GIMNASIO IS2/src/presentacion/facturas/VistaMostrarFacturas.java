@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
 import negocio.tCliente;
+import negocio.tFactura;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -69,14 +70,14 @@ public class VistaMostrarFacturas {
 		GUI.setVisible(true);
 	}
 
-	public static void actualizar(int evento, List<tCliente> datos) {
-		if (evento == Evento.RES_MOSTRAR_CLIENTES_OK) {
+	public static void actualizar(int evento, List<tFactura> res) {
+		if (evento == Evento.RES_MOSTRAR_FACTURAS_OK) {
 			panelMostrarFacturas.removeAll();
 			String[] columnNames = {"ID", "Nombre", "Direccion", "Activo"};
-			String[][] data = new String[datos.size()][4];
+			String[][] data = new String[res.size()][4];
 
-			for (int i = 0; i < datos.size(); i++) {
-				tCliente cliente = datos.get(i);
+			for (int i = 0; i < res.size(); i++) {
+				tCliente cliente = res.get(i);
 				data[i][0] = String.valueOf(cliente.getId());
 				data[i][1] = cliente.getNombre();
 				data[i][2] = cliente.getDir();
@@ -99,7 +100,7 @@ public class VistaMostrarFacturas {
 		}
 		else if (evento == Evento.RES_MOSTRAR_FACTURAS_KO) {
 			panelMostrarFacturas.removeAll();
-			if (datos == null || datos.isEmpty()) {
+			if (res == null || res.isEmpty()) {
 				JLabel mensaje = new JLabel("No hay clientes disponibles.", SwingConstants.CENTER);
 				mensaje.setForeground(Color.WHITE);
 				panelMostrarFacturas.add(mensaje, BorderLayout.CENTER);
