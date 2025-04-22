@@ -43,6 +43,7 @@ public class Evento {
 	public static final int VISTA_MOSTRAR_FACTURAS = 204;
 	public static final int VISTA_MOSTRAR_FACTURA = 205;
 	public static final int VISTA_MODIFICAR_FACTURA = 206;
+	public static final int VISTA_MOSTRAR_FACTURAS_CLIENTE = 207;
 	//Eventos de Negocio
 	public static final int ALTA_FACTURA = 210;
 	public static final int ELIMINAR_FACTURA = 211;
@@ -50,6 +51,7 @@ public class Evento {
 	public static final int MODIFICAR_FACTURA = 213;
 	public static final int MOSTRAR_FACTURAS = 214;
 	public static final int BUSCAR_FACTURA = 215;
+	public static final int MOSTRAR_FACTURAS_CLIENTE = 216;
 	//Eventos de Respuesta
 	public static final int RES_ALTA_FACTURAS_OK = 220;
 	public static final int RES_ALTA_FACTURAS_KO = 221;
@@ -68,6 +70,9 @@ public class Evento {
 
 	public static final int RES_MOSTRAR_FACTURAS_OK = 230;
 	public static final int RES_MOSTRAR_FACTURAS_KO = 231;
+	
+	public static final int RES_MOSTRAR_FACTURAS_CLIENTE_OK = 232;
+	public static final int RES_MOSTRAR_FACTURAS_CLIENTE_KO = 233;
 
 	// Eventos Salas
 	//Eventos de Vistas

@@ -75,7 +75,7 @@ public class DAOFacturasImp implements DAOFacturas {
 	}
 
 	public List<tFactura> leerTodasFacturas() {
-		ArrayList<tFactura> salas = new ArrayList<tFactura>();
+		ArrayList<tFactura> facturas = new ArrayList<tFactura>();
 		String query = "SELECT * FROM Factura";
 		try ( Statement stmt = BDConexion.getConnection().createStatement ()) {
 			ResultSet rs = stmt.executeQuery(query);
@@ -84,12 +84,32 @@ public class DAOFacturasImp implements DAOFacturas {
 				Date fecha = rs.getDate("fecha");
 				Double imp = rs.getDouble("importeTotal");
 				tFactura f = new tFactura(numFactura, fecha, imp);
-				salas.add(f);
+				facturas.add(f);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return salas;
+		return facturas;
+	}
+	
+	public List<tFactura> leerFacturasCliente(int idCliente){
+		ArrayList<tFactura> facturas = new ArrayList<tFactura>();
+		String query = "SELECT * FROM Factura WHERE numFactura = (SELECT numFactura FROM Compra WHERE idCliente = ?)";
+		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
+			stmt.setInt(1, idCliente);
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next ()) {
+				int numFactura = rs.getInt("numFactura");
+				Date fecha = rs.getDate("fecha");
+				Double imp = rs.getDouble("importeTotal");
+				tFactura f = new tFactura(numFactura, fecha, imp);
+				facturas.add(f);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return facturas;
 	}
 	
 }
