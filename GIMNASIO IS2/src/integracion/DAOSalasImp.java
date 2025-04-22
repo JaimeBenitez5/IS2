@@ -28,7 +28,7 @@ public class DAOSalasImp implements DAOSalas {
 		}
 		return 0;
 	}
-	
+
 	public tSala leerSala(final int id) {
 		String query = "SELECT * FROM Sala WHERE idSala  = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
@@ -51,7 +51,7 @@ public class DAOSalasImp implements DAOSalas {
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setString(1, String.valueOf(sala.getAforo()));
 			stmt.setInt(2,sala.getId());
-	        return stmt.executeUpdate(); 
+			return stmt.executeUpdate(); 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -61,31 +61,30 @@ public class DAOSalasImp implements DAOSalas {
 	public int borrarSala(final int id) {
 		//HAY QUE BORRAR ANTES LOS PARES DE ACTIVIDAD Y DE CATALOGO
 		//LLAMAR A LAS SA DE CADA SUBSISTEMA Y BORRARLO EN SU DAO
-		
-		String query1 = "DELETE FROM Actividad_Catalogo WHERE idSala = ?";
-		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query1, Statement.RETURN_GENERATED_KEYS)) {
-			stmt.setInt(1, id);
-			stmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-		String query2 = "DELETE FROM Actividad WHERE idSala = ?";
-		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query2, Statement.RETURN_GENERATED_KEYS)) {
-			stmt.setInt(1, id);
-			stmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-		String query3 = "DELETE FROM Sala WHERE idSala = ?";
-		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query3, Statement.RETURN_GENERATED_KEYS)) {
-			stmt.setInt(1, id);
-			return stmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		tSala s = leerSala(id);
+		if(s != null) {
+			String query1 = "DELETE FROM Actividad_Catalogo WHERE idSala = ?";
+			try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query1, Statement.RETURN_GENERATED_KEYS)) {
+				stmt.setInt(1, id);
+				stmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			String query2 = "DELETE FROM Actividad WHERE idSala = ?";
+			try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query2, Statement.RETURN_GENERATED_KEYS)) {
+				stmt.setInt(1, id);
+				stmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			String query3 = "DELETE FROM Sala WHERE idSala = ?";
+			try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query3, Statement.RETURN_GENERATED_KEYS)) {
+				stmt.setInt(1, id);
+				return stmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return 0;
 	}
