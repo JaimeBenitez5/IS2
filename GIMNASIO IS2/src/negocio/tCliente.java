@@ -68,6 +68,6 @@ public class tCliente {
     }
 
     public String toString() {
-        return _id + " " + _dni+ " " + _nombre + " " + _dir;
+        return _id + " " + _dni+ " " + _nombre + " " + _dir + " " + _activo;
     }
 }
