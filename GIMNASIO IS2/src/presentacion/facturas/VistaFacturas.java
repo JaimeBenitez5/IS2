@@ -9,7 +9,9 @@ import presentacion.VistaMenuPrincipal;
 
 public class VistaFacturas {
 
-    public VistaFacturas() {
+	private static JFrame GUI = null;
+	
+    private static JFrame initGUI() {
         // ------------------------------------
         // Diseño de la vista
         JFrame menuPrincipal = new JFrame();
@@ -50,23 +52,29 @@ public class VistaFacturas {
         // Listeners
         botonAlta.addActionListener(e -> {
             menuPrincipal.setVisible(false);
-            Controlador.accion(Evento.ALTA_CLIENTE, null);
+            Controlador.mostrarVista(Evento.VISTA_ALTA_FACTURA);
         });
 
         botonReadAll.addActionListener(e -> {
             menuPrincipal.setVisible(false);
-            Controlador.accion(Evento.MOSTRAR_CLIENTES, null);
+            Controlador.mostrarVista(Evento.VISTA_MOSTRAR_FACTURAS);
         });
 
         botonListByClient.addActionListener(e -> {
             menuPrincipal.setVisible(false);
-            Controlador.accion(Evento.ELIMINAR_CLIENTE, null);
+            Controlador.mostrarVista(Evento.VISTA_ELIMINAR_FACTURA);
+        });
+        
+        botonRead.addActionListener(e -> {
+            menuPrincipal.setVisible(false);
+            Controlador.mostrarVista(Evento.VISTA_MOSTRAR_FACTURA);
         });
 
         botonMainMenu.addActionListener(e -> {
             menuPrincipal.setVisible(false);
             new VistaMenuPrincipal();
         });
+        return menuPrincipal;
     }
 
     // Método para crear botones con formato
@@ -90,4 +98,9 @@ public class VistaFacturas {
             JOptionPane.showMessageDialog(null, "No se ha podido encontrar ninguna factura");
         }
     }
+    
+    public static void open() {
+		if(GUI == null) GUI = initGUI();
+		GUI.setVisible(true);
+	}
 }
