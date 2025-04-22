@@ -6,6 +6,9 @@ import presentacion.actividades.*;
 import presentacion.catalogos.*;
 import presentacion.clientes.*;
 import presentacion.empleados.*;
+import presentacion.facturas.VistaAltaFacturas;
+import presentacion.facturas.VistaFacturas;
+import presentacion.facturas.VistaMostrarFacturas;
 import presentacion.salas.*;
 import negocio.*;
 
@@ -16,6 +19,12 @@ public class Controlador{
 	private static SAActividades SAActividades;
 	private static SACatalogos SACatalogos;
 	private static SAEmpleados SAEmpleados;
+	private static SAFacturas SAFacturas;
+	
+	private static SAFacturas getSAFacturas(){
+		if(SAFacturas == null) SAFacturas = new SAFacturasImp();
+		return SAFacturas;
+	}
 	
 	private static SAClientes getSAClientes(){
 		if(SAClientes == null) SAClientes = new SAClientesImp();
@@ -40,6 +49,21 @@ public class Controlador{
 	
 	public static void accion(int evento, Object datos) { 
 		switch(evento) {
+		//FACTURAS
+		case Evento.ALTA_FACTURA:{
+			int id = getSAFacturas().altaFactura((tFactura) datos);
+			((tFactura) datos).setId(id);
+			if(id != 0) VistaAltaFacturas.actualizar(Evento.RES_ALTA_FACTURAS_OK, id);
+			else VistaAltaFacturas.actualizar(Evento.RES_ALTA_FACTURAS_KO, id);
+			break;
+		}
+		case Evento.MOSTRAR_FACTURAS:{
+			int id = getSAFacturas().altaFactura((tFactura) datos);
+			((tFactura) datos).setId(id);
+			if(id != 0) VistaAltaFacturas.actualizar(Evento.RES_ALTA_FACTURAS_OK, id);
+			else VistaAltaFacturas.actualizar(Evento.RES_ALTA_FACTURAS_KO, id);
+			break;
+		}
 		//CLIENTES
 		case Evento.ALTA_CLIENTE:{
 			int id = getSAClientes().altaCliente((tCliente) datos);
@@ -184,6 +208,19 @@ public class Controlador{
 		switch(evento) {
 		case Evento.VISTA_MENU_PRINCIPAL:{
 			VistaMenuPrincipal.open();
+			break;
+		}
+		//VISTAS FACTURAS
+		case Evento.VISTA_FACTURAS:{ 
+			VistaFacturas.open();
+			break;
+		}
+		case Evento.VISTA_ALTA_FACTURA:{ 
+			VistaAltaFacturas.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_FACTURAS:{ 
+			VistaMostrarFacturas.open();
 			break;
 		}
 		//VISTAS CLIENTES
