@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import negocio.DTOtCatalogo;
 import negocio.DTOtCliente;
 import presentacion.Controlador;
 import presentacion.Evento;
@@ -34,7 +35,7 @@ public class VistaMostrarCatalogo {
 	}
 
 	private static JFrame initGUI() {
-		JFrame menuPrincipal = new JFrame("Menú Mostrar Cliente");
+		JFrame menuPrincipal = new JFrame("Menú Mostrar Catalogo");
 		menuPrincipal.setSize(854, 480);
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,7 +87,7 @@ public class VistaMostrarCatalogo {
 			public void actionPerformed (ActionEvent e) {
 				String id = idTF.getText();
 				idTF.setText("");
-				Controlador.accion(Evento.MOSTRAR_CLIENTE, id);
+				Controlador.accion(Evento.MOSTRAR_CATALOGO, id);
 			}
 		});
 
@@ -106,22 +107,19 @@ public class VistaMostrarCatalogo {
 		return menuPrincipal;
 	}
 	
-	public static void actualizar(int evento, DTOtCliente cliente) {
-		if (evento == Evento.RES_MOSTRAR_CLIENTE_OK) {
+	public static void actualizar(int evento, DTOtCatalogo catalogo) {
+		if (evento == Evento.RES_MOSTRAR_CATALOGO_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			String dni = cliente.getDni();
-			String nombre = cliente.getNombre();
-			String dir = cliente.getDir();
-			String activo = cliente.getActivo() + "";
-			JOptionPane.showMessageDialog(null, "DNI: " + dni + " Nombre: " + nombre + " Direccion: " + dir + " Activo: " + activo);
+			int n = catalogo.getNumActividades();
+			JOptionPane.showMessageDialog(null,"Numero de actividades: "+n);
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_MOSTRAR_CLIENTE_KO) {
+		else if (evento == Evento.RES_MOSTRAR_CATALOGO_KO) {
 			JOptionPane.showMessageDialog(null, "No se ha podido encontrar el catalogo");
 		}
 	}

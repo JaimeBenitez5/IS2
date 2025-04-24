@@ -23,6 +23,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.JFrame;
 
+import negocio.DTOtCatalogo;
 import negocio.DTOtCliente;
 import presentacion.Controlador;
 import presentacion.Evento;
@@ -30,16 +31,16 @@ import presentacion.UIElementFactory;
 
 public class VistaMostrarCatalogos {
 	private static JFrame GUI = null;
-	private static JPanel panelMostrarClientes;
+	private static JPanel panelMostrarCatalogos;
 
 	public static void open() {  
 		if (GUI == null) initGUI();
-		Controlador.accion(Evento.MOSTRAR_CLIENTES, null);
+		Controlador.accion(Evento.MOSTRAR_CATALOGOS, null);
 		GUI.setVisible(true);
 	}
 
 	private static void initGUI() {
-		GUI = new JFrame("Menú Mostrar Clientes");
+		GUI = new JFrame("Menú Mostrar Catalogos");
 		GUI.setSize(854, 480);
 		GUI.setLocationRelativeTo(null);
 		GUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,9 +48,9 @@ public class VistaMostrarCatalogos {
 		GUI.getContentPane().setBackground(new Color(17, 47, 69));
 
 		// Panel principal donde se mostrarán los clientes
-		panelMostrarClientes = new JPanel(new BorderLayout());
-		panelMostrarClientes.setBackground(new Color(17, 47, 69));
-		GUI.add(panelMostrarClientes, BorderLayout.CENTER);
+		panelMostrarCatalogos = new JPanel(new BorderLayout());
+		panelMostrarCatalogos.setBackground(new Color(17, 47, 69));
+		GUI.add(panelMostrarCatalogos, BorderLayout.CENTER);
 
 		// Botones de navegación
 		JPanel botones = new JPanel(new FlowLayout());
@@ -80,41 +81,39 @@ public class VistaMostrarCatalogos {
 		GUI.setVisible(true);
 	}
 
-	public static void actualizar(int evento, List<DTOtCliente> datos) {
-		if (evento == Evento.RES_MOSTRAR_CLIENTES_OK) {
-			panelMostrarClientes.removeAll();
+	public static void actualizar(int evento, List<DTOtCatalogo> datos) {
+		if (evento == Evento.RES_MOSTRAR_CATALOGOS_OK) {
+			panelMostrarCatalogos.removeAll();
 			String[] columnNames = {"ID", "Nombre", "Direccion", "Activo"};
 			String[][] data = new String[datos.size()][4];
 
 			for (int i = 0; i < datos.size(); i++) {
-				DTOtCliente cliente = datos.get(i);
-				data[i][0] = String.valueOf(cliente.getId());
-				data[i][1] = cliente.getNombre();
-				data[i][2] = cliente.getDir();
-				data[i][3] = cliente.getActivo() + "";
+				DTOtCatalogo catalogo = datos.get(i);
+				data[i][0] = String.valueOf(catalogo.getId());
+				data[i][1] = String.valueOf(catalogo.getNumActividades());
 			}
 
-			JTable tablaClientes = new JTable(data, columnNames);
-			JScrollPane scrollPane = new JScrollPane(tablaClientes);
-			tablaClientes.setBackground(new Color(17, 47, 69));
-			tablaClientes.setForeground(Color.WHITE);
-			tablaClientes.setOpaque(false);
-			tablaClientes.setShowGrid(false);
+			JTable tablaCatalogos = new JTable(data, columnNames);
+			JScrollPane scrollPane = new JScrollPane(tablaCatalogos);
+			tablaCatalogos.setBackground(new Color(17, 47, 69));
+			tablaCatalogos.setForeground(Color.WHITE);
+			tablaCatalogos.setOpaque(false);
+			tablaCatalogos.setShowGrid(false);
 			scrollPane.setForeground(new Color(17, 47, 69));
 			scrollPane.setOpaque(false);
 			scrollPane.getViewport().setOpaque(false);
-			panelMostrarClientes.add(scrollPane, BorderLayout.CENTER);
+			panelMostrarCatalogos.add(scrollPane, BorderLayout.CENTER);
 
 			// Refrescar la GUI
-			panelMostrarClientes.revalidate();
-			panelMostrarClientes.repaint();
+			panelMostrarCatalogos.revalidate();
+			panelMostrarCatalogos.repaint();
 		}
-		else if (evento == Evento.RES_MOSTRAR_CLIENTES_KO) {
-			panelMostrarClientes.removeAll();
+		else if (evento == Evento.RES_MOSTRAR_CATALOGOS_KO) {
+			panelMostrarCatalogos.removeAll();
 			if (datos == null || datos.isEmpty()) {
-				JLabel mensaje = new JLabel("No hay clientes disponibles.", SwingConstants.CENTER);
+				JLabel mensaje = new JLabel("No hay catalogos disponibles.", SwingConstants.CENTER);
 				mensaje.setForeground(Color.WHITE);
-				panelMostrarClientes.add(mensaje, BorderLayout.CENTER);
+				panelMostrarCatalogos.add(mensaje, BorderLayout.CENTER);
 			} 
 		}
 	}
