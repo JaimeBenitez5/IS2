@@ -40,18 +40,18 @@ public class VistaEliminarCatalogo {
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		JPanel panelBajaCliente = new JPanel();
-		panelBajaCliente.setLayout(new BoxLayout(panelBajaCliente, BoxLayout.Y_AXIS));
-		panelBajaCliente.setBackground(new Color(17, 47, 69));
-		panelBajaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+		JPanel panelBajaCatalogo = new JPanel();
+		panelBajaCatalogo.setLayout(new BoxLayout(panelBajaCatalogo, BoxLayout.Y_AXIS));
+		panelBajaCatalogo.setBackground(new Color(17, 47, 69));
+		panelBajaCatalogo.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-		menuPrincipal.add(panelBajaCliente, BorderLayout.CENTER);
+		menuPrincipal.add(panelBajaCatalogo, BorderLayout.CENTER);
 
 		JLabel titulo = new JLabel("Dar de Baja Catalogo");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelBajaCliente.add(titulo);
-		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
+		panelBajaCatalogo.add(titulo);
+		panelBajaCatalogo.add(Box.createRigidArea(new Dimension(0, 30)));
 
 		JPanel panelCampos = new JPanel(new GridLayout(1, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
@@ -63,8 +63,8 @@ public class VistaEliminarCatalogo {
 		JTextField idTF = new JTextField(30);
 		panelCampos.add(idTF);
 
-		panelBajaCliente.add(panelCampos);
-		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
+		panelBajaCatalogo.add(panelCampos);
+		panelBajaCatalogo.add(Box.createRigidArea(new Dimension(0, 50)));
 
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
@@ -77,14 +77,14 @@ public class VistaEliminarCatalogo {
 		botones.add(delete);
 		botones.add(botonMainMenu);
 
-		panelBajaCliente.add(botones);
+		panelBajaCatalogo.add(botones);
 		menuPrincipal.setVisible(true);
 
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				int id = Integer.parseInt(idTF.getText());
-				Controlador.accion(Evento.ELIMINAR_CLIENTE, id);
+				Controlador.accion(Evento.ELIMINAR_CATALOGO, id);
 			}
 		});
 
@@ -105,18 +105,18 @@ public class VistaEliminarCatalogo {
 	}
 
 	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_ELIMINAR_CLIENTE_OK) {
+		if (evento == Evento.RES_ELIMINAR_CATALOGO_OK) {
 			JTextArea textArea = new JTextArea(datos.toString());
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, "El cliente se ha eliminado correctamente");
+			JOptionPane.showMessageDialog(null, "El catalogo se ha eliminado correctamente");
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_ELIMINAR_CLIENTE_KO) {
-			JOptionPane.showMessageDialog(null, "No se ha podido eliminar el cliente");
+		else if (evento == Evento.RES_ELIMINAR_CATALOGO_KO) {
+			JOptionPane.showMessageDialog(null, "No se ha podido eliminar el catalogo");
 		}
 	}
 }

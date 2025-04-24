@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.DTOtCliente;
+import negocio.DTOtCatalogo;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -41,18 +42,18 @@ public class VistaModificarCatalogo {
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		JPanel panelAltaCliente = new JPanel();
-		panelAltaCliente.setLayout(new BoxLayout(panelAltaCliente, BoxLayout.Y_AXIS));
-		panelAltaCliente.setBackground(new Color(17, 47, 69));
-		panelAltaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Márgenes exteriores
+		JPanel panelModificarCatalogo = new JPanel();
+		panelModificarCatalogo.setLayout(new BoxLayout(panelModificarCatalogo, BoxLayout.Y_AXIS));
+		panelModificarCatalogo.setBackground(new Color(17, 47, 69));
+		panelModificarCatalogo.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Márgenes exteriores
 
-		menuPrincipal.add(panelAltaCliente, BorderLayout.CENTER);
+		menuPrincipal.add(panelModificarCatalogo, BorderLayout.CENTER);
 
 		JLabel titulo = new JLabel("Modificar Catalogo");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelAltaCliente.add(titulo);
-		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
+		panelModificarCatalogo.add(titulo);
+		panelModificarCatalogo.add(Box.createRigidArea(new Dimension(0, 30)));
 
 		JPanel panelCampos = new JPanel(new GridLayout(4, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
@@ -64,26 +65,15 @@ public class VistaModificarCatalogo {
 		JTextField idTF = new JTextField(30);
 		panelCampos.add(idTF);
 
-		JLabel dni = new JLabel("DNI:");
-		dni.setForeground(Color.WHITE);
-		panelCampos.add(dni);
-		JTextField dniTF = new JTextField(30);
-		panelCampos.add(dniTF);
+		JLabel numero = new JLabel("Numero de actividades:");
+		numero.setForeground(Color.WHITE);
+		panelCampos.add(numero);
+		JTextField numeroTF = new JTextField(30);
+		panelCampos.add(numeroTF);
 
-		JLabel nombre = new JLabel("Nombre:");
-		nombre.setForeground(Color.WHITE);
-		panelCampos.add(nombre);
-		JTextField nombreTF = new JTextField(30);
-		panelCampos.add(nombreTF);
 
-		JLabel dir = new JLabel("Dirección:");
-		dir.setForeground(Color.WHITE);
-		panelCampos.add(dir);
-		JTextField dirTF = new JTextField(30);
-		panelCampos.add(dirTF);
-
-		panelAltaCliente.add(panelCampos);
-		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
+		panelModificarCatalogo.add(panelCampos);
+		panelModificarCatalogo.add(Box.createRigidArea(new Dimension(0, 50)));
 
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
@@ -96,21 +86,22 @@ public class VistaModificarCatalogo {
 		botones.add(save);
 		botones.add(botonMainMenu);
 
-		panelAltaCliente.add(botones);
+		panelModificarCatalogo.add(botones);
 		menuPrincipal.setVisible(true);
 
 		save.addActionListener(
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
 						int id = Integer.parseInt(idTF.getText());
-						String dni = dniTF.getText();
-						String nombre = nombreTF.getText();
-						String dir = dirTF.getText();
-						if (dni.isEmpty() || nombre.isEmpty() || dir.isEmpty()) {
+						String n = numeroTF.getText();
+						
+						if (n.isEmpty()) {
 							JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 						}
-						DTOtCliente c = new DTOtCliente(id,dni, nombre, dir);
-						Controlador.accion(Evento.MODIFICAR_CLIENTE, c);
+						DTOtCatalogo c = new DTOtCatalogo(id,Integer.parseInt(n));
+						idTF.setText("");
+						numeroTF.setText("");
+						Controlador.accion(Evento.MODIFICAR_CATALOGO, c);
 					}
 				}
 				);
@@ -134,16 +125,16 @@ public class VistaModificarCatalogo {
 	
 
 	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_MODIFICAR_CLIENTE_OK) {
+		if (evento == Evento.RES_MODIFICAR_CATALOGO_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, "El cliente se ha modificado correctamente");
+			JOptionPane.showMessageDialog(null, "El catalogo se ha modificado correctamente");
 			GUI.setVisible(false);
-		} else if (evento == Evento.RES_MODIFICAR_CLIENTE_KO)
-			JOptionPane.showMessageDialog(null, "No se ha podido modificar el cliente");
+		} else if (evento == Evento.RES_MODIFICAR_CATALOGO_KO)
+			JOptionPane.showMessageDialog(null, "No se ha podido modificar el catalogo");
 	}
 }

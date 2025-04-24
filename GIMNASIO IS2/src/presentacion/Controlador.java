@@ -196,23 +196,23 @@ public class Controlador{
 //			break;
 //		}
 //
-//		case Evento.ELIMINAR_CATALOGO: {
-//			int exito = getSACatalogos().borrarCatalogo((int) datos);
-//			if (exito == 1)
-//				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_OK, (int) datos);
-//			else
-//				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_KO, null);
-//			break;
-//		}
+		case Evento.ELIMINAR_CATALOGO: {
+			int exito = getSACatalogos().borrarCatalogo((int) datos);
+			if (exito == 1)
+				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_OK, (int) datos);
+			else
+				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_KO, null);
+			break;
+		}
 //
-//		case Evento.MODIFICAR_CATALOGO: {
-//			int exitoModificar = getSACatalogos().actualizarCatalogo((tCatalogo) datos);
-//			if (exitoModificar == 1)
-//				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_OK, null);
-//			else
-//				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_KO, null);
-//			break;
-//		}
+		case Evento.MODIFICAR_CATALOGO: {
+			int exitoModificar = getSACatalogos().actualizarCatalogo((DTOtCatalogo) datos);
+			if (exitoModificar == 1)
+				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_OK, null);
+			else
+				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_KO, null);
+			break;
+		}
 		}
 	}
 

@@ -34,25 +34,25 @@ public class VistaMostrarCatalogo {
 	}
 
 	private static JFrame initGUI() {
-		JFrame menuPrincipal = new JFrame("Menú Mostrar Catalogo");
+		JFrame menuPrincipal = new JFrame("Menú Mostrar Cliente");
 		menuPrincipal.setSize(854, 480);
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		JPanel panelBajaCliente = new JPanel();
-		panelBajaCliente.setLayout(new BoxLayout(panelBajaCliente, BoxLayout.Y_AXIS));
-		panelBajaCliente.setBackground(new Color(17, 47, 69));
-		panelBajaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+		JPanel panelMostrarCliente = new JPanel();
+		panelMostrarCliente.setLayout(new BoxLayout(panelMostrarCliente, BoxLayout.Y_AXIS));
+		panelMostrarCliente.setBackground(new Color(17, 47, 69));
+		panelMostrarCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-		menuPrincipal.add(panelBajaCliente, BorderLayout.CENTER);
+		menuPrincipal.add(panelMostrarCliente, BorderLayout.CENTER);
 
 		JLabel titulo = new JLabel("Mostrar Catalogo");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelBajaCliente.add(titulo);
-		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
+		panelMostrarCliente.add(titulo);
+		panelMostrarCliente.add(Box.createRigidArea(new Dimension(0, 30)));
 
 		JPanel panelCampos = new JPanel(new GridLayout(1, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
@@ -64,8 +64,8 @@ public class VistaMostrarCatalogo {
 		JTextField idTF = new JTextField(30);
 		panelCampos.add(idTF);
 
-		panelBajaCliente.add(panelCampos);
-		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
+		panelMostrarCliente.add(panelCampos);
+		panelMostrarCliente.add(Box.createRigidArea(new Dimension(0, 50)));
 
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
@@ -78,14 +78,15 @@ public class VistaMostrarCatalogo {
 		botones.add(delete);
 		botones.add(botonMainMenu);
 
-		panelBajaCliente.add(botones);
+		panelMostrarCliente.add(botones);
 		menuPrincipal.setVisible(true);
 
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int id = Integer.parseInt(idTF.getText());
-				Controlador.accion(Evento.MOSTRAR_CATALOGO, id);
+				String id = idTF.getText();
+				idTF.setText("");
+				Controlador.accion(Evento.MOSTRAR_CLIENTE, id);
 			}
 		});
 
@@ -113,15 +114,15 @@ public class VistaMostrarCatalogo {
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			String id = String.valueOf(cliente.getId());
+			String dni = cliente.getDni();
 			String nombre = cliente.getNombre();
 			String dir = cliente.getDir();
 			String activo = cliente.getActivo() + "";
-			JOptionPane.showMessageDialog(null, "ID: " +id + " Nombre: " + nombre + " Direccion: " + dir + " Activo: " + activo);
+			JOptionPane.showMessageDialog(null, "DNI: " + dni + " Nombre: " + nombre + " Direccion: " + dir + " Activo: " + activo);
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_MOSTRAR_CLIENTE_KO) {
-			JOptionPane.showMessageDialog(null, "No se ha podido encontrar el cliente");
+			JOptionPane.showMessageDialog(null, "No se ha podido encontrar el catalogo");
 		}
 	}
 }
