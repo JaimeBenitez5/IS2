@@ -171,15 +171,15 @@ public class Controlador{
 			break;
 		}
 //		//CATALOGOS
-//		case Evento.ALTA_CATALOGO: {
-//			int id = getSACatalogos().altaCatalogo((tCatalogo) datos);
-//			((tCatalogo) datos).setId(id);
-//			if (id != 0)
-//				VistaAnadirCatalogo.actualizar(Evento.RES_ALTA_CATALOGO_OK, id);
-//			else
-//				VistaAnadirCatalogo.actualizar(Evento.RES_ALTA_CATALOGO_KO, id);
-//			break;
-//		}
+		case Evento.ALTA_CATALOGO: {
+			int id = getSACatalogos().altaCatalogo((DTOtCatalogo) datos);
+			((DTOtCatalogo) datos).setId(id);
+			if (id != 0)
+				VistaAnadirCatalogo.actualizar(Evento.RES_ALTA_CATALOGO_OK, id);
+			else
+				VistaAnadirCatalogo.actualizar(Evento.RES_ALTA_CATALOGO_KO, id);
+			break;
+		}
 //
 //		case Evento.MOSTRAR_CATALOGO: {
 //			tCatalogo c = getSACatalogos().leerCatalogo((int) datos);

@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.DTOtCliente;
+import negocio.DTOtCatalogo;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -42,43 +43,32 @@ public class VistaAnadirCatalogo {
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
 		// Panel principal con margen
-		JPanel panelAltaCliente = new JPanel();
-		panelAltaCliente.setLayout(new BoxLayout(panelAltaCliente, BoxLayout.Y_AXIS));
-		panelAltaCliente.setBackground(new Color(17, 47, 69));
-		panelAltaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+		JPanel panelAnadirCatalogo = new JPanel();
+		panelAnadirCatalogo.setLayout(new BoxLayout(panelAnadirCatalogo, BoxLayout.Y_AXIS));
+		panelAnadirCatalogo.setBackground(new Color(17, 47, 69));
+		panelAnadirCatalogo.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-		menuPrincipal.add(panelAltaCliente, BorderLayout.CENTER);
+		menuPrincipal.add(panelAnadirCatalogo, BorderLayout.CENTER);
 
 		JLabel titulo = new JLabel("Añadir Catalogo");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelAltaCliente.add(titulo);
-		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
+		panelAnadirCatalogo.add(titulo);
+		panelAnadirCatalogo.add(Box.createRigidArea(new Dimension(0, 30)));
 
 		JPanel panelCampos = new JPanel(new GridLayout(3, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
-		JLabel dni = new JLabel("DNI:");
-		dni.setForeground(Color.WHITE);
-		panelCampos.add(dni);
-		JTextField dniTF = new JTextField(30);
-		panelCampos.add(dniTF);
+		JLabel numero = new JLabel("Número de actividades:");
+		numero.setForeground(Color.WHITE);
+		panelCampos.add(numero);
+		JTextField numeroTF = new JTextField(30);
+		panelCampos.add(numeroTF);
 
-		JLabel nombre = new JLabel("Nombre:");
-		nombre.setForeground(Color.WHITE);
-		panelCampos.add(nombre);
-		JTextField nombreTF = new JTextField(30);
-		panelCampos.add(nombreTF);
 
-		JLabel dir = new JLabel("Dirección:");
-		dir.setForeground(Color.WHITE);
-		panelCampos.add(dir);
-		JTextField dirTF = new JTextField(30);
-		panelCampos.add(dirTF);
-
-		panelAltaCliente.add(panelCampos);
-		panelAltaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
+		panelAnadirCatalogo.add(panelCampos);
+		panelAnadirCatalogo.add(Box.createRigidArea(new Dimension(0, 50)));
 
 		// Botones
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
@@ -92,23 +82,19 @@ public class VistaAnadirCatalogo {
 		botones.add(save);
 		botones.add(botonMainMenu);
 
-		panelAltaCliente.add(botones);
+		panelAnadirCatalogo.add(botones);
 		menuPrincipal.setVisible(true);
 
 		save.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String dni = dniTF.getText();
-				String nombre = nombreTF.getText();
-				String dir = dirTF.getText();
-				if (dni.isEmpty() || nombre.isEmpty() || dir.isEmpty()) {
+				String n= numeroTF.getText();
+				if (n.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-					dniTF.setText("");
-					nombreTF.setText("");
-					dirTF.setText("");
-					DTOtCliente c = new DTOtCliente(dni, nombre, dir);
-					Controlador.accion(Evento.ALTA_CLIENTE, c);
+					numeroTF.setText("");
+					DTOtCatalogo c = new DTOtCatalogo(Integer.parseInt(n));
+					Controlador.accion(Evento.ALTA_CATALOGO, c);
 				}
 			}
 		});
@@ -130,18 +116,18 @@ public class VistaAnadirCatalogo {
 	}
 
 	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_ALTA_CLIENTE_OK) {
+		if (evento == Evento.RES_ALTA_CATALOGO_OK) {
 			JTextArea textArea = new JTextArea(datos.toString());
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, "El cliente se ha insertado correctamente con ID: " + datos.toString());
+			JOptionPane.showMessageDialog(null, "El catalogo se ha insertado correctamente con ID: " + datos.toString());
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_ALTA_CLIENTE_KO) {
-			JOptionPane.showMessageDialog(null, "No se ha podido insertar el cliente");
+		else if (evento == Evento.RES_ALTA_CATALOGO_KO) {
+			JOptionPane.showMessageDialog(null, "No se ha podido insertar el catalogo");
 		}
 	}
 }
