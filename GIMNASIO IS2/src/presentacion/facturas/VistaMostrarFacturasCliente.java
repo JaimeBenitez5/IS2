@@ -25,7 +25,7 @@ import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
 
-public class VistaFacturasDeCliente {
+public class VistaMostrarFacturasCliente {
 	private static JFrame GUI = null;
 
 	public static void open() {

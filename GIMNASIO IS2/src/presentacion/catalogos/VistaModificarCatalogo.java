@@ -20,7 +20,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.DTOtCliente;
 import negocio.DTOtCatalogo;
 import presentacion.Controlador;
 import presentacion.Evento;
@@ -28,12 +27,12 @@ import presentacion.UIElementFactory;
 
 public class VistaModificarCatalogo {
 	private static JFrame GUI = null;
-	
+
 	public static void open() {
 		if(GUI == null) GUI = initGUI();
 		GUI.setVisible(true);
 	}
-	
+
 	private static JFrame initGUI() {
 		JFrame menuPrincipal = new JFrame("Menú Modificar Catalogo");
 		menuPrincipal.setSize(854, 480);
@@ -45,7 +44,7 @@ public class VistaModificarCatalogo {
 		JPanel panelModificarCatalogo = new JPanel();
 		panelModificarCatalogo.setLayout(new BoxLayout(panelModificarCatalogo, BoxLayout.Y_AXIS));
 		panelModificarCatalogo.setBackground(new Color(17, 47, 69));
-		panelModificarCatalogo.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Márgenes exteriores
+		panelModificarCatalogo.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
 		menuPrincipal.add(panelModificarCatalogo, BorderLayout.CENTER);
 
@@ -55,7 +54,7 @@ public class VistaModificarCatalogo {
 		panelModificarCatalogo.add(titulo);
 		panelModificarCatalogo.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(4, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(2, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
@@ -89,22 +88,20 @@ public class VistaModificarCatalogo {
 		panelModificarCatalogo.add(botones);
 		menuPrincipal.setVisible(true);
 
-		save.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						int id = Integer.parseInt(idTF.getText());
-						String n = numeroTF.getText();
-						
-						if (n.isEmpty()) {
-							JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-						}
-						DTOtCatalogo c = new DTOtCatalogo(id,Integer.parseInt(n));
-						idTF.setText("");
-						numeroTF.setText("");
-						Controlador.accion(Evento.MODIFICAR_CATALOGO, c);
-					}
+		save.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				int id = Integer.parseInt(idTF.getText());
+				String n = numeroTF.getText();
+
+				if (n.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				);
+				DTOtCatalogo c = new DTOtCatalogo(id,Integer.parseInt(n));
+				idTF.setText("");
+				numeroTF.setText("");
+				Controlador.accion(Evento.MODIFICAR_CATALOGO, c);
+			}
+		});
 
 		back.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
@@ -122,7 +119,7 @@ public class VistaModificarCatalogo {
 		menuPrincipal.pack();
 		return menuPrincipal;
 	}
-	
+
 
 	public static void actualizar(int evento, Object datos) {
 		if (evento == Evento.RES_MODIFICAR_CATALOGO_OK) {

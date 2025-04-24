@@ -21,7 +21,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.DTOtCatalogo;
-import negocio.DTOtCliente;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;

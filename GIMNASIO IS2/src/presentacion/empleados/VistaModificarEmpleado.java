@@ -29,9 +29,6 @@ import presentacion.UIElementFactory;
 
 public class VistaModificarEmpleado {
 	private static JFrame GUI = null;
-	public VistaModificarEmpleado() {
-
-	}
 
 	public static void open() {
 		if(GUI == null) GUI = initGUI();
@@ -59,7 +56,7 @@ public class VistaModificarEmpleado {
 		panelModEmpleado.add(titulo);
 		panelModEmpleado.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(4, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(5, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 

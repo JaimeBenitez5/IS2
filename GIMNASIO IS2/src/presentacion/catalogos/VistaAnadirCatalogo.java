@@ -20,7 +20,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.DTOtCliente;
 import negocio.DTOtCatalogo;
 import presentacion.Controlador;
 import presentacion.Evento;
@@ -42,7 +41,6 @@ public class VistaAnadirCatalogo {
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		// Panel principal con margen
 		JPanel panelAnadirCatalogo = new JPanel();
 		panelAnadirCatalogo.setLayout(new BoxLayout(panelAnadirCatalogo, BoxLayout.Y_AXIS));
 		panelAnadirCatalogo.setBackground(new Color(17, 47, 69));
@@ -56,7 +54,7 @@ public class VistaAnadirCatalogo {
 		panelAnadirCatalogo.add(titulo);
 		panelAnadirCatalogo.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(3, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(1, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
@@ -70,7 +68,6 @@ public class VistaAnadirCatalogo {
 		panelAnadirCatalogo.add(panelCampos);
 		panelAnadirCatalogo.add(Box.createRigidArea(new Dimension(0, 50)));
 
-		// Botones
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
 
@@ -85,7 +82,7 @@ public class VistaAnadirCatalogo {
 		panelAnadirCatalogo.add(botones);
 		menuPrincipal.setVisible(true);
 
-		save.addActionListener( new ActionListener () {
+		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				String n= numeroTF.getText();
 				if (n.isEmpty()) {
@@ -99,13 +96,13 @@ public class VistaAnadirCatalogo {
 			}
 		});
 
-		back.addActionListener( new ActionListener () {
+		back.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 			}
 		});
 
-		botonMainMenu.addActionListener( new ActionListener () {
+		botonMainMenu.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);

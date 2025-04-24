@@ -80,7 +80,7 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 
 	public List<DTOtEmpleado> leerTodosEmpleados() {
 		ArrayList<DTOtEmpleado> clientes = new ArrayList<DTOtEmpleado>();
-		String query = "SELECT * FROM CLIENTE WHERE activo = 1";
+		String query = "SELECT * FROM Empleado";
 		try ( Statement stmt = BDConexion.getConnection().createStatement ()) {
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next ()) {

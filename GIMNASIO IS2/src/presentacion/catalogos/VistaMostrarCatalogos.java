@@ -2,21 +2,13 @@ package presentacion.catalogos;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -24,7 +16,6 @@ import javax.swing.SwingConstants;
 import javax.swing.JFrame;
 
 import negocio.DTOtCatalogo;
-import negocio.DTOtCliente;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -47,12 +38,10 @@ public class VistaMostrarCatalogos {
 		GUI.getContentPane().setLayout(new BorderLayout());
 		GUI.getContentPane().setBackground(new Color(17, 47, 69));
 
-		// Panel principal donde se mostrarán los clientes
 		panelMostrarCatalogos = new JPanel(new BorderLayout());
 		panelMostrarCatalogos.setBackground(new Color(17, 47, 69));
 		GUI.add(panelMostrarCatalogos, BorderLayout.CENTER);
 
-		// Botones de navegación
 		JPanel botones = new JPanel(new FlowLayout());
 		botones.setBackground(new Color(17, 47, 69));
 
@@ -64,7 +53,6 @@ public class VistaMostrarCatalogos {
 		botones.add(botonMainMenu);
 		GUI.add(botones, BorderLayout.SOUTH);
 
-		// Acciones de los botones
 		back.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				GUI.setVisible (false);
@@ -103,8 +91,6 @@ public class VistaMostrarCatalogos {
 			scrollPane.setOpaque(false);
 			scrollPane.getViewport().setOpaque(false);
 			panelMostrarCatalogos.add(scrollPane, BorderLayout.CENTER);
-
-			// Refrescar la GUI
 			panelMostrarCatalogos.revalidate();
 			panelMostrarCatalogos.repaint();
 		}

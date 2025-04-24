@@ -20,7 +20,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.DTOtCliente;
 import negocio.DTOtFactura;
 import presentacion.Controlador;
 import presentacion.Evento;

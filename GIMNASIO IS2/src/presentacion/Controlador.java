@@ -6,11 +6,7 @@ import presentacion.actividades.*;
 import presentacion.catalogos.*;
 import presentacion.clientes.*;
 import presentacion.empleados.*;
-import presentacion.facturas.VistaAltaFactura;
-import presentacion.facturas.VistaEliminarFactura;
-import presentacion.facturas.VistaFacturas;
-import presentacion.facturas.VistaMostrarFactura;
-import presentacion.facturas.VistaMostrarFacturas;
+import presentacion.facturas.*;
 import presentacion.salas.*;
 import negocio.*;
 
@@ -163,7 +159,9 @@ public class Controlador{
 			else VistaEliminarFactura.actualizar(Evento.RES_ELIMINAR_FACTURA_KO, null);
 			break;
 		}
-		
+		case Evento.MOSTRAR_FACTURAS_CLIENTE:{ 
+			break;
+		}
 		case Evento.MOSTRAR_FACTURA:{
 			DTOtFactura factura = getSAFacturas().leerFactura((int)datos);
 			if (factura != null) VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_OK, factura);
@@ -280,7 +278,10 @@ public class Controlador{
 			VistaMostrarFacturas.open();
 			break;
 		}
-		
+		case Evento.VISTA_MOSTRAR_FACTURAS_CLIENTE:{ 
+			VistaMostrarFacturasCliente.open();
+			break;
+		}
 		case Evento.VISTA_ELIMINAR_FACTURA:{
 			VistaEliminarFactura.open();
 			break;
