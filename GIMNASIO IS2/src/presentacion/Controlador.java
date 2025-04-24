@@ -170,7 +170,53 @@ public class Controlador{
 			else VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_KO, null);
 			break;
 		}
-//		//CATALOGOS
+		//EMPLEADOS
+		case Evento.ALTA_EMPLEADO: {
+			int exito = getSAEmpleados().altaEmpleado((DTOtEmpleado) datos);
+			if (exito == 1) 
+				VistaAnadirEmpleado.actualizar(Evento.RES_ALTA_EMPLEADO_OK, ((DTOtEmpleado) datos).getDni());
+			else 
+				VistaAnadirEmpleado.actualizar(Evento.RES_ALTA_EMPLEADO_KO, ((DTOtEmpleado) datos).getDni());
+			break;
+		}
+
+		case Evento.MOSTRAR_EMPLEADOS: {
+			List<DTOtEmpleado> res = getSAEmpleados().leerTodosEmpleados();
+			if (!res.isEmpty()) 
+				VistaMostrarEmpleados.actualizar(Evento.RES_MOSTRAR_EMPLEADOS_OK, res);
+			else 
+				VistaMostrarEmpleados.actualizar(Evento.RES_MOSTRAR_EMPLEADOS_KO, null);
+			break;
+		}
+
+		case Evento.MOSTRAR_EMPLEADO: {
+			DTOtEmpleado empleado = getSAEmpleados().leerEmpleado((int) datos);
+			if (empleado != null) 
+				VistaMostrarEmpleado.actualizar(Evento.RES_MOSTRAR_EMPLEADO_OK, empleado);
+			else 
+				VistaMostrarEmpleado.actualizar(Evento.RES_MOSTRAR_EMPLEADO_KO, null);
+			break;
+		}
+
+		case Evento.ELIMINAR_EMPLEADO: {
+			int exito = getSAEmpleados().borrarEmpleado((int) datos);
+			if (exito == 1) 
+				VistaEliminarEmpleado.actualizar(Evento.RES_ELIMINAR_EMPLEADO_OK, null);
+			else 
+				VistaEliminarEmpleado.actualizar(Evento.RES_ELIMINAR_EMPLEADO_KO, null);
+			break;
+		}
+
+		case Evento.MODIFICAR_EMPLEADO: {
+			int exitoModificar = getSAEmpleados().actualizarEmpleado((DTOtEmpleado) datos);
+			if (exitoModificar == 1) 
+				VistaModificarEmpleado.actualizar(Evento.RES_MODIFICAR_EMPLEADO_OK, null);
+			else 
+				VistaModificarEmpleado.actualizar(Evento.RES_MODIFICAR_EMPLEADO_KO, null);
+			break;
+		}
+
+		//CATALOGOS
 		case Evento.ALTA_CATALOGO: {
 			int id = getSACatalogos().altaCatalogo((DTOtCatalogo) datos);
 			((DTOtCatalogo) datos).setId(id);
@@ -180,22 +226,22 @@ public class Controlador{
 				VistaAnadirCatalogo.actualizar(Evento.RES_ALTA_CATALOGO_KO, id);
 			break;
 		}
-//
+
 //		case Evento.MOSTRAR_CATALOGO: {
-//			tCatalogo c = getSACatalogos().leerCatalogo((int) datos);
+//			DTOtCatalogo c = getSACatalogos().leerCatalogo((int) datos);
 //			VistaMostrarCatalogo.actualizar(Evento.RES_MOSTRAR_CATALOGO_OK, c);
 //			break;
 //		}
 //
 //		case Evento.MOSTRAR_CATALOGOS: {
-//			List<tCatalogo> res = getSACatalogos().leerTodosCatalogos();
+//			List<DTOtCatalogo> res = getSACatalogos().leerTodosCatalogos();
 //			if (!res.isEmpty())
 //				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_OK, res);
 //			else
 //				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_KO, null);
 //			break;
 //		}
-//
+
 		case Evento.ELIMINAR_CATALOGO: {
 			int exito = getSACatalogos().borrarCatalogo((int) datos);
 			if (exito == 1)
@@ -204,7 +250,6 @@ public class Controlador{
 				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_KO, null);
 			break;
 		}
-//
 		case Evento.MODIFICAR_CATALOGO: {
 			int exitoModificar = getSACatalogos().actualizarCatalogo((DTOtCatalogo) datos);
 			if (exitoModificar == 1)

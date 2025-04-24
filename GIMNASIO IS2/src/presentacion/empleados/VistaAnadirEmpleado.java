@@ -101,7 +101,7 @@ public class VistaAnadirEmpleado {
 			public void actionPerformed (ActionEvent e) {
 				String dni = dniTF.getText();
 				String nombre = nombreTF.getText();
-				int sueldo = Integer.parseInt(sueldoTF.getText());
+				double sueldo = Double.parseDouble(sueldoTF.getText());
 				int rol = 0;
 				//FALTA EL ROL QUE DEPENDE DE COMO LO HAGAMOS, PODRIA SER UN COMBO-BOX
 				if (dni.isEmpty() || nombre.isEmpty()) {
@@ -133,15 +133,15 @@ public class VistaAnadirEmpleado {
 		return menuPrincipal;
 	}
 
-	public static void actualizar(int evento, DTOtEmpleado empleado) {
+	public static void actualizar(int evento, Object datos) {
 		if (evento == Evento.RES_ALTA_EMPLEADO_OK) {
-			JTextArea textArea = new JTextArea(empleado.toString());
+			JTextArea textArea = new JTextArea(datos.toString());
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize(new Dimension(500, 200));
-			JOptionPane.showMessageDialog(null, "El empleado se ha insertado correctamente con ID: " + empleado.toString());
+			JOptionPane.showMessageDialog(null, "El empleado se ha insertado correctamente con ID: " + datos.toString());
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_ALTA_EMPLEADO_KO) {

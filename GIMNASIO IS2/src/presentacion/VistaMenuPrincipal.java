@@ -16,19 +16,18 @@ import javax.swing.JPanel;
 
 public class VistaMenuPrincipal{
 	private static JFrame GUI = null;
-	
+
 	public static void open() {
 		if(GUI == null) GUI = initGUI();
 		GUI.setVisible(true);
 	}
-	
+
 	private static JFrame initGUI() {
 		JFrame menuPrincipal = new JFrame("Menú Principal");
 		menuPrincipal.setSize(1280, 720);
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// Panel principal con margen
 		JPanel mainPanel = new JPanel(new GridLayout(3, 3, 25, 25));
 		mainPanel.setPreferredSize(new Dimension(400, 400));
 		mainPanel.setBackground(new Color(88, 161, 164));
@@ -37,7 +36,6 @@ public class VistaMenuPrincipal{
 		mainPanel.setMaximumSize(new Dimension(400, 400));
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-		// Botones
 		Color colorBotones = new Color(48, 86, 119);
 		JButton botonCliente = UIElementFactory.crearBoton("Clientes", colorBotones);
 		JButton botonFacturas = UIElementFactory.crearBoton("Facturas",colorBotones);
@@ -45,11 +43,9 @@ public class VistaMenuPrincipal{
 		JButton botonActividades = UIElementFactory.crearBoton("Actividades",colorBotones);
 		JButton botonEmpleados = UIElementFactory.crearBoton("Empleados",colorBotones);
 		JButton botonCatalogos = UIElementFactory.crearBoton("Catalogos",colorBotones);
-		// Logo
 		ImageIcon logo = new ImageIcon("icons/logo.png");
 		JLabel logoL = new JLabel(logo, JLabel.CENTER);
 
-		// Agregar elementos en orden al grid
 		mainPanel.add(botonCliente);
 		mainPanel.add(Box.createRigidArea(new Dimension(1, 1)));
 		mainPanel.add(botonFacturas);
@@ -62,60 +58,47 @@ public class VistaMenuPrincipal{
 
 		menuPrincipal.add(mainPanel);
 		menuPrincipal.setVisible(true);
-		
-		// Listener's
-		botonCliente.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-						Controlador.mostrarVista(Evento.VISTA_CLIENTES);
-					}
-				}
-				);
 
-		botonFacturas.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-						Controlador.mostrarVista(Evento.VISTA_FACTURAS);
-					}
-				}
-				);
+		botonCliente.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				menuPrincipal.setVisible (false);
+				Controlador.mostrarVista(Evento.VISTA_CLIENTES);
+			}
+		});
 
-		botonSalas.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-						Controlador.mostrarVista(Evento.VISTA_SALAS);
-					}
-				}
-				);
-		botonActividades.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-						Controlador.mostrarVista(Evento.VISTA_ACTIVIDADES);
-					}
-				}
-				);
+		botonFacturas.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				menuPrincipal.setVisible (false);
+				Controlador.mostrarVista(Evento.VISTA_FACTURAS);
+			}
+		});
 
-		botonEmpleados.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-						Controlador.mostrarVista(Evento.VISTA_EMPLEADOS);
-					}
-				}
-				);
+		botonSalas.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				menuPrincipal.setVisible (false);
+				Controlador.mostrarVista(Evento.VISTA_SALAS);
+			}
+		});
+		botonActividades.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				menuPrincipal.setVisible (false);
+				Controlador.mostrarVista(Evento.VISTA_ACTIVIDADES);
+			}
+		});
 
-		botonCatalogos.addActionListener(
-				new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						menuPrincipal.setVisible (false);
-						Controlador.mostrarVista(Evento.VISTA_CATALOGOS);
-					}
-				}
-				);
+		botonEmpleados.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				menuPrincipal.setVisible (false);
+				Controlador.mostrarVista(Evento.VISTA_EMPLEADOS);
+			}
+		});
+
+		botonCatalogos.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				menuPrincipal.setVisible (false);
+				Controlador.mostrarVista(Evento.VISTA_CATALOGOS);
+			}
+		});
 
 		return menuPrincipal;
 	}

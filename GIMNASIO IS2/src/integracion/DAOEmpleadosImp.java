@@ -18,7 +18,7 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 			stmt.setString(1, empleado.getDni());
 			stmt.setString(2, empleado.getNombre());
 			stmt.setDouble(3, empleado.getSueldo());
-			stmt.setInt(4, empleado.getRol());
+			stmt.setString(4, "Monitor");
 			stmt.executeUpdate();
 			try (ResultSet rs = stmt.getGeneratedKeys()) {
 				if (rs.next()) {
