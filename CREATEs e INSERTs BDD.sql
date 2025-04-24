@@ -1,0 +1,212 @@
+DROP TABLE IF EXISTS Premium;
+DROP TABLE IF EXISTS Basica;
+DROP TABLE IF EXISTS SuscripcionesRoles; 
+DROP TABLE IF EXISTS TiposSuscripciones; 
+DROP TABLE IF EXISTS Compras; 
+DROP TABLE IF EXISTS Suscripciones; 
+DROP TABLE IF EXISTS ActividadesCatalogo; 
+DROP TABLE IF EXISTS Catalogos; 
+DROP TABLE IF EXISTS Actividades; 
+DROP TABLE IF EXISTS Mantienen;
+DROP TABLE IF EXISTS Salas; 
+DROP TABLE IF EXISTS Clientes;
+DROP TABLE IF EXISTS Facturas; 
+DROP TABLE IF EXISTS Monitores; 
+DROP TABLE IF EXISTS Nutricionistas; 
+DROP TABLE IF EXISTS Mantenimiento; 
+DROP TABLE IF EXISTS Recepcion; 
+DROP TABLE IF EXISTS EmpleadosRoles; 
+DROP TABLE IF EXISTS Roles; 
+DROP TABLE IF EXISTS Empleados; 
+
+
+
+CREATE TABLE Clientes(
+dniCliente VARCHAR (9) PRIMARY KEY,
+nombre VARCHAR(255) NOT NULL, 
+direccion VARCHAR(255), 
+activo TINYINT(1) NOT NULL DEFAULT 1
+);
+
+CREATE TABLE Facturas(
+numFactura INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+fecha DATE, 
+importeTotal DECIMAL(15,2)
+); 
+
+CREATE TABLE Salas(
+idSala INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+aforo INT 
+);
+
+CREATE TABLE Catalogos(
+idCatalogo INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+numActividades INT 
+);
+
+CREATE TABLE Empleados(
+dniEmpleado VARCHAR(9) PRIMARY KEY,
+nombre VARCHAR(255)
+);
+
+CREATE TABLE Actividades(
+tipoActividad VARCHAR(255), 
+fecha DATE, 
+idSala INT NOT NULL,
+dniEmpleado VARCHAR(9),
+PRIMARY KEY (tipoActividad, fecha, idSala), 
+FOREIGN KEY (idSala) REFERENCES Salas(idSala),
+FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado)
+); 
+
+CREATE TABLE Roles(
+idRol INT AUTO_INCREMENT PRIMARY KEY,
+nombre VARCHAR(50)
+); 
+
+CREATE TABLE EmpleadosRoles (
+dniEmpleado VARCHAR(9),
+idRol INT,
+PRIMARY KEY (dniEmpleado, idRol),
+FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado) ON DELETE CASCADE,
+FOREIGN KEY (idRol) REFERENCES Roles(idRol) ON DELETE CASCADE
+);
+
+CREATE TABLE Monitores(
+idRol INT PRIMARY KEY,
+salario DECIMAL(10,2) NOT NULL, 
+FOREIGN KEY (idRol) REFERENCES Roles(idRol) ON DELETE CASCADE
+); 
+
+CREATE TABLE Nutricionistas(
+idRol INT PRIMARY KEY, 
+salario DECIMAL(10,2) NOT NULL, 
+FOREIGN KEY (idRol) REFERENCES Roles(idRol) ON DELETE CASCADE
+); 
+
+CREATE TABLE Mantenimiento(
+idRol INT PRIMARY KEY, 
+salario DECIMAL(10,2) NOT NULL, 
+FOREIGN KEY (idRol) REFERENCES Roles(idRol) ON DELETE CASCADE
+); 
+
+CREATE TABLE Recepcion(
+idRol INT PRIMARY KEY, 
+salario DECIMAL(10,2) NOT NULL, 
+FOREIGN KEY (idRol) REFERENCES Roles(idRol) ON DELETE CASCADE
+); 
+
+CREATE TABLE Mantienen(
+dniEmpleado VARCHAR(9), 
+idSala INT NOT NULL, 
+PRIMARY KEY (dniEmpleado, idSala), 
+FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado),
+FOREIGN KEY (idSala) REFERENCES Salas(idSala)
+);
+
+CREATE TABLE Suscripciones(
+numSuscripcion INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nombre VARCHAR(50)
+); 
+
+CREATE TABLE TiposSuscripciones(
+idTipoSuscripcion INT AUTO_INCREMENT PRIMARY KEY,
+nombre VARCHAR(50)
+);
+
+CREATE TABLE SuscripcionesRoles (
+numSuscripcion INT,
+idTipoSuscripcion INT, 
+PRIMARY KEY (numSuscripcion, idTipoSuscripcion),
+FOREIGN KEY (numSuscripcion) REFERENCES Suscripciones(numSuscripcion) ON DELETE CASCADE,
+FOREIGN KEY (idTipoSuscripcion) REFERENCES TiposSuscripciones(idTipoSuscripcion) ON DELETE CASCADE
+);
+
+CREATE TABLE Basica(
+idTipoSuscripcion INT PRIMARY KEY, 
+precio DECIMAL(10, 2) NOT NULL,
+duracion INT,
+tipoActividad VARCHAR(255), 
+fecha DATE, 
+idSala INT NOT NULL,
+FOREIGN KEY (tipoActividad, fecha, idSala) REFERENCES Actividades(tipoActividad, fecha, idSala),
+FOREIGN KEY (idTipoSuscripcion) REFERENCES TiposSuscripciones(idTipoSuscripcion) ON DELETE CASCADE
+);
+
+CREATE TABLE Premium(
+idTipoSuscripcion INT PRIMARY KEY, 
+precio DECIMAL(10, 2) NOT NULL,
+duracion INT,
+dniEmpleado VARCHAR(9),
+idCatalogo INT, 
+FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado),
+FOREIGN KEY (idCatalogo) REFERENCES Catalogos(idCatalogo),
+FOREIGN KEY (idTipoSuscripcion) REFERENCES TiposSuscripciones(idTipoSuscripcion) ON DELETE CASCADE
+);
+
+CREATE TABLE ActividadesCatalogo(
+idCatalogo INT NOT NULL, 
+tipoActividad VARCHAR(255), 
+fechaActividad DATE, 
+idSala INT, 
+PRIMARY KEY(idCatalogo, tipoActividad, fechaActividad, idSala), 
+FOREIGN KEY (idCatalogo) REFERENCES Catalogos(idCatalogo),
+FOREIGN KEY (tipoActividad, fechaActividad, idSala) REFERENCES Actividades(tipoActividad, fecha, idSala)
+);
+
+CREATE TABLE Compras(
+numSuscripcion INT PRIMARY KEY, 
+dniCliente VARCHAR(9) NOT NULL, 
+fecha DATE, 
+metodoPago VARCHAR(255) CHECK (metodoPago IN ('Efectivo', 'Tarjeta', 'Transferencia Bancaria', 'Bizum')),
+numFactura INT NOT NULL, 
+dniEmpleado VARCHAR(9), 
+FOREIGN KEY (numSuscripcion) REFERENCES Suscripciones(numSuscripcion), 
+FOREIGN KEY (dniCliente) REFERENCES Clientes(dniCliente),
+FOREIGN KEY (numFactura) REFERENCES Facturas(numFactura), 
+FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado)
+);
+
+INSERT INTO Empleados (dniEmpleado, nombre) VALUES ('06013483H', 'Nicolas'); 
+INSERT INTO Empleados (dniEmpleado, nombre) VALUES ('1234567A', 'Jaime'); 
+INSERT INTO Empleados (dniEmpleado, nombre) VALUES ('1234567B', 'Juan'); 
+INSERT INTO Empleados (dniEmpleado, nombre) VALUES ('1234567C', 'Gabriel'); 
+
+INSERT INTO Roles (nombre) VALUES ('Mantenimiento');
+INSERT INTO Roles (nombre) VALUES ('Monitor');
+INSERT INTO Roles (nombre) VALUES ('Nutricionista');
+INSERT INTO Roles (nombre) VALUES ('Recepcion');
+
+INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('06013483H', 1);
+INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('1234567A', 2);
+INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('1234567B', 3);
+INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('1234567C', 4);
+
+INSERT INTO Mantenimiento (idRol, salario) VALUES (1, 2400);
+INSERT INTO Monitores (idRol, salario) VALUES (2, 2100);
+INSERT INTO Nutricionistas (idRol, salario) VALUES (3, 1300);
+INSERT INTO Recepcion (idRol, salario) VALUES (4, 1500);
+
+INSERT INTO Clientes (nombre, dniCliente, direccion) VALUES ('Marlon', 'AAAAAAAAA' ,'Gran Via 4'); 
+INSERT INTO Clientes (nombre, dniCliente, direccion) VALUES ('Carlos', 'BBBBBBBBB' ,'Las Tablas'); 
+
+INSERT INTO Salas (aforo) VALUES (100);
+INSERT INTO Salas (aforo) VALUES (150); 
+
+INSERT INTO Actividades (tipoActividad, fecha, idSala, dniEmpleado) VALUES ('Yoga', '2025-03-19', 1, '1234567A');
+INSERT INTO Actividades (tipoActividad, fecha, idSala) VALUES ('Spinning', '2025-03-20', 2); 
+
+INSERT INTO Suscripciones (nombre) VALUES ('suscripcion para novatos');
+INSERT INTO Suscripciones (nombre) VALUES ('suscripcion para pros'); 
+
+INSERT INTO Catalogos (numActividades) VALUES (2); 
+
+INSERT INTO ActividadesCatalogo VALUES (1, 'Yoga', '2025-03-19', 1); 
+INSERT INTO ActividadesCatalogo VALUES (1, 'Spinning', '2025-03-20', 2); 
+
+INSERT INTO Facturas (Fecha, ImporteTotal) VALUES ('2015-05-01', 12.22);
+
+SELECT * FROM Salas; 
+SELECT * FROM Clientes; 
+SELECT * FROM Empleados;
+SELECT * FROM Facturas;

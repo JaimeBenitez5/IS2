@@ -13,7 +13,7 @@ import negocio.DTOtSala;
 public class DAOSalasImp implements DAOSalas {
 
 	public int altaSala(DTOtSala sala) {
-		String query = "INSERT INTO Sala (aforo) VALUES (?)";
+		String query = "INSERT INTO SALAS (aforo) VALUES (?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setString(1, String.valueOf(sala.getAforo()));
 			stmt.executeUpdate();
@@ -30,7 +30,7 @@ public class DAOSalasImp implements DAOSalas {
 	}
 
 	public DTOtSala leerSala(final int id) {
-		String query = "SELECT * FROM Sala WHERE idSala  = ?";
+		String query = "SELECT * FROM SALAS WHERE idSala  = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1,id);
 			ResultSet rs = stmt.executeQuery();
@@ -47,7 +47,7 @@ public class DAOSalasImp implements DAOSalas {
 	}
 
 	public int actualizarSala(final DTOtSala sala) {
-		String query = "UPDATE Sala SET aforo = ? WHERE idSala=?";
+		String query = "UPDATE SALAS SET aforo = ? WHERE idSala=?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setString(1, String.valueOf(sala.getAforo()));
 			stmt.setInt(2,sala.getId());
@@ -59,7 +59,7 @@ public class DAOSalasImp implements DAOSalas {
 	}
 
 	public int borrarSala(final int id) {
-		String query = "DELETE FROM Sala WHERE idSala = ?";
+		String query = "DELETE FROM SALAS WHERE idSala = ?";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setInt(1, id);
 			return stmt.executeUpdate();
@@ -71,7 +71,7 @@ public class DAOSalasImp implements DAOSalas {
 
 	public List<DTOtSala> leerTodasSalas() {
 		ArrayList<DTOtSala> salas = new ArrayList<DTOtSala>();
-		String query = "SELECT * FROM Sala";
+		String query = "SELECT * FROM SALAS";
 		try ( Statement stmt = BDConexion.getConnection().createStatement ()) {
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next ()) {

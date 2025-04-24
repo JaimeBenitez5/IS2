@@ -14,7 +14,7 @@ import negocio.DTOtFactura;
 public class DAOFacturasImp implements DAOFacturas {
 
 	public int altaFactura(DTOtFactura Factura) {
-		String query = "INSERT INTO Factura (fecha, importetotal) VALUES (?, ?)";
+		String query = "INSERT INTO FACTURAS (fecha, importetotal) VALUES (?, ?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setDate(1, Factura.getFecha());
 			stmt.setDouble(2, Factura.getImporte());
@@ -32,7 +32,7 @@ public class DAOFacturasImp implements DAOFacturas {
 	}
 
 	public DTOtFactura leerFactura(int id) {
-		String query = "SELECT * FROM Factura WHERE numFactura = ?";
+		String query = "SELECT * FROM FACTURAS WHERE numFactura = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1,id);
 			ResultSet rs = stmt.executeQuery();
@@ -51,7 +51,7 @@ public class DAOFacturasImp implements DAOFacturas {
 	}
 
 	public int actualizarFactura(DTOtFactura factura) {
-		String query = "UPDATE Factura SET fecha = ?, importeTotal = ? WHERE numFactura = ? ";
+		String query = "UPDATE FACTURAS SET fecha = ?, importeTotal = ? WHERE numFactura = ? ";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setDate(1, factura.getFecha());
 	        stmt.setDouble(2, factura.getImporte());
@@ -76,7 +76,7 @@ public class DAOFacturasImp implements DAOFacturas {
 
 	public List<DTOtFactura> leerTodasFacturas() {
 		ArrayList<DTOtFactura> facturas = new ArrayList<DTOtFactura>();
-		String query = "SELECT * FROM Factura";
+		String query = "SELECT * FROM FACTURAS";
 		try ( Statement stmt = BDConexion.getConnection().createStatement ()) {
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next ()) {
@@ -94,7 +94,7 @@ public class DAOFacturasImp implements DAOFacturas {
 	
 	public List<DTOtFactura> leerFacturasCliente(int idCliente){
 		ArrayList<DTOtFactura> facturas = new ArrayList<DTOtFactura>();
-		String query = "SELECT * FROM Factura WHERE numFactura = (SELECT numFactura FROM Compra WHERE idCliente = ?)";
+		String query = "SELECT * FROM FACTURAS WHERE numFactura = (SELECT numFactura FROM Compra WHERE idCliente = ?)";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1, idCliente);
 			ResultSet rs = stmt.executeQuery(query);

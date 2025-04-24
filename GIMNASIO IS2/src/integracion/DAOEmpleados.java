@@ -8,11 +8,11 @@ public interface DAOEmpleados {
 
     int altaEmpleado(DTOtEmpleado empleado);
 
-    DTOtEmpleado leerEmpleado(final int id);
+    DTOtEmpleado leerEmpleado(final String dni);
 
     int actualizarEmpleado(final DTOtEmpleado empleado);
 
-    int borrarEmpleado(final int id);
+    int borrarEmpleado(final String dni);
 
     List<DTOtEmpleado> leerTodosEmpleados();
 }

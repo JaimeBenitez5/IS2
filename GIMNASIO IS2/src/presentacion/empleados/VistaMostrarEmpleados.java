@@ -72,15 +72,13 @@ public class VistaMostrarEmpleados {
 	public static void actualizar(int evento, List<DTOtEmpleado> datos) {
 		if (evento == Evento.RES_MOSTRAR_EMPLEADOS_OK) {
 			panelMostrarClientes.removeAll();
-			String[] columnNames = {"ID", "Nombre", "Sueldo", "Rol"};
-			String[][] data = new String[datos.size()][4];
+			String[] columnNames = {"DNI", "Nombre"};
+			String[][] data = new String[datos.size()][2];
 
 			for (int i = 0; i < datos.size(); i++) {
 				DTOtEmpleado empleado = datos.get(i);
-				data[i][0] = String.valueOf(empleado.getId());
+				data[i][0] = empleado.getDni();
 				data[i][1] = empleado.getNombre();
-				data[i][2] = empleado.getSueldo() + "";
-				data[i][3] = empleado.getRol() + "";
 			}
 
 			JTable tablaEmpleados = new JTable(data, columnNames);

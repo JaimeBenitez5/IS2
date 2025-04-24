@@ -10,7 +10,7 @@ import negocio.DTOtCliente;
 public class DAOClientesImp implements DAOClientes {
 
 	public int altaCliente(DTOtCliente cliente) {
-		String query = "INSERT INTO Cliente (dniCliente, nombre, direccion) VALUES (?, ?, ?)";
+		String query = "INSERT INTO CLIENTES (dniCliente, nombre, direccion) VALUES (?, ?, ?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setString(1, cliente.getDni());
 			stmt.setString(2, cliente.getNombre());
@@ -23,7 +23,7 @@ public class DAOClientesImp implements DAOClientes {
 	}
 
 	public DTOtCliente leerCliente(final String dni) {
-		String query = "SELECT * FROM Cliente WHERE dniCliente  = ?";
+		String query = "SELECT * FROM CLIENTES WHERE dniCliente  = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setString(1,dni);
 			ResultSet rs = stmt.executeQuery();
@@ -42,7 +42,7 @@ public class DAOClientesImp implements DAOClientes {
 	}
 
 	public int actualizarCliente(final DTOtCliente cliente) {
-		String query = "UPDATE CLIENTE SET nombre = ?, direccion = ?, activo = ? WHERE dniCliente = ? ";
+		String query = "UPDATE CLIENTES SET nombre = ?, direccion = ?, activo = ? WHERE dniCliente = ? ";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setString(1, cliente.getNombre());
 			stmt.setString(2, cliente.getDir());
@@ -57,7 +57,7 @@ public class DAOClientesImp implements DAOClientes {
 	}
 
 	public int borrarCliente(final String dni) {
-		String query = "UPDATE Cliente SET activo = 0 WHERE dniCliente = ?";
+		String query = "UPDATE CLIENTES SET activo = 0 WHERE dniCliente = ?";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setString(1, dni);
 			return stmt.executeUpdate();
@@ -69,7 +69,7 @@ public class DAOClientesImp implements DAOClientes {
 
 	public List<DTOtCliente> leerTodosClientes() {
 		ArrayList<DTOtCliente> clientes = new ArrayList<DTOtCliente>();
-		String query = "SELECT * FROM CLIENTE";
+		String query = "SELECT * FROM CLIENTES";
 		try ( Statement stmt = BDConexion.getConnection().createStatement ()) {
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next ()) {

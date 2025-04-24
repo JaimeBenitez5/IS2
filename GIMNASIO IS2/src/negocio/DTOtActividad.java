@@ -6,11 +6,11 @@ public class DTOtActividad {
 	String _tipoActividad;
 	Date _fecha;
 	int _idSala;
-	int _idEmpleado;
+	String _dniEmpleado;
 
-	public DTOtActividad(final String tipoActividad, final int idEmpleado,  final int idSala ,final Date fecha) {
+	public DTOtActividad(final String tipoActividad, final String dniEmpleado,  final int idSala ,final Date fecha) {
 		_tipoActividad = tipoActividad;
-		_idEmpleado = idEmpleado;
+		_dniEmpleado = dniEmpleado;
 		_idSala = idSala;
 		_fecha = fecha;
 	}
@@ -29,8 +29,8 @@ public class DTOtActividad {
 		return _tipoActividad;
 	}
 	
-	public int getIdEmpleado() {
-		return _idEmpleado;
+	public String getDniEmpleado() {
+		return _dniEmpleado;
 	}
 	
 	public Date getFecha() {
@@ -45,8 +45,8 @@ public class DTOtActividad {
 		_tipoActividad = tipoActividad;
 	}
 
-	public void setIdEmpleado(int idEmpleado) {
-		_idEmpleado = idEmpleado;
+	public void setIdEmpleado(String dniEmpleado) {
+		_dniEmpleado = dniEmpleado;
 	}
 	
 	public void setFecha(Date fecha) {
@@ -54,6 +54,6 @@ public class DTOtActividad {
 	}
 	
 	public String toString() {
-        return  _tipoActividad + " " + _idSala + " " + _idEmpleado + " " + _fecha;
+        return  _tipoActividad + " " + _idSala + " " + _dniEmpleado + " " + _fecha;
     }
 }

@@ -188,7 +188,7 @@ public class Controlador{
 		}
 
 		case Evento.MOSTRAR_EMPLEADO: {
-			DTOtEmpleado empleado = getSAEmpleados().leerEmpleado((int) datos);
+			DTOtEmpleado empleado = getSAEmpleados().leerEmpleado((String) datos);
 			if (empleado != null) 
 				VistaMostrarEmpleado.actualizar(Evento.RES_MOSTRAR_EMPLEADO_OK, empleado);
 			else 
@@ -197,7 +197,7 @@ public class Controlador{
 		}
 
 		case Evento.ELIMINAR_EMPLEADO: {
-			int exito = getSAEmpleados().borrarEmpleado((int) datos);
+			int exito = getSAEmpleados().borrarEmpleado((String) datos);
 			if (exito == 1) 
 				VistaEliminarEmpleado.actualizar(Evento.RES_ELIMINAR_EMPLEADO_OK, null);
 			else 

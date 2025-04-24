@@ -18,23 +18,23 @@ public class SAEmpleadosImp implements SAEmpleados {
 		return getDAOEmpleados().altaEmpleado(empleado);
 	}
 
-	public DTOtEmpleado leerEmpleado(final int id) {
-		return getDAOEmpleados().leerEmpleado(id);
+	public DTOtEmpleado leerEmpleado(final String dni) {
+		return getDAOEmpleados().leerEmpleado(dni);
 	}
 
 	public int actualizarEmpleado(final DTOtEmpleado empleado) {
-		DTOtEmpleado e = leerEmpleado(empleado.getId());
+		DTOtEmpleado e = leerEmpleado(empleado.getDni());
 		int exito = 0;
 		if(e != null) exito = getDAOEmpleados().actualizarEmpleado(empleado);
 		return exito;
 	}
 
-	public int borrarEmpleado(final int id) {
-		DTOtEmpleado e = leerEmpleado(id);
+	public int borrarEmpleado(final String dni) {
+		DTOtEmpleado e = leerEmpleado(dni);
 		int exito = 0;
 		if(e != null) {
 			//falta por hacer borrar de la sala, actividad o asesoramiento
-			exito = getDAOEmpleados().borrarEmpleado(id);
+			exito = getDAOEmpleados().borrarEmpleado(dni);
 		}
 		return exito;
 	}

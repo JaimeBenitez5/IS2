@@ -80,7 +80,7 @@ public class VistaMostrarActividades {
 				data[i][0] = a.getTipoActividad();
 				data[i][1] = String.valueOf(a.getIdSala());
 				data[i][2] = String.valueOf(utilDate);
-				data[i][3] = String.valueOf(a.getIdEmpleado());
+				data[i][3] = a.getDniEmpleado();
 			}
 
 			JTable tablaActividades = new JTable(data, columnNames);
