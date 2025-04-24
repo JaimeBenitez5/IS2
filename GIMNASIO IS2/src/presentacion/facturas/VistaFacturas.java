@@ -67,13 +67,13 @@ public class VistaFacturas {
 
 		botonListByClient.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				Controlador.mostrarVista(Evento.VISTA_ELIMINAR_FACTURA);
+				Controlador.mostrarVista(Evento.VISTA_MOSTRAR_FACTURAS_CLIENTE);
 			}
 		});
 
 		botonBorrar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				Controlador.mostrarVista(Evento.VISTA_MODIFICAR_FACTURA);
+				Controlador.mostrarVista(Evento.VISTA_ELIMINAR_FACTURA);
 			}
 		});
 
