@@ -84,7 +84,7 @@ public class VistaMostrarCliente {
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int id = Integer.parseInt(idTF.getText());
+				String id = idTF.getText();
 				idTF.setText("");
 				Controlador.accion(Evento.MOSTRAR_CLIENTE, id);
 			}

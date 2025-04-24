@@ -59,8 +59,8 @@ public class DAOCatalogosImp implements DAOCatalogos{
 	}
 	
 	public int borrarCatalogosSala(int idSala) {
-		String query1 = "DELETE FROM Actividad_Catalogo WHERE idSala = ?";
-		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query1, Statement.RETURN_GENERATED_KEYS)) {
+		String query = "DELETE FROM Actividad_Catalogo WHERE idSala = ?";
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setInt(1, idSala);
 			return stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -70,8 +70,13 @@ public class DAOCatalogosImp implements DAOCatalogos{
 	}
 	
 	public int borrarCatalogo(int id) {
-		//HAY QUE BORRAR ANTES LOS PARES DE ACTIVIDAD Y DE CATALOGO
-		//LLAMAR A LAS SA DE CADA SUBSISTEMA Y BORRARLO EN SU DAO
+		String query1 = "DELETE FROM Catalogo WHERE idCatalogo = ?";
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query1, Statement.RETURN_GENERATED_KEYS)) {
+			stmt.setInt(1, id);
+			return stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 	

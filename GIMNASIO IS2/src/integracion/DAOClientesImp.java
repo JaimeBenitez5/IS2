@@ -55,6 +55,7 @@ public class DAOClientesImp implements DAOClientes {
 			stmt.setString(2, cliente.getDir());
 			int activo = cliente.getActivo() == true ? 1 : 0;
 			stmt.setInt(3, activo);
+			stmt.setString(4, cliente.getDni());
 			return stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
