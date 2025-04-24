@@ -23,7 +23,10 @@ public class SACatalogosImp implements SACatalogos {
 	}
 
 	public int actualizarCatalogo(DTOtCatalogo catalogo) {
-		return getDAOCatalogos().actualizarCatalogo(catalogo);
+		DTOtCatalogo c = leerCatalogo(catalogo.getId());
+		int exito = 0;
+		if(c != null) exito = getDAOCatalogos().actualizarCatalogo(catalogo);
+		return exito;
 	}
 	
 	public int borrarCatalogosSala(int idSala) {
@@ -31,7 +34,10 @@ public class SACatalogosImp implements SACatalogos {
 	}
 	
 	public int borrarCatalogo(int id) {
-		return getDAOCatalogos().borrarCatalogo(id);
+		DTOtCatalogo c = leerCatalogo(id);
+		int exito = 0;
+		if(c != null) exito = getDAOCatalogos().borrarCatalogo(id);
+		return exito;
 	}
 
 	public List<DTOtCatalogo> leerTodosCatalogos() {

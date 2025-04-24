@@ -16,13 +16,6 @@ public class DAOClientesImp implements DAOClientes {
 			stmt.setString(2, cliente.getNombre());
 			stmt.setString(3, cliente.getDir());
 			return stmt.executeUpdate();
-//			stmt.executeUpdate();
-//			try (ResultSet rs = stmt.getGeneratedKeys()) {
-//				if (rs.next()) {
-//					String dni = rs.getString(1);
-//					return dni;
-//				}
-//			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

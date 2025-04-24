@@ -23,11 +23,19 @@ public class SAFacturasImp implements SAFacturas {
 	}
 
 	public int actualizarFactura(final DTOtFactura factura) {
-		return getDAOFacturas().actualizarFactura(factura);
+		DTOtFactura f = leerFactura(factura.getId());
+		int exito = 0;
+		if(f != null) exito = getDAOFacturas().actualizarFactura(factura);
+		return exito;
 	}
 
 	public int borrarFactura(final int id) {
-		return getDAOFacturas().borrarFactura(id);
+		DTOtFactura f = leerFactura(id);
+		int exito = 0;
+		if(f != null) {
+			exito = getDAOFacturas().borrarFactura(id);
+		}
+		return exito;
 	}
 
 	public List<DTOtFactura> leerTodasFacturas() {
