@@ -58,7 +58,7 @@ public class VistaMostrarFacturasCliente {
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
-		JLabel dni = new JLabel("DNI:");
+		JLabel dni = new JLabel("DNI de cliente:");
 		dni.setForeground(Color.WHITE);
 		panelCampos.add(dni);
 		JTextField dniTF = new JTextField(30);

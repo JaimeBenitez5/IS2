@@ -58,11 +58,11 @@ public class VistaMostrarCliente {
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
-		JLabel id = new JLabel("ID:");
-		id.setForeground(Color.WHITE);
-		panelCampos.add(id);
-		JTextField idTF = new JTextField(30);
-		panelCampos.add(idTF);
+		JLabel dni = new JLabel("DNI:");
+		dni.setForeground(Color.WHITE);
+		panelCampos.add(dni);
+		JTextField dniTF = new JTextField(30);
+		panelCampos.add(dniTF);
 
 		panelBajaCliente.add(panelCampos);
 		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -84,8 +84,8 @@ public class VistaMostrarCliente {
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String id = idTF.getText();
-				idTF.setText("");
+				String id = dniTF.getText();
+				dniTF.setText("");
 				Controlador.accion(Evento.MOSTRAR_CLIENTE, id);
 			}
 		});

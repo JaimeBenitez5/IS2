@@ -142,8 +142,8 @@ public class Controlador{
 		case Evento.ALTA_FACTURA:{
 			int id = getSAFacturas().altaFactura((DTOtFactura) datos);
 			((DTOtFactura) datos).setId(id);
-			if(id != 0) VistaAltaFactura.actualizar(Evento.RES_ALTA_FACTURA_OK, id);
-			else VistaAltaFactura.actualizar(Evento.RES_ALTA_FACTURA_KO, id);
+			if(id != 0) VistaAnadirFactura.actualizar(Evento.RES_ALTA_FACTURA_OK, id);
+			else VistaAnadirFactura.actualizar(Evento.RES_ALTA_FACTURA_KO, id);
 			break;
 		}
 		case Evento.MOSTRAR_FACTURAS:{
@@ -262,7 +262,7 @@ public class Controlador{
 			break;
 		}
 		case Evento.VISTA_ALTA_FACTURA:{ 
-			VistaAltaFactura.open();
+			VistaAnadirFactura.open();
 			break;
 		}
 		case Evento.VISTA_MOSTRAR_FACTURAS:{ 

@@ -27,7 +27,7 @@ import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
 
-public class VistaAltaFactura {
+public class VistaAnadirFactura {
 	
 	private static JFrame GUI = null;
 
@@ -57,7 +57,7 @@ public class VistaAltaFactura {
 		panelAltaFactura.add(titulo);
 		panelAltaFactura.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(3, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(2, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
@@ -75,12 +75,6 @@ public class VistaAltaFactura {
 		fechaTF.setColumns(10);
 		fechaTF.setValue(new java.util.Date());
 		panelCampos.add(fechaTF);
-
-		JLabel numFactura = new JLabel("Número de factura:");
-		numFactura.setForeground(Color.WHITE);
-		panelCampos.add(numFactura);
-		JTextField numFactTF = new JTextField(30);
-		panelCampos.add(numFactTF);
 
 		panelAltaFactura.add(panelCampos);
 		panelAltaFactura.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -104,15 +98,13 @@ public class VistaAltaFactura {
 				double importe = Double.parseDouble(importeTF.getText());
 				java.util.Date Date = (java.util.Date) fechaTF.getValue();
 				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
-				int num = Integer.parseInt(numFactTF.getText());
 				if (importe == 0) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
 					importeTF.setText("");
 					fechaTF.setText("");
-					numFactTF.setText("");
-					DTOtFactura c = new DTOtFactura(num, sqlDate, importe);
+					DTOtFactura c = new DTOtFactura(sqlDate, importe);
 					Controlador.accion(Evento.ALTA_FACTURA, c);
 				}
 			}

@@ -12,7 +12,13 @@ public class DTOtFactura {
         _fecha = fecha;
         _importeTotal = importeTotal;
     }
-
+    
+    public DTOtFactura(final Date fecha, final double importeTotal) {
+        _id = 0;
+        _fecha = fecha;
+        _importeTotal = importeTotal;
+    }
+    
     public int getId() {
         return _id;
     }

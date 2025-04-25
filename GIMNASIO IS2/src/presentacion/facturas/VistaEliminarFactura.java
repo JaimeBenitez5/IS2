@@ -58,9 +58,9 @@ public class VistaEliminarFactura {
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
-		JLabel numeroFactura = new JLabel("Numero de Factura:");
-		numeroFactura.setForeground(Color.WHITE);
-		panelCampos.add(numeroFactura);
+		JLabel id = new JLabel("ID:");
+		id.setForeground(Color.WHITE);
+		panelCampos.add(id);
 		JTextField idTF = new JTextField(30);
 		panelCampos.add(idTF);
 

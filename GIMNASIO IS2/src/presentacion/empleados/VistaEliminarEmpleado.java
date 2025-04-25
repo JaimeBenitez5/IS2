@@ -57,11 +57,11 @@ public class VistaEliminarEmpleado {
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
-		JLabel id = new JLabel("ID:");
-		id.setForeground(Color.WHITE);
-		panelCampos.add(id);
-		JTextField idTF = new JTextField(30);
-		panelCampos.add(idTF);
+		JLabel dni = new JLabel("DNI:");
+		dni.setForeground(Color.WHITE);
+		panelCampos.add(dni);
+		JTextField dniTF = new JTextField(30);
+		panelCampos.add(dniTF);
 
 		panelBajaEmpleado.add(panelCampos);
 		panelBajaEmpleado.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -83,7 +83,7 @@ public class VistaEliminarEmpleado {
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String dniEmp = idTF.getText();
+				String dniEmp = dniTF.getText();
 				Controlador.accion(Evento.ELIMINAR_EMPLEADO, dniEmp);
 			}
 		});
