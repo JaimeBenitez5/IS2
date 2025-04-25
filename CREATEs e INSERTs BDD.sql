@@ -42,11 +42,6 @@ idCatalogo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 numActividades INT 
 );
 
-CREATE TABLE Empleados(
-dniEmpleado VARCHAR(9) PRIMARY KEY,
-nombre VARCHAR(255)
-);
-
 CREATE TABLE Actividades(
 tipoActividad VARCHAR(255), 
 fecha DATE, 
@@ -56,6 +51,11 @@ PRIMARY KEY (tipoActividad, fecha, idSala),
 FOREIGN KEY (idSala) REFERENCES Salas(idSala),
 FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado)
 ); 
+
+CREATE TABLE Empleados(
+dniEmpleado VARCHAR(9) PRIMARY KEY,
+nombre VARCHAR(255)
+);
 
 CREATE TABLE Roles(
 idRol INT AUTO_INCREMENT PRIMARY KEY,

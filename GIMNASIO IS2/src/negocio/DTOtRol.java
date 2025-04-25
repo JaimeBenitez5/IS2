@@ -1,7 +1,14 @@
 package negocio;
 
 public class DTOtRol {
-	String nombrRol;
-	double salario;
-
+	private Rol _idRol;
+	private String _nombrRol;
+	private double _salario;
+	
+	public DTOtRol() {
+		
+	}
+	
+	
+	
 }
