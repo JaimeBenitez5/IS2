@@ -56,15 +56,9 @@ public class VistaModificarEmpleado {
 		panelModEmpleado.add(titulo);
 		panelModEmpleado.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(5, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(2, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
-
-		JLabel id = new JLabel("ID:");
-		id.setForeground(Color.WHITE);
-		panelCampos.add(id);
-		JTextField idTF = new JTextField(30);
-		panelCampos.add(idTF);
 
 		JLabel dni = new JLabel("DNI:");
 		dni.setForeground(Color.WHITE);
@@ -77,20 +71,6 @@ public class VistaModificarEmpleado {
 		panelCampos.add(nombre);
 		JTextField nombreTF = new JTextField(30);
 		panelCampos.add(nombreTF);
-
-		JLabel dir = new JLabel("Dirección:");
-		dir.setForeground(Color.WHITE);
-		panelCampos.add(dir);
-		JTextField dirTF = new JTextField(30);
-		panelCampos.add(dirTF);
-
-		//FALTA QUE NO TE DEJE ESCRIBIR LETRAS, SOLO NUMEROS
-		JLabel sueldo = new JLabel("Sueldo:");
-		sueldo.setForeground(Color.WHITE);
-		panelCampos.add(sueldo);
-		JFormattedTextField sueldoTF = new JFormattedTextField(NumberFormat.getIntegerInstance());
-		sueldoTF.setColumns(8);
-		panelCampos.add(sueldoTF);
 
 		panelModEmpleado.add(panelCampos);
 		panelModEmpleado.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -111,20 +91,14 @@ public class VistaModificarEmpleado {
 
 		save.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int id = Integer.parseInt(idTF.getText());
 				String dni = dniTF.getText();
 				String nombre = nombreTF.getText();
-				String dir = dirTF.getText();
-				int sueldo = Integer.parseInt(sueldoTF.getText());
-				int rol = 0;
-				if (dni.isEmpty() || nombre.isEmpty() || dir.isEmpty()) {
+				if (dni.isEmpty() || nombre.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				dniTF.setText("");
 				nombreTF.setText("");
-				dirTF.setText("");
-				sueldoTF.setText("");
-				DTOtEmpleado emp = new DTOtEmpleado(id, dni, nombre, sueldo, rol);
+				DTOtEmpleado emp = new DTOtEmpleado(dni, nombre);
 				Controlador.accion(Evento.MODIFICAR_EMPLEADO, emp);
 			}
 		});

@@ -64,7 +64,7 @@ public class DAOFacturasImp implements DAOFacturas {
 	}
 
 	public int borrarFactura(int id) {
-		String query = "DELETE FROM Factura WHERE numFactura = ?";
+		String query = "DELETE FROM FACTURAS WHERE numFactura = ?";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setInt(1, id);
 			return stmt.executeUpdate();

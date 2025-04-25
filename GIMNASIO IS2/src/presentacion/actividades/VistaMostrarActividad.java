@@ -145,9 +145,9 @@ public class VistaMostrarActividad {
 			java.sql.Date sqlDate = a.getFecha();
 			java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
 			String idSala = String.valueOf(a.getIdSala());
-			String idEmp = String.valueOf(a.getIdEmpleado());
+			String dniEmp = a.getDniEmpleado();
 			JOptionPane.showMessageDialog(null, "Tipo de actividad: " + tipoAct + " id de sala: " + idSala +
-					" fecha: " + utilDate + " id de empleado: " + idEmp);
+					" fecha: " + utilDate + " DNI de empleado: " + dniEmp);
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_MOSTRAR_ACTIVIDAD_KO) {

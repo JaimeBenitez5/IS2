@@ -19,8 +19,6 @@ DROP TABLE IF EXISTS EmpleadosRoles;
 DROP TABLE IF EXISTS Roles; 
 DROP TABLE IF EXISTS Empleados; 
 
-
-
 CREATE TABLE Clientes(
 dniCliente VARCHAR (9) PRIMARY KEY,
 nombre VARCHAR(255) NOT NULL, 

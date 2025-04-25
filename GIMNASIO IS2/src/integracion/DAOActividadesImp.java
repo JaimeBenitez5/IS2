@@ -14,12 +14,14 @@ import negocio.DTOtActividad;
 public class DAOActividadesImp implements DAOActividades{
 
 	public int altaActividad(DTOtActividad actividad) {
-		String query = "INSERT INTO ACTIVIDADES (tipoActividad, fecha, idSala, idEmpleado) VALUES (?, ?, ?, ?)";
+		String query = "INSERT INTO ACTIVIDADES (tipoActividad, fecha, idSala, dniEmpleado) VALUES (?, ?, ?, ?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setString(1, actividad.getTipoActividad());
 			stmt.setDate(2, actividad.getFecha());
 			stmt.setInt(3, actividad.getIdSala());
-			stmt.setInt(4, actividad.getIdEmpleado());
+			String dni = actividad.getDniEmpleado();
+			if(dni != null && dni != "") stmt.setString(4, actividad.getDniEmpleado());
+			else stmt.setString(4, "");
 			return stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -35,8 +37,8 @@ public class DAOActividadesImp implements DAOActividades{
 			stmt.setInt(3, idSala);
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
-				int idEmpleado = rs.getInt("idEmpleado");
-				DTOtActividad a = new DTOtActividad(tipoActividad, idEmpleado, idSala, fecha);
+				String dniEmpleado = rs.getString("dniEmpleado");
+				DTOtActividad a = new DTOtActividad(tipoActividad, dniEmpleado, idSala, fecha);
 				return a;
 			}
 		} catch (SQLException e) {
@@ -46,9 +48,9 @@ public class DAOActividadesImp implements DAOActividades{
 	}
 
 	public int actualizarActividad(DTOtActividad actividad) {
-		String query = "UPDATE ACTIVIDADES SET idEmpleado = ? WHERE tipoActividad  = ? AND fecha = ? AND idSala = ?";
+		String query = "UPDATE ACTIVIDADES SET dniEmpleado = ? WHERE tipoActividad  = ? AND fecha = ? AND idSala = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
-			stmt.setInt(1, actividad.getIdEmpleado());
+			stmt.setString(1, actividad.getDniEmpleado());
 			stmt.setString(2, actividad.getTipoActividad());
 			stmt.setDate(3, actividad.getFecha());
 			stmt.setInt(4, actividad.getIdSala());

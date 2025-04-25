@@ -111,7 +111,7 @@ public class VistaAnadirEmpleado {
 					dniTF.setText("");
 					nombreTF.setText("");
 					sueldoTF.setText("");
-					DTOtEmpleado emp = new DTOtEmpleado(dni, nombre, sueldo, rol);
+					DTOtEmpleado emp = new DTOtEmpleado(dni, nombre);
 					Controlador.accion(Evento.ALTA_EMPLEADO, emp);
 				}
 			}

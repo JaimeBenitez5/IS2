@@ -83,11 +83,11 @@ public class VistaAnadirActividad {
 		JTextField idSalaTF = new JTextField(30);
 		panelCampos.add(idSalaTF);
 		
-		JLabel idEmp = new JLabel("ID Empleado:");
-		idEmp.setForeground(Color.WHITE);
-		panelCampos.add(idEmp);
-		JTextField idEmpTF = new JTextField(30);
-		panelCampos.add(idEmpTF);
+		JLabel dniEmp = new JLabel("DNI Empleado:");
+		dniEmp.setForeground(Color.WHITE);
+		panelCampos.add(dniEmp);
+		JTextField dniEmpTF = new JTextField(30);
+		panelCampos.add(dniEmpTF);
 		
 		panelAnadirActividad.add(panelCampos);
 		panelAnadirActividad.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -112,16 +112,16 @@ public class VistaAnadirActividad {
 				java.util.Date Date = (java.util.Date) fechaTF.getValue();
 				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
 				int idSala = Integer.parseInt(idSalaTF.getText());
-				int idEmp = Integer.parseInt(idEmpTF.getText());
+				String dniEmp = dniEmpTF.getText();
 				
 				if (tipoAct == "") {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				tipoActTF.setText("");
-				idEmpTF.setText("");
+				dniEmpTF.setText("");
 				fechaTF.setValue(new java.util.Date());
 				DTOtActividad a = new DTOtActividad(tipoAct, idSala, sqlDate);
-				if(idEmp != 0) a.setIdEmpleado(idEmp);
+				if(dniEmp != "") a.setDniEmpleado(dniEmp);
 				Controlador.accion(Evento.ALTA_ACTIVIDAD, a);
 			}
 		});

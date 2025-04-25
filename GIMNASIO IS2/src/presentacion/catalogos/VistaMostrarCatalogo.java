@@ -84,7 +84,7 @@ public class VistaMostrarCatalogo {
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String id = idTF.getText();
+				int id = Integer.parseInt(idTF.getText());
 				idTF.setText("");
 				Controlador.accion(Evento.MOSTRAR_CATALOGO, id);
 			}
@@ -114,8 +114,9 @@ public class VistaMostrarCatalogo {
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
+			int id = catalogo.getId();
 			int n = catalogo.getNumActividades();
-			JOptionPane.showMessageDialog(null,"Numero de actividades: "+n);
+			JOptionPane.showMessageDialog(null,"ID: " + id + "de actividades: " + n);
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_MOSTRAR_CATALOGO_KO) {

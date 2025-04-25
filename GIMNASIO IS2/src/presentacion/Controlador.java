@@ -116,7 +116,6 @@ public class Controlador{
 			break;
 		}
 		case Evento.MOSTRAR_ACTIVIDAD:{
-			//NO TIENE MUCHO SENTIDO, LO TENEMOS YA TODO MENOS EL ID DE EMPLEADO QUE ENCIMA HASTA PUEDE SER NULO, PERO ES ASI LA BD
 			DTOtActividad a = getSAActividades().leerActividad(((DTOtActividad) datos).getTipoActividad(), ((DTOtActividad) datos).getFecha(), ((DTOtActividad) datos).getIdSala());
 			VistaMostrarActividad.actualizar(Evento.RES_MOSTRAR_ACTIVIDAD_OK, a);
 			break;
@@ -177,7 +176,6 @@ public class Controlador{
 				VistaAnadirEmpleado.actualizar(Evento.RES_ALTA_EMPLEADO_KO, ((DTOtEmpleado) datos).getDni());
 			break;
 		}
-
 		case Evento.MOSTRAR_EMPLEADOS: {
 			List<DTOtEmpleado> res = getSAEmpleados().leerTodosEmpleados();
 			if (!res.isEmpty()) 
@@ -186,7 +184,6 @@ public class Controlador{
 				VistaMostrarEmpleados.actualizar(Evento.RES_MOSTRAR_EMPLEADOS_KO, null);
 			break;
 		}
-
 		case Evento.MOSTRAR_EMPLEADO: {
 			DTOtEmpleado empleado = getSAEmpleados().leerEmpleado((String) datos);
 			if (empleado != null) 
@@ -195,16 +192,14 @@ public class Controlador{
 				VistaMostrarEmpleado.actualizar(Evento.RES_MOSTRAR_EMPLEADO_KO, null);
 			break;
 		}
-
 		case Evento.ELIMINAR_EMPLEADO: {
 			int exito = getSAEmpleados().borrarEmpleado((String) datos);
 			if (exito == 1) 
-				VistaEliminarEmpleado.actualizar(Evento.RES_ELIMINAR_EMPLEADO_OK, null);
+				VistaEliminarEmpleado.actualizar(Evento.RES_ELIMINAR_EMPLEADO_OK, (String)datos);
 			else 
 				VistaEliminarEmpleado.actualizar(Evento.RES_ELIMINAR_EMPLEADO_KO, null);
 			break;
 		}
-
 		case Evento.MODIFICAR_EMPLEADO: {
 			int exitoModificar = getSAEmpleados().actualizarEmpleado((DTOtEmpleado) datos);
 			if (exitoModificar == 1) 
@@ -213,7 +208,6 @@ public class Controlador{
 				VistaModificarEmpleado.actualizar(Evento.RES_MODIFICAR_EMPLEADO_KO, null);
 			break;
 		}
-
 		//CATALOGOS
 		case Evento.ALTA_CATALOGO: {
 			int id = getSACatalogos().altaCatalogo((DTOtCatalogo) datos);
@@ -224,22 +218,19 @@ public class Controlador{
 				VistaAnadirCatalogo.actualizar(Evento.RES_ALTA_CATALOGO_KO, id);
 			break;
 		}
-
-//		case Evento.MOSTRAR_CATALOGO: {
-//			DTOtCatalogo c = getSACatalogos().leerCatalogo((int) datos);
-//			VistaMostrarCatalogo.actualizar(Evento.RES_MOSTRAR_CATALOGO_OK, c);
-//			break;
-//		}
-//
-//		case Evento.MOSTRAR_CATALOGOS: {
-//			List<DTOtCatalogo> res = getSACatalogos().leerTodosCatalogos();
-//			if (!res.isEmpty())
-//				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_OK, res);
-//			else
-//				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_KO, null);
-//			break;
-//		}
-
+		case Evento.MOSTRAR_CATALOGO: {
+			DTOtCatalogo c = getSACatalogos().leerCatalogo((int) datos);
+			VistaMostrarCatalogo.actualizar(Evento.RES_MOSTRAR_CATALOGO_OK, c);
+			break;
+		}
+		case Evento.MOSTRAR_CATALOGOS: {
+			List<DTOtCatalogo> res = getSACatalogos().leerTodosCatalogos();
+			if (!res.isEmpty())
+				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_OK, res);
+			else
+				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_KO, null);
+			break;
+		}
 		case Evento.ELIMINAR_CATALOGO: {
 			int exito = getSACatalogos().borrarCatalogo((int) datos);
 			if (exito == 1)

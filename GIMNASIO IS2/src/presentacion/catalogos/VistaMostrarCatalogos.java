@@ -72,8 +72,8 @@ public class VistaMostrarCatalogos {
 	public static void actualizar(int evento, List<DTOtCatalogo> datos) {
 		if (evento == Evento.RES_MOSTRAR_CATALOGOS_OK) {
 			panelMostrarCatalogos.removeAll();
-			String[] columnNames = {"ID", "Nombre", "Direccion", "Activo"};
-			String[][] data = new String[datos.size()][4];
+			String[] columnNames = {"ID", "Numero de actividades"};
+			String[][] data = new String[datos.size()][2];
 
 			for (int i = 0; i < datos.size(); i++) {
 				DTOtCatalogo catalogo = datos.get(i);

@@ -83,8 +83,8 @@ public class VistaEliminarEmpleado {
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int id = Integer.parseInt(idTF.getText());
-				Controlador.accion(Evento.ELIMINAR_EMPLEADO, id);
+				String dniEmp = idTF.getText();
+				Controlador.accion(Evento.ELIMINAR_EMPLEADO, dniEmp);
 			}
 		});
 

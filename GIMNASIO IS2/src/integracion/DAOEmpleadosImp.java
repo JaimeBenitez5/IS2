@@ -30,15 +30,13 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 		return 0;
 	}
 
-	public DTOtEmpleado leerEmpleado(int id) {
+	public DTOtEmpleado leerEmpleado(String dni) {
 		String query = "SELECT * FROM EMPLEADOS WHERE dniEmpleado  = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
-			stmt.setInt(1,id);
+			stmt.setString(1,dni);
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
-				String nombre = rs.getString ("dni");
-				String dni = rs.getString ("nombre");
-				
+				String nombre = rs.getString ("nombre");
 				DTOtEmpleado emp = new DTOtEmpleado(dni, nombre);
 				return emp;
 			}

@@ -45,7 +45,7 @@ public class DTOtActividad {
 		_tipoActividad = tipoActividad;
 	}
 
-	public void setIdEmpleado(String dniEmpleado) {
+	public void setDniEmpleado(String dniEmpleado) {
 		_dniEmpleado = dniEmpleado;
 	}
 	

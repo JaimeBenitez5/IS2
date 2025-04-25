@@ -58,11 +58,11 @@ public class VistaMostrarEmpleado {
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
-		JLabel id = new JLabel("ID:");
-		id.setForeground(Color.WHITE);
-		panelCampos.add(id);
-		JTextField idTF = new JTextField(30);
-		panelCampos.add(idTF);
+		JLabel dni = new JLabel("DNI:");
+		dni.setForeground(Color.WHITE);
+		panelCampos.add(dni);
+		JTextField dniEmpTF = new JTextField(30);
+		panelCampos.add(dniEmpTF);
 
 		panelMostrarEmpleados.add(panelCampos);
 		panelMostrarEmpleados.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -84,8 +84,8 @@ public class VistaMostrarEmpleado {
 
 		mostrar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int id = Integer.parseInt(idTF.getText());
-				Controlador.accion(Evento.MOSTRAR_EMPLEADO, id);
+				String dniEmpleado = dniEmpTF.getText();
+				Controlador.accion(Evento.MOSTRAR_EMPLEADO, dniEmpleado);
 			}
 		});
 
@@ -113,11 +113,9 @@ public class VistaMostrarEmpleado {
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize(new Dimension(500, 200));
-			String id = String.valueOf(empleado.getId());
+			String dni = empleado.getDni();
 			String nombre = empleado.getNombre();
-			double sueldo = empleado.getSueldo();
-			int rol = empleado.getRol();
-			JOptionPane.showMessageDialog(null, "ID: " + id + " Nombre: " + nombre + " Sueldo: " + sueldo + " Rol: " + rol );
+			JOptionPane.showMessageDialog(null, "ID: " + dni + " Nombre: " + nombre);
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_MOSTRAR_EMPLEADO_KO) {
