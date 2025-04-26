@@ -1,0 +1,42 @@
+package negocio;
+
+import java.util.List;
+
+import integracion.DAOSalas;
+import integracion.DAOSalasImp;
+import integracion.DAOSuscripciones;
+
+public class SASuscripcionImp implements SASuscripcion{
+
+	private static DAOSuscripciones suscripcionesDAO = null;
+
+	//USADO PATRON SINGLETON
+	public static DAOSuscripciones getDAOSuscripciones(){
+		if(suscripcionesDAO == null) suscripcionesDAO = new DAOSuscripcionesImp();
+		return suscripcionesDAO;
+	}
+
+	public int altaSuscripcion(final DTOtSuscripcion suscripcion) {
+		return getDAOSuscripciones().altaSuscripcion(suscripcion);
+	}
+
+	public DTOtSuscripcion leerSuscripcion(final int id) {
+		return getDAOSuscripciones().leerSuscripcion(id);
+	}
+
+	public int actualizarSuscripcion(final DTOtSuscripcion suscripcion) {
+		DTOtSuscripcion s = leerSuscripcion(suscripcion.getId());
+		int exito = 0;
+		if(s != null) exito = getDAOSuscripciones().actualizarSuscripcion(suscripcion);
+		return exito;
+	}
+
+	public int borrarSuscripcion(final int id) {
+		//TODO
+	}
+
+	public List<DTOtSala> leerTodasSuscripciones() {
+		return getDAOSuscripciones().leerTodasSuscripciones();
+	}
+
+}

@@ -1,4 +1,4 @@
-package configFiles;
+	package configFiles;
 import java.sql.*;
 
 public class BDConexion {

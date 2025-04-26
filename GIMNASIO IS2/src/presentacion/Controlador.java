@@ -8,6 +8,11 @@ import presentacion.clientes.*;
 import presentacion.empleados.*;
 import presentacion.facturas.*;
 import presentacion.salas.*;
+import presentacion.suscripciones.VistaAltaSuscripcion;
+import presentacion.suscripciones.VistaEliminarSuscripcion;
+import presentacion.suscripciones.VistaMostrarSuscripcion;
+import presentacion.suscripciones.VistaMostrarSuscripciones;
+import presentacion.suscripciones.VistaSuscripciones;
 import negocio.*;
 
 public class Controlador{
@@ -18,10 +23,15 @@ public class Controlador{
 	private static SACatalogos SACatalogos;
 	private static SAEmpleados SAEmpleados;
 	private static SAFacturas SAFacturas;
+	private static SASuscripcion SASuscripcion;
 	
 	private static SAClientes getSAClientes(){
 		if(SAClientes == null) SAClientes = new SAClientesImp();
 		return SAClientes;
+	}
+	private static SASuscripcion getSASuscripcion(){
+		if(SASuscripcion == null) SASuscripcion = new SASuscripcionImp();
+		return SASuscripcion;
 	}
 	private static SASalas getSASalas() {
 		if (SASalas == null) SASalas = new SASalasImp();
@@ -247,6 +257,47 @@ public class Controlador{
 				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_KO, null);
 			break;
 		}
+		
+		
+		//SUSCRIPCIONES
+		case Evento.ALTA_SUSCRIPCION: {
+			int id = getSASuscripcion().altaSuscripcion((DTOtSuscripcion) datos);
+			((DTOtSuscripcion) datos).setId(id);
+			if (id != 0)
+				VistaAltaSuscripcion.actualizar(Evento.RES_ALTA_SUSCRIPCION_OK, id);
+			else
+				VistaAltaSuscripcion.actualizar(Evento.RES_ALTA_CATALOGO_KO, id);
+			break;
+		}
+		case Evento.MOSTRAR_SUSCRIPCION: {
+			DTOtCatalogo c = getSACatalogos().leerCatalogo((int) datos);
+			VistaMostrarCatalogo.actualizar(Evento.RES_MOSTRAR_CATALOGO_OK, c);
+			break;
+		}
+		case Evento.MOSTRAR_SUSCRIPCIONES: {
+			List<DTOtCatalogo> res = getSACatalogos().leerTodosCatalogos();
+			if (!res.isEmpty())
+				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_OK, res);
+			else
+				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_KO, null);
+			break;
+		}
+		case Evento.ELIMINAR_SUSCRIPCION: {
+			int exito = getSACatalogos().borrarCatalogo((int) datos);
+			if (exito == 1)
+				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_OK, (int) datos);
+			else
+				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_KO, null);
+			break;
+		}
+		case Evento.MODIFICAR_SUSCRIPCION: {
+			int exitoModificar = getSACatalogos().actualizarCatalogo((DTOtCatalogo) datos);
+			if (exitoModificar == 1)
+				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_OK, null);
+			else
+				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_KO, null);
+			break;
+		}
 		}
 	}
 
@@ -330,6 +381,31 @@ public class Controlador{
 		}
 		case Evento.VISTA_MODIFICAR_SALA:{ 
 			VistaModificarSala.open();
+			break;
+		}
+		//VISTAS SUSCRIPCIONES
+		case Evento.VISTA_SUSCRIPCIONES:{ 
+			VistaSuscripciones.open();
+			break;
+		}
+		case Evento.VISTA_ANADIR_SUSCRIPCION:{ 
+			VistaAltaSuscripcion.open();
+			break;
+		}
+		case Evento.VISTA_ELIMINAR_SUSCRIPCION:{ 
+			VistaEliminarSuscripcion.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_SUSCRIPCION:{ 
+			VistaMostrarSuscripcion.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_SUSCRIPCIONES:{ 
+			VistaMostrarSuscripciones.open();
+			break;
+		}
+		case Evento.VISTA_MODIFICAR_SUSCRIPCION:{ 
+			//VistaModificarSuscripcion.open();
 			break;
 		}
 		//VISTAS ACTIVIDADES

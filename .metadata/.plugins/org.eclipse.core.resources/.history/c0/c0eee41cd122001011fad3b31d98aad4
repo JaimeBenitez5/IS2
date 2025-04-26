@@ -1,0 +1,486 @@
+package presentacion;
+
+import java.util.List;
+
+import presentacion.actividades.*;
+import presentacion.catalogos.*;
+import presentacion.clientes.*;
+import presentacion.empleados.*;
+import presentacion.facturas.*;
+import presentacion.salas.*;
+import presentacion.suscripciones.VistaAltaSuscripcion;
+import presentacion.suscripciones.VistaEliminarSuscripcion;
+import presentacion.suscripciones.VistaSuscripciones;
+import negocio.*;
+
+public class Controlador{
+	//patron singleton
+	private static SAClientes SAClientes;
+	private static SASalas SASalas;
+	private static SAActividades SAActividades;
+	private static SACatalogos SACatalogos;
+	private static SAEmpleados SAEmpleados;
+	private static SAFacturas SAFacturas;
+	private static SASuscripcion SASuscripcion;
+	
+	private static SAClientes getSAClientes(){
+		if(SAClientes == null) SAClientes = new SAClientesImp();
+		return SAClientes;
+	}
+	private static SASuscripcion getSASuscripcion(){
+		if(SASuscripcion == null) SASuscripcion = new SASuscripcionImp();
+		return SASuscripcion;
+	}
+	private static SASalas getSASalas() {
+		if (SASalas == null) SASalas = new SASalasImp();
+		return SASalas;
+	}
+	private static SAActividades getSAActividades() {
+		if (SAActividades == null) SAActividades = new SAActividadesImp();
+		return SAActividades;
+	}
+	private static SAFacturas getSAFacturas(){
+		if(SAFacturas == null) SAFacturas = new SAFacturasImp();
+		return SAFacturas;
+	}
+	private static SACatalogos getSACatalogos() {
+		if (SACatalogos == null) SACatalogos = new SACatalogosImp();
+		return SACatalogos;
+	}
+	private static SAEmpleados getSAEmpleados() {
+		if (SAEmpleados == null) SAEmpleados = new SAEmpleadosImp();
+		return SAEmpleados;
+	}
+	
+	public static void accion(int evento, Object datos) { 
+		switch(evento) {
+		//CLIENTES
+		case Evento.ALTA_CLIENTE:{
+			int exito = getSAClientes().altaCliente((DTOtCliente) datos);
+			if(exito == 1) VistaAltaCliente.actualizar(Evento.RES_ALTA_CLIENTE_OK, ((DTOtCliente) datos).getDni());
+			else VistaAltaCliente.actualizar(Evento.RES_ALTA_CLIENTE_KO, ((DTOtCliente) datos).getDni());
+			break;
+		}
+		case Evento.MOSTRAR_CLIENTES:{
+			List<DTOtCliente> res = getSAClientes().leerTodosClientes();
+			if (!res.isEmpty()) VistaMostrarClientes.actualizar(Evento.RES_MOSTRAR_CLIENTES_OK, res);
+			else VistaMostrarClientes.actualizar(Evento.RES_MOSTRAR_CLIENTES_KO, null);
+			break;
+		}
+		case Evento.MOSTRAR_CLIENTE:{
+			DTOtCliente cliente = getSAClientes().leerCliente((String)datos);
+			if (cliente != null) VistaMostrarCliente.actualizar(Evento.RES_MOSTRAR_CLIENTE_OK, cliente);
+			else VistaMostrarCliente.actualizar(Evento.RES_MOSTRAR_CLIENTE_KO, null);
+			break;
+		}
+		case Evento.ELIMINAR_CLIENTE:{
+			int exito = getSAClientes().borrarCliente((String) datos);
+			if (exito == 1) VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_OK, null);
+			else VistaBajaCliente.actualizar(Evento.RES_ELIMINAR_CLIENTE_KO, null);
+			break;
+		}
+		case Evento.MODIFICAR_CLIENTE:{
+			int exitoModificar = getSAClientes().actualizarCliente((DTOtCliente) datos);
+			if (exitoModificar == 1) VistaModificarCliente.actualizar(Evento.RES_MODIFICAR_CLIENTE_OK, null);
+			else VistaModificarCliente.actualizar(Evento.RES_MODIFICAR_CLIENTE_KO, null);
+			break; 
+		}
+		//SALAS
+		case Evento.ALTA_SALA:{
+			int id = getSASalas().altaSala((DTOtSala) datos);
+			((DTOtSala) datos).setId(id);
+			if(id != 0) VistaAnadirSala.actualizar(Evento.RES_ALTA_SALA_OK, id);
+			else VistaAnadirSala.actualizar(Evento.RES_ALTA_SALA_KO, id);
+			break;
+		}
+		case Evento.MOSTRAR_SALA:{
+			DTOtSala s = getSASalas().leerSala((int) datos);
+			VistaMostrarSala.actualizar(Evento.RES_MOSTRAR_SALA_OK, s);
+			break;
+		}
+		case Evento.MOSTRAR_SALAS:{
+			List<DTOtSala> res = getSASalas().leerTodasSalas();
+			if (!res.isEmpty()) VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_OK, res);
+			else VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_KO, null);
+			break;
+		}
+		case Evento.ELIMINAR_SALA:{
+			int exito = getSASalas().borrarSala((int) datos);
+			if (exito == 1) VistaEliminarSala.actualizar(Evento.RES_ELIMINAR_SALA_OK, (int) datos);
+			else VistaEliminarSala.actualizar(Evento.RES_ELIMINAR_SALA_KO, null);
+			break;
+		}
+		case Evento.MODIFICAR_SALA:{
+			int exitoModificar = getSASalas().actualizarSala((DTOtSala) datos);
+			if (exitoModificar == 1) VistaModificarSala.actualizar(Evento.RES_MODIFICAR_SALA_OK, null);
+			else VistaModificarSala.actualizar(Evento.RES_MODIFICAR_SALA_KO, null);
+			break;
+		}
+		//ACTIVIDADES
+		case Evento.ALTA_ACTIVIDAD:{
+			int exitoInsertar = getSAActividades().altaActividad((DTOtActividad) datos);
+			if(exitoInsertar == 1) VistaAnadirActividad.actualizar(Evento.RES_ALTA_ACTIVIDAD_OK, null);
+			else VistaAnadirActividad.actualizar(Evento.RES_ALTA_ACTIVIDAD_KO, null);
+			break;
+		}
+		case Evento.MOSTRAR_ACTIVIDAD:{
+			DTOtActividad a = getSAActividades().leerActividad(((DTOtActividad) datos).getTipoActividad(), ((DTOtActividad) datos).getFecha(), ((DTOtActividad) datos).getIdSala());
+			VistaMostrarActividad.actualizar(Evento.RES_MOSTRAR_ACTIVIDAD_OK, a);
+			break;
+		}
+		case Evento.MOSTRAR_ACTIVIDADES:{
+			List<DTOtActividad> res = getSAActividades().leerTodasActividades();
+			if (!res.isEmpty()) VistaMostrarActividades.actualizar(Evento.RES_MOSTRAR_ACTIVIDADES_OK, res);
+			else VistaMostrarActividades.actualizar(Evento.RES_MOSTRAR_ACTIVIDADES_KO, null);
+			break;
+		}
+		case Evento.ELIMINAR_ACTIVIDAD:{
+			int exito = getSAActividades().borrarActividad(((DTOtActividad) datos).getTipoActividad(), ((DTOtActividad) datos).getFecha(), ((DTOtActividad) datos).getIdSala());
+			if (exito == 1) VistaEliminarActividad.actualizar(Evento.RES_ELIMINAR_ACTIVIDAD_OK, (int) datos);
+			else VistaEliminarActividad.actualizar(Evento.RES_ELIMINAR_ACTIVIDAD_KO, null);
+			break;
+		}
+		case Evento.MODIFICAR_ACTIVIDAD:{
+			int exitoModificar = getSAActividades().actualizarActividad((DTOtActividad) datos);
+			if (exitoModificar == 1) VistaModificarActividad.actualizar(Evento.RES_MODIFICAR_ACTIVIDAD_OK, null);
+			else VistaModificarActividad.actualizar(Evento.RES_MODIFICAR_ACTIVIDAD_KO, null);
+			break;
+		}
+		//FACTURAS
+		case Evento.ALTA_FACTURA:{
+			int id = getSAFacturas().altaFactura((DTOtFactura) datos);
+			((DTOtFactura) datos).setId(id);
+			if(id != 0) VistaAnadirFactura.actualizar(Evento.RES_ALTA_FACTURA_OK, id);
+			else VistaAnadirFactura.actualizar(Evento.RES_ALTA_FACTURA_KO, id);
+			break;
+		}
+		case Evento.MOSTRAR_FACTURAS:{
+			List<DTOtFactura> res = getSAFacturas().leerTodasFacturas();
+			if (!res.isEmpty()) VistaMostrarFacturas.actualizar(Evento.RES_MOSTRAR_FACTURAS_OK, res);
+			else VistaMostrarFacturas.actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, null);
+			break;
+		}
+		case Evento.ELIMINAR_FACTURA:{
+			int exito = getSAFacturas().borrarFactura((int) datos);
+			if(exito == 1) VistaEliminarFactura.actualizar(Evento.RES_ELIMINAR_FACTURA_OK, datos);
+			else VistaEliminarFactura.actualizar(Evento.RES_ELIMINAR_FACTURA_KO, null);
+			break;
+		}
+		case Evento.MOSTRAR_FACTURAS_CLIENTE:{ 
+			break;
+		}
+		case Evento.MOSTRAR_FACTURA:{
+			DTOtFactura factura = getSAFacturas().leerFactura((int)datos);
+			if (factura != null) VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_OK, factura);
+			else VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_KO, null);
+			break;
+		}
+		//EMPLEADOS
+		case Evento.ALTA_EMPLEADO: {
+			int exito = getSAEmpleados().altaEmpleado((DTOtEmpleado) datos);
+			if (exito == 1) 
+				VistaAnadirEmpleado.actualizar(Evento.RES_ALTA_EMPLEADO_OK, ((DTOtEmpleado) datos).getDni());
+			else 
+				VistaAnadirEmpleado.actualizar(Evento.RES_ALTA_EMPLEADO_KO, ((DTOtEmpleado) datos).getDni());
+			break;
+		}
+		case Evento.MOSTRAR_EMPLEADOS: {
+			List<DTOtEmpleado> res = getSAEmpleados().leerTodosEmpleados();
+			if (!res.isEmpty()) 
+				VistaMostrarEmpleados.actualizar(Evento.RES_MOSTRAR_EMPLEADOS_OK, res);
+			else 
+				VistaMostrarEmpleados.actualizar(Evento.RES_MOSTRAR_EMPLEADOS_KO, null);
+			break;
+		}
+		case Evento.MOSTRAR_EMPLEADO: {
+			DTOtEmpleado empleado = getSAEmpleados().leerEmpleado((String) datos);
+			if (empleado != null) 
+				VistaMostrarEmpleado.actualizar(Evento.RES_MOSTRAR_EMPLEADO_OK, empleado);
+			else 
+				VistaMostrarEmpleado.actualizar(Evento.RES_MOSTRAR_EMPLEADO_KO, null);
+			break;
+		}
+		case Evento.ELIMINAR_EMPLEADO: {
+			int exito = getSAEmpleados().borrarEmpleado((String) datos);
+			if (exito == 1) 
+				VistaEliminarEmpleado.actualizar(Evento.RES_ELIMINAR_EMPLEADO_OK, (String)datos);
+			else 
+				VistaEliminarEmpleado.actualizar(Evento.RES_ELIMINAR_EMPLEADO_KO, null);
+			break;
+		}
+		case Evento.MODIFICAR_EMPLEADO: {
+			int exitoModificar = getSAEmpleados().actualizarEmpleado((DTOtEmpleado) datos);
+			if (exitoModificar == 1) 
+				VistaModificarEmpleado.actualizar(Evento.RES_MODIFICAR_EMPLEADO_OK, null);
+			else 
+				VistaModificarEmpleado.actualizar(Evento.RES_MODIFICAR_EMPLEADO_KO, null);
+			break;
+		}
+		//CATALOGOS
+		case Evento.ALTA_CATALOGO: {
+			int id = getSACatalogos().altaCatalogo((DTOtCatalogo) datos);
+			((DTOtCatalogo) datos).setId(id);
+			if (id != 0)
+				VistaAnadirCatalogo.actualizar(Evento.RES_ALTA_CATALOGO_OK, id);
+			else
+				VistaAnadirCatalogo.actualizar(Evento.RES_ALTA_CATALOGO_KO, id);
+			break;
+		}
+		case Evento.MOSTRAR_CATALOGO: {
+			DTOtCatalogo c = getSACatalogos().leerCatalogo((int) datos);
+			VistaMostrarCatalogo.actualizar(Evento.RES_MOSTRAR_CATALOGO_OK, c);
+			break;
+		}
+		case Evento.MOSTRAR_CATALOGOS: {
+			List<DTOtCatalogo> res = getSACatalogos().leerTodosCatalogos();
+			if (!res.isEmpty())
+				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_OK, res);
+			else
+				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_KO, null);
+			break;
+		}
+		case Evento.ELIMINAR_CATALOGO: {
+			int exito = getSACatalogos().borrarCatalogo((int) datos);
+			if (exito == 1)
+				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_OK, (int) datos);
+			else
+				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_KO, null);
+			break;
+		}
+		case Evento.MODIFICAR_CATALOGO: {
+			int exitoModificar = getSACatalogos().actualizarCatalogo((DTOtCatalogo) datos);
+			if (exitoModificar == 1)
+				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_OK, null);
+			else
+				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_KO, null);
+			break;
+		}
+		
+		
+		//SUSCRIPCIONES
+		case Evento.ALTA_SUSCRIPCION: {
+			int id = getSASuscripcion().altaSuscripcion((DTOtSuscripcion) datos);
+			((DTOtSuscripcion) datos).setId(id);
+			if (id != 0)
+				VistaAltaSuscripcion.actualizar(Evento.RES_ALTA_SUSCRIPCION_OK, id);
+			else
+				VistaAltaSuscripcion.actualizar(Evento.RES_ALTA_CATALOGO_KO, id);
+			break;
+		}
+		case Evento.MOSTRAR_SUSCRIPCION: {
+			DTOtCatalogo c = getSACatalogos().leerCatalogo((int) datos);
+			VistaMostrarCatalogo.actualizar(Evento.RES_MOSTRAR_CATALOGO_OK, c);
+			break;
+		}
+		case Evento.MOSTRAR_SUSCRIPCIONES: {
+			List<DTOtCatalogo> res = getSACatalogos().leerTodosCatalogos();
+			if (!res.isEmpty())
+				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_OK, res);
+			else
+				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_KO, null);
+			break;
+		}
+		case Evento.ELIMINAR_SUSCRIPCION: {
+			int exito = getSACatalogos().borrarCatalogo((int) datos);
+			if (exito == 1)
+				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_OK, (int) datos);
+			else
+				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_KO, null);
+			break;
+		}
+		case Evento.MODIFICAR_SUSCRIPCION: {
+			int exitoModificar = getSACatalogos().actualizarCatalogo((DTOtCatalogo) datos);
+			if (exitoModificar == 1)
+				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_OK, null);
+			else
+				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_KO, null);
+			break;
+		}
+		}
+	}
+
+	public static void mostrarVista(int evento) {
+		switch(evento) {
+		case Evento.VISTA_MENU_PRINCIPAL:{
+			VistaMenuPrincipal.open();
+			break;
+		}
+		//VISTAS FACTURAS
+		case Evento.VISTA_FACTURAS:{ 
+			VistaFacturas.open();
+			break;
+		}
+		case Evento.VISTA_ALTA_FACTURA:{ 
+			VistaAnadirFactura.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_FACTURAS:{ 
+			VistaMostrarFacturas.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_FACTURAS_CLIENTE:{ 
+			VistaMostrarFacturasCliente.open();
+			break;
+		}
+		case Evento.VISTA_ELIMINAR_FACTURA:{
+			VistaEliminarFactura.open();
+			break;
+		}
+		
+		case Evento.VISTA_MOSTRAR_FACTURA:{ 
+			VistaMostrarFactura.open();
+			break;
+		}
+		//VISTAS CLIENTES
+		case Evento.VISTA_CLIENTES:{ 
+			VistaCliente.open();
+			break;
+		}
+		case Evento.VISTA_ALTA_CLIENTE:{	
+			VistaAltaCliente.open();
+			break;
+		}
+		case Evento.VISTA_ELIMINAR_CLIENTE:{
+			VistaBajaCliente.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_CLIENTES:{
+			VistaMostrarClientes.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_CLIENTE:{
+			VistaMostrarCliente.open();
+			break;
+		}
+		case Evento.VISTA_MODIFICAR_CLIENTE:{
+			VistaModificarCliente.open();
+			break;
+		}
+		//VISTAS SALAS
+		case Evento.VISTA_SALAS:{ 
+			VistaSalas.open();
+			break;
+		}
+		case Evento.VISTA_ANADIR_SALAS:{ 
+			VistaAnadirSala.open();
+			break;
+		}
+		case Evento.VISTA_ELIMINAR_SALA:{ 
+			VistaEliminarSala.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_SALAS:{ 
+			VistaMostrarSalas.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_SALA:{ 
+			VistaMostrarSala.open();
+			break;
+		}
+		case Evento.VISTA_MODIFICAR_SALA:{ 
+			VistaModificarSala.open();
+			break;
+		}
+		//VISTAS SUSCRIPCIONES
+		case Evento.VISTA_SUSCRIPCIONES:{ 
+			VistaSuscripciones.open();
+			break;
+		}
+		case Evento.VISTA_ANADIR_SUSCRIPCION:{ 
+			VistaAltaSuscripcion.open();
+			break;
+		}
+		case Evento.VISTA_ELIMINAR_SUSCRIPCION:{ 
+			VistaEliminarSuscripcion.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_SUSCRIPCION:{ 
+			VistaMostrarSuscripcion.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_SUSCRIPCIONES:{ 
+			//VistaMostrarSuscripciones.open();
+			break;
+		}
+		case Evento.VISTA_MODIFICAR_SUSCRIPCION:{ 
+			//VistaModificarSuscripcion.open();
+			break;
+		}
+		//VISTAS ACTIVIDADES
+		case Evento.VISTA_ACTIVIDADES:{ 
+			VistaActividad.open();
+			break;
+		}
+		case Evento.VISTA_ANADIR_ACTIVIDAD:{ 
+			VistaAnadirActividad.open();
+			break;
+		}
+		case Evento.VISTA_ELIMINAR_ACTIVIDAD:{ 
+			VistaEliminarActividad.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_ACTIVIDADES:{ 
+			VistaMostrarActividades.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_ACTIVIDAD:{ 
+			VistaMostrarActividad.open();
+			break;
+		}
+		case Evento.VISTA_MODIFICAR_ACTIVIDAD:{ 
+			VistaModificarActividad.open();
+			break;
+		}
+		// VISTAS CATÁLOGOS
+		case Evento.VISTA_CATALOGOS: {
+			VistaCatalogos.open();
+			break;
+		}
+		case Evento.VISTA_ANADIR_CATALOGO: {
+			VistaAnadirCatalogo.open();
+			break;
+		}
+		case Evento.VISTA_ELIMINAR_CATALOGO: {
+			VistaEliminarCatalogo.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_CATALOGOS: {
+			VistaMostrarCatalogos.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_CATALOGO: {
+			VistaMostrarCatalogo.open();
+			break;
+		}
+		case Evento.VISTA_MODIFICAR_CATALOGO: {
+			VistaModificarCatalogo.open();
+			break;
+		}
+		// VISTAS EMPLEADOS
+		case Evento.VISTA_EMPLEADOS: {
+			VistaEmpleados.open();
+			break;
+		}
+		case Evento.VISTA_ANADIR_EMPLEADO: {
+			VistaAnadirEmpleado.open();
+			break;
+		}
+		case Evento.VISTA_ELIMINAR_EMPLEADO: {
+			VistaEliminarEmpleado.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_EMPLEADOS: {
+			VistaMostrarEmpleados.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_EMPLEADO: {
+			VistaMostrarEmpleado.open();
+			break;
+		}
+		case Evento.VISTA_MODIFICAR_EMPLEADO: {
+			VistaModificarEmpleado.open();
+			break;
+		}
+		}
+	}
+}

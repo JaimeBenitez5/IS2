@@ -1,0 +1,18 @@
+package integracion;
+
+import java.util.List;
+
+import negocio.DTOtSuscripcion;
+
+
+public interface DAOSuscripciones {
+	int altaSala(DTOtSuscripcion suscripcion);
+
+    DTOtSuscripcion leerSala(final int id);
+
+    int actualizarSala(final DTOtSuscripcion suscripcion);
+
+    int borrarSala(final int id);
+
+    List<DTOtSuscripcion> leerTodasSalas();
+}

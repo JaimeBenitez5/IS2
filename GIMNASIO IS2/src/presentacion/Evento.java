@@ -205,5 +205,39 @@ public class Evento {
 
 	public static final int RES_MOSTRAR_EMPLEADO_OK = 630;
 	public static final int RES_MOSTRAR_EMPLEADO_KO = 631;
+	
+	// Eventos Suscripciones
+	//Eventos de Vistas
+	public static final int VISTA_SUSCRIPCIONES = 701;
+	public static final int VISTA_ANADIR_SUSCRIPCION = 702;
+	public static final int VISTA_ELIMINAR_SUSCRIPCION = 703;
+	public static final int VISTA_MOSTRAR_SUSCRIPCION = 704;
+	public static final int VISTA_MOSTRAR_SUSCRIPCIONES = 705;
+	public static final int VISTA_MODIFICAR_SUSCRIPCION = 706;
+	//Eventos de Negocio
+	public static final int ALTA_SUSCRIPCION = 710;
+	public static final int ELIMINAR_SUSCRIPCION = 711;
+	public static final int MOSTRAR_SUSCRIPCION = 712;
+	public static final int MODIFICAR_SUSCRIPCION = 713;
+	public static final int MOSTRAR_SUSCRIPCIONES = 714;
+	public static final int BUSCAR_SUSCRIPCION = 715;
+	//Eventos de Respuesta
+	public static final int RES_ALTA_SUSCRIPCION_OK = 720;
+	public static final int RES_ALTA_SUSCRIPCION_KO = 721;
+
+	public static final int RES_ELIMINAR_SUSCRIPCION_OK = 722;
+	public static final int RES_ELIMINAR_SUSCRIPCION_KO = 723;
+
+	public static final int RES_BUSCAR_SUSCRIPCION_OK = 724;
+	public static final int RES_BUSCAR_SUSCRIPCION_KO = 725;
+
+	public static final int RES_MODIFICAR_SUSCRIPCION_OK = 726;
+	public static final int RES_MODIFICAR_SUSCRIPCION_KO = 727;
+
+	public static final int RES_MOSTRAR_SUSCRIPCION_OK = 728;
+	public static final int RES_MOSTRAR_SUSCRIPCION_KO = 729;
+
+	public static final int RES_MOSTRAR_SUSCRIPCIONES_OK = 730;
+	public static final int RES_MOSTRAR_SUSCRIPCIONES_KO = 731;
 
 }

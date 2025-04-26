@@ -13,6 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +24,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.DTOtEmpleado;
+import negocio.DTOtRol;
+import negocio.Rol;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -80,6 +83,12 @@ public class VistaAnadirEmpleado {
 		sueldoTF.setColumns(8);
 		panelCampos.add(sueldoTF);
 		
+		JComboBox cb= new JComboBox(Rol.values());
+		JLabel rol= new JLabel("Rol:");
+		rol.setForeground(Color.WHITE);
+		panelCampos.add(rol);
+		panelCampos.add(cb);
+		
 		panelAltaEmpleado.add(panelCampos);
 		panelAltaEmpleado.add(Box.createRigidArea(new Dimension(0, 50)));
 
@@ -103,7 +112,7 @@ public class VistaAnadirEmpleado {
 				String nombre = nombreTF.getText();
 				double sueldo = Double.parseDouble(sueldoTF.getText());
 				int rol = 0;
-				//FALTA EL ROL QUE DEPENDE DE COMO LO HAGAMOS, PODRIA SER UN COMBO-BOX
+				
 				if (dni.isEmpty() || nombre.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
