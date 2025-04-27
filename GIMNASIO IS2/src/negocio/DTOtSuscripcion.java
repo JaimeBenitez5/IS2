@@ -1,37 +1,31 @@
 package negocio;
 
-public class DTOtSuscripcion {
-	private int _idSuscripcion;
-	private DTOtTipoSuscripcion _tipoSuscripcion;
+public abstract class DTOtSuscripcion {
+	protected int _idSuscripcion;
+	protected String _nombre;
+	protected int _duracion;
 	
-	public DTOtSuscripcion(final int id, final String nombre) {
-		_idSuscripcion = id;
-    	_nombre = nombre;
-    }
-    
-    public DTOtSuscripcion(final DTOtTipoSuscripcion tipo, final String nombre) {
-    	_idSuscripcion = 0;
-    	_nombre = nombre;
-    	_tipoSuscripcion = tipo;
-    }
-    
-    public int getId() {
-    	return _idSuscripcion;
-    }
-
-    public DTOtTipoSuscripcion getTipo() {
-        return _tipo;
-    }
-
-    public String getNombre() {
-        return _nombre;
-    }
-    
-    public void setId(final int id) {
-    	_idSuscripcion = id;
-    }
-
-    public String toString() {
-        return _idSuscripcion + " " + _tipo + " "+ _nombre;
-    }
+	public int getIdSuscripcion() {
+		return _idSuscripcion;
+	}
+	
+	public String get_nombre() {
+		return _nombre;
+	}
+	
+	public int get_duracion() {
+		return _duracion;
+	}
+	
+	public void setIdSuscripcion(int idSuscripcion) {
+		_idSuscripcion = idSuscripcion;
+	}
+	
+	public void set_nombre(String nombre) {
+		_nombre = nombre;
+	}
+	
+	public void set_duracion(int duracion) {
+		_duracion = duracion;
+	}
 }

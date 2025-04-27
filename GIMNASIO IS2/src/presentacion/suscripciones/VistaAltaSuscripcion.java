@@ -58,7 +58,7 @@ public class VistaAltaSuscripcion {
 		panelAltaSuscripcion.add(titulo);
 		panelAltaSuscripcion.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(3, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(2, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
@@ -67,13 +67,13 @@ public class VistaAltaSuscripcion {
 		panelCampos.add(nommbre);
 		JTextField nombreTF = new JTextField(30);
 		panelCampos.add(nombreTF);
-
-		JComboBox cb= new JComboBox(TipoSuscripcion.values());
+		
 		JLabel rol= new JLabel("Tipo Suscripcion:");
 		rol.setForeground(Color.WHITE);
 		panelCampos.add(rol);
-		panelCampos.add(cb);
-	
+		
+		JComboBox<String> comboSus = new JComboBox<>(new String[] {"SIN ASIGNAR", "PREMIUM", "BASICA"});
+		panelCampos.add(comboSus);
 		
 		panelAltaSuscripcion.add(panelCampos);
 		panelAltaSuscripcion.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -95,14 +95,17 @@ public class VistaAltaSuscripcion {
 		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				String nombre = nombreTF.getText();
-				TipoSuscripcion t= (TipoSuscripcion) cb.getSelectedItem();
 				if (nombre.isEmpty() ) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
 					nombreTF.setText("");
-					DTOtSuscripcion c = new DTOtSuscripcion(new DTOtTipoSuscripcion(t),nombre);//TODO no se si esto se puede hacer
-					Controlador.accion(Evento.ALTA_SUSCRIPCION, c);
+
+					DTOtSuscripcion sus;
+					if(comboSus.getSelectedItem() == "BASICA")  sus = new DTOtBasica();
+					else sus = new DTOtPremium();
+					
+					Controlador.accion(Evento.ALTA_SUSCRIPCION, sus);
 				}
 			}
 		});

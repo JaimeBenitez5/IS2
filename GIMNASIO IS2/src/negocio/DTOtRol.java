@@ -5,7 +5,7 @@ public class DTOtRol {
 	private String _nombreRol;
 	private double _salario;
 	
-	public DTOtRol(final int idRol, final String nombreRol,final double salario) {
+	public DTOtRol(final int idRol, final String nombreRol, final double salario) {
 		_idRol = idRol;
 		_nombreRol = nombreRol;
 		_salario = salario;

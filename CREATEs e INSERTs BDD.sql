@@ -104,21 +104,9 @@ FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado)
 
 CREATE TABLE Suscripciones(
 numSuscripcion INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-nombre VARCHAR(50)
+nombre VARCHAR(50),
+idTipoSuscripcion INT
 ); 
-
-CREATE TABLE TiposSuscripciones(
-idTipoSuscripcion INT AUTO_INCREMENT PRIMARY KEY,
-nombre VARCHAR(50)
-);
-
-CREATE TABLE SuscripcionesRoles (
-numSuscripcion INT,
-idTipoSuscripcion INT, 
-PRIMARY KEY (numSuscripcion, idTipoSuscripcion),
-FOREIGN KEY (numSuscripcion) REFERENCES Suscripciones(numSuscripcion) ON DELETE CASCADE,
-FOREIGN KEY (idTipoSuscripcion) REFERENCES TiposSuscripciones(idTipoSuscripcion) ON DELETE CASCADE
-);
 
 CREATE TABLE Basica(
 idTipoSuscripcion INT PRIMARY KEY, 
