@@ -1,4 +1,4 @@
-package presentacion.suscripciones;
+package presentacion.suscripciones.premium;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,7 +12,6 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,15 +20,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.DTOtCliente;
+import negocio.DTOtPremium;
 import negocio.DTOtSuscripcion;
-import negocio.DTOtTipoSuscripcion;
-import negocio.TipoSuscripcion;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
 
-public class VistaAltaSuscripcion {
+public class VistaAltaSuscripcionPremium {
 	private static JFrame GUI = null;
 
 	public static void open() {
@@ -38,7 +35,7 @@ public class VistaAltaSuscripcion {
 	}
 
 	private static JFrame initGUI() {
-		JFrame menuPrincipal = new JFrame("Menú Alta Suscripcion");
+		JFrame menuPrincipal = new JFrame("Menú Alta Suscripcion Premium");
 		menuPrincipal.setSize(854, 480);
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,7 +49,7 @@ public class VistaAltaSuscripcion {
 
 		menuPrincipal.add(panelAltaSuscripcion, BorderLayout.CENTER);
 
-		JLabel titulo = new JLabel("Añadir Suscripcion");
+		JLabel titulo = new JLabel("Añadir Suscripcion Premium");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelAltaSuscripcion.add(titulo);
@@ -62,18 +59,17 @@ public class VistaAltaSuscripcion {
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
-		JLabel nommbre = new JLabel("Nombre:");
-		nommbre.setForeground(Color.WHITE);
-		panelCampos.add(nommbre);
-		JTextField nombreTF = new JTextField(30);
-		panelCampos.add(nombreTF);
+		JLabel idCat = new JLabel("ID de catalogo:");
+		idCat.setForeground(Color.WHITE);
+		panelCampos.add(idCat);
+		JTextField idCatTF = new JTextField(30);
+		panelCampos.add(idCatTF);
 		
-		JLabel rol= new JLabel("Tipo Suscripcion:");
-		rol.setForeground(Color.WHITE);
-		panelCampos.add(rol);
-		
-		JComboBox<String> comboSus = new JComboBox<>(new String[] {"SIN ASIGNAR", "PREMIUM", "BASICA"});
-		panelCampos.add(comboSus);
+		JLabel dniEmp = new JLabel("DNI de Empleado Nutricionista:");
+		dniEmp.setForeground(Color.WHITE);
+		panelCampos.add(dniEmp);
+		JTextField dniEmpTF = new JTextField(300);
+		panelCampos.add(dniEmpTF);
 		
 		panelAltaSuscripcion.add(panelCampos);
 		panelAltaSuscripcion.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -94,18 +90,16 @@ public class VistaAltaSuscripcion {
 
 		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String nombre = nombreTF.getText();
-				if (nombre.isEmpty() ) {
+				int idCatalogo = Integer.parseInt(idCatTF.getText());
+				String dniEmp = dniEmpTF.getText();
+				if (dniEmpTF.getText() == "" || idCatTF.getText() == "" ) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-					nombreTF.setText("");
+					idCatTF.setText("");
 
-					DTOtSuscripcion sus;
-					if(comboSus.getSelectedItem() == "BASICA")  sus = new DTOtBasica();
-					else sus = new DTOtPremium();
-					
-					Controlador.accion(Evento.ALTA_SUSCRIPCION, sus);
+					DTOtSuscripcion sus = new DTOtPremium(idCatalogo, dniEmp);
+					Controlador.accion(Evento.ALTA_SUSCRIPCION_PREMIUM, sus);
 				}
 			}
 		});
@@ -127,7 +121,7 @@ public class VistaAltaSuscripcion {
 	}
 
 	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_ALTA_SUSCRIPCION_OK) {
+		if (evento == Evento.RES_ALTA_SUSCRIPCION_PREMIUM_OK) {
 			JTextArea textArea = new JTextArea(datos.toString());
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
@@ -137,7 +131,7 @@ public class VistaAltaSuscripcion {
 			JOptionPane.showMessageDialog(null, "La suscripcion se ha insertado correctamente con ID: " + datos.toString());
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_ALTA_SUSCRIPCION_KO) {
+		else if (evento == Evento.RES_ALTA_SUSCRIPCION_PREMIUM_KO) {
 			JOptionPane.showMessageDialog(null, "No se ha podido insertar la suscripcion con ID: " + datos.toString());
 		}
 	}

@@ -1,4 +1,4 @@
-package presentacion.suscripciones;
+package presentacion.suscripciones.basica;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,7 +15,7 @@ import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
 
-public class VistaSuscripciones {
+public class VistaSuscripcionesBasica {
 private static JFrame GUI = null;
 	
 	public static void open() {

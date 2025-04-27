@@ -1,14 +1,14 @@
 package presentacion;
 
 import java.util.List;
-
 import presentacion.actividades.*;
 import presentacion.catalogos.*;
 import presentacion.clientes.*;
 import presentacion.empleados.*;
 import presentacion.facturas.*;
 import presentacion.salas.*;
-import presentacion.suscripciones.*;
+import presentacion.suscripciones.basica.*;
+import presentacion.suscripciones.premium.*;
 import negocio.*;
 
 public class Controlador{
@@ -334,31 +334,59 @@ public class Controlador{
 			VistaModificarSala.open();
 			break;
 		}
-		//VISTAS SUSCRIPCIONES
-		case Evento.VISTA_SUSCRIPCIONES:{ 
-			VistaSuscripciones.open();
-			break;
+		//VISTAS SUSCRIPCIONES BASICAS
+		case Evento.VISTA_SUSCRIPCIONES_BASICA: { 
+		    VistaSuscripcionesBasica.open();
+		    break;
 		}
-		case Evento.VISTA_ANADIR_SUSCRIPCION:{ 
-			VistaAltaSuscripcion.open();
-			break;
+		case Evento.VISTA_ANADIR_SUSCRIPCION_BASICA: { 
+		    VistaAltaSuscripcionBasica.open();
+		    break;
 		}
-		case Evento.VISTA_ELIMINAR_SUSCRIPCION:{ 
-			VistaEliminarSuscripcion.open();
-			break;
+		case Evento.VISTA_ELIMINAR_SUSCRIPCION_BASICA: { 
+		    VistaEliminarSuscripcionBasica.open();
+		    break;
 		}
-		case Evento.VISTA_MOSTRAR_SUSCRIPCION:{ 
-			VistaMostrarSuscripcion.open();
-			break;
+		case Evento.VISTA_MOSTRAR_SUSCRIPCION_BASICA: { 
+		    VistaMostrarSuscripcionBasica.open();
+		    break;
 		}
-		case Evento.VISTA_MOSTRAR_SUSCRIPCIONES:{ 
-			VistaMostrarSuscripciones.open();
-			break;
+		case Evento.VISTA_MOSTRAR_SUSCRIPCIONES_BASICA: { 
+		    VistaMostrarSuscripcionesBasica.open();
+		    break;
 		}
-		case Evento.VISTA_MODIFICAR_SUSCRIPCION:{ 
-			//VistaModificarSuscripcion.open();
-			break;
+		case Evento.VISTA_MODIFICAR_SUSCRIPCION_BASICA: { 
+		    VistaModificarSuscripcionBasica.open();
+		    break;
 		}
+		// VISTAS SUSCRIPCIONES PREMIUM
+		// VISTAS SUSCRIPCIONES PREMIUM
+		case Evento.VISTA_SUSCRIPCIONES_PREMIUM: { 
+		    VistaSuscripcionesPremium.open();
+		    break;
+		}
+		case Evento.VISTA_ANADIR_SUSCRIPCION_PREMIUM: { 
+		    VistaAltaSuscripcionPremium.open();
+		    break;
+		}
+		case Evento.VISTA_ELIMINAR_SUSCRIPCION_PREMIUM: { 
+		    VistaEliminarSuscripcionPremium.open();
+		    break;
+		}
+		case Evento.VISTA_MOSTRAR_SUSCRIPCION_PREMIUM: { 
+		    VistaMostrarSuscripcionPremium.open();
+		    break;
+		}
+		case Evento.VISTA_MOSTRAR_SUSCRIPCIONES_PREMIUM: { 
+		    VistaMostrarSuscripcionesPremium.open();
+		    break;
+		}
+		case Evento.VISTA_MODIFICAR_SUSCRIPCION_PREMIUM: { 
+		    VistaModificarSuscripcionPremium.open();
+		    break;
+		}
+
+		
 		//VISTAS ACTIVIDADES
 		case Evento.VISTA_ACTIVIDADES:{ 
 			VistaActividad.open();

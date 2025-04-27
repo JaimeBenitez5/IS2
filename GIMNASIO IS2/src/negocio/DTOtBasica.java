@@ -32,7 +32,6 @@ public class DTOtBasica extends DTOtSuscripcion {
 		_fecha = fecha;
 	}
 
-	
 	public void setIdActividad(int idActividad) {
 		_idActividad = idActividad;
 	}

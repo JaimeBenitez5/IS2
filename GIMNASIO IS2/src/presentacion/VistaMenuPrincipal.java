@@ -28,7 +28,7 @@ public class VistaMenuPrincipal{
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JPanel mainPanel = new JPanel(new GridLayout(3, 3, 25, 25));
+		JPanel mainPanel = new JPanel(new GridLayout(4, 4, 25, 25));
 		mainPanel.setPreferredSize(new Dimension(400, 400));
 		mainPanel.setBackground(new Color(88, 161, 164));
 		mainPanel.setMinimumSize(new Dimension(400, 400));
@@ -43,18 +43,19 @@ public class VistaMenuPrincipal{
 		JButton botonActividades = UIElementFactory.crearBoton("Actividades",colorBotones);
 		JButton botonEmpleados = UIElementFactory.crearBoton("Empleados",colorBotones);
 		JButton botonCatalogos = UIElementFactory.crearBoton("Catalogos",colorBotones);
-		JButton botonSuscripciones = UIElementFactory.crearBoton("Suscripciones",colorBotones);
+		JButton botonSuscripcionesBasicas = UIElementFactory.crearBoton("Suscripciones Basicas",colorBotones);
+		JButton botonSuscripcionesPremium = UIElementFactory.crearBoton("Suscripciones Premium",colorBotones);
 		ImageIcon logo = new ImageIcon("icons/logo.png");
 		JLabel logoL = new JLabel(logo, JLabel.CENTER);
 
 		mainPanel.add(botonCliente);
-		mainPanel.add(Box.createRigidArea(new Dimension(1, 1)));
 		mainPanel.add(botonFacturas);
 		mainPanel.add(botonSalas);
-		mainPanel.add(logoL);
 		mainPanel.add(botonActividades);
+		mainPanel.add(logoL);
 		mainPanel.add(botonEmpleados);
-		mainPanel.add(botonSuscripciones);
+		mainPanel.add(botonSuscripcionesBasicas);
+		mainPanel.add(botonSuscripcionesPremium);
 		mainPanel.add(botonCatalogos);
 
 		menuPrincipal.add(mainPanel);
@@ -101,10 +102,17 @@ public class VistaMenuPrincipal{
 			}
 		});
 
-		botonSuscripciones.addActionListener(new ActionListener () {
+		botonSuscripcionesBasicas.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
-				Controlador.mostrarVista(Evento.VISTA_SUSCRIPCIONES);
+				Controlador.mostrarVista(Evento.VISTA_SUSCRIPCIONES_BASICA);
+			}
+		});
+		
+		botonSuscripcionesPremium.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				menuPrincipal.setVisible (false);
+				Controlador.mostrarVista(Evento.VISTA_SUSCRIPCIONES_PREMIUM);
 			}
 		});
 		

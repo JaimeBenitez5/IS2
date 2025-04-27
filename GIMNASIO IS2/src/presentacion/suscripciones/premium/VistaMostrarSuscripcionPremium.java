@@ -1,4 +1,4 @@
-package presentacion.suscripciones;
+package presentacion.suscripciones.premium;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,11 +20,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import negocio.DTOtCliente;
+import negocio.DTOtSuscripcion;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
 
-public class VistaEliminarSuscripcion {
+public class VistaMostrarSuscripcionPremium {
 	private static JFrame GUI = null;
 
 	public static void open() {
@@ -33,25 +35,25 @@ public class VistaEliminarSuscripcion {
 	}
 
 	private static JFrame initGUI() {
-		JFrame menuPrincipal = new JFrame("Menú Baja Suscripcion");
+		JFrame menuPrincipal = new JFrame("Menú Mostrar Suscripcion Premium");
 		menuPrincipal.setSize(854, 480);
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menuPrincipal.getContentPane().setLayout(new BorderLayout());
 		menuPrincipal.getContentPane().setBackground(new Color(17, 47, 69));
 
-		JPanel panelBajaSuscripcion = new JPanel();
-		panelBajaSuscripcion.setLayout(new BoxLayout(panelBajaSuscripcion, BoxLayout.Y_AXIS));
-		panelBajaSuscripcion.setBackground(new Color(17, 47, 69));
-		panelBajaSuscripcion.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+		JPanel panelBajaCliente = new JPanel();
+		panelBajaCliente.setLayout(new BoxLayout(panelBajaCliente, BoxLayout.Y_AXIS));
+		panelBajaCliente.setBackground(new Color(17, 47, 69));
+		panelBajaCliente.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-		menuPrincipal.add(panelBajaSuscripcion, BorderLayout.CENTER);
+		menuPrincipal.add(panelBajaCliente, BorderLayout.CENTER);
 
-		JLabel titulo = new JLabel("Dar de baja Suscripcion");
+		JLabel titulo = new JLabel("Mostrar Suscripcion");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelBajaSuscripcion.add(titulo);
-		panelBajaSuscripcion.add(Box.createRigidArea(new Dimension(0, 30)));
+		panelBajaCliente.add(titulo);
+		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 30)));
 
 		JPanel panelCampos = new JPanel(new GridLayout(1, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
@@ -63,21 +65,21 @@ public class VistaEliminarSuscripcion {
 		JTextField idTF = new JTextField(30);
 		panelCampos.add(idTF);
 
-		panelBajaSuscripcion.add(panelCampos);
-		panelBajaSuscripcion.add(Box.createRigidArea(new Dimension(0, 50)));
+		panelBajaCliente.add(panelCampos);
+		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
 
 		JPanel botones = new JPanel(new GridLayout(1, 5, 20, 0));
 		botones.setBackground(new Color(17, 47, 69));
 
 		JButton back = UIElementFactory.crearBotonConIcono("icons/back.png");
-		JButton delete = UIElementFactory.crearBoton("Dar de baja",  new Color(67, 75, 172));
+		JButton delete = UIElementFactory.crearBoton("Mostrar",  new Color(67, 75, 172));
 		JButton botonMainMenu = UIElementFactory.crearBotonConIcono("icons/main_menu.png");
 
 		botones.add(back);
 		botones.add(delete);
 		botones.add(botonMainMenu);
 
-		panelBajaSuscripcion.add(botones);
+		panelBajaCliente.add(botones);
 		menuPrincipal.setVisible(true);
 
 
@@ -85,7 +87,7 @@ public class VistaEliminarSuscripcion {
 			public void actionPerformed (ActionEvent e) {
 				String id = idTF.getText();
 				idTF.setText("");
-				Controlador.accion(Evento.ELIMINAR_SUSCRIPCION, id);
+				Controlador.accion(Evento.MOSTRAR_SUSCRIPCION_PREMIUM, id);
 			}
 		});
 
@@ -104,20 +106,23 @@ public class VistaEliminarSuscripcion {
 		
 		return menuPrincipal;
 	}
-
-	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_ELIMINAR_SUSCRIPCION_OK) {
+	
+	public static void actualizar(int evento, DTOtSuscripcion suscripcion) {
+		if (evento == Evento.RES_MOSTRAR_SUSCRIPCION_PREMIUM_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			JOptionPane.showMessageDialog(null, "La suscripcion se ha eliminado correctamente");
+			int i = suscripcion.getId();
+			int duracion = suscripcion.getTipo().getDuracion();
+			double precio = suscripcion.getTipo().getPrecio();
+			JOptionPane.showMessageDialog(null, "ID: " + i + " Duracion: " + duracion + " Precio: " + precio );
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_ELIMINAR_SUSCRIPCION_KO) {
-			JOptionPane.showMessageDialog(null, "No se ha podido eliminar la suscripcion");
+		else if (evento == Evento.RES_MOSTRAR_SUSCRIPCION_PREMIUM_KO) {
+			JOptionPane.showMessageDialog(null, "No se ha podido encontrar la suscripcion");
 		}
 	}
 }

@@ -206,38 +206,76 @@ public class Evento {
 	public static final int RES_MOSTRAR_EMPLEADO_OK = 630;
 	public static final int RES_MOSTRAR_EMPLEADO_KO = 631;
 	
-	// Eventos Suscripciones
-	//Eventos de Vistas
-	public static final int VISTA_SUSCRIPCIONES = 701;
-	public static final int VISTA_ANADIR_SUSCRIPCION = 702;
-	public static final int VISTA_ELIMINAR_SUSCRIPCION = 703;
-	public static final int VISTA_MOSTRAR_SUSCRIPCION = 704;
-	public static final int VISTA_MOSTRAR_SUSCRIPCIONES = 705;
-	public static final int VISTA_MODIFICAR_SUSCRIPCION = 706;
-	//Eventos de Negocio
-	public static final int ALTA_SUSCRIPCION = 710;
-	public static final int ELIMINAR_SUSCRIPCION = 711;
-	public static final int MOSTRAR_SUSCRIPCION = 712;
-	public static final int MODIFICAR_SUSCRIPCION = 713;
-	public static final int MOSTRAR_SUSCRIPCIONES = 714;
-	public static final int BUSCAR_SUSCRIPCION = 715;
-	//Eventos de Respuesta
-	public static final int RES_ALTA_SUSCRIPCION_OK = 720;
-	public static final int RES_ALTA_SUSCRIPCION_KO = 721;
+	// Eventos Suscripciones Basicas
+	// Eventos de Vistas
+	public static final int VISTA_SUSCRIPCIONES_BASICA = 740;
+	public static final int VISTA_ANADIR_SUSCRIPCION_BASICA = 741;
+	public static final int VISTA_ELIMINAR_SUSCRIPCION_BASICA = 742;
+	public static final int VISTA_MOSTRAR_SUSCRIPCION_BASICA = 743;
+	public static final int VISTA_MOSTRAR_SUSCRIPCIONES_BASICA = 744;
+	public static final int VISTA_MODIFICAR_SUSCRIPCION_BASICA = 745;
 
-	public static final int RES_ELIMINAR_SUSCRIPCION_OK = 722;
-	public static final int RES_ELIMINAR_SUSCRIPCION_KO = 723;
+	// Eventos de Negocio
+	public static final int ALTA_SUSCRIPCION_BASICA = 750;
+	public static final int ELIMINAR_SUSCRIPCION_BASICA = 751;
+	public static final int MOSTRAR_SUSCRIPCION_BASICA = 752;
+	public static final int MODIFICAR_SUSCRIPCION_BASICA = 753;
+	public static final int MOSTRAR_SUSCRIPCIONES_BASICA = 754;
+	public static final int BUSCAR_SUSCRIPCION_BASICA = 755;
 
-	public static final int RES_BUSCAR_SUSCRIPCION_OK = 724;
-	public static final int RES_BUSCAR_SUSCRIPCION_KO = 725;
+	// Eventos de Respuesta
+	public static final int RES_ALTA_SUSCRIPCION_BASICA_OK = 760;
+	public static final int RES_ALTA_SUSCRIPCION_BASICA_KO = 761;
 
-	public static final int RES_MODIFICAR_SUSCRIPCION_OK = 726;
-	public static final int RES_MODIFICAR_SUSCRIPCION_KO = 727;
+	public static final int RES_ELIMINAR_SUSCRIPCION_BASICA_OK = 762;
+	public static final int RES_ELIMINAR_SUSCRIPCION_BASICA_KO = 763;
 
-	public static final int RES_MOSTRAR_SUSCRIPCION_OK = 728;
-	public static final int RES_MOSTRAR_SUSCRIPCION_KO = 729;
+	public static final int RES_BUSCAR_SUSCRIPCION_BASICA_OK = 764;
+	public static final int RES_BUSCAR_SUSCRIPCION_BASICA_KO = 765;
 
-	public static final int RES_MOSTRAR_SUSCRIPCIONES_OK = 730;
-	public static final int RES_MOSTRAR_SUSCRIPCIONES_KO = 731;
+	public static final int RES_MODIFICAR_SUSCRIPCION_BASICA_OK = 766;
+	public static final int RES_MODIFICAR_SUSCRIPCION_BASICA_KO = 767;
+
+	public static final int RES_MOSTRAR_SUSCRIPCION_BASICA_OK = 768;
+	public static final int RES_MOSTRAR_SUSCRIPCION_BASICA_KO = 769;
+
+	public static final int RES_MOSTRAR_SUSCRIPCIONES_BASICA_OK = 770;
+	public static final int RES_MOSTRAR_SUSCRIPCIONES_BASICA_KO = 771;
+	// Eventos Suscripciones Basicas
+	// Eventos de Vistas
+	public static final int VISTA_SUSCRIPCIONES_PREMIUM = 780;
+	public static final int VISTA_ANADIR_SUSCRIPCION_PREMIUM = 781;
+	public static final int VISTA_ELIMINAR_SUSCRIPCION_PREMIUM = 782;
+	public static final int VISTA_MOSTRAR_SUSCRIPCION_PREMIUM = 783;
+	public static final int VISTA_MOSTRAR_SUSCRIPCIONES_PREMIUM = 784;
+	public static final int VISTA_MODIFICAR_SUSCRIPCION_PREMIUM = 785;
+
+	// Eventos de Premium
+	public static final int ALTA_SUSCRIPCION_PREMIUM = 790;
+	public static final int ELIMINAR_SUSCRIPCION_PREMIUM = 791;
+	public static final int MOSTRAR_SUSCRIPCION_PREMIUM = 792;
+	public static final int MODIFICAR_SUSCRIPCION_PREMIUM = 793;
+	public static final int MOSTRAR_SUSCRIPCIONES_PREMIUM = 794;
+	public static final int BUSCAR_SUSCRIPCION_PREMIUM = 795;
+
+	// Eventos de Respuesta
+	public static final int RES_ALTA_SUSCRIPCION_PREMIUM_OK = 800;
+	public static final int RES_ALTA_SUSCRIPCION_PREMIUM_KO = 801;
+
+	public static final int RES_ELIMINAR_SUSCRIPCION_PREMIUM_OK = 802;
+	public static final int RES_ELIMINAR_SUSCRIPCION_PREMIUM_KO = 803;
+
+	public static final int RES_BUSCAR_SUSCRIPCION_PREMIUM_OK = 804;
+	public static final int RES_BUSCAR_SUSCRIPCION_PREMIUM_KO = 805;
+
+	public static final int RES_MODIFICAR_SUSCRIPCION_PREMIUM_OK = 806;
+	public static final int RES_MODIFICAR_SUSCRIPCION_PREMIUM_KO = 807;
+
+	public static final int RES_MOSTRAR_SUSCRIPCION_PREMIUM_OK = 808;
+	public static final int RES_MOSTRAR_SUSCRIPCION_PREMIUM_KO = 809;
+
+	public static final int RES_MOSTRAR_SUSCRIPCIONES_PREMIUM_OK = 810;
+	public static final int RES_MOSTRAR_SUSCRIPCIONES_PREMIUM_KO = 811;
+
 
 }
