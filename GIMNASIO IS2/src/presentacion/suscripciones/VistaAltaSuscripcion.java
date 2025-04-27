@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,6 +23,9 @@ import javax.swing.JTextField;
 
 import negocio.DTOtCliente;
 import negocio.DTOtSuscripcion;
+import negocio.DTOtTipoSuscripcion;
+import negocio.Rol;
+import negocio.TipoSuscripcion;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -59,18 +63,19 @@ public class VistaAltaSuscripcion {
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
-		JLabel duracion = new JLabel("Duracion:");
-		duracion.setForeground(Color.WHITE);
-		panelCampos.add(duracion);
-		JTextField duracionTF = new JTextField(30);
-		panelCampos.add(duracionTF);
+		JLabel nommbre = new JLabel("Nombre:");
+		nommbre.setForeground(Color.WHITE);
+		panelCampos.add(nommbre);
+		JTextField nombreTF = new JTextField(30);
+		panelCampos.add(nombreTF);
 
-		JLabel precio = new JLabel("Precio:");
-		precio.setForeground(Color.WHITE);
-		panelCampos.add(precio);
-		JTextField precioTF = new JTextField(30);
-		panelCampos.add(precioTF);
-
+		JComboBox cb= new JComboBox(TipoSuscripcion.values());
+		JLabel rol= new JLabel("Tipo Suscripcion:");
+		rol.setForeground(Color.WHITE);
+		panelCampos.add(rol);
+		panelCampos.add(cb);
+	
+		
 		panelAltaSuscripcion.add(panelCampos);
 		panelAltaSuscripcion.add(Box.createRigidArea(new Dimension(0, 50)));
 
@@ -90,15 +95,14 @@ public class VistaAltaSuscripcion {
 
 		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String duracion = duracionTF.getText();
-				String precio = precioTF.getText();
-				if (duracion.isEmpty() || precio.isEmpty()) {
+				String nombre = nombreTF.getText();
+				TipoSuscripcion t= (TipoSuscripcion) cb.getSelectedItem();
+				if (nombre.isEmpty() ) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-					duracionTF.setText("");
-					precioTF.setText("");
-					DTOtSuscripcion c = new DTOtSuscripcion(Integer.parseInt(duracion), Integer.parseInt(precio));
+					nombreTF.setText("");
+					DTOtSuscripcion c = new DTOtSuscripcion(new DTOtTipoSuscripcion(t),nombre);//TODO no se si esto se puede hacer
 					Controlador.accion(Evento.ALTA_SUSCRIPCION, c);
 				}
 			}

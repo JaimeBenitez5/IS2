@@ -1,0 +1,14 @@
+package negocio;
+
+public class DTOtTipoSuscripcion {
+	
+	private TipoSuscripcion _idTipoSuscripcion;
+	private int _duracion;
+	private double _precio;
+	
+	DTOtTipoSuscripcion(TipoSuscripcion ts,int duracion,double precio){
+		_idTipoSuscripcion=ts;
+		_duracion=duracion;
+		_precio= precio;
+	}
+}

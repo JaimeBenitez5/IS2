@@ -10,6 +10,7 @@ import presentacion.facturas.*;
 import presentacion.salas.*;
 import presentacion.suscripciones.VistaAltaSuscripcion;
 import presentacion.suscripciones.VistaEliminarSuscripcion;
+import presentacion.suscripciones.VistaModificarSuscripcion;
 import presentacion.suscripciones.VistaMostrarSuscripcion;
 import presentacion.suscripciones.VistaMostrarSuscripciones;
 import presentacion.suscripciones.VistaSuscripciones;
@@ -270,32 +271,32 @@ public class Controlador{
 			break;
 		}
 		case Evento.MOSTRAR_SUSCRIPCION: {
-			DTOtCatalogo c = getSACatalogos().leerCatalogo((int) datos);
-			VistaMostrarCatalogo.actualizar(Evento.RES_MOSTRAR_CATALOGO_OK, c);
+			DTOtSuscripcion c = getSASuscripcion().leerSuscripcion((int) datos);
+			VistaMostrarSuscripcion.actualizar(Evento.RES_MOSTRAR_SUSCRIPCION_OK, c);
 			break;
 		}
 		case Evento.MOSTRAR_SUSCRIPCIONES: {
-			List<DTOtCatalogo> res = getSACatalogos().leerTodosCatalogos();
+			List<DTOtSuscripcion> res = getSASuscripcion().leerTodasSuscripciones();
 			if (!res.isEmpty())
-				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_OK, res);
+				VistaMostrarSuscripciones.actualizar(Evento.RES_MOSTRAR_SUSCRIPCIONES_OK, res);
 			else
-				VistaMostrarCatalogos.actualizar(Evento.RES_MOSTRAR_CATALOGOS_KO, null);
+				VistaMostrarSuscripciones.actualizar(Evento.RES_MOSTRAR_SUSCRIPCIONES_KO, null);
 			break;
 		}
 		case Evento.ELIMINAR_SUSCRIPCION: {
-			int exito = getSACatalogos().borrarCatalogo((int) datos);
+			int exito = getSASuscripcion().borrarSuscripcion((int) datos);
 			if (exito == 1)
-				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_OK, (int) datos);
+				VistaEliminarSuscripcion.actualizar(Evento.RES_ELIMINAR_SUSCRIPCION_OK, (int) datos);
 			else
-				VistaEliminarCatalogo.actualizar(Evento.RES_ELIMINAR_CATALOGO_KO, null);
+				VistaEliminarSuscripcion.actualizar(Evento.RES_ELIMINAR_SUSCRIPCION_KO, null);
 			break;
 		}
 		case Evento.MODIFICAR_SUSCRIPCION: {
 			int exitoModificar = getSACatalogos().actualizarCatalogo((DTOtCatalogo) datos);
 			if (exitoModificar == 1)
-				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_OK, null);
+				VistaModificarSuscripcion.actualizar(Evento.RES_MODIFICAR_SUSCRIPCION_OK, null);
 			else
-				VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_KO, null);
+				VistaModificarSuscripcion.actualizar(Evento.RES_MODIFICAR_SUSCRIPCION_KO, null);
 			break;
 		}
 		}

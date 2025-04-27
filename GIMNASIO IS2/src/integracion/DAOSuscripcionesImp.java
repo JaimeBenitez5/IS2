@@ -13,10 +13,10 @@ import negocio.DTOtSuscripcion;
 
 public class DAOSuscripcionesImp implements DAOSuscripciones {
 	public int altaSuscripcion(DTOtSuscripcion suscripcion) {
-		String query = "INSERT INTO SUSCRIPCIONES (aforo) VALUES (?)";
+		String query = "INSERT INTO SUSCRIPCIONES (numSuscripcion,nombre) VALUES (?,?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-			stmt.setString(1, String.valueOf(suscripcion.getPrecio()));
-			stmt.setString(2, String.valueOf(suscripcion.getDuracion()));
+			stmt.setString(1, String.valueOf(suscripcion.getId()));
+			stmt.setString(2, String.valueOf(suscripcion.getNombre()));
 			stmt.executeUpdate();
 			try (ResultSet rs = stmt.getGeneratedKeys()) {
 				if (rs.next()) {
@@ -36,10 +36,10 @@ public class DAOSuscripcionesImp implements DAOSuscripciones {
 			stmt.setInt(1,id);
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
-				int idSuscripcion = rs.getInt("idSala");
-				int duracion = rs.getInt("duracion");
-				int precio = rs.getInt("precio");
-				DTOtSuscripcion s = new DTOtSuscripcion(idSuscripcion, duracion,precio);
+				int idSuscripcion = rs.getInt("numSuscripcion");
+				String nombre = rs.getString("nombre");
+				DTOtSuscripcion s = new DTOtSuscripcion( idSuscripcion , nombre);
+				s.setId(id);
 				return s;
 			}
 		} catch (SQLException e) {
@@ -49,10 +49,10 @@ public class DAOSuscripcionesImp implements DAOSuscripciones {
 	}
 
 	public int actualizarSuscripcion	(final DTOtSuscripcion suscripcion) {
-		String query = "UPDATE SUSCRIPCIONES SET aforo = ? WHERE idSuscripcion=?";
+		String query = "UPDATE SUSCRIPCIONES SET DURACION = ? WHERE idSuscripcion=?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
-			stmt.setString(1, String.valueOf(suscripcion.getDuracion()));
-			stmt.setString(3, String.valueOf(suscripcion.getPrecio()));
+			stmt.setString(1, String.valueOf(suscripcion.getTipo().getDuracion()));
+			stmt.setString(3, String.valueOf(suscripcion.getTipo().getPrecio()));
 			stmt.setInt(2,suscripcion.getId());
 			return stmt.executeUpdate(); 
 		} catch (SQLException e) {
@@ -74,14 +74,14 @@ public class DAOSuscripcionesImp implements DAOSuscripciones {
 
 	public List<DTOtSuscripcion> leerTodasSuscripciones() {
 		ArrayList<DTOtSuscripcion> suscripcion = new ArrayList<DTOtSuscripcion>();
-		String query = "SELECT * FROM SUSCRIPCION";
+		String query = "SELECT * FROM SUSCRIPCIONES";
 		try ( Statement stmt = BDConexion.getConnection().createStatement ()) {
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next ()) {
-				int idSuscripcion = rs.getInt("idSuscripcion");
-				int duracion = rs.getInt("duracion");
-				double precio = rs.getDouble("precio");
-				DTOtSuscripcion s = new DTOtSuscripcion(idSuscripcion, duracion,(int) precio);
+				int idSuscripcion = rs.getInt("numSuscripcion");
+				String nombre = rs.getString("nombre");
+				DTOtSuscripcion s = new DTOtSuscripcion(idSuscripcion,nombre);
+				s.setId(idSuscripcion);
 				suscripcion.add(s);
 			}
 		} catch (SQLException e) {

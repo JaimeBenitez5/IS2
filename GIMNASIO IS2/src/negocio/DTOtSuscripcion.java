@@ -1,47 +1,39 @@
 package negocio;
 
 public class DTOtSuscripcion {
-	int _id;
-	double _precio;
-	int _duracion;
+	private int _id;
+	private DTOtTipoSuscripcion _tipo;
+	private String _nombre;
 	
-	public DTOtSuscripcion(final int id, final int precio,final int duracion) {
+	
+	public DTOtSuscripcion(final int id,final String nombre) {
     	_id = id;
-    	_precio = precio;
-    	_duracion = duracion;
+    	_nombre = nombre;
     }
     
-    public DTOtSuscripcion( final int precio,final int duracion) {
+    public DTOtSuscripcion( final DTOtTipoSuscripcion tipo, final String nombre) {
     	_id = 0;
-    	_precio = precio;
-    	_duracion = duracion;
+    	_nombre= nombre;
+    	_tipo=tipo;
     }
     
     public int getId() {
     	return _id;
     }
 
-    public int getDuracion() {
-        return _duracion;
+    public DTOtTipoSuscripcion getTipo() {
+        return _tipo;
     }
 
-    public double getPrecio() {
-        return _precio;
+    public String getNombre() {
+        return _nombre;
     }
     
     public void setId(final int id) {
     	_id = id;
     }
 
-    public void setAforo(final double precio) {
-    	_precio = precio;
-    }
-    
-    public void setDuracion(final int duracion) {
-    	_duracion = duracion;
-    }
-
     public String toString() {
-        return _id + " " + _precio + " "+ _duracion;
+        return _id + " " + _tipo + " "+ _nombre;
     }
 }

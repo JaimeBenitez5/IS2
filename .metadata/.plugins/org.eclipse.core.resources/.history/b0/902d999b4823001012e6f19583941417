@@ -1,0 +1,12 @@
+package negocio;
+
+public class DTOtTipoSuscripcion {
+	
+	private int _idTipoSuscripcion;
+	private int _duracion;
+	private double _precio;
+	
+	DTOtTipoSuscripcion(){
+		
+	}
+}

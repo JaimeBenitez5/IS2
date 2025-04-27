@@ -116,8 +116,8 @@ public class VistaMostrarSuscripcion {
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
 			int i = suscripcion.getId();
-			int duracion = suscripcion.getDuracion();
-			double precio = suscripcion.getPrecio();
+			int duracion = suscripcion.getTipo().getDuracion();
+			double precio = suscripcion.getTipo().getPrecio();
 			JOptionPane.showMessageDialog(null, "ID: " + i + " Duracion: " + duracion + " Precio: " + precio );
 			GUI.setVisible(false);
 		} 

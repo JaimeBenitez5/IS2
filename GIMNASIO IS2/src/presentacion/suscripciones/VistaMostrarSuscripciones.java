@@ -27,7 +27,7 @@ public class VistaMostrarSuscripciones {
 
 	public static void open() {  
 		if (GUI == null) initGUI();
-		Controlador.accion(Evento.MOSTRAR_CLIENTES, null);
+		Controlador.accion(Evento.MOSTRAR_SUSCRIPCIONES, null);
 		GUI.setVisible(true);
 	}
 
@@ -73,14 +73,13 @@ public class VistaMostrarSuscripciones {
 	public static void actualizar(int evento, List<DTOtSuscripcion> datos) {
 		if (evento == Evento.RES_MOSTRAR_SUSCRIPCIONES_OK) {
 			panelMostrarSuscripciones.removeAll();
-			String[] columnNames = {"DNI", "Nombre", "Direccion", "Activo"};
+			String[] columnNames = {"NumSuscripcion", "Nombre"};
 			String[][] data = new String[datos.size()][4];
 
 			for (int i = 0; i < datos.size(); i++) {
 				DTOtSuscripcion suscripcion = datos.get(i);
 				data[i][0] = String.valueOf(suscripcion.getId());
-				data[i][1] = String.valueOf(suscripcion.getDuracion());
-				data[i][2] = String.valueOf(suscripcion.getPrecio());
+				data[i][1] = String.valueOf(suscripcion.getNombre());
 			}
 
 			JTable tablaSuscripciones = new JTable(data, columnNames);
