@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -116,8 +117,8 @@ public class VistaMostrarSala {
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
 			String id = String.valueOf(s.getId());
 			int aforo = s.getAforo();
-			String emp = s.getDniEmpleado();
-			JOptionPane.showMessageDialog(null, "ID: " +id + " Aforo: " + aforo + " Empleado de mantenimiento: " + emp);
+			String[] emps = s.getDniEmpleados();
+			JOptionPane.showMessageDialog(null, "ID: " +id + " Aforo: " + aforo + " Empleados de mantenimiento: " + Arrays.toString(emps));
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_MOSTRAR_SALA_KO) {

@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -118,7 +119,8 @@ public class VistaMostrarFactura {
 			java.sql.Date sqlDate = factura.getFecha();
 			java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
 			String id = String.valueOf(factura.getId());
-			String fecha =  String.valueOf(utilDate);
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			String fecha = sdf.format(utilDate);
 			String importe = String.valueOf(factura.getImporte());
 
 			JOptionPane.showMessageDialog(null, "ID: " + id + " Fecha: " + fecha + " Importe: " + importe);

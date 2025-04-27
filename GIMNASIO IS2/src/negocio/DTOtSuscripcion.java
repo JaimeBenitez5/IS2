@@ -1,24 +1,22 @@
 package negocio;
 
 public class DTOtSuscripcion {
-	private int _id;
-	private DTOtTipoSuscripcion _tipo;
-	private String _nombre;
+	private int _idSuscripcion;
+	private DTOtTipoSuscripcion _tipoSuscripcion;
 	
-	
-	public DTOtSuscripcion(final int id,final String nombre) {
-    	_id = id;
+	public DTOtSuscripcion(final int id, final String nombre) {
+		_idSuscripcion = id;
     	_nombre = nombre;
     }
     
     public DTOtSuscripcion(final DTOtTipoSuscripcion tipo, final String nombre) {
-    	_id = 0;
-    	_nombre= nombre;
-    	_tipo=tipo;
+    	_idSuscripcion = 0;
+    	_nombre = nombre;
+    	_tipoSuscripcion = tipo;
     }
     
     public int getId() {
-    	return _id;
+    	return _idSuscripcion;
     }
 
     public DTOtTipoSuscripcion getTipo() {
@@ -30,10 +28,10 @@ public class DTOtSuscripcion {
     }
     
     public void setId(final int id) {
-    	_id = id;
+    	_idSuscripcion = id;
     }
 
     public String toString() {
-        return _id + " " + _tipo + " "+ _nombre;
+        return _idSuscripcion + " " + _tipo + " "+ _nombre;
     }
 }

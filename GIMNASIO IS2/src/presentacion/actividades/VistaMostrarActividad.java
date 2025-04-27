@@ -144,10 +144,12 @@ public class VistaMostrarActividad {
 			String tipoAct = a.getTipoActividad();
 			java.sql.Date sqlDate = a.getFecha();
 			java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			String fecha = sdf.format(utilDate);
 			String idSala = String.valueOf(a.getIdSala());
 			String dniEmp = a.getDniEmpleado();
-			JOptionPane.showMessageDialog(null, "Tipo de actividad: " + tipoAct + " id de sala: " + idSala +
-					" fecha: " + utilDate + " DNI de empleado: " + dniEmp);
+			JOptionPane.showMessageDialog(null, "Tipo de actividad: " + tipoAct + " ID de sala: " + idSala +
+					" fecha: " + fecha + " DNI de empleado: " + dniEmp);
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_MOSTRAR_ACTIVIDAD_KO) {

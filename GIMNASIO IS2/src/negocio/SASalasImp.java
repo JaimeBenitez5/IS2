@@ -11,6 +11,7 @@ public class SASalasImp implements SASalas {
 
 	private static DAOSalas salasDAO = null;
 	private static DAOEmpleados empleadosDAO = null;
+
 	//USADO PATRON SINGLETON
 	public static DAOSalas getDAOSalas(){
 		if(salasDAO == null) salasDAO = new DAOSalasImp();
@@ -20,19 +21,28 @@ public class SASalasImp implements SASalas {
 		if(empleadosDAO == null) empleadosDAO = new DAOEmpleadosImp();
 		return empleadosDAO;
 	}
-	
+
 	public int altaSala(final DTOtSala sala) {
 		//compruebo que no existe
 		DTOtSala s = leerSala(sala.getId());
 		int idSala = 0;
-		if(s == null) {
-			int idRolEmp = getDAOEmpleados().leerEmpleadoRol(sala.getDniEmpleado());
-			if(idRolEmp == 1) {
+		if (s == null) {
+			String[] empleados = sala.getDniEmpleados();
+			int i = 0;
+			boolean todosSonMantenimiento = true;
+			while (i < empleados.length && todosSonMantenimiento) {
+				String dni = empleados[i];
+				int idRolEmp = getDAOEmpleados().leerEmpleadoRol(dni);
+				if (idRolEmp != 1) todosSonMantenimiento = false;
+				i++;
+			}
+			if (todosSonMantenimiento) {
 				idSala = getDAOSalas().altaSala(sala);
 				sala.setId(idSala);
-				if(idSala != 0) getDAOSalas().altaMantenedor(sala);
-				//si se ha añadido, añado tambien en tabla Mantienen
-			} 
+				if (idSala != 0) {
+					getDAOSalas().altaMantenedor(sala);
+				}
+			}
 		}
 		return idSala;
 	}

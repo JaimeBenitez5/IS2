@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -72,14 +73,14 @@ public class VistaMostrarSalas {
 	public static void actualizar(int evento, List<DTOtSala> datos) {
 		if (evento == Evento.RES_MOSTRAR_SALAS_OK) {
 			panelMostrarSalas.removeAll();
-			String[] columnNames = {"ID", "Aforo", "DNI de Empleado de Mantenimiento"};
+			String[] columnNames = {"ID", "Aforo", "DNI de Empleados de Mantenimiento"};
 			String[][] data = new String[datos.size()][3];
 
 			for (int i = 0; i < datos.size(); i++) {
 				DTOtSala sala = datos.get(i);
 				data[i][0] = String.valueOf(sala.getId());
 				data[i][1] = String.valueOf(sala.getAforo());
-				data[i][2] = sala.getDniEmpleado();
+				data[i][2] = Arrays.toString(sala.getDniEmpleados());
 			}
 
 			JTable tablaSalas = new JTable(data, columnNames);

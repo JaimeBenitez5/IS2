@@ -78,7 +78,7 @@ public class DAOActividadesImp implements DAOActividades{
 			stmt.setString(1, tipoActividad);
 			stmt.setDate(2, fecha);
 			stmt.setInt(3, idSala);
-			stmt.executeUpdate();
+			return stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

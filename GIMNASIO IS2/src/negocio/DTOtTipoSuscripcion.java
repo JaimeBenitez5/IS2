@@ -1,12 +1,12 @@
 package negocio;
 
 public class DTOtTipoSuscripcion {
+	private int _idTipoSuscripcion;
+	private String _nombreSus;
+	private int _duracion;
+	private double _precio;
 	
-	private TipoSuscripcion _idTipoSuscripcion;
-	private final int _duracion;
-	private final double _precio;
-	
-	public DTOtTipoSuscripcion(TipoSuscripcion ts){
+	public DTOtTipoSuscripcion(int ts){
 		_idTipoSuscripcion=ts;
 		switch (ts) {
 		case BASICA:

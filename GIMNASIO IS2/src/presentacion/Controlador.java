@@ -130,7 +130,7 @@ public class Controlador{
 		}
 		case Evento.ELIMINAR_ACTIVIDAD:{
 			int exito = getSAActividades().borrarActividad(((DTOtActividad) datos).getTipoActividad(), ((DTOtActividad) datos).getFecha(), ((DTOtActividad) datos).getIdSala());
-			if (exito == 1) VistaEliminarActividad.actualizar(Evento.RES_ELIMINAR_ACTIVIDAD_OK, (int) datos);
+			if (exito == 1) VistaEliminarActividad.actualizar(Evento.RES_ELIMINAR_ACTIVIDAD_OK, (DTOtActividad) datos);
 			else VistaEliminarActividad.actualizar(Evento.RES_ELIMINAR_ACTIVIDAD_KO, null);
 			break;
 		}

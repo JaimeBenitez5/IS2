@@ -64,10 +64,10 @@ public class VistaAnadirSala {
 		JTextField aforoTF = new JTextField(30);
 		panelCampos.add(aforoTF);
 		
-		JLabel dniEmp = new JLabel("DNI Empleado de Mantenimiento:");
+		JLabel dniEmp = new JLabel("DNIs de Empleados de Mantenimiento:");
 		dniEmp.setForeground(Color.WHITE);
 		panelCampos.add(dniEmp);
-		JTextField dniEmpTF = new JTextField(30);
+		JTextField dniEmpTF = new JTextField(300);
 		panelCampos.add(dniEmpTF);
 
 		panelAnadirSala.add(panelCampos);
@@ -90,13 +90,13 @@ public class VistaAnadirSala {
 		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				int aforo = Integer.parseInt(aforoTF.getText());
-				String dniEmp = dniEmpTF.getText();
-				if (aforoTF.getText() == "" || dniEmp == "") {
+				String[] dniEmps = dniEmpTF.getText().split(" ");
+				if (aforoTF.getText() == "" || dniEmps.length == 0) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				aforoTF.setText("");
 				dniEmpTF.setText("");
-				DTOtSala s = new DTOtSala(aforo, dniEmp);
+				DTOtSala s = new DTOtSala(aforo, dniEmps);
 				Controlador.accion(Evento.ALTA_SALA, s);
 			}
 		});

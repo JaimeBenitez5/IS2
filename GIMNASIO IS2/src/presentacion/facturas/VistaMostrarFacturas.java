@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -78,8 +79,10 @@ public class VistaMostrarFacturas {
 				DTOtFactura f = res.get(i);
 				java.sql.Date sqlDate = f.getFecha();
 				java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				String fechaFormateada = sdf.format(utilDate);
 				data[i][0] = String.valueOf(f.getId());
-				data[i][1] =  String.valueOf(utilDate);
+				data[i][1] =  fechaFormateada;
 				data[i][2] = String.valueOf(f.getImporte());
 			}
 

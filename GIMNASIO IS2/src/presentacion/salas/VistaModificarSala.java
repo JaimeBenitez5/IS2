@@ -70,10 +70,10 @@ public class VistaModificarSala {
 		JTextField aforoTF = new JTextField(30);
 		panelCampos.add(aforoTF);
 		
-		JLabel dniEmp = new JLabel("DNI Empleado de Mantenimiento:");
+		JLabel dniEmp = new JLabel("DNIs de Empleados de Mantenimiento:");
 		dniEmp.setForeground(Color.WHITE);
 		panelCampos.add(dniEmp);
-		JTextField dniEmpTF = new JTextField(30);
+		JTextField dniEmpTF = new JTextField(300);
 		panelCampos.add(dniEmpTF);
 
 
@@ -98,8 +98,8 @@ public class VistaModificarSala {
 			public void actionPerformed (ActionEvent e) {
 				int id = Integer.parseInt(idTF.getText());
 				int aforo = Integer.parseInt(aforoTF.getText());
-				String dniEmp = dniEmpTF.getText();
-				DTOtSala s = new DTOtSala(id, aforo, dniEmp);
+				String[] dniEmps = dniEmpTF.getText().split(" ");
+				DTOtSala s = new DTOtSala(id, aforo, dniEmps);
 				Controlador.accion(Evento.MODIFICAR_SALA, s);
 			}
 		});

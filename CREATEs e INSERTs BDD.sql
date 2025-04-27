@@ -149,7 +149,7 @@ fechaActividad DATE,
 idSala INT, 
 PRIMARY KEY(idCatalogo, tipoActividad, fechaActividad, idSala), 
 FOREIGN KEY (idCatalogo) REFERENCES Catalogos(idCatalogo),
-FOREIGN KEY (tipoActividad, fechaActividad, idSala) REFERENCES Actividades(tipoActividad, fecha, idSala)
+FOREIGN KEY (tipoActividad, fechaActividad, idSala) REFERENCES Actividades(tipoActividad, fecha, idSala) ON DELETE CASCADE
 );
 
 CREATE TABLE Compras(

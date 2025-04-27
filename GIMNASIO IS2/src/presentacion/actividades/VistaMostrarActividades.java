@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -76,10 +77,12 @@ public class VistaMostrarActividades {
 				DTOtActividad a = res.get(i);
 				java.sql.Date sqlDate = a.getFecha();
 				java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				String fechaFormateada = sdf.format(utilDate);
 				
 				data[i][0] = a.getTipoActividad();
 				data[i][1] = String.valueOf(a.getIdSala());
-				data[i][2] = String.valueOf(utilDate);
+				data[i][2] = fechaFormateada;
 				data[i][3] = a.getDniEmpleado();
 			}
 
