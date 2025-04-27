@@ -13,6 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +24,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.DTOtEmpleado;
+import negocio.DTOtRol;
+import negocio.Rol;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -71,7 +74,14 @@ public class VistaAnadirEmpleado {
 		panelCampos.add(nombre);
 		JTextField nombreTF = new JTextField(30);
 		panelCampos.add(nombreTF);
-		
+
+		JLabel rolLabel = new JLabel("Rol:");
+		rolLabel.setForeground(Color.WHITE);
+		panelCampos.add(rolLabel);
+
+		JComboBox<Rol> comboRol = new JComboBox<>(Rol.values());
+		panelCampos.add(comboRol);
+
 		//FALTA QUE NO TE DEJE ESCRIBIR LETRAS, SOLO NUMEROS
 		JLabel sueldo = new JLabel("Sueldo:");
 		sueldo.setForeground(Color.WHITE);
@@ -79,7 +89,7 @@ public class VistaAnadirEmpleado {
 		JFormattedTextField sueldoTF = new JFormattedTextField(NumberFormat.getIntegerInstance());
 		sueldoTF.setColumns(8);
 		panelCampos.add(sueldoTF);
-		
+
 		panelAltaEmpleado.add(panelCampos);
 		panelAltaEmpleado.add(Box.createRigidArea(new Dimension(0, 50)));
 
@@ -99,19 +109,22 @@ public class VistaAnadirEmpleado {
 
 		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String dni = dniTF.getText();
-				String nombre = nombreTF.getText();
-				double sueldo = Double.parseDouble(sueldoTF.getText());
-				int rol = 0;
-				//FALTA EL ROL QUE DEPENDE DE COMO LO HAGAMOS, PODRIA SER UN COMBO-BOX
-				if (dni.isEmpty() || nombre.isEmpty()) {
+				String dni = dniTF.getText().trim();
+				String nombre = nombreTF.getText().trim();
+				String sueldoText = sueldoTF.getText().trim();
+				Rol rol = (Rol) comboRol.getSelectedItem();
+
+				if (dni.isEmpty() || nombre.isEmpty() || sueldoText.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-				}
+				} 
 				else {
+					double salario = Double.parseDouble(sueldoText);
 					dniTF.setText("");
 					nombreTF.setText("");
 					sueldoTF.setText("");
-					DTOtEmpleado emp = new DTOtEmpleado(dni, nombre);
+
+					DTOtRol dtoRol = new DTOtRol(rol, rol.name(), salario);
+					DTOtEmpleado emp = new DTOtEmpleado(dni, nombre, dtoRol);
 					Controlador.accion(Evento.ALTA_EMPLEADO, emp);
 				}
 			}

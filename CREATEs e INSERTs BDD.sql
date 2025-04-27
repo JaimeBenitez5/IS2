@@ -65,7 +65,7 @@ nombre VARCHAR(50)
 CREATE TABLE EmpleadosRoles (
 dniEmpleado VARCHAR(9),
 idRol INT,
-PRIMARY KEY (dniEmpleado, idRol),
+PRIMARY KEY (dniEmpleado),
 FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado) ON DELETE CASCADE,
 FOREIGN KEY (idRol) REFERENCES Roles(idRol) ON DELETE CASCADE
 );

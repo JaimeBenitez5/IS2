@@ -115,7 +115,9 @@ public class VistaMostrarEmpleado {
 			scrollPane.setPreferredSize(new Dimension(500, 200));
 			String dni = empleado.getDni();
 			String nombre = empleado.getNombre();
-			JOptionPane.showMessageDialog(null, "ID: " + dni + " Nombre: " + nombre);
+			String rol = empleado.getRolEmpleado().getNombreRol();
+			String salario = String.format("%.2f", empleado.getRolEmpleado().getSalario());
+			JOptionPane.showMessageDialog(null, "DNI: " + dni + " Nombre: " + nombre + " Rol: " + rol + " Salario: " + salario);
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_MOSTRAR_EMPLEADO_KO) {

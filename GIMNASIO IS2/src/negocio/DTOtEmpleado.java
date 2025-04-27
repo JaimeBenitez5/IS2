@@ -5,9 +5,10 @@ public class DTOtEmpleado {
 	private String _nombre;
     private DTOtRol _rolEmpleado;
     
-    public DTOtEmpleado(final String dni, final String nombre) {
+    public DTOtEmpleado(final String dni, final String nombre, final DTOtRol rol) {
     	_dni = dni;
     	_nombre = nombre;
+    	_rolEmpleado = rol;
     }
     
     public String getDni() {

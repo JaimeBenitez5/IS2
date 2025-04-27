@@ -72,13 +72,15 @@ public class VistaMostrarEmpleados {
 	public static void actualizar(int evento, List<DTOtEmpleado> datos) {
 		if (evento == Evento.RES_MOSTRAR_EMPLEADOS_OK) {
 			panelMostrarClientes.removeAll();
-			String[] columnNames = {"DNI", "Nombre"};
-			String[][] data = new String[datos.size()][2];
+			String[] columnNames = {"DNI", "Nombre", "Rol", "Salario"};
+			String[][] data = new String[datos.size()][4];
 
 			for (int i = 0; i < datos.size(); i++) {
 				DTOtEmpleado empleado = datos.get(i);
 				data[i][0] = empleado.getDni();
 				data[i][1] = empleado.getNombre();
+				data[i][2] = empleado.getRolEmpleado().getNombreRol();
+				data[i][3] = String.format("%.2f", empleado.getRolEmpleado().getSalario());
 			}
 
 			JTable tablaEmpleados = new JTable(data, columnNames);
@@ -90,18 +92,18 @@ public class VistaMostrarEmpleados {
 			scrollPane.setForeground(new Color(17, 47, 69));
 			scrollPane.setOpaque(false);
 			scrollPane.getViewport().setOpaque(false);
-			panelMostrarClientes.add(scrollPane, BorderLayout.CENTER);
 
+			panelMostrarClientes.add(scrollPane, BorderLayout.CENTER);
 			panelMostrarClientes.revalidate();
 			panelMostrarClientes.repaint();
-		}
-		else if (evento == Evento.RES_MOSTRAR_EMPLEADOS_KO) {
+
+		} else if (evento == Evento.RES_MOSTRAR_EMPLEADOS_KO) {
 			panelMostrarClientes.removeAll();
-			if (datos == null || datos.isEmpty()) {
-				JLabel mensaje = new JLabel("No hay empleados disponibles.", SwingConstants.CENTER);
-				mensaje.setForeground(Color.WHITE);
-				panelMostrarClientes.add(mensaje, BorderLayout.CENTER);
-			} 
+			JLabel mensaje = new JLabel("No hay empleados disponibles.", SwingConstants.CENTER);
+			mensaje.setForeground(Color.WHITE);
+			panelMostrarClientes.add(mensaje, BorderLayout.CENTER);
+			panelMostrarClientes.revalidate();
+			panelMostrarClientes.repaint();
 		}
 	}
 }

@@ -15,14 +15,46 @@ public class SAEmpleadosImp implements SAEmpleados {
 	}
 	
 	public int altaEmpleado(final DTOtEmpleado empleado) {
-		return getDAOEmpleados().altaEmpleado(empleado);
+		//compruebo que no existe
+		DTOtEmpleado e = leerEmpleado(empleado.getDni());
+		int exito = 0;
+		if(e == null) exito = getDAOEmpleados().altaEmpleado(empleado);
+		//si se ha añadido, añado tambien en tabla Empleado-Rol
+		if(exito == 1) exito = getDAOEmpleados().altaEmpleadoRol(empleado);
+		return exito;
 	}
 
 	public DTOtEmpleado leerEmpleado(final String dni) {
-		return getDAOEmpleados().leerEmpleado(dni);
+		//saco el empleado (Tabla Empleados)
+		DTOtEmpleado e = getDAOEmpleados().leerEmpleado(dni);
+		//si existe saco el idRol del empleado (Tabla EmpleadosRol)
+		if(e != null) {
+			int idRol = getDAOEmpleados().leerEmpleadoRol(dni);
+			//si existe saco el nombre del rol (Tabla Roles)
+			String nombreRol = getDAOEmpleados().leerNombreRol(idRol);
+			//me falta el salario del rol (Tabla Monitor/Recep/....)
+			double salarioRol = getSalarioPorRol(idRol);
+			DTOtRol rol = new DTOtRol(idRol, nombreRol, salarioRol);
+			//junto el empleado y el rol
+			e.setRolEmpleado(rol);
+		} 
+		return e;
+	}
+	
+	private double getSalarioPorRol(int idRol) {
+		double salario;
+		
+		if(idRol == 1) salario = getDAOEmpleados().leerSalarioMantenimiento();
+		else if (idRol == 2) salario = getDAOEmpleados().leerSalarioMonitores();
+		else if(idRol == 3) salario = getDAOEmpleados().leerSalarioNutricionistas();
+		else salario = getDAOEmpleados().leerSalarioRecepcion();
+		
+		return salario;
 	}
 
 	public int actualizarEmpleado(final DTOtEmpleado empleado) {
+		//compruebo que si que existia ya
+		//del empleado solo podemos editar el nombre asiq con esto sobra
 		DTOtEmpleado e = leerEmpleado(empleado.getDni());
 		int exito = 0;
 		if(e != null) exito = getDAOEmpleados().actualizarEmpleado(empleado);
@@ -30,11 +62,15 @@ public class SAEmpleadosImp implements SAEmpleados {
 	}
 
 	public int borrarEmpleado(final String dni) {
+		//compruebo que existia
 		DTOtEmpleado e = leerEmpleado(dni);
 		int exito = 0;
 		if(e != null) {
 			//falta por hacer borrar de la sala, actividad o asesoramiento
+			//borrado de la lista de empleados
 			exito = getDAOEmpleados().borrarEmpleado(dni);
+			//borrado de la lista de empleados-roles
+			exito = getDAOEmpleados().borrarEmpleadoRol(dni);
 		}
 		return exito;
 	}
