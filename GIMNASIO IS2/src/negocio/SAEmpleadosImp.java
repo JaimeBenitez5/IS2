@@ -67,16 +67,20 @@ public class SAEmpleadosImp implements SAEmpleados {
 		int exito = 0;
 		if(e != null) {
 			//falta por hacer borrar de la sala, actividad o asesoramiento
-			//borrado de la lista de empleados
+			//borrado de la lista de empleados, como empleados roles tiene 
+			//on cascade, se borra de la lista de empleados-roles autopmaticamente
 			exito = getDAOEmpleados().borrarEmpleado(dni);
-			//borrado de la lista de empleados-roles
-			exito = getDAOEmpleados().borrarEmpleadoRol(dni);
 		}
 		return exito;
 	}
 
 	public List<DTOtEmpleado> leerTodosEmpleados() {
-		return getDAOEmpleados().leerTodosEmpleados();
+		List<DTOtEmpleado> emps = getDAOEmpleados().leerTodosEmpleados();
+		for(DTOtEmpleado e : emps) {
+			int idRol = e.getRolEmpleado().getIdRol();
+			e.getRolEmpleado().setSalario(getSalarioPorRol(idRol));
+		}
+		return emps;
 	}
 
 }

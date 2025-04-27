@@ -8,6 +8,7 @@ import presentacion.clientes.*;
 import presentacion.empleados.*;
 import presentacion.facturas.*;
 import presentacion.salas.*;
+import presentacion.suscripciones.*;
 import negocio.*;
 
 public class Controlador{
@@ -331,6 +332,31 @@ public class Controlador{
 		}
 		case Evento.VISTA_MODIFICAR_SALA:{ 
 			VistaModificarSala.open();
+			break;
+		}
+		//VISTAS SUSCRIPCIONES
+		case Evento.VISTA_SUSCRIPCIONES:{ 
+			VistaSuscripciones.open();
+			break;
+		}
+		case Evento.VISTA_ANADIR_SUSCRIPCION:{ 
+			VistaAltaSuscripcion.open();
+			break;
+		}
+		case Evento.VISTA_ELIMINAR_SUSCRIPCION:{ 
+			VistaEliminarSuscripcion.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_SUSCRIPCION:{ 
+			VistaMostrarSuscripcion.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_SUSCRIPCIONES:{ 
+			VistaMostrarSuscripciones.open();
+			break;
+		}
+		case Evento.VISTA_MODIFICAR_SUSCRIPCION:{ 
+			//VistaModificarSuscripcion.open();
 			break;
 		}
 		//VISTAS ACTIVIDADES

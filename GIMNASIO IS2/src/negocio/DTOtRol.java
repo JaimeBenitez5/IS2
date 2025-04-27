@@ -10,7 +10,31 @@ public class DTOtRol {
 		_nombreRol = nombreRol;
 		_salario = salario;
 	}
-
+	
+	public DTOtRol(final String nombreRol) {
+		_idRol = castIdRol(nombreRol);
+		_nombreRol = nombreRol;
+		_salario = 0;
+	}
+	
+	private int castIdRol(final String nombreRol) {
+		int idRol = 0; 
+		
+		if(nombreRol == "MANTENIMIENTO") {
+			idRol = 1;
+		}
+		else if(nombreRol == "MONITOR") {
+			idRol = 2;
+		}
+		else if(nombreRol == "NUTRICIONISTA") {
+			idRol = 3;
+		}
+		else if(nombreRol == "RECEPCION") {
+			idRol = 4;
+		}
+		return idRol;
+	}
+	
 	public int getIdRol() {
 		return _idRol;
 	}

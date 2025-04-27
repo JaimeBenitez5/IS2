@@ -54,7 +54,7 @@ public class VistaModificarSala {
 		panelModificarSala.add(titulo);
 		panelModificarSala.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(2, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(3, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
@@ -69,6 +69,13 @@ public class VistaModificarSala {
 		panelCampos.add(aforo);
 		JTextField aforoTF = new JTextField(30);
 		panelCampos.add(aforoTF);
+		
+		JLabel dniEmp = new JLabel("DNI Empleado de Mantenimiento:");
+		dniEmp.setForeground(Color.WHITE);
+		panelCampos.add(dniEmp);
+		JTextField dniEmpTF = new JTextField(30);
+		panelCampos.add(dniEmpTF);
+
 
 		panelModificarSala.add(panelCampos);
 		panelModificarSala.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -91,7 +98,8 @@ public class VistaModificarSala {
 			public void actionPerformed (ActionEvent e) {
 				int id = Integer.parseInt(idTF.getText());
 				int aforo = Integer.parseInt(aforoTF.getText());
-				DTOtSala s = new DTOtSala(id, aforo);
+				String dniEmp = dniEmpTF.getText();
+				DTOtSala s = new DTOtSala(id, aforo, dniEmp);
 				Controlador.accion(Evento.MODIFICAR_SALA, s);
 			}
 		});

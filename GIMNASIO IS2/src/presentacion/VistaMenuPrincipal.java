@@ -43,6 +43,7 @@ public class VistaMenuPrincipal{
 		JButton botonActividades = UIElementFactory.crearBoton("Actividades",colorBotones);
 		JButton botonEmpleados = UIElementFactory.crearBoton("Empleados",colorBotones);
 		JButton botonCatalogos = UIElementFactory.crearBoton("Catalogos",colorBotones);
+		JButton botonSuscripciones = UIElementFactory.crearBoton("Suscripciones",colorBotones);
 		ImageIcon logo = new ImageIcon("icons/logo.png");
 		JLabel logoL = new JLabel(logo, JLabel.CENTER);
 
@@ -53,7 +54,7 @@ public class VistaMenuPrincipal{
 		mainPanel.add(logoL);
 		mainPanel.add(botonActividades);
 		mainPanel.add(botonEmpleados);
-		mainPanel.add(Box.createRigidArea(new Dimension(1, 1)));
+		mainPanel.add(botonSuscripciones);
 		mainPanel.add(botonCatalogos);
 
 		menuPrincipal.add(mainPanel);
@@ -100,6 +101,13 @@ public class VistaMenuPrincipal{
 			}
 		});
 
+		botonSuscripciones.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				menuPrincipal.setVisible (false);
+				Controlador.mostrarVista(Evento.VISTA_SUSCRIPCIONES);
+			}
+		});
+		
 		return menuPrincipal;
 	}
 }

@@ -54,7 +54,7 @@ public class VistaAnadirSala {
 		panelAnadirSala.add(titulo);
 		panelAnadirSala.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(1, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(2, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
@@ -96,7 +96,7 @@ public class VistaAnadirSala {
 				}
 				aforoTF.setText("");
 				dniEmpTF.setText("");
-				DTOtSala s = new DTOtSala(aforo);
+				DTOtSala s = new DTOtSala(aforo, dniEmp);
 				Controlador.accion(Evento.ALTA_SALA, s);
 			}
 		});

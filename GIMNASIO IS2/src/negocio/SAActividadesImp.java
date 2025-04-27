@@ -16,7 +16,10 @@ public class SAActividadesImp implements SAActividades {
 	}
 	
 	public int altaActividad(final DTOtActividad actividad) {
-		return getDAOActividades().altaActividad(actividad);
+		DTOtActividad a = leerActividad(actividad.getTipoActividad(), actividad.getFecha(), actividad.getIdSala());
+		int exito = 0;
+		if(a == null) exito = getDAOActividades().altaActividad(actividad);
+		return exito;
 	}
 
 	public DTOtActividad leerActividad(final String tipoActividad, final Date fecha, final int idSala) {
@@ -46,5 +49,4 @@ public class SAActividadesImp implements SAActividades {
 	public List<DTOtActividad> leerTodasActividades() {
 		return getDAOActividades().leerTodasActividades();
 	}
-
 }

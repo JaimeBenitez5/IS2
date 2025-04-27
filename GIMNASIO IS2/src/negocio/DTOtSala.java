@@ -11,9 +11,10 @@ public class DTOtSala {
     	_dniEmpleado = dniEmpleado;
     }
     
-    public DTOtSala( final int aforo) {
+    public DTOtSala(final int aforo, final String dniEmpleado) {
     	_id = 0;
     	_aforo = aforo;
+    	_dniEmpleado = dniEmpleado;
     }
     
     public int getId() {

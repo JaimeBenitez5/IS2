@@ -42,16 +42,6 @@ idCatalogo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 numActividades INT 
 );
 
-CREATE TABLE Actividades(
-tipoActividad VARCHAR(255), 
-fecha DATE, 
-idSala INT NOT NULL,
-dniEmpleado VARCHAR(9),
-PRIMARY KEY (tipoActividad, fecha, idSala), 
-FOREIGN KEY (idSala) REFERENCES Salas(idSala),
-FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado)
-); 
-
 CREATE TABLE Empleados(
 dniEmpleado VARCHAR(9) PRIMARY KEY,
 nombre VARCHAR(255)
@@ -99,8 +89,18 @@ dniEmpleado VARCHAR(9),
 idSala INT NOT NULL, 
 PRIMARY KEY (dniEmpleado, idSala), 
 FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado),
-FOREIGN KEY (idSala) REFERENCES Salas(idSala)
+FOREIGN KEY (idSala) REFERENCES Salas(idSala) ON DELETE CASCADE
 );
+
+CREATE TABLE Actividades(
+tipoActividad VARCHAR(255), 
+fecha DATE, 
+idSala INT NOT NULL,
+dniEmpleado VARCHAR(9),
+PRIMARY KEY (tipoActividad, fecha, idSala), 
+FOREIGN KEY (idSala) REFERENCES Salas(idSala),
+FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado)
+); 
 
 CREATE TABLE Suscripciones(
 numSuscripcion INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -190,6 +190,9 @@ INSERT INTO Clientes (nombre, dniCliente, direccion) VALUES ('Carlos', 'BBBBBBBB
 
 INSERT INTO Salas (aforo) VALUES (100);
 INSERT INTO Salas (aforo) VALUES (150); 
+
+INSERT INTO Mantienen(dniEmpleado, idSala) VALUES ('06013483H', 1);
+INSERT INTO Mantienen(dniEmpleado, idSala) VALUES ('06013483H', 2);
 
 INSERT INTO Actividades (tipoActividad, fecha, idSala, dniEmpleado) VALUES ('Yoga', '2025-03-19', 1, '1234567A');
 INSERT INTO Actividades (tipoActividad, fecha, idSala) VALUES ('Spinning', '2025-03-20', 2); 

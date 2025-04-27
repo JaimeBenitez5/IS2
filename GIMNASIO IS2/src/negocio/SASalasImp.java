@@ -2,21 +2,39 @@ package negocio;
 
 import java.util.List;
 
+import integracion.DAOEmpleados;
+import integracion.DAOEmpleadosImp;
 import integracion.DAOSalas;
 import integracion.DAOSalasImp;
 
 public class SASalasImp implements SASalas {
 
 	private static DAOSalas salasDAO = null;
-
+	private static DAOEmpleados empleadosDAO = null;
 	//USADO PATRON SINGLETON
 	public static DAOSalas getDAOSalas(){
 		if(salasDAO == null) salasDAO = new DAOSalasImp();
 		return salasDAO;
 	}
-
+	public static DAOEmpleados getDAOEmpleados(){
+		if(empleadosDAO == null) empleadosDAO = new DAOEmpleadosImp();
+		return empleadosDAO;
+	}
+	
 	public int altaSala(final DTOtSala sala) {
-		return getDAOSalas().altaSala(sala);
+		//compruebo que no existe
+		DTOtSala s = leerSala(sala.getId());
+		int idSala = 0;
+		if(s == null) {
+			int idRolEmp = getDAOEmpleados().leerEmpleadoRol(sala.getDniEmpleado());
+			if(idRolEmp == 1) {
+				idSala = getDAOSalas().altaSala(sala);
+				sala.setId(idSala);
+				if(idSala != 0) getDAOSalas().altaMantenedor(sala);
+				//si se ha añadido, añado tambien en tabla Mantienen
+			} 
+		}
+		return idSala;
 	}
 
 	public DTOtSala leerSala(final int id) {
@@ -26,7 +44,10 @@ public class SASalasImp implements SASalas {
 	public int actualizarSala(final DTOtSala sala) {
 		DTOtSala s = leerSala(sala.getId());
 		int exito = 0;
-		if(s != null) exito = getDAOSalas().actualizarSala(sala);
+		if(s != null) {
+			exito = getDAOSalas().actualizarSala(sala);
+			if(exito != 0) getDAOSalas().actualizarMantenedor(sala);
+		}
 		return exito;
 	}
 

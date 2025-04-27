@@ -116,7 +116,8 @@ public class VistaMostrarSala {
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
 			String id = String.valueOf(s.getId());
 			int aforo = s.getAforo();
-			JOptionPane.showMessageDialog(null, "ID: " +id + " Aforo: " + aforo);
+			String emp = s.getDniEmpleado();
+			JOptionPane.showMessageDialog(null, "ID: " +id + " Aforo: " + aforo + " Empleado de mantenimiento: " + emp);
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_MOSTRAR_SALA_KO) {

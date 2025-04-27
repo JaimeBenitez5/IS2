@@ -72,13 +72,14 @@ public class VistaMostrarSalas {
 	public static void actualizar(int evento, List<DTOtSala> datos) {
 		if (evento == Evento.RES_MOSTRAR_SALAS_OK) {
 			panelMostrarSalas.removeAll();
-			String[] columnNames = {"ID", "Aforo"};
-			String[][] data = new String[datos.size()][2];
+			String[] columnNames = {"ID", "Aforo", "DNI de Empleado de Mantenimiento"};
+			String[][] data = new String[datos.size()][3];
 
 			for (int i = 0; i < datos.size(); i++) {
 				DTOtSala sala = datos.get(i);
 				data[i][0] = String.valueOf(sala.getId());
 				data[i][1] = String.valueOf(sala.getAforo());
+				data[i][2] = sala.getDniEmpleado();
 			}
 
 			JTable tablaSalas = new JTable(data, columnNames);
