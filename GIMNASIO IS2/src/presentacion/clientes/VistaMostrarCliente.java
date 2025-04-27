@@ -71,18 +71,18 @@ public class VistaMostrarCliente {
 		botones.setBackground(new Color(17, 47, 69));
 
 		JButton back = UIElementFactory.crearBotonConIcono("icons/back.png");
-		JButton delete = UIElementFactory.crearBoton("Mostrar",  new Color(67, 75, 172));
+		JButton mostrar = UIElementFactory.crearBoton("Mostrar",  new Color(67, 75, 172));
 		JButton botonMainMenu = UIElementFactory.crearBotonConIcono("icons/main_menu.png");
 
 		botones.add(back);
-		botones.add(delete);
+		botones.add(mostrar);
 		botones.add(botonMainMenu);
 
 		panelBajaCliente.add(botones);
 		menuPrincipal.setVisible(true);
 
 
-		delete.addActionListener(new ActionListener () {
+		mostrar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				String id = dniTF.getText();
 				dniTF.setText("");

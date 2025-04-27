@@ -87,7 +87,8 @@ public class Controlador{
 		}
 		case Evento.MOSTRAR_SALA:{
 			DTOtSala s = getSASalas().leerSala((int) datos);
-			VistaMostrarSala.actualizar(Evento.RES_MOSTRAR_SALA_OK, s);
+			if (s != null) VistaMostrarSala.actualizar(Evento.RES_MOSTRAR_SALA_OK, s);
+			else VistaMostrarSala.actualizar(Evento.RES_MOSTRAR_SALA_KO, s);
 			break;
 		}
 		case Evento.MOSTRAR_SALAS:{

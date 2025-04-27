@@ -185,8 +185,7 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 				String nombreRol = rs.getString("nombreRol");
 				double salario = rs.getDouble("salario");
 
-				Rol rol = Rol.getRol(nombreRol);
-				DTOtRol dtoRol = new DTOtRol(rol, nombreRol, salario);
+				DTOtRol dtoRol = new DTOtRol(idRolInt, nombreRol, salario);
 				DTOtEmpleado emp = new DTOtEmpleado(dni, nombre, dtoRol);
 
 				empleados.add(emp);
