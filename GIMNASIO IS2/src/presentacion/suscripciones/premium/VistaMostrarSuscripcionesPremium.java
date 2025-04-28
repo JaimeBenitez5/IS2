@@ -71,14 +71,14 @@ public class VistaMostrarSuscripcionesPremium {
 		GUI.setVisible(true);
 	}
 
-	public static void actualizar(int evento, List<DTOtPremium> datos) {
+	public static void actualizar(int evento, List<DTOtSuscripcion> datos) {
 		if (evento == Evento.RES_MOSTRAR_SUSCRIPCIONES_PREMIUM_OK) {
 			panelMostrarSuscripciones.removeAll();
 			String[] columnNames = {"ID de Suscripcion", "Nombre", "Duracion", "DNI de Empleado", "ID de Catalogo"};
 			String[][] data = new String[datos.size()][5];
 
 			for (int i = 0; i < datos.size(); i++) {
-				DTOtPremium suscripcion = datos.get(i);
+				DTOtPremium suscripcion = (DTOtPremium) datos.get(i);
 				data[i][0] = String.valueOf(suscripcion.getIdSuscripcion());
 				data[i][1] = String.valueOf(suscripcion.getNombre());
 				data[i][2] = String.valueOf(suscripcion.getDuracion());

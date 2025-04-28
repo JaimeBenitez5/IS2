@@ -12,10 +12,7 @@ import configFiles.BDConexion;
 import negocio.DTOtCliente;
 import negocio.DTOtCompra;
 import negocio.DTOtEmpleado;
-<<<<<<< Updated upstream
 import negocio.DTOtSala;
-=======
->>>>>>> Stashed changes
 
 public class DAOComprasImp implements DAOCompras {
 
@@ -40,30 +37,27 @@ public class DAOComprasImp implements DAOCompras {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-        return 0;
+		return 0;
 	}
 
 	public DTOtCompra leerCompra(int id) {
-<<<<<<< Updated upstream
 		String leerCompra = "SELECT * FROM SUSCRIPCIONES s JOIN COMPRAS c ON s.numSuscripcion = c.numSuscripcion WHERE c.idCompra = ?";
-        try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(leerCompra)) {
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-            List<String> suscripciones = new ArrayList<>();
-            int aforo = 0;
-            while (rs.next()) {
-                suscripciones.add(rs.getString("numSuscripcion"));
-            }
-            if (!suscripciones.isEmpty()) {
-            	
-                String[] dniEmpleadosArray = suscripciones.toArray(new String[0]);
-                return new DTOtCompra(id, aforo, dniEmpleadosArray);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-=======
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(leerCompra)) {
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			List<String> suscripciones = new ArrayList<>();
+			int aforo = 0;
+			while (rs.next()) {
+				suscripciones.add(rs.getString("numSuscripcion"));
+			}
+			if (!suscripciones.isEmpty()) {
+				String[] dniEmpleadosArray = suscripciones.toArray(new String[0]);
+				return new DTOtCompra(id, aforo, dniEmpleadosArray);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 		String query = "SELECT * FROM Compras WHERE idCompra = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1,id);
@@ -82,10 +76,8 @@ public class DAOComprasImp implements DAOCompras {
 			e.printStackTrace();
 		}
 		return null;
->>>>>>> Stashed changes
 	}
 
-	@Override
 	public int actualizarCompra(DTOtCompra compra) {
 		String query = "UPDATE COMPRAS SET  dniCliente = ? , fecha = ? , metodoPago = ?, numFactura = ? , dniEmpleado = ? WHERE numSuscripcion = ? ";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
@@ -112,7 +104,6 @@ public class DAOComprasImp implements DAOCompras {
 		return 0;
 	}
 
-	@Override
 	public List<DTOtCompra> leerTodasCompras() {
 		ArrayList<DTOtCompra> compra = new ArrayList<DTOtCompra>();
 		String query = "SELECT * FROM COMPRAS";
