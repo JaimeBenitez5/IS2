@@ -9,13 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import configFiles.BDConexion;
-import negocio.DTOtCliente;
 import negocio.DTOtCompra;
-import negocio.DTOtEmpleado;
-<<<<<<< Updated upstream
-import negocio.DTOtSala;
-=======
->>>>>>> Stashed changes
 
 public class DAOComprasImp implements DAOCompras {
 
@@ -23,19 +17,20 @@ public class DAOComprasImp implements DAOCompras {
 	public int altaCompra(DTOtCompra compra) {
 		String insertCompra = "INSERT INTO Compras (numSuscripcion, dniCliente, fecha,metodoPago,numFactura ,dniEmpleado) VALUES (?,?,?,?,?,?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(insertCompra, Statement.RETURN_GENERATED_KEYS)) {
-			stmt.setString(1, compra.getDniCliente());
-			stmt.setString(2, compra.getIdCliente());
+			stmt.setString(1, null);
+			stmt.setString(2, compra.getDniCliente());
 			stmt.setDate(3, (Date) compra.getFecha());
 			stmt.setString(4, compra.getMetodoPago());
 			stmt.setInt(5, compra.getIdFactura());
-			stmt.setInt(6,compra.getDniEmpleado());
-			stmt.executeUpdate();
+			stmt.setString(6,compra.getDniEmpleado());
+			
 			try (ResultSet rs = stmt.getGeneratedKeys()) {
 				if (rs.next()) {
 					int idSuscripcion = rs.getInt(1);
 					return idSuscripcion;
 				}
 			}
+			stmt.executeUpdate();
 			return stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -44,45 +39,28 @@ public class DAOComprasImp implements DAOCompras {
 	}
 
 	public DTOtCompra leerCompra(int id) {
-<<<<<<< Updated upstream
 		String leerCompra = "SELECT * FROM SUSCRIPCIONES s JOIN COMPRAS c ON s.numSuscripcion = c.numSuscripcion WHERE c.idCompra = ?";
         try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(leerCompra)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
-            List<String> suscripciones = new ArrayList<>();
+            List<Integer> suscripciones = new ArrayList<>();
             int aforo = 0;
             while (rs.next()) {
-                suscripciones.add(rs.getString("numSuscripcion"));
+                suscripciones.add(rs.getInt("numSuscripcion"));
             }
             if (!suscripciones.isEmpty()) {
-            	
-                String[] dniEmpleadosArray = suscripciones.toArray(new String[0]);
-                return new DTOtCompra(id, aforo, dniEmpleadosArray);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-=======
-		String query = "SELECT * FROM Compras WHERE idCompra = ?";
-		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
-			stmt.setInt(1,id);
-			ResultSet rs = stmt.executeQuery();
-			if(rs.next()) {
-				int numSuscripcion = rs.getInt("numSuscripcion");
 				String idCliente= rs.getString("dniCliente");
 				Date date = rs.getDate("fecha");
 				String metodoPago= rs.getString("metodoPago");
 				int idFactura = rs.getInt("numFactura");
-				int dniEmpleado=rs.getInt("dniEmpleado");
-				DTOtCompra e = new DTOtCompra(dniEmpleado,idFactura,id,idCliente,date,metodoPago);
-				return e;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
->>>>>>> Stashed changes
+				String dniEmpleado=rs.getString("dniEmpleado");
+                String[] dniEmpleadosArray = suscripciones.toArray(new String[0]);
+                return new DTOtCompra(id,dniEmpleado,idFactura,suscripciones,idCliente,date,metodoPago);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+       return null;
 	}
 
 	@Override
@@ -119,12 +97,13 @@ public class DAOComprasImp implements DAOCompras {
 		try ( Statement stmt = BDConexion.getConnection().createStatement ()) {
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next ()) {
-				int numSuscripcion = rs.getInt("numSuscripcion");
+				List<Integer> numSuscripcion= new ArrayList<Integer>() ;
+						//rs.getInt("numSuscripcion");
 				String idCliente= rs.getString("dniCliente");
 				Date date = rs.getDate("fecha");
 				String metodoPago= rs.getString("metodoPago");
 				int idFactura = rs.getInt("numFactura");
-				int dniEmpleado=rs.getInt("dniEmpleado");
+				String dniEmpleado=rs.getString("dniEmpleado");
 				DTOtCompra e = new DTOtCompra(dniEmpleado,idFactura,numSuscripcion,idCliente,date,metodoPago);
 				compra.add(e);
 			}

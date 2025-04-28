@@ -7,43 +7,43 @@ import java.util.List;
 public class DTOtCompra {
 	
 	int _idCompra;
-	int _numSuscripcion;
-	int _dniEmpleado;
+	String _dniEmpleado;
 	int _idFactura;
 	List<Integer> _idSuscripciones;
 	String _dniCliente;
 	Date _fecha;
 	String _metodoPago;//mirar bbdd
 	
-<<<<<<< Updated upstream
-	public DTOtCompra(int dniEmpleado,int idFactura,List<Integer> idSuscripciones,String dniCliente,Date fecha,String metodoPago) {
+	public DTOtCompra(String dniEmpleado,int idFactura,List<Integer> idSuscripciones,String dniCliente,Date fecha,String metodoPago) {
 		_dniEmpleado = dniEmpleado ;
 		_idFactura= idFactura;
 		_idSuscripciones = idSuscripciones;
-=======
-	public DTOtCompra(int dniEmpleado,int idFactura,int idSuscripcion,String dniCliente,Date fecha,String metodoPago) {
-		_dniEmpleado = dniEmpleado ;
-		_idFactura= idFactura;
-		_idSuscripciones = new ArrayList<Integer>();
->>>>>>> Stashed changes
 		_dniCliente = dniCliente;
 		_fecha=fecha;
 		_metodoPago=metodoPago;
 	}
+	public DTOtCompra(int idCompra,String dniEmpleado,int idFactura,List<Integer> idSuscripciones,String dniCliente,Date fecha,String metodoPago) {
+		_idCompra= idCompra;
+		_dniEmpleado = dniEmpleado ;
+		_idFactura= idFactura;
+		_idSuscripciones = idSuscripciones;
+		_dniCliente = dniCliente;
+		_fecha=fecha;
+		_metodoPago=metodoPago;
+		
+	}
 	
-<<<<<<< Updated upstream
-	public DTOtCompra(int idCompra,int numSuscripcion,int dniEmpleado,int idFactura,List<Integer> idSuscripciones,String dniCliente,Date fecha,String metodoPago) {
+	public DTOtCompra(int idCompra,int numSuscripcion,String dniEmpleado,int idFactura,List<Integer> idSuscripciones,String dniCliente,Date fecha,String metodoPago) {
 		_idCompra=idCompra;
 		_dniEmpleado = dniEmpleado ;
 		_idFactura= idFactura;
 		_idSuscripciones = idSuscripciones;
-=======
-	public DTOtCompra(int idCompra,int numSuscripcion,int dniEmpleado,int idFactura,int idSuscripcion,String dniCliente,Date fecha,String metodoPago) {
+	}
+	public DTOtCompra(int idCompra,int numSuscripcion,String dniEmpleado,int idFactura,int idSuscripcion,String dniCliente,Date fecha,String metodoPago) {
 		_idCompra=idCompra;
 		_dniEmpleado = dniEmpleado ;
 		_idFactura= idFactura;
 		_idSuscripciones = new ArrayList<Integer>();
->>>>>>> Stashed changes
 		_dniCliente = dniCliente;
 		_fecha=fecha;
 		_metodoPago=metodoPago;
@@ -53,11 +53,11 @@ public class DTOtCompra {
 		return _dniCliente;
 	}
 	
-	public int getDniEmpleado() {
+	public String getDniEmpleado() {
 		return _dniEmpleado;
 	}
 
-	public void setDniEmpleado(int dniEmpleado) {
+	public void setDniEmpleado(String dniEmpleado) {
 		this._dniEmpleado = dniEmpleado;
 	}
 
@@ -67,10 +67,6 @@ public class DTOtCompra {
 
 	public void setIdFactura(int idFactura) {
 		this._idFactura = idFactura;
-	}
-
-	public String getIdCliente() {
-		return _dniCliente;
 	}
 
 	public void setIdCliente(String dniCliente) {
@@ -96,7 +92,14 @@ public class DTOtCompra {
 	public int getId() {
 		return _idCompra;
 	}
+	
+	public void setId(int id) {
+		_idCompra= id;
+	}
 
+	public List<Integer> getSuscripciones(){
+		return _idSuscripciones;
+	}
 
 	
 	
