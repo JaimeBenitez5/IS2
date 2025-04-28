@@ -1,0 +1,51 @@
+package negocio;
+
+import java.util.List;
+
+import integracion.DAOClientes;
+import integracion.DAOClientesImp;
+import integracion.DAOCompras;
+
+public class SAComprasImp implements SACompras {
+
+
+	private static DAOCompras comprasDao = null;
+
+	//USADO PATRON SINGLETON
+	public static DAOCompras getDAOCompras(){
+		if(comprasDao == null) comprasDao = new DAOComprasImp();
+		return comprasDao;
+	}
+
+	public int altaCompras(final DTOtCompra compra) {
+		DTOtCompra c = leerCompra(compra.getId());
+		int exito = 0;
+		if(c == null) exito = getDAOCompras().altaCompra(compra); 
+		return exito;
+	}
+
+
+	public DTOtCompra leerCompra(String dni) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public int actualizarCompra(DTOtCompra compra) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	public int borrarCompra(String dni) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	public List<DTOtCompra> leerTodasCompras() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

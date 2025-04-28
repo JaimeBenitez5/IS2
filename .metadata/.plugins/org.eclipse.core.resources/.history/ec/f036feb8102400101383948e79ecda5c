@@ -1,0 +1,76 @@
+package negocio;
+
+import java.util.Date;
+
+public class DTOtCompra {
+	
+	int _dniEmpleado;
+	int _idFactura;
+	int _idSuscripcion;
+	int _idCliente;
+	Date _fecha;
+	String _metodoPago;//mirar bbdd
+	
+	public DTOtCompra(int dniEmpleado,int idFactura,int idSuscripcion,int idCliente,Date fecha,String metodoPago) {
+		_dniEmpleado = dniEmpleado ;
+		_idFactura= idFactura;
+		_idSuscripcion = idSuscripcion;
+		_idCliente = idCliente;
+		_fecha=fecha;
+		_metodoPago=metodoPago;
+	}
+	
+	public int getDniEmpleado() {
+		return _dniEmpleado;
+	}
+
+	public void setDniEmpleado(int dniEmpleado) {
+		this._dniEmpleado = dniEmpleado;
+	}
+
+	public int getIdFactura() {
+		return _idFactura;
+	}
+
+	public void setIdFactura(int idFactura) {
+		this._idFactura = idFactura;
+	}
+
+	public int getIdSuscripcion() {
+		return _idSuscripcion;
+	}
+
+	public void setIdSuscripcion(int idSuscripcion) {
+		this._idSuscripcion = idSuscripcion;
+	}
+
+	public int getIdCliente() {
+		return _idCliente;
+	}
+
+	public void setIdCliente(int idCliente) {
+		this._idCliente = idCliente;
+	}
+
+	public Date getFecha() {
+		return _fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this._fecha = fecha;
+	}
+
+	public String getMetodoPago() {
+		return _metodoPago;
+	}
+
+	public void setMetodoPago(String metodoPago) {
+		this._metodoPago = metodoPago;
+	}
+
+
+	
+	public int getId() {
+		return _idSuscripcion;
+	}
+}

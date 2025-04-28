@@ -15,20 +15,35 @@ public class DTOtCompra {
 	Date _fecha;
 	String _metodoPago;//mirar bbdd
 	
+<<<<<<< Updated upstream
 	public DTOtCompra(int dniEmpleado,int idFactura,List<Integer> idSuscripciones,String dniCliente,Date fecha,String metodoPago) {
 		_dniEmpleado = dniEmpleado ;
 		_idFactura= idFactura;
 		_idSuscripciones = idSuscripciones;
+=======
+	public DTOtCompra(int dniEmpleado,int idFactura,int idSuscripcion,String dniCliente,Date fecha,String metodoPago) {
+		_dniEmpleado = dniEmpleado ;
+		_idFactura= idFactura;
+		_idSuscripciones = new ArrayList<Integer>();
+>>>>>>> Stashed changes
 		_dniCliente = dniCliente;
 		_fecha=fecha;
 		_metodoPago=metodoPago;
 	}
 	
+<<<<<<< Updated upstream
 	public DTOtCompra(int idCompra,int numSuscripcion,int dniEmpleado,int idFactura,List<Integer> idSuscripciones,String dniCliente,Date fecha,String metodoPago) {
 		_idCompra=idCompra;
 		_dniEmpleado = dniEmpleado ;
 		_idFactura= idFactura;
 		_idSuscripciones = idSuscripciones;
+=======
+	public DTOtCompra(int idCompra,int numSuscripcion,int dniEmpleado,int idFactura,int idSuscripcion,String dniCliente,Date fecha,String metodoPago) {
+		_idCompra=idCompra;
+		_dniEmpleado = dniEmpleado ;
+		_idFactura= idFactura;
+		_idSuscripciones = new ArrayList<Integer>();
+>>>>>>> Stashed changes
 		_dniCliente = dniCliente;
 		_fecha=fecha;
 		_metodoPago=metodoPago;

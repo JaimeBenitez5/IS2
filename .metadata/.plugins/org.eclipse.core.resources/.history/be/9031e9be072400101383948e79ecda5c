@@ -1,0 +1,25 @@
+package negocio;
+
+import java.util.Date;
+
+public class DTOtCompra {
+	int _dniEmpleado;
+	int _idFactura;
+	int _idSuscripcion;
+	int _idCliente;
+	Date _fecha;
+	String _metodoPago;//mirar bbdd
+	
+	public DTOtCompra(int dniEmpleado,int idFactura,int idSuscripcion,int idCliente,Date fecha,String metodoPago) {
+		_dniEmpleado = dniEmpleado ;
+		_idFactura= idFactura;
+		_idSuscripcion = idSuscripcion;
+		_idCliente = idCliente;
+		_fecha=fecha;
+		_metodoPago=metodoPago;
+	}
+	
+	public int getId() {
+		return _idSuscripcion;
+	}
+}

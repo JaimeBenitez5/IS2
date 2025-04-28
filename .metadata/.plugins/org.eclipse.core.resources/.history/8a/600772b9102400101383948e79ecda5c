@@ -1,0 +1,38 @@
+package integracion;
+
+import java.util.List;
+
+import negocio.DTOtCompra;
+
+public class DAOComprasImp implements DAOCompras {
+
+
+	public int altaCompra(DTOtCompra compra) {
+		
+		return 0;
+	}
+
+	public DTOtCompra leerCompra(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int actualizarCompra(DTOtCompra compra) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int borrarCompra(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<DTOtCompra> leerTodasCompras() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

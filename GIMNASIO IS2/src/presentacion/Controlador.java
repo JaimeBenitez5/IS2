@@ -4,6 +4,7 @@ import java.util.List;
 import presentacion.actividades.*;
 import presentacion.catalogos.*;
 import presentacion.clientes.*;
+import presentacion.compras.VistaCompras;
 import presentacion.empleados.*;
 import presentacion.facturas.*;
 import presentacion.salas.*;
@@ -460,6 +461,29 @@ public class Controlador{
 		}
 		case Evento.VISTA_MODIFICAR_EMPLEADO: {
 			VistaModificarEmpleado.open();
+			break;
+		}
+		//VISTAS FACTURAS
+		case Evento.VISTA_COMPRAS:{ 	
+			VistaCompras.open();
+			break;
+		}
+		case Evento.VISTA_ANADIR_COMPRA:{ 
+			VistaAnadirFactura.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_COMPRA:{ 
+			VistaMostrarFacturas.open();
+			break;
+		}
+	
+		case Evento.VISTA_ELIMINAR_COMPRA:{
+			VistaEliminarFactura.open();
+			break;
+		}
+
+		case Evento.VISTA_MOSTRAR_COMPRAS:{ 
+			VistaMostrarFactura.open();
 			break;
 		}
 		}

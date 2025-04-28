@@ -1,0 +1,68 @@
+package negocio;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class DTOtCompra {
+	
+	int _dniEmpleado;
+	int _idFactura;
+	List<Integer> _idSuscripciones;
+	String _dniCliente;
+	Date _fecha;
+	String _metodoPago;//mirar bbdd
+	
+	public DTOtCompra(int dniEmpleado,int idFactura,int idSuscripcion,String dniCliente,Date fecha,String metodoPago) {
+		_dniEmpleado = dniEmpleado ;
+		_idFactura= idFactura;
+		_idSuscripciones = new ArrayList<Integer>();
+		_dniCliente = dniCliente;
+		_fecha=fecha;
+		_metodoPago=metodoPago;
+	}
+	
+	public int getDniEmpleado() {
+		return _dniEmpleado;
+	}
+
+	public void setDniEmpleado(int dniEmpleado) {
+		this._dniEmpleado = dniEmpleado;
+	}
+
+	public int getIdFactura() {
+		return _idFactura;
+	}
+
+	public void setIdFactura(int idFactura) {
+		this._idFactura = idFactura;
+	}
+
+	public String getIdCliente() {
+		return _dniCliente;
+	}
+
+	public void setIdCliente(String dniCliente) {
+		this._dniCliente = dniCliente;
+	}
+
+	public Date getFecha() {
+		return _fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this._fecha = fecha;
+	}
+
+	public String getMetodoPago() {
+		return _metodoPago;
+	}
+
+	public void setMetodoPago(String metodoPago) {
+		this._metodoPago = metodoPago;
+	}
+
+
+	
+	
+}

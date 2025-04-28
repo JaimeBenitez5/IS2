@@ -1,0 +1,37 @@
+package negocio;
+
+import java.util.List;
+
+public class SAComprasImp implements SACompras {
+
+	@Override
+	public int altaCompra(DTOtCompra compra) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public DTOtCompra leerCompra(String dni) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int actualizarCompra(DTOtCompra compra) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int borrarCompra(String dni) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<DTOtCompra> leerTodasCompras() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

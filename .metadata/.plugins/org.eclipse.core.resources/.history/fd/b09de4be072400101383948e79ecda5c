@@ -1,0 +1,18 @@
+package integracion;
+
+import java.util.List;
+
+import negocio.DTOtCompra;
+
+public interface DAOCompras {
+	
+	int altaCompra(final DTOtCompra compra);
+
+	DTOtCompra leerCompra(final String dni);
+
+	int actualizarCompra(final DTOtCompra compra);
+
+	int borrarCompra(final String dni);
+
+	List<DTOtCompra> leerTodasCompras();
+}

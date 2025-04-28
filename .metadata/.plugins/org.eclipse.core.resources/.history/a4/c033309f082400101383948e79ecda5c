@@ -1,0 +1,15 @@
+package negocio;
+
+import java.util.List;
+
+public interface SACompras {
+	int altaCompra(final DTOtCompra compra);
+
+	DTOtCompra leerCompra(final String dni);
+
+	int actualizarCompra(final DTOtCompra compra);
+
+	int borrarCompra(final String dni);
+
+	List<DTOtCompra> leerTodasCompras();
+}

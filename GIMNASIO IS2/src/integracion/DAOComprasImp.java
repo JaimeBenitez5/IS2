@@ -12,7 +12,10 @@ import configFiles.BDConexion;
 import negocio.DTOtCliente;
 import negocio.DTOtCompra;
 import negocio.DTOtEmpleado;
+<<<<<<< Updated upstream
 import negocio.DTOtSala;
+=======
+>>>>>>> Stashed changes
 
 public class DAOComprasImp implements DAOCompras {
 
@@ -41,6 +44,7 @@ public class DAOComprasImp implements DAOCompras {
 	}
 
 	public DTOtCompra leerCompra(int id) {
+<<<<<<< Updated upstream
 		String leerCompra = "SELECT * FROM SUSCRIPCIONES s JOIN COMPRAS c ON s.numSuscripcion = c.numSuscripcion WHERE c.idCompra = ?";
         try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(leerCompra)) {
             stmt.setInt(1, id);
@@ -59,6 +63,26 @@ public class DAOComprasImp implements DAOCompras {
             e.printStackTrace();
         }
         return null;
+=======
+		String query = "SELECT * FROM Compras WHERE idCompra = ?";
+		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
+			stmt.setInt(1,id);
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()) {
+				int numSuscripcion = rs.getInt("numSuscripcion");
+				String idCliente= rs.getString("dniCliente");
+				Date date = rs.getDate("fecha");
+				String metodoPago= rs.getString("metodoPago");
+				int idFactura = rs.getInt("numFactura");
+				int dniEmpleado=rs.getInt("dniEmpleado");
+				DTOtCompra e = new DTOtCompra(dniEmpleado,idFactura,id,idCliente,date,metodoPago);
+				return e;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+>>>>>>> Stashed changes
 	}
 
 	@Override
