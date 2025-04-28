@@ -110,24 +110,26 @@ idTipoSuscripcion INT
 
 CREATE TABLE Basica(
 idTipoSuscripcion INT PRIMARY KEY, 
+numSuscripcion INT, 
 precio DECIMAL(10, 2) NOT NULL,
 duracion INT,
 tipoActividad VARCHAR(255), 
 fecha DATE, 
 idSala INT NOT NULL,
 FOREIGN KEY (tipoActividad, fecha, idSala) REFERENCES Actividades(tipoActividad, fecha, idSala),
-FOREIGN KEY (idTipoSuscripcion) REFERENCES TiposSuscripciones(idTipoSuscripcion) ON DELETE CASCADE
+FOREIGN KEY (numSuscripcion) REFERENCES Suscripciones(numSuscripcion) ON DELETE CASCADE
 );
 
 CREATE TABLE Premium(
 idTipoSuscripcion INT PRIMARY KEY, 
+numSuscripcion INT, 
 precio DECIMAL(10, 2) NOT NULL,
 duracion INT,
 dniEmpleado VARCHAR(9),
 idCatalogo INT, 
 FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado),
 FOREIGN KEY (idCatalogo) REFERENCES Catalogos(idCatalogo),
-FOREIGN KEY (idTipoSuscripcion) REFERENCES TiposSuscripciones(idTipoSuscripcion) ON DELETE CASCADE
+FOREIGN KEY (numSuscripcion) REFERENCES Suscripciones(numSuscripcion) ON DELETE CASCADE
 );
 
 CREATE TABLE ActividadesCatalogo(
@@ -141,12 +143,14 @@ FOREIGN KEY (tipoActividad, fechaActividad, idSala) REFERENCES Actividades(tipoA
 );
 
 CREATE TABLE Compras(
-numSuscripcion INT PRIMARY KEY, 
+idCompra INT NOT NULL AUTO_INCREMENT,
+numSuscripcion INT, 
 dniCliente VARCHAR(9) NOT NULL, 
 fecha DATE, 
 metodoPago VARCHAR(255) CHECK (metodoPago IN ('Efectivo', 'Tarjeta', 'Transferencia Bancaria', 'Bizum')),
 numFactura INT NOT NULL, 
 dniEmpleado VARCHAR(9), 
+PRIMARY KEY (idCompra, numSuscripcion),
 FOREIGN KEY (numSuscripcion) REFERENCES Suscripciones(numSuscripcion), 
 FOREIGN KEY (dniCliente) REFERENCES Clientes(dniCliente),
 FOREIGN KEY (numFactura) REFERENCES Facturas(numFactura), 

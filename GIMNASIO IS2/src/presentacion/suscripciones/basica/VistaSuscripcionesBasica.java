@@ -54,31 +54,31 @@ private static JFrame GUI = null;
 		
 		botonAlta.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				Controlador.mostrarVista(Evento.VISTA_ANADIR_SUSCRIPCION);
+				Controlador.mostrarVista(Evento.VISTA_ANADIR_SUSCRIPCION_BASICA);
 			}
 		});
 
 		botonReadAll.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				Controlador.mostrarVista(Evento.VISTA_MOSTRAR_SUSCRIPCIONES);
+				Controlador.mostrarVista(Evento.VISTA_MOSTRAR_SUSCRIPCIONES_BASICA);
 			}
 		});
 
 		botonRead.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				Controlador.mostrarVista(Evento.VISTA_MOSTRAR_SUSCRIPCION);
+				Controlador.mostrarVista(Evento.VISTA_MOSTRAR_SUSCRIPCION_BASICA);
 			}
 		});
 
 		botonUnroll.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				Controlador.mostrarVista(Evento.VISTA_ELIMINAR_SUSCRIPCION);
+				Controlador.mostrarVista(Evento.VISTA_ELIMINAR_SUSCRIPCION_BASICA);
 			}
 		});
 
 		botonModClient.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				Controlador.mostrarVista(Evento.VISTA_MODIFICAR_SUSCRIPCION);
+				Controlador.mostrarVista(Evento.VISTA_MODIFICAR_SUSCRIPCION_BASICA);
 			}
 		});
 

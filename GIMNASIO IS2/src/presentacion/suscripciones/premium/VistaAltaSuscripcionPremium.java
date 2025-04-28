@@ -55,10 +55,16 @@ public class VistaAltaSuscripcionPremium {
 		panelAltaSuscripcion.add(titulo);
 		panelAltaSuscripcion.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(2, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(3, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
-
+		
+		JLabel nommbre = new JLabel("Nombre:");
+		nommbre.setForeground(Color.WHITE);
+		panelCampos.add(nommbre);
+		JTextField nombreTF = new JTextField(30);
+		panelCampos.add(nombreTF);
+		
 		JLabel idCat = new JLabel("ID de catalogo:");
 		idCat.setForeground(Color.WHITE);
 		panelCampos.add(idCat);

@@ -4,27 +4,28 @@ public class DTOtPremium extends DTOtSuscripcion{
 	private int _idCatalogo;	
 	private String _dniEmpleado;
 	
-	public DTOtPremium(final int idCatalogo, final String dniEmpleado) {
-		_idSuscripcion = 2;
-		_nombre = "PREMIUM";
+	public DTOtPremium(final String nombre, final int idCatalogo, final String dniEmpleado) {
+		_idSuscripcion = 0;
+		_tipoSus = 2;
 		_duracion = 90;
+		_nombre = nombre;
 		_idCatalogo = idCatalogo;
 		_dniEmpleado = dniEmpleado;
 	}
 
-	public int get_idCatalogo() {
+	public int getIdCatalogo() {
 		return _idCatalogo;
 	}
 
-	public void set_idCatalogo(int _idCatalogo) {
-		this._idCatalogo = _idCatalogo;
-	}
-
-	public String get_dniEmpleado() {
+	public String getDniEmpleado() {
 		return _dniEmpleado;
 	}
-
-	public void set_dniEmpleado(String _dniEmpleado) {
-		this._dniEmpleado = _dniEmpleado;
+	
+	public void setIdCatalogo(final int idCatalogo) {
+		_idCatalogo = idCatalogo;
+	}
+	
+	public void setDniEmpleado(String dniEmpleado) {
+		_dniEmpleado = dniEmpleado;
 	}
 }

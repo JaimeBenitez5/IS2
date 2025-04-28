@@ -2,6 +2,7 @@ package negocio;
 
 public abstract class DTOtSuscripcion {
 	protected int _idSuscripcion;
+	protected int _tipoSus;
 	protected String _nombre;
 	protected int _duracion;
 	
@@ -9,23 +10,31 @@ public abstract class DTOtSuscripcion {
 		return _idSuscripcion;
 	}
 	
-	public String get_nombre() {
+	public int getTipoSus() {
+		return _tipoSus;
+	}
+	
+	public String getNombre() {
 		return _nombre;
 	}
 	
-	public int get_duracion() {
+	public int getDuracion() {
 		return _duracion;
 	}
 	
-	public void setIdSuscripcion(int idSuscripcion) {
+	public void setIdSuscripcion(final int idSuscripcion) {
 		_idSuscripcion = idSuscripcion;
 	}
 	
-	public void set_nombre(String nombre) {
+	public void setTipoSus(final int tipoSus) {
+		_tipoSus = tipoSus;
+	}
+	
+	public void setNombre(final String nombre) {
 		_nombre = nombre;
 	}
 	
-	public void set_duracion(int duracion) {
+	public void setDuracion(final int duracion) {
 		_duracion = duracion;
 	}
 }
