@@ -13,7 +13,6 @@ import negocio.DTOtCompra;
 
 public class DAOComprasImp implements DAOCompras {
 
-
 	public int altaCompra(DTOtCompra compra) {
 		String insertCompra = "INSERT INTO Compras (numSuscripcion, dniCliente, fecha,metodoPago,numFactura ,dniEmpleado) VALUES (?,?,?,?,?,?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(insertCompra, Statement.RETURN_GENERATED_KEYS)) {
@@ -44,7 +43,6 @@ public class DAOComprasImp implements DAOCompras {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             List<Integer> suscripciones = new ArrayList<>();
-            int aforo = 0;
             while (rs.next()) {
                 suscripciones.add(rs.getInt("numSuscripcion"));
             }
@@ -67,11 +65,11 @@ public class DAOComprasImp implements DAOCompras {
 	public int actualizarCompra(DTOtCompra compra) {
 		String query = "UPDATE COMPRAS SET  dniCliente = ? , fecha = ? , metodoPago = ?, numFactura = ? , dniEmpleado = ? WHERE numSuscripcion = ? ";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
-			stmt.setString(1, compra.getIdCliente());
+			stmt.setString(1, compra.getDniCliente());
 			stmt.setDate(2, (Date) compra.getFecha());
 			stmt.setString(3, compra.getMetodoPago());
 			stmt.setInt(4, compra.getIdFactura());
-			stmt.setString(5,compra.getIdCliente());
+			stmt.setString(5,compra.getDniCliente());
 			return stmt.executeUpdate(); 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -90,7 +88,6 @@ public class DAOComprasImp implements DAOCompras {
 		return 0;
 	}
 
-	@Override
 	public List<DTOtCompra> leerTodasCompras() {
 		ArrayList<DTOtCompra> compra = new ArrayList<DTOtCompra>();
 		String query = "SELECT * FROM COMPRAS";

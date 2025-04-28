@@ -8,7 +8,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -23,7 +22,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.DTOtCompra;
-import negocio.DTOtSala;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;

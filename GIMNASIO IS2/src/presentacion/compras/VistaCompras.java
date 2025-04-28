@@ -78,7 +78,7 @@ public class VistaCompras {
 
 		botonModCompra.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				Controlador.mostrarVista(Evento.VISTA_MODIFICAR_COMPRAS);
+				Controlador.mostrarVista(Evento.VISTA_MODIFICAR_COMPRA);
 			}
 		});
 

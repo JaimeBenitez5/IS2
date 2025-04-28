@@ -15,7 +15,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
-import negocio.DTOtCliente;
 import negocio.DTOtPremium;
 import negocio.DTOtSuscripcion;
 import presentacion.Controlador;

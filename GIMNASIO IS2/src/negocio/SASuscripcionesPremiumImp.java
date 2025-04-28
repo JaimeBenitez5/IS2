@@ -3,10 +3,7 @@ package negocio;
 import java.util.List;
 
 import integracion.DAOSuscripciones;
-import integracion.DAOSuscripcionesBasicasImp;
 import integracion.DAOSuscripcionesPremiumImp;
-import negocio.DTOtSuscripcion;
-import negocio.DTOtPremium;
 
 public class SASuscripcionesPremiumImp implements SASuscripciones {
 

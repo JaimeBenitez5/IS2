@@ -187,7 +187,7 @@ INSERT INTO Mantienen(dniEmpleado, idSala) VALUES ('06013483H', 1);
 INSERT INTO Mantienen(dniEmpleado, idSala) VALUES ('06013483H', 2);
 
 INSERT INTO Actividades (tipoActividad, fecha, idSala, dniEmpleado) VALUES ('Yoga', '2025-03-19', 1, '1234567A');
-INSERT INTO Actividades (tipoActividad, fecha, idSala) VALUES ('Spinning', '2025-03-20', 2); 
+INSERT INTO Actividades (tipoActividad, fecha, idSala, dniEmpleado) VALUES ('Spinning', '2025-03-20', 2, '1234567A'); 
 
 INSERT INTO Catalogos (numActividades) VALUES (2); 
 

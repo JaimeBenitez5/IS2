@@ -1,4 +1,4 @@
-package presentacion.facturas;
+package presentacion.compras;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

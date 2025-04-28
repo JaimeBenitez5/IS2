@@ -1,4 +1,4 @@
-package presentacion.facturas;
+package presentacion.compras;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -20,12 +21,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.DTOtCliente;
+import negocio.DTOtFactura;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
 
-public class VistaMostrarFacturasCliente {
+public class VistaMostrarFactura {
 	private static JFrame GUI = null;
 
 	public static void open() {
@@ -34,7 +35,7 @@ public class VistaMostrarFacturasCliente {
 	}
 
 	private static JFrame initGUI() {
-		JFrame menuPrincipal = new JFrame("Menú Mostrar Facturas de Cliente");
+		JFrame menuPrincipal = new JFrame("Menú Mostrar Factura");
 		menuPrincipal.setSize(854, 480);
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,7 +49,7 @@ public class VistaMostrarFacturasCliente {
 
 		menuPrincipal.add(panelBajaCliente, BorderLayout.CENTER);
 
-		JLabel titulo = new JLabel("Mostrar Facturas de Cliente");
+		JLabel titulo = new JLabel("Mostrar Factura");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelBajaCliente.add(titulo);
@@ -58,11 +59,11 @@ public class VistaMostrarFacturasCliente {
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
-		JLabel dni = new JLabel("DNI de cliente:");
-		dni.setForeground(Color.WHITE);
-		panelCampos.add(dni);
-		JTextField dniTF = new JTextField(30);
-		panelCampos.add(dniTF);
+		JLabel id = new JLabel("ID:");
+		id.setForeground(Color.WHITE);
+		panelCampos.add(id);
+		JTextField idTF = new JTextField(30);
+		panelCampos.add(idTF);
 
 		panelBajaCliente.add(panelCampos);
 		panelBajaCliente.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -84,46 +85,49 @@ public class VistaMostrarFacturasCliente {
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int id = Integer.parseInt(dniTF.getText());
-				dniTF.setText("");
-				Controlador.accion(Evento.MOSTRAR_FACTURAS_CLIENTE, id);
+				int id = Integer.parseInt(idTF.getText());
+				idTF.setText("");
+				Controlador.accion(Evento.MOSTRAR_FACTURA, id);
 			}
 		});
 
-		back.addActionListener(new ActionListener () {
+		back.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 			}
 		});
 
-		botonMainMenu.addActionListener(new ActionListener () {
+		botonMainMenu.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
 			}
 		});
-		
+
 		return menuPrincipal;
 	}
-	
-	public static void actualizar(int evento, DTOtCliente cliente) {
-		if (evento == Evento.RES_MOSTRAR_FACTURAS_CLIENTE_OK) {
+
+	public static void actualizar(int evento, DTOtFactura factura) {
+		if (evento == Evento.RES_MOSTRAR_FACTURA_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			String dni = cliente.getDni();
-			String nombre = cliente.getNombre();
-			String dir = cliente.getDir();
-			String activo = cliente.getActivo() + "";
-			JOptionPane.showMessageDialog(null, "DNI: " + dni + " Nombre: " + nombre + " Direccion: " + dir + " Activo: " + activo);
+
+			java.sql.Date sqlDate = factura.getFecha();
+			java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
+			String id = String.valueOf(factura.getId());
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			String fecha = sdf.format(utilDate);
+			String importe = String.valueOf(factura.getImporte());
+
+			JOptionPane.showMessageDialog(null, "ID: " + id + " Fecha: " + fecha + " Importe: " + importe);
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_MOSTRAR_FACTURAS_CLIENTE_KO) {
+		else if (evento == Evento.RES_MOSTRAR_FACTURA_KO) {
 			JOptionPane.showMessageDialog(null, "No se ha podido encontrar el cliente");
 		}
 	}
 }
-

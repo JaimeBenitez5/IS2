@@ -4,8 +4,6 @@ import java.util.List;
 
 import integracion.DAOSuscripciones;
 import integracion.DAOSuscripcionesBasicasImp;
-import negocio.DTOtSuscripcion;
-import negocio.DTOtBasica;
 
 public class SASuscripcionesBasicasImp implements SASuscripciones {
 

@@ -157,36 +157,6 @@ public class Controlador{
 			else VistaModificarActividad.actualizar(Evento.RES_MODIFICAR_ACTIVIDAD_KO, null);
 			break;
 		}
-		//FACTURAS
-		case Evento.ALTA_FACTURA:{
-			int id = getSAFacturas().altaFactura((DTOtFactura) datos);
-			((DTOtFactura) datos).setId(id);
-			if(id != 0) VistaAnadirFactura.actualizar(Evento.RES_ALTA_FACTURA_OK, id);
-			else VistaAnadirFactura.actualizar(Evento.RES_ALTA_FACTURA_KO, id);
-			break;
-		}
-		case Evento.MOSTRAR_FACTURA:{
-			DTOtFactura factura = getSAFacturas().leerFactura((int)datos);
-			if (factura != null) VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_OK, factura);
-			else VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_KO, null);
-			break;
-		}
-		case Evento.MOSTRAR_FACTURAS:{
-			List<DTOtFactura> res = getSAFacturas().leerTodasFacturas();
-			if (!res.isEmpty()) VistaMostrarFacturas.actualizar(Evento.RES_MOSTRAR_FACTURAS_OK, res);
-			else VistaMostrarFacturas.actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, null);
-			break;
-		}
-		case Evento.ELIMINAR_FACTURA:{
-			int exito = getSAFacturas().borrarFactura((int) datos);
-			if(exito == 1) VistaEliminarFactura.actualizar(Evento.RES_ELIMINAR_FACTURA_OK, datos);
-			else VistaEliminarFactura.actualizar(Evento.RES_ELIMINAR_FACTURA_KO, null);
-			break;
-		}
-		case Evento.MOSTRAR_FACTURAS_CLIENTE:{ 
-			//TODO
-			break;
-		}
 		//EMPLEADOS
 		case Evento.ALTA_EMPLEADO: {
 			int exito = getSAEmpleados().altaEmpleado((DTOtEmpleado) datos);
@@ -329,21 +299,37 @@ public class Controlador{
 			break;
 		}
 		case Evento.MOSTRAR_COMPRAS:{
-			List<DTOtSala> res = getSASalas().leerTodasSalas();
+			List<DTOtSala> res = getSACompras().leerTodasCompras();
 			if (!res.isEmpty()) VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_OK, res);
 			else VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_KO, null);
 			break;
 		}
 		case Evento.ELIMINAR_COMPRA:{
-			int exito = getSASalas().borrarSala((int) datos);
+			int exito = getSACompras().borrarCompra((DTOtCompra) datos);
 			if (exito == 1) VistaEliminarSala.actualizar(Evento.RES_ELIMINAR_SALA_OK, (int) datos);
 			else VistaEliminarSala.actualizar(Evento.RES_ELIMINAR_SALA_KO, null);
 			break;
 		}
 		case Evento.MODIFICAR_COMPRA:{
-			int exitoModificar = getSASalas().actualizarSala((DTOtSala) datos);
-			if (exitoModificar == 1) VistaModificarSala.actualizar(Evento.RES_MODIFICAR_SALA_OK, null);
-			else VistaModificarSala.actualizar(Evento.RES_MODIFICAR_SALA_KO, null);
+			int exitoModificar = getSACompras().actualizarCompra((DTOtCompra) datos);
+			if (exitoModificar == 1) VistaModificarSala.actualizar(Evento.RES_MODIFICAR_COMPRA_OK, null);
+			else VistaModificarSala.actualizar(Evento.RES_MODIFICAR_COMPRA_KO, null);
+			break;
+		}
+		case Evento.MOSTRAR_FACTURA:{
+			DTOtFactura factura = getSACompras().leerFactura((int)datos);
+			if (factura != null) VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_OK, factura);
+			else VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_KO, null);
+			break;
+		}
+		case Evento.MOSTRAR_FACTURAS:{
+			List<DTOtFactura> res = getSACompras().leerTodasFacturas();
+			if (!res.isEmpty()) VistaMostrarFacturas.actualizar(Evento.RES_MOSTRAR_FACTURAS_OK, res);
+			else VistaMostrarFacturas.actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, null);
+			break;
+		}
+		case Evento.MOSTRAR_FACTURAS_CLIENTE:{ 
+			//TODO
 			break;
 		}
 		}
@@ -353,32 +339,6 @@ public class Controlador{
 		switch(evento) {
 		case Evento.VISTA_MENU_PRINCIPAL:{
 			VistaMenuPrincipal.open();
-			break;
-		}
-		//VISTAS FACTURAS
-		case Evento.VISTA_FACTURAS:{ 
-			VistaFacturas.open();
-			break;
-		}
-		case Evento.VISTA_ALTA_FACTURA:{ 
-			VistaAnadirFactura.open();
-			break;
-		}
-		case Evento.VISTA_MOSTRAR_FACTURAS:{ 
-			VistaMostrarFacturas.open();
-			break;
-		}
-		case Evento.VISTA_MOSTRAR_FACTURAS_CLIENTE:{ 
-			VistaMostrarFacturasCliente.open();
-			break;
-		}
-		case Evento.VISTA_ELIMINAR_FACTURA:{
-			VistaEliminarFactura.open();
-			break;
-		}
-
-		case Evento.VISTA_MOSTRAR_FACTURA:{ 
-			VistaMostrarFactura.open();
 			break;
 		}
 		//VISTAS CLIENTES
@@ -561,19 +521,22 @@ public class Controlador{
 			break;
 		}
 		case Evento.VISTA_ANADIR_COMPRA:{ 
-			VistaAnadirFactura.open();
+			VistaAnadirCompra.open();
 			break;
 		}
 		case Evento.VISTA_MOSTRAR_COMPRA:{ 
-			VistaMostrarFacturas.open();
+			VistaMostrarCompra.open();
 			break;
 		}
-
 		case Evento.VISTA_ELIMINAR_COMPRA:{
 			VistaEliminarFactura.open();
 			break;
 		}
 		case Evento.VISTA_MOSTRAR_COMPRAS:{ 
+			VistaMostrarFactura.open();
+			break;
+		}
+		case Evento.VISTA_MODIFICAR_COMPRA:{ 
 			VistaMostrarFactura.open();
 			break;
 		}

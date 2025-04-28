@@ -7,11 +7,14 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -54,7 +57,7 @@ public class VistaAnadirCatalogo {
 		panelAnadirCatalogo.add(titulo);
 		panelAnadirCatalogo.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(1, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(4, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
@@ -64,7 +67,27 @@ public class VistaAnadirCatalogo {
 		JTextField numeroTF = new JTextField(30);
 		panelCampos.add(numeroTF);
 
-
+		JLabel tipoAct = new JLabel("Tipo de actividad:");
+		tipoAct.setForeground(Color.WHITE);
+		panelCampos.add(tipoAct);
+		JTextField tipoActTF = new JTextField(30);
+		panelCampos.add(tipoActTF);
+		
+		JLabel fecha = new JLabel("Fecha:");
+		fecha.setForeground(Color.WHITE);
+		panelCampos.add(fecha);
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		JFormattedTextField fechaTF = new JFormattedTextField(format);
+		fechaTF.setColumns(10);
+		fechaTF.setValue(new java.util.Date());
+		panelCampos.add(fechaTF);
+		
+		JLabel idSala = new JLabel("ID Sala:");
+		idSala.setForeground(Color.WHITE);
+		panelCampos.add(idSala);
+		JTextField idSalaTF = new JTextField(30);
+		panelCampos.add(idSalaTF);
+		
 		panelAnadirCatalogo.add(panelCampos);
 		panelAnadirCatalogo.add(Box.createRigidArea(new Dimension(0, 50)));
 

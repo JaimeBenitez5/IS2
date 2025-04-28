@@ -145,7 +145,7 @@ public class Evento {
 	public static final int VISTA_ELIMINAR_COMPRA = 903;
 	public static final int VISTA_MOSTRAR_COMPRA = 904;
 	public static final int VISTA_MOSTRAR_COMPRAS = 905;
-	public static final int VISTA_MODIFICAR_COMPRAS = 906;
+	public static final int VISTA_MODIFICAR_COMPRA = 906;
 	//Eventos de Negocio
 	public static final int ALTA_COMPRA = 910;
 	public static final int ELIMINAR_COMPRA = 911;
