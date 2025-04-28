@@ -2,7 +2,7 @@ package negocio;
 
 import java.util.List;
 
-public interface SASuscripcion {
+public interface SASuscripciones {
 	int altaSuscripcion(final DTOtSuscripcion suscripcion);
 
     public DTOtSuscripcion leerSuscripcion(final int id);

@@ -20,7 +20,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.DTOtCliente;
 import negocio.DTOtPremium;
 import negocio.DTOtSuscripcion;
 import presentacion.Controlador;
@@ -86,7 +85,7 @@ public class VistaMostrarSuscripcionPremium {
 
 		mostrar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String id = idTF.getText();
+				int id = Integer.parseInt(idTF.getText());
 				idTF.setText("");
 				Controlador.accion(Evento.MOSTRAR_SUSCRIPCION_PREMIUM, id);
 			}
@@ -108,7 +107,7 @@ public class VistaMostrarSuscripcionPremium {
 		return menuPrincipal;
 	}
 	
-	public static void actualizar(int evento, DTOtPremium suscripcion) {
+	public static void actualizar(int evento, DTOtSuscripcion suscripcion) {
 		if (evento == Evento.RES_MOSTRAR_SUSCRIPCION_PREMIUM_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
@@ -116,12 +115,12 @@ public class VistaMostrarSuscripcionPremium {
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-
-			String idSus = String.valueOf(suscripcion.getIdSuscripcion());
-			String nombre = String.valueOf(suscripcion.getNombre());
-			String duracion = String.valueOf(suscripcion.getDuracion());
-			String dniEmp = String.valueOf(suscripcion.getDniEmpleado());
-			String idCat = String.valueOf(suscripcion.getIdCatalogo());
+			DTOtPremium sus  = (DTOtPremium) suscripcion;
+			String idSus = String.valueOf(sus.getIdSuscripcion());
+			String nombre = String.valueOf(sus.getNombre());
+			String duracion = String.valueOf(sus.getDuracion());
+			String dniEmp = String.valueOf(sus.getDniEmpleado());
+			String idCat = String.valueOf(sus.getIdCatalogo());
 			
 			JOptionPane.showMessageDialog(null, "ID de Suscripcion: " + idSus + " Nombre: " + nombre + " Duracion: " + duracion + " ID de Catalogo: " + idCat + " DNI de Empleado: " + dniEmp);
 			GUI.setVisible(false);

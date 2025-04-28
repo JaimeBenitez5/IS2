@@ -22,6 +22,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.DTOtBasica;
+import negocio.DTOtSuscripcion;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -85,7 +86,7 @@ public class VistaMostrarSuscripcionBasica {
 
 		mostrar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String id = idTF.getText();
+				Integer id = Integer.parseInt(idTF.getText());
 				idTF.setText("");
 				Controlador.accion(Evento.MOSTRAR_SUSCRIPCION_BASICA, id);
 			}
@@ -107,7 +108,7 @@ public class VistaMostrarSuscripcionBasica {
 		return menuPrincipal;
 	}
 	
-	public static void actualizar(int evento, DTOtBasica suscripcion) {
+	public static void actualizar(int evento, DTOtSuscripcion suscripcion) {
 		if (evento == Evento.RES_MOSTRAR_SUSCRIPCION_BASICA_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
@@ -115,16 +116,16 @@ public class VistaMostrarSuscripcionBasica {
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-
-			String idSus = String.valueOf(suscripcion.getIdSuscripcion());
-			String nombre = String.valueOf(suscripcion.getNombre());
-			String duracion = String.valueOf(suscripcion.getDuracion());
-			String tipoAct = String.valueOf(suscripcion.getTipoActividad());
-			java.sql.Date sqlDate = suscripcion.getFecha();
+			DTOtBasica sus = (DTOtBasica) suscripcion;
+			String idSus = String.valueOf(sus.getIdSuscripcion());
+			String nombre = String.valueOf(sus.getNombre());
+			String duracion = String.valueOf(sus.getDuracion());
+			String tipoAct = String.valueOf(sus.getTipoActividad());
+			java.sql.Date sqlDate = sus.getFecha();
 			java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			String fechaFormateada = sdf.format(utilDate);
-			String idSala = String.valueOf(suscripcion.getIdSala());
+			String idSala = String.valueOf(sus.getIdSala());
 			
 			JOptionPane.showMessageDialog(null, "ID de Suscripcion: " + idSus + " Nombre: " + nombre +" Duracion: " + duracion + " Tipo de Actividad: " + tipoAct + " Fecha" + fechaFormateada + " ID de Sala: " + idSala);
 			GUI.setVisible(false);

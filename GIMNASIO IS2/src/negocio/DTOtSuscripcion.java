@@ -5,6 +5,7 @@ public abstract class DTOtSuscripcion {
 	protected int _tipoSus;
 	protected String _nombre;
 	protected int _duracion;
+	protected double _precio;
 	
 	public int getIdSuscripcion() {
 		return _idSuscripcion;
@@ -22,6 +23,10 @@ public abstract class DTOtSuscripcion {
 		return _duracion;
 	}
 	
+	public double getPrecio() {
+		return _precio;
+	}
+	
 	public void setIdSuscripcion(final int idSuscripcion) {
 		_idSuscripcion = idSuscripcion;
 	}
@@ -36,5 +41,9 @@ public abstract class DTOtSuscripcion {
 	
 	public void setDuracion(final int duracion) {
 		_duracion = duracion;
+	}
+	
+	public void setPrecio(final double precio) {
+		_precio = precio;
 	}
 }

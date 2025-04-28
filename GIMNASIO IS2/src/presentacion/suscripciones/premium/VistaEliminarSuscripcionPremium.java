@@ -83,7 +83,7 @@ public class VistaEliminarSuscripcionPremium {
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String id = idTF.getText();
+				int id = Integer.parseInt(idTF.getText());
 				idTF.setText("");
 				Controlador.accion(Evento.ELIMINAR_SUSCRIPCION_PREMIUM, id);
 			}
