@@ -1,4 +1,4 @@
-package presentacion.suscripciones.premium;
+package presentacion.suscripciones.basica;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -7,11 +7,15 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,13 +24,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.DTOtPremium;
+import negocio.DTOtBasica;
+import negocio.DTOtCliente;
 import negocio.DTOtSuscripcion;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
 
-public class VistaAnadirSuscripcionPremium {
+public class VistaAltaSuscripcionBasica {
 	private static JFrame GUI = null;
 
 	public static void open() {
@@ -35,7 +40,7 @@ public class VistaAnadirSuscripcionPremium {
 	}
 
 	private static JFrame initGUI() {
-		JFrame menuPrincipal = new JFrame("Menú Alta Suscripcion Premium");
+		JFrame menuPrincipal = new JFrame("Menú Alta Suscripcion Basica");
 		menuPrincipal.setSize(854, 480);
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,33 +54,42 @@ public class VistaAnadirSuscripcionPremium {
 
 		menuPrincipal.add(panelAltaSuscripcion, BorderLayout.CENTER);
 
-		JLabel titulo = new JLabel("Añadir Suscripcion Premium");
+		JLabel titulo = new JLabel("Añadir Suscripcion Basica");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelAltaSuscripcion.add(titulo);
 		panelAltaSuscripcion.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(3, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(4, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
-		
+
 		JLabel nommbre = new JLabel("Nombre:");
 		nommbre.setForeground(Color.WHITE);
 		panelCampos.add(nommbre);
 		JTextField nombreTF = new JTextField(30);
 		panelCampos.add(nombreTF);
 		
-		JLabel idCat = new JLabel("ID de catalogo:");
-		idCat.setForeground(Color.WHITE);
-		panelCampos.add(idCat);
-		JTextField idCatTF = new JTextField(30);
-		panelCampos.add(idCatTF);
+		JLabel tipoAct = new JLabel("Tipo de actividad:");
+		tipoAct.setForeground(Color.WHITE);
+		panelCampos.add(tipoAct);
+		JTextField tipoActTF = new JTextField(30);
+		panelCampos.add(tipoActTF);
 		
-		JLabel dniEmp = new JLabel("DNI de Empleado Nutricionista:");
-		dniEmp.setForeground(Color.WHITE);
-		panelCampos.add(dniEmp);
-		JTextField dniEmpTF = new JTextField(300);
-		panelCampos.add(dniEmpTF);
+		JLabel fecha = new JLabel("Fecha:");
+		fecha.setForeground(Color.WHITE);
+		panelCampos.add(fecha);
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		JFormattedTextField fechaTF = new JFormattedTextField(format);
+		fechaTF.setColumns(10);
+		fechaTF.setValue(new java.util.Date());
+		panelCampos.add(fechaTF);
+		
+		JLabel idSala = new JLabel("ID Sala:");
+		idSala.setForeground(Color.WHITE);
+		panelCampos.add(idSala);
+		JTextField idSalaTF = new JTextField(30);
+		panelCampos.add(idSalaTF);
 		
 		panelAltaSuscripcion.add(panelCampos);
 		panelAltaSuscripcion.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -97,16 +111,18 @@ public class VistaAnadirSuscripcionPremium {
 		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				String nombre = nombreTF.getText();
-				int idCatalogo = Integer.parseInt(idCatTF.getText());
-				String dniEmp = dniEmpTF.getText();
-				if (dniEmpTF.getText() == "" || idCatTF.getText() == "" ) {
+				String tipoAct = tipoActTF.getText();
+				java.util.Date Date = (java.util.Date) fechaTF.getValue();
+				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
+				int idSala = Integer.parseInt(idSalaTF.getText());
+				if (nombre.isEmpty() ) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-					idCatTF.setText("");
-
-					DTOtSuscripcion sus = new DTOtPremium(nombre, idCatalogo, dniEmp);
-					Controlador.accion(Evento.ALTA_SUSCRIPCION_PREMIUM, sus);
+					nombreTF.setText("");
+					tipoActTF.setText("");
+					DTOtSuscripcion sus = new DTOtBasica(nombre, tipoAct, sqlDate, idSala);
+					Controlador.accion(Evento.ALTA_SUSCRIPCION_BASICA, sus);
 				}
 			}
 		});
@@ -128,7 +144,7 @@ public class VistaAnadirSuscripcionPremium {
 	}
 
 	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_ALTA_SUSCRIPCION_PREMIUM_OK) {
+		if (evento == Evento.RES_ALTA_SUSCRIPCION_BASICA_OK) {
 			JTextArea textArea = new JTextArea(datos.toString());
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
@@ -138,7 +154,7 @@ public class VistaAnadirSuscripcionPremium {
 			JOptionPane.showMessageDialog(null, "La suscripcion se ha insertado correctamente con ID: " + datos.toString());
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_ALTA_SUSCRIPCION_PREMIUM_KO) {
+		else if (evento == Evento.RES_ALTA_SUSCRIPCION_BASICA_KO) {
 			JOptionPane.showMessageDialog(null, "No se ha podido insertar la suscripcion con ID: " + datos.toString());
 		}
 	}

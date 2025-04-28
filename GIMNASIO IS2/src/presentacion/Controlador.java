@@ -4,7 +4,9 @@ import java.util.List;
 import presentacion.actividades.*;
 import presentacion.catalogos.*;
 import presentacion.clientes.*;
+import presentacion.compras.VistaAñadirCompra;
 import presentacion.compras.VistaCompras;
+import presentacion.compras.VistaMostrarCompra;
 import presentacion.empleados.*;
 import presentacion.facturas.*;
 import presentacion.salas.*;
@@ -20,6 +22,7 @@ public class Controlador{
 	private static SACatalogos SACatalogos;
 	private static SAEmpleados SAEmpleados;
 	private static SAFacturas SAFacturas;
+	private static SACompras SACompras;
 	private static SASuscripciones SASuscripcionesBasicas;
 	private static SASuscripciones SASuscripcionesPremium;
 	
@@ -54,6 +57,11 @@ public class Controlador{
 	private static SASuscripciones getSASuscripcionesPremium() {
 		if (SASuscripcionesPremium == null) SASuscripcionesPremium = new SASuscripcionesPremiumImp();
 		return SASuscripcionesPremium;
+	}
+	
+	private static SACompras getSACompras() {
+		if (SACompras == null) SACompras = new SAComprasImp();
+		return SACompras;
 	}
 	
 	public static void accion(int evento, Object datos) { 
@@ -240,6 +248,38 @@ public class Controlador{
 			int exitoModificar = getSACatalogos().actualizarCatalogo((DTOtCatalogo) datos);
 			if (exitoModificar == 1) VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_OK, null);
 			else VistaModificarCatalogo.actualizar(Evento.RES_MODIFICAR_CATALOGO_KO, null);
+			break;
+		}
+		//SALAS
+		case Evento.ALTA_COMPRA:{
+			int id = getSACompras().altaCompra((DTOtCompra) datos);
+			((DTOtCompra) datos).setId(id);
+			if(id != 0) VistaAñadirCompra.actualizar(Evento.RES_ALTA_COMPRA_OK, id);
+			else VistaAñadirCompra.actualizar(Evento.RES_ALTA_COMPRA_KO, id);
+			break;
+		}
+		case Evento.MOSTRAR_COMPRA:{
+			DTOtCompra s = getSACompras().leerCompra((int) datos);
+			if (s != null) VistaMostrarCompra.actualizar(Evento.RES_MOSTRAR_COMPRA_OK, s);
+			else VistaMostrarCompra.actualizar(Evento.RES_MOSTRAR_COMPRA_KO, s);
+			break;
+		}
+		case Evento.MOSTRAR_COMPRAS:{
+			List<DTOtSala> res = getSASalas().leerTodasSalas();
+			if (!res.isEmpty()) VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_OK, res);
+			else VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_KO, null);
+			break;
+		}
+		case Evento.ELIMINAR_COMPRA:{
+			int exito = getSASalas().borrarSala((int) datos);
+			if (exito == 1) VistaEliminarSala.actualizar(Evento.RES_ELIMINAR_SALA_OK, (int) datos);
+			else VistaEliminarSala.actualizar(Evento.RES_ELIMINAR_SALA_KO, null);
+			break;
+		}
+		case Evento.MODIFICAR_COMPRA:{
+			int exitoModificar = getSASalas().actualizarSala((DTOtSala) datos);
+			if (exitoModificar == 1) VistaModificarSala.actualizar(Evento.RES_MODIFICAR_SALA_OK, null);
+			else VistaModificarSala.actualizar(Evento.RES_MODIFICAR_SALA_KO, null);
 			break;
 		}
 		//SUSCRIPCIONES BASICAS
@@ -521,7 +561,7 @@ public class Controlador{
 			break;
 		}
 		case Evento.VISTA_ANADIR_COMPRA:{ 
-			VistaAnadirFactura.open();
+			VistaAñadirCompra.open();
 			break;
 		}
 		case Evento.VISTA_MOSTRAR_COMPRA:{ 

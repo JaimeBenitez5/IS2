@@ -16,7 +16,6 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
 import negocio.DTOtBasica;
-import negocio.DTOtSuscripcion;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -70,14 +69,14 @@ public class VistaMostrarSuscripcionesBasica {
 		GUI.setVisible(true);
 	}
 
-	public static void actualizar(int evento, List<DTOtSuscripcion> datos) {
+	public static void actualizar(int evento, List<DTOtBasica> datos) {
 		if (evento == Evento.RES_MOSTRAR_SUSCRIPCIONES_BASICAS_OK) {
 			panelMostrarSuscripciones.removeAll();
 			String[] columnNames = {"ID de Suscripcion", "Nombre", "Duracion", "Tipo de Actividad", "Fecha", "ID de Sala"};
 			String[][] data = new String[datos.size()][6];
 
 			for (int i = 0; i < datos.size(); i++) {
-				DTOtBasica suscripcion = (DTOtBasica)datos.get(i);
+				DTOtBasica suscripcion = datos.get(i);
 				data[i][0] = String.valueOf(suscripcion.getIdSuscripcion());
 				data[i][1] = String.valueOf(suscripcion.getNombre());
 				data[i][2] = String.valueOf(suscripcion.getDuracion());

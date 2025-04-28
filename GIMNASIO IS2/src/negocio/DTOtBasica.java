@@ -7,22 +7,10 @@ public class DTOtBasica extends DTOtSuscripcion {
 	private Date _fecha;
 	private int _idSala;
 	
-	public DTOtBasica(final int id, final String nombre, final String tipoActividad, final Date fecha, final int idSala) {
-		_idSuscripcion = id;
-		_tipoSus = 1;
-		_duracion = 30;
-		_precio = 30;
-		_nombre = nombre;
-		_tipoActividad = tipoActividad;
-		_fecha = fecha;
-		_idSala = idSala;
-	}
-	
 	public DTOtBasica(final String nombre, final String tipoActividad, final Date fecha, final int idSala) {
 		_idSuscripcion = 0;
 		_tipoSus = 1;
 		_duracion = 30;
-		_precio = 30;
 		_nombre = nombre;
 		_tipoActividad = tipoActividad;
 		_fecha = fecha;

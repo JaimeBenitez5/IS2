@@ -109,8 +109,8 @@ idTipoSuscripcion INT
 ); 
 
 CREATE TABLE Basica(
-idTipoSuscripcion INT, 
-numSuscripcion INT PRIMARY KEY, 
+idTipoSuscripcion INT PRIMARY KEY, 
+numSuscripcion INT, 
 precio DECIMAL(10, 2) NOT NULL,
 duracion INT,
 tipoActividad VARCHAR(255), 
@@ -121,8 +121,8 @@ FOREIGN KEY (numSuscripcion) REFERENCES Suscripciones(numSuscripcion) ON DELETE 
 );
 
 CREATE TABLE Premium(
-idTipoSuscripcion INT, 
-numSuscripcion INT PRIMARY KEY, 
+idTipoSuscripcion INT PRIMARY KEY, 
+numSuscripcion INT, 
 precio DECIMAL(10, 2) NOT NULL,
 duracion INT,
 dniEmpleado VARCHAR(9),
@@ -189,16 +189,13 @@ INSERT INTO Mantienen(dniEmpleado, idSala) VALUES ('06013483H', 2);
 INSERT INTO Actividades (tipoActividad, fecha, idSala, dniEmpleado) VALUES ('Yoga', '2025-03-19', 1, '1234567A');
 INSERT INTO Actividades (tipoActividad, fecha, idSala) VALUES ('Spinning', '2025-03-20', 2); 
 
+INSERT INTO Suscripciones (nombre) VALUES ('suscripcion para novatos');
+INSERT INTO Suscripciones (nombre) VALUES ('suscripcion para pros'); 
+
 INSERT INTO Catalogos (numActividades) VALUES (2); 
 
 INSERT INTO ActividadesCatalogo VALUES (1, 'Yoga', '2025-03-19', 1); 
 INSERT INTO ActividadesCatalogo VALUES (1, 'Spinning', '2025-03-20', 2); 
-
-INSERT INTO Suscripciones (nombre, idTipoSuscripcion) VALUES ('suscripcion para novatos', 1);
-INSERT INTO Basica (idTipoSuscripcion, numSuscripcion, precio, duracion, tipoActividad, fecha, idSala) VALUES (1, 1, '30', '30', 'Yoga', '2025-03-19', 1);
-INSERT INTO Suscripciones (nombre) VALUES ('suscripcion para pros'); 
-INSERT INTO Premium (idTipoSuscripcion, numSuscripcion, precio, duracion, dniEmpleado, idCatalogo) VALUES (1, 2, '90', '120', '1234567B', 1);
-
 
 INSERT INTO Facturas (Fecha, ImporteTotal) VALUES ('2015-05-01', 12.22);
 

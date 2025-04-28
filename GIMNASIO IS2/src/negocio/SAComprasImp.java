@@ -21,7 +21,9 @@ public class SAComprasImp implements SACompras {
 	public int altaCompra(final DTOtCompra compra) {
 		DTOtCompra c = leerCompra(compra.getId());
 		int exito = 0;
-		if(c == null) exito = getDAOCompras().altaCompra(compra); 
+		if(c == null) {
+			exito = getDAOCompras().altaCompra(compra); 
+		}
 		return exito;
 	}
 
