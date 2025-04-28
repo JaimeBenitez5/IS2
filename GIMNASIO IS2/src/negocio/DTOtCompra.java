@@ -1,12 +1,88 @@
 package negocio;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DTOtCompra {
+	
+	int _idCompra;
+	int _numSuscripcion;
 	int _dniEmpleado;
 	int _idFactura;
-	int _idSuscripcion;
-	int _idCliente;
+	List<Integer> _idSuscripciones;
+	String _dniCliente;
 	Date _fecha;
-	String _metodoPago;
+	String _metodoPago;//mirar bbdd
+	
+	public DTOtCompra(int dniEmpleado,int idFactura,List<Integer> idSuscripciones,String dniCliente,Date fecha,String metodoPago) {
+		_dniEmpleado = dniEmpleado ;
+		_idFactura= idFactura;
+		_idSuscripciones = idSuscripciones;
+		_dniCliente = dniCliente;
+		_fecha=fecha;
+		_metodoPago=metodoPago;
+	}
+	
+	public DTOtCompra(int idCompra,int numSuscripcion,int dniEmpleado,int idFactura,List<Integer> idSuscripciones,String dniCliente,Date fecha,String metodoPago) {
+		_idCompra=idCompra;
+		_dniEmpleado = dniEmpleado ;
+		_idFactura= idFactura;
+		_idSuscripciones = idSuscripciones;
+		_dniCliente = dniCliente;
+		_fecha=fecha;
+		_metodoPago=metodoPago;
+	}
+	
+	public String getDniCliente() {
+		return _dniCliente;
+	}
+	
+	public int getDniEmpleado() {
+		return _dniEmpleado;
+	}
+
+	public void setDniEmpleado(int dniEmpleado) {
+		this._dniEmpleado = dniEmpleado;
+	}
+
+	public int getIdFactura() {
+		return _idFactura;
+	}
+
+	public void setIdFactura(int idFactura) {
+		this._idFactura = idFactura;
+	}
+
+	public String getIdCliente() {
+		return _dniCliente;
+	}
+
+	public void setIdCliente(String dniCliente) {
+		this._dniCliente = dniCliente;
+	}
+
+	public Date getFecha() {
+		return _fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this._fecha = fecha;
+	}
+
+	public String getMetodoPago() {
+		return _metodoPago;
+	}
+
+	public void setMetodoPago(String metodoPago) {
+		this._metodoPago = metodoPago;
+	}
+
+	public int getId() {
+		return _idCompra;
+	}
+
+
+	
+	
 }
