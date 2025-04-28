@@ -120,6 +120,7 @@ public class VistaAltaSuscripcionBasica {
 				}
 				else {
 					nombreTF.setText("");
+					tipoActTF.setText("");
 					DTOtSuscripcion sus = new DTOtBasica(nombre, tipoAct, sqlDate, idSala);
 					Controlador.accion(Evento.ALTA_SUSCRIPCION_BASICA, sus);
 				}
@@ -143,7 +144,7 @@ public class VistaAltaSuscripcionBasica {
 	}
 
 	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_ALTA_SUSCRIPCION_OK) {
+		if (evento == Evento.RES_ALTA_SUSCRIPCION_BASICA_OK) {
 			JTextArea textArea = new JTextArea(datos.toString());
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
@@ -153,7 +154,7 @@ public class VistaAltaSuscripcionBasica {
 			JOptionPane.showMessageDialog(null, "La suscripcion se ha insertado correctamente con ID: " + datos.toString());
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_ALTA_SUSCRIPCION_KO) {
+		else if (evento == Evento.RES_ALTA_SUSCRIPCION_BASICA_KO) {
 			JOptionPane.showMessageDialog(null, "No se ha podido insertar la suscripcion con ID: " + datos.toString());
 		}
 	}

@@ -133,11 +133,6 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 		return 0;
 	}
 
-//	public List<DTOtEmpleado> leerEmpleadosPorRol(String nombreRol) {
-//		List<DTOtEmpleado> empleados = new ArrayList<>();
-//
-//	}
-
 	public int actualizarEmpleado(DTOtEmpleado empleado) {
 		String query = "UPDATE Empleados SET nombre = ? WHERE dniEmpleado = ?";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {

@@ -96,6 +96,7 @@ public class VistaAltaSuscripcionPremium {
 
 		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
+				String nombre = nombreTF.getText();
 				int idCatalogo = Integer.parseInt(idCatTF.getText());
 				String dniEmp = dniEmpTF.getText();
 				if (dniEmpTF.getText() == "" || idCatTF.getText() == "" ) {
@@ -104,7 +105,7 @@ public class VistaAltaSuscripcionPremium {
 				else {
 					idCatTF.setText("");
 
-					DTOtSuscripcion sus = new DTOtPremium(idCatalogo, dniEmp);
+					DTOtSuscripcion sus = new DTOtPremium(nombre, idCatalogo, dniEmp);
 					Controlador.accion(Evento.ALTA_SUSCRIPCION_PREMIUM, sus);
 				}
 			}

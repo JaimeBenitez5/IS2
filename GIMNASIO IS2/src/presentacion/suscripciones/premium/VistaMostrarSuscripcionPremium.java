@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.DTOtCliente;
+import negocio.DTOtPremium;
 import negocio.DTOtSuscripcion;
 import presentacion.Controlador;
 import presentacion.Evento;
@@ -49,7 +50,7 @@ public class VistaMostrarSuscripcionPremium {
 
 		menuPrincipal.add(panelBajaCliente, BorderLayout.CENTER);
 
-		JLabel titulo = new JLabel("Mostrar Suscripcion");
+		JLabel titulo = new JLabel("Mostrar Suscripcion Premium");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelBajaCliente.add(titulo);
@@ -72,18 +73,18 @@ public class VistaMostrarSuscripcionPremium {
 		botones.setBackground(new Color(17, 47, 69));
 
 		JButton back = UIElementFactory.crearBotonConIcono("icons/back.png");
-		JButton delete = UIElementFactory.crearBoton("Mostrar",  new Color(67, 75, 172));
+		JButton mostrar = UIElementFactory.crearBoton("Mostrar",  new Color(67, 75, 172));
 		JButton botonMainMenu = UIElementFactory.crearBotonConIcono("icons/main_menu.png");
 
 		botones.add(back);
-		botones.add(delete);
+		botones.add(mostrar);
 		botones.add(botonMainMenu);
 
 		panelBajaCliente.add(botones);
 		menuPrincipal.setVisible(true);
 
 
-		delete.addActionListener(new ActionListener () {
+		mostrar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				String id = idTF.getText();
 				idTF.setText("");
@@ -107,7 +108,7 @@ public class VistaMostrarSuscripcionPremium {
 		return menuPrincipal;
 	}
 	
-	public static void actualizar(int evento, DTOtSuscripcion suscripcion) {
+	public static void actualizar(int evento, DTOtPremium suscripcion) {
 		if (evento == Evento.RES_MOSTRAR_SUSCRIPCION_PREMIUM_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
@@ -115,10 +116,14 @@ public class VistaMostrarSuscripcionPremium {
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			int i = suscripcion.getId();
-			int duracion = suscripcion.getTipo().getDuracion();
-			double precio = suscripcion.getTipo().getPrecio();
-			JOptionPane.showMessageDialog(null, "ID: " + i + " Duracion: " + duracion + " Precio: " + precio );
+
+			String idSus = String.valueOf(suscripcion.getIdSuscripcion());
+			String nombre = String.valueOf(suscripcion.getNombre());
+			String duracion = String.valueOf(suscripcion.getDuracion());
+			String dniEmp = String.valueOf(suscripcion.getDniEmpleado());
+			String idCat = String.valueOf(suscripcion.getIdCatalogo());
+			
+			JOptionPane.showMessageDialog(null, "ID de Suscripcion: " + idSus + " Nombre: " + nombre + " Duracion: " + duracion + " ID de Catalogo: " + idCat + " DNI de Empleado: " + dniEmp);
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_MOSTRAR_SUSCRIPCION_PREMIUM_KO) {

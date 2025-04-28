@@ -220,7 +220,7 @@ public class Evento {
 	public static final int ELIMINAR_SUSCRIPCION_BASICA = 751;
 	public static final int MOSTRAR_SUSCRIPCION_BASICA = 752;
 	public static final int MODIFICAR_SUSCRIPCION_BASICA = 753;
-	public static final int MOSTRAR_SUSCRIPCIONES_BASICA = 754;
+	public static final int MOSTRAR_SUSCRIPCIONES_BASICAS = 754;
 	public static final int BUSCAR_SUSCRIPCION_BASICA = 755;
 
 	// Eventos de Respuesta
@@ -239,8 +239,8 @@ public class Evento {
 	public static final int RES_MOSTRAR_SUSCRIPCION_BASICA_OK = 768;
 	public static final int RES_MOSTRAR_SUSCRIPCION_BASICA_KO = 769;
 
-	public static final int RES_MOSTRAR_SUSCRIPCIONES_BASICA_OK = 770;
-	public static final int RES_MOSTRAR_SUSCRIPCIONES_BASICA_KO = 771;
+	public static final int RES_MOSTRAR_SUSCRIPCIONES_BASICAS_OK = 770;
+	public static final int RES_MOSTRAR_SUSCRIPCIONES_BASICAS_KO = 771;
 	// Eventos Suscripciones Basicas
 	// Eventos de Vistas
 	public static final int VISTA_SUSCRIPCIONES_PREMIUM = 780;

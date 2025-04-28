@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -20,8 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import negocio.DTOtCliente;
-import negocio.DTOtSuscripcion;
+import negocio.DTOtBasica;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -35,7 +35,7 @@ public class VistaMostrarSuscripcionBasica {
 	}
 
 	private static JFrame initGUI() {
-		JFrame menuPrincipal = new JFrame("Menú Mostrar Suscripcion");
+		JFrame menuPrincipal = new JFrame("Menú Mostrar Suscripcion Basicas");
 		menuPrincipal.setSize(854, 480);
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,22 +72,22 @@ public class VistaMostrarSuscripcionBasica {
 		botones.setBackground(new Color(17, 47, 69));
 
 		JButton back = UIElementFactory.crearBotonConIcono("icons/back.png");
-		JButton delete = UIElementFactory.crearBoton("Mostrar",  new Color(67, 75, 172));
+		JButton mostrar = UIElementFactory.crearBoton("Mostrar",  new Color(67, 75, 172));
 		JButton botonMainMenu = UIElementFactory.crearBotonConIcono("icons/main_menu.png");
 
 		botones.add(back);
-		botones.add(delete);
+		botones.add(mostrar);
 		botones.add(botonMainMenu);
 
 		panelBajaCliente.add(botones);
 		menuPrincipal.setVisible(true);
 
 
-		delete.addActionListener(new ActionListener () {
+		mostrar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				String id = idTF.getText();
 				idTF.setText("");
-				Controlador.accion(Evento.MOSTRAR_SUSCRIPCION, id);
+				Controlador.accion(Evento.MOSTRAR_SUSCRIPCIONES_BASICAS, id);
 			}
 		});
 
@@ -107,21 +107,29 @@ public class VistaMostrarSuscripcionBasica {
 		return menuPrincipal;
 	}
 	
-	public static void actualizar(int evento, DTOtSuscripcion suscripcion) {
-		if (evento == Evento.RES_MOSTRAR_SUSCRIPCION_OK) {
+	public static void actualizar(int evento, DTOtBasica suscripcion) {
+		if (evento == Evento.RES_MOSTRAR_SUSCRIPCION_BASICA_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			int i = suscripcion.getId();
-			int duracion = suscripcion.getTipo().getDuracion();
-			double precio = suscripcion.getTipo().getPrecio();
-			JOptionPane.showMessageDialog(null, "ID: " + i + " Duracion: " + duracion + " Precio: " + precio );
+
+			String idSus = String.valueOf(suscripcion.getIdSuscripcion());
+			String nombre = String.valueOf(suscripcion.getNombre());
+			String duracion = String.valueOf(suscripcion.getDuracion());
+			String tipoAct = String.valueOf(suscripcion.getTipoActividad());
+			java.sql.Date sqlDate = suscripcion.getFecha();
+			java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			String fechaFormateada = sdf.format(utilDate);
+			String idSala = String.valueOf(suscripcion.getIdSala());
+			
+			JOptionPane.showMessageDialog(null, "ID de Suscripcion: " + idSus + " Nombre: " + nombre +" Duracion: " + duracion + " Tipo de Actividad: " + tipoAct + " Fecha" + fechaFormateada + " ID de Sala: " + idSala);
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_MOSTRAR_SUSCRIPCION_KO) {
+		else if (evento == Evento.RES_MOSTRAR_SUSCRIPCION_BASICA_KO) {
 			JOptionPane.showMessageDialog(null, "No se ha podido encontrar la suscripcion");
 		}
 	}

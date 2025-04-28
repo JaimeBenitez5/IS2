@@ -85,7 +85,7 @@ public class VistaEliminarSuscripcionBasica {
 			public void actionPerformed (ActionEvent e) {
 				String id = idTF.getText();
 				idTF.setText("");
-				Controlador.accion(Evento.ELIMINAR_SUSCRIPCION, id);
+				Controlador.accion(Evento.ELIMINAR_SUSCRIPCION_BASICA, id);
 			}
 		});
 
@@ -106,7 +106,7 @@ public class VistaEliminarSuscripcionBasica {
 	}
 
 	public static void actualizar(int evento, Object datos) {
-		if (evento == Evento.RES_ELIMINAR_SUSCRIPCION_OK) {
+		if (evento == Evento.RES_ELIMINAR_SUSCRIPCION_BASICA_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
@@ -116,7 +116,7 @@ public class VistaEliminarSuscripcionBasica {
 			JOptionPane.showMessageDialog(null, "La suscripcion se ha eliminado correctamente");
 			GUI.setVisible(false);
 		} 
-		else if (evento == Evento.RES_ELIMINAR_SUSCRIPCION_KO) {
+		else if (evento == Evento.RES_ELIMINAR_SUSCRIPCION_BASICA_KO) {
 			JOptionPane.showMessageDialog(null, "No se ha podido eliminar la suscripcion");
 		}
 	}

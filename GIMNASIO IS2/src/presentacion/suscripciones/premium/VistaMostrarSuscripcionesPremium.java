@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
 import negocio.DTOtCliente;
+import negocio.DTOtPremium;
 import negocio.DTOtSuscripcion;
 import presentacion.Controlador;
 import presentacion.Evento;
@@ -70,16 +71,19 @@ public class VistaMostrarSuscripcionesPremium {
 		GUI.setVisible(true);
 	}
 
-	public static void actualizar(int evento, List<DTOtSuscripcion> datos) {
+	public static void actualizar(int evento, List<DTOtPremium> datos) {
 		if (evento == Evento.RES_MOSTRAR_SUSCRIPCIONES_PREMIUM_OK) {
 			panelMostrarSuscripciones.removeAll();
-			String[] columnNames = {"NumSuscripcion", "Nombre"};
-			String[][] data = new String[datos.size()][4];
+			String[] columnNames = {"ID de Suscripcion", "Nombre", "Duracion", "DNI de Empleado", "ID de Catalogo"};
+			String[][] data = new String[datos.size()][5];
 
 			for (int i = 0; i < datos.size(); i++) {
-				DTOtSuscripcion suscripcion = datos.get(i);
-				data[i][0] = String.valueOf(suscripcion.getId());
+				DTOtPremium suscripcion = datos.get(i);
+				data[i][0] = String.valueOf(suscripcion.getIdSuscripcion());
 				data[i][1] = String.valueOf(suscripcion.getNombre());
+				data[i][2] = String.valueOf(suscripcion.getDuracion());
+				data[i][3] = String.valueOf(suscripcion.getDniEmpleado());
+				data[i][4] = String.valueOf(suscripcion.getIdCatalogo());
 			}
 
 			JTable tablaSuscripciones = new JTable(data, columnNames);

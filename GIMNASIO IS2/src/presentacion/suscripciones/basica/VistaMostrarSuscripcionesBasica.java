@@ -15,8 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
-import negocio.DTOtCliente;
-import negocio.DTOtSuscripcion;
+import negocio.DTOtBasica;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -27,12 +26,12 @@ public class VistaMostrarSuscripcionesBasica {
 
 	public static void open() {  
 		if (GUI == null) initGUI();
-		Controlador.accion(Evento.MOSTRAR_SUSCRIPCIONES, null);
+		Controlador.accion(Evento.MOSTRAR_SUSCRIPCIONES_BASICAS, null);
 		GUI.setVisible(true);
 	}
 
 	private static void initGUI() {
-		GUI = new JFrame("Menú Mostrar Suscripciones");
+		GUI = new JFrame("Menú Mostrar Suscripciones Basicas");
 		GUI.setSize(854, 480);
 		GUI.setLocationRelativeTo(null);
 		GUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,16 +69,20 @@ public class VistaMostrarSuscripcionesBasica {
 		GUI.setVisible(true);
 	}
 
-	public static void actualizar(int evento, List<DTOtSuscripcion> datos) {
-		if (evento == Evento.RES_MOSTRAR_SUSCRIPCIONES_OK) {
+	public static void actualizar(int evento, List<DTOtBasica> datos) {
+		if (evento == Evento.RES_MOSTRAR_SUSCRIPCIONES_BASICAS_OK) {
 			panelMostrarSuscripciones.removeAll();
-			String[] columnNames = {"NumSuscripcion", "Nombre"};
-			String[][] data = new String[datos.size()][4];
+			String[] columnNames = {"ID de Suscripcion", "Nombre", "Duracion", "Tipo de Actividad", "Fecha", "ID de Sala"};
+			String[][] data = new String[datos.size()][6];
 
 			for (int i = 0; i < datos.size(); i++) {
-				DTOtSuscripcion suscripcion = datos.get(i);
-				data[i][0] = String.valueOf(suscripcion.getId());
+				DTOtBasica suscripcion = datos.get(i);
+				data[i][0] = String.valueOf(suscripcion.getIdSuscripcion());
 				data[i][1] = String.valueOf(suscripcion.getNombre());
+				data[i][2] = String.valueOf(suscripcion.getDuracion());
+				data[i][3] = String.valueOf(suscripcion.getTipoActividad());
+				data[i][4] = String.valueOf(suscripcion.getFecha());
+				data[i][5] = String.valueOf(suscripcion.getIdSala());
 			}
 
 			JTable tablaSuscripciones = new JTable(data, columnNames);
@@ -96,7 +99,7 @@ public class VistaMostrarSuscripcionesBasica {
 			panelMostrarSuscripciones.revalidate();
 			panelMostrarSuscripciones.repaint();
 		}
-		else if (evento == Evento.RES_MOSTRAR_SUSCRIPCIONES_KO) {
+		else if (evento == Evento.RES_MOSTRAR_SUSCRIPCIONES_BASICAS_KO) {
 			panelMostrarSuscripciones.removeAll();
 			if (datos == null || datos.isEmpty()) {
 				JLabel mensaje = new JLabel("No hay suscripciones disponibles.", SwingConstants.CENTER);
