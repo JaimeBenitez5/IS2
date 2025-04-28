@@ -47,7 +47,7 @@ public class SAEmpleadosImp implements SAEmpleados {
 		else if (idRol == 2) salario = getDAOEmpleados().leerSalarioMonitores();
 		else if(idRol == 3) salario = getDAOEmpleados().leerSalarioNutricionistas();
 		else if(idRol == 4) salario = getDAOEmpleados().leerSalarioRecepcion();
-		else salario = 0;		
+		else salario = 0;
 		return salario;
 	}
 
@@ -81,5 +81,4 @@ public class SAEmpleadosImp implements SAEmpleados {
 		}
 		return emps;
 	}
-
 }

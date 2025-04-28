@@ -52,5 +52,4 @@ public class DTOtBasica extends DTOtSuscripcion {
 	public void setIdSala(int idSala) {
 		_idSala = idSala;
 	}
-
 }

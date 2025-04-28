@@ -88,7 +88,7 @@ public class VistaMostrarSuscripcionBasica {
 			public void actionPerformed (ActionEvent e) {
 				Integer id = Integer.parseInt(idTF.getText());
 				idTF.setText("");
-				Controlador.accion(Evento.MOSTRAR_SUSCRIPCIONES_BASICAS, id);
+				Controlador.accion(Evento.MOSTRAR_SUSCRIPCION_BASICA, id);
 			}
 		});
 

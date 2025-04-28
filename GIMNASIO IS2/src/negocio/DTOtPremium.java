@@ -24,7 +24,6 @@ public class DTOtPremium extends DTOtSuscripcion{
 		_dniEmpleado = dniEmpleado;
 	}
 
-
 	public int getIdCatalogo() {
 		return _idCatalogo;
 	}

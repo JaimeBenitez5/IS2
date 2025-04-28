@@ -53,6 +53,7 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 		return null;
 	}
 	
+	//VER TODAS LAS SALAS QUE MANTIENE UN EMPLEADO DE MANTENIMIENTO
 	public double leerSalarioMantenimiento() {
 		String query = "SELECT salario FROM Mantenimiento WHERE idRol  = 1";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
@@ -166,17 +167,14 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 				String nombre = rs.getString("nombre");
 				int idRolInt = rs.getInt("idRol");
 				String nombreRol = rs.getString("nombreRol");
-
 				DTOtRol dtoRol = new DTOtRol(idRolInt, nombreRol, 0);
 				DTOtEmpleado emp = new DTOtEmpleado(dni, nombre, dtoRol);
-
 				empleados.add(emp);
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return empleados;
 	}
 }
