@@ -4,7 +4,7 @@ import java.util.List;
 import presentacion.actividades.*;
 import presentacion.catalogos.*;
 import presentacion.clientes.*;
-import presentacion.compras.VistaCompras;
+import presentacion.compras.*;
 import presentacion.empleados.*;
 import presentacion.facturas.*;
 import presentacion.salas.*;
@@ -21,8 +21,9 @@ public class Controlador{
 	private static SAEmpleados SAEmpleados;
 	private static SAFacturas SAFacturas;
 	private static SASuscripciones SASuscripcionesBasicas;
-	private static SASuscripciones SASuscripcionesPremium;
-	
+	private static SASuscripciones SASuscripcionesPremium;	
+	private static SACompras SACompras;
+
 	private static SAClientes getSAClientes(){
 		if(SAClientes == null) SAClientes = new SAClientesImp();
 		return SAClientes;
@@ -55,7 +56,11 @@ public class Controlador{
 		if (SASuscripcionesPremium == null) SASuscripcionesPremium = new SASuscripcionesPremiumImp();
 		return SASuscripcionesPremium;
 	}
-	
+	private static SACompras getSACompras() {
+		if (SACompras == null) SACompras = new SAComprasImp();
+		return SACompras;
+	}
+
 	public static void accion(int evento, Object datos) { 
 		switch(evento) {
 		//CLIENTES
@@ -65,16 +70,16 @@ public class Controlador{
 			else VistaAltaCliente.actualizar(Evento.RES_ALTA_CLIENTE_KO, ((DTOtCliente) datos).getDni());
 			break;
 		}
-		case Evento.MOSTRAR_CLIENTES:{
-			List<DTOtCliente> res = getSAClientes().leerTodosClientes();
-			if (!res.isEmpty()) VistaMostrarClientes.actualizar(Evento.RES_MOSTRAR_CLIENTES_OK, res);
-			else VistaMostrarClientes.actualizar(Evento.RES_MOSTRAR_CLIENTES_KO, null);
-			break;
-		}
 		case Evento.MOSTRAR_CLIENTE:{
 			DTOtCliente cliente = getSAClientes().leerCliente((String)datos);
 			if (cliente != null) VistaMostrarCliente.actualizar(Evento.RES_MOSTRAR_CLIENTE_OK, cliente);
 			else VistaMostrarCliente.actualizar(Evento.RES_MOSTRAR_CLIENTE_KO, null);
+			break;
+		}
+		case Evento.MOSTRAR_CLIENTES:{
+			List<DTOtCliente> res = getSAClientes().leerTodosClientes();
+			if (!res.isEmpty()) VistaMostrarClientes.actualizar(Evento.RES_MOSTRAR_CLIENTES_OK, res);
+			else VistaMostrarClientes.actualizar(Evento.RES_MOSTRAR_CLIENTES_KO, null);
 			break;
 		}
 		case Evento.ELIMINAR_CLIENTE:{
@@ -130,7 +135,8 @@ public class Controlador{
 		}
 		case Evento.MOSTRAR_ACTIVIDAD:{
 			DTOtActividad a = getSAActividades().leerActividad(((DTOtActividad) datos).getTipoActividad(), ((DTOtActividad) datos).getFecha(), ((DTOtActividad) datos).getIdSala());
-			VistaMostrarActividad.actualizar(Evento.RES_MOSTRAR_ACTIVIDAD_OK, a);
+			if (a != null) VistaMostrarActividad.actualizar(Evento.RES_MOSTRAR_ACTIVIDAD_OK, a);
+			else VistaMostrarActividad.actualizar(Evento.RES_MOSTRAR_ACTIVIDAD_KO, a);
 			break;
 		}
 		case Evento.MOSTRAR_ACTIVIDADES:{
@@ -159,6 +165,12 @@ public class Controlador{
 			else VistaAnadirFactura.actualizar(Evento.RES_ALTA_FACTURA_KO, id);
 			break;
 		}
+		case Evento.MOSTRAR_FACTURA:{
+			DTOtFactura factura = getSAFacturas().leerFactura((int)datos);
+			if (factura != null) VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_OK, factura);
+			else VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_KO, null);
+			break;
+		}
 		case Evento.MOSTRAR_FACTURAS:{
 			List<DTOtFactura> res = getSAFacturas().leerTodasFacturas();
 			if (!res.isEmpty()) VistaMostrarFacturas.actualizar(Evento.RES_MOSTRAR_FACTURAS_OK, res);
@@ -172,12 +184,7 @@ public class Controlador{
 			break;
 		}
 		case Evento.MOSTRAR_FACTURAS_CLIENTE:{ 
-			break;
-		}
-		case Evento.MOSTRAR_FACTURA:{
-			DTOtFactura factura = getSAFacturas().leerFactura((int)datos);
-			if (factura != null) VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_OK, factura);
-			else VistaMostrarFactura.actualizar(Evento.RES_MOSTRAR_FACTURA_KO, null);
+			//TODO
 			break;
 		}
 		//EMPLEADOS
@@ -187,16 +194,16 @@ public class Controlador{
 			else VistaAnadirEmpleado.actualizar(Evento.RES_ALTA_EMPLEADO_KO, ((DTOtEmpleado) datos).getDni());
 			break;
 		}
-		case Evento.MOSTRAR_EMPLEADOS: {
-			List<DTOtEmpleado> res = getSAEmpleados().leerTodosEmpleados();
-			if (!res.isEmpty()) VistaMostrarEmpleados.actualizar(Evento.RES_MOSTRAR_EMPLEADOS_OK, res);
-			else VistaMostrarEmpleados.actualizar(Evento.RES_MOSTRAR_EMPLEADOS_KO, null);
-			break;
-		}
 		case Evento.MOSTRAR_EMPLEADO: {
 			DTOtEmpleado empleado = getSAEmpleados().leerEmpleado((String) datos);
 			if (empleado != null) VistaMostrarEmpleado.actualizar(Evento.RES_MOSTRAR_EMPLEADO_OK, empleado);
 			else VistaMostrarEmpleado.actualizar(Evento.RES_MOSTRAR_EMPLEADO_KO, null);
+			break;
+		}
+		case Evento.MOSTRAR_EMPLEADOS: {
+			List<DTOtEmpleado> res = getSAEmpleados().leerTodosEmpleados();
+			if (!res.isEmpty()) VistaMostrarEmpleados.actualizar(Evento.RES_MOSTRAR_EMPLEADOS_OK, res);
+			else VistaMostrarEmpleados.actualizar(Evento.RES_MOSTRAR_EMPLEADOS_KO, null);
 			break;
 		}
 		case Evento.ELIMINAR_EMPLEADO: {
@@ -221,7 +228,8 @@ public class Controlador{
 		}
 		case Evento.MOSTRAR_CATALOGO: {
 			DTOtCatalogo c = getSACatalogos().leerCatalogo((int) datos);
-			VistaMostrarCatalogo.actualizar(Evento.RES_MOSTRAR_CATALOGO_OK, c);
+			if (c != null) VistaMostrarCatalogo.actualizar(Evento.RES_MOSTRAR_CATALOGO_OK, c);
+			else VistaMostrarCatalogo.actualizar(Evento.RES_MOSTRAR_CATALOGO_KO, c);
 			break;
 		}
 		case Evento.MOSTRAR_CATALOGOS: {
@@ -244,65 +252,99 @@ public class Controlador{
 		}
 		//SUSCRIPCIONES BASICAS
 		case Evento.ALTA_SUSCRIPCION_BASICA: {
-		    int id = getSASuscripcionesBasicas().altaSuscripcion((DTOtBasica) datos);
-		    ((DTOtBasica) datos).setIdSuscripcion(id);;
-		    if (id != 0) VistaAnadirSuscripcionBasica.actualizar(Evento.RES_ALTA_SUSCRIPCION_BASICA_OK, id);
-		    else VistaAnadirSuscripcionBasica.actualizar(Evento.RES_ALTA_SUSCRIPCION_BASICA_KO, id);
-		    break;
+			int id = getSASuscripcionesBasicas().altaSuscripcion((DTOtBasica) datos);
+			((DTOtBasica) datos).setIdSuscripcion(id);;
+			if (id != 0) VistaAnadirSuscripcionBasica.actualizar(Evento.RES_ALTA_SUSCRIPCION_BASICA_OK, id);
+			else VistaAnadirSuscripcionBasica.actualizar(Evento.RES_ALTA_SUSCRIPCION_BASICA_KO, id);
+			break;
 		}
 		case Evento.MOSTRAR_SUSCRIPCION_BASICA: {
 			DTOtSuscripcion s = getSASuscripcionesBasicas().leerSuscripcion((int) datos);
-		    VistaMostrarSuscripcionBasica.actualizar(Evento.RES_MOSTRAR_SUSCRIPCION_BASICA_OK, s);
-		    break;
+			if(s != null) VistaMostrarSuscripcionBasica.actualizar(Evento.RES_MOSTRAR_SUSCRIPCION_BASICA_OK, s);
+			else  VistaMostrarSuscripcionBasica.actualizar(Evento.RES_MOSTRAR_SUSCRIPCION_BASICA_KO, s);
+			break;
 		}
 		case Evento.MOSTRAR_SUSCRIPCIONES_BASICAS: {
-		    List<DTOtSuscripcion> res = getSASuscripcionesBasicas().leerTodasSuscripciones();
-		    if (!res.isEmpty()) VistaMostrarSuscripcionesBasica.actualizar(Evento.RES_MOSTRAR_SUSCRIPCIONES_BASICAS_OK, res);
-		    else VistaMostrarSuscripcionesBasica.actualizar(Evento.RES_MOSTRAR_SUSCRIPCIONES_BASICAS_KO, null);
-		    break;
+			List<DTOtSuscripcion> res = getSASuscripcionesBasicas().leerTodasSuscripciones();
+			if (!res.isEmpty()) VistaMostrarSuscripcionesBasica.actualizar(Evento.RES_MOSTRAR_SUSCRIPCIONES_BASICAS_OK, res);
+			else VistaMostrarSuscripcionesBasica.actualizar(Evento.RES_MOSTRAR_SUSCRIPCIONES_BASICAS_KO, null);
+			break;
 		}
 		case Evento.ELIMINAR_SUSCRIPCION_BASICA: {
-		    int exito = getSASuscripcionesBasicas().borrarSuscripcion((int) datos);
-		    if (exito == 1) VistaEliminarSuscripcionBasica.actualizar(Evento.RES_ELIMINAR_SUSCRIPCION_BASICA_OK, (int) datos);
-		    else VistaEliminarSuscripcionBasica.actualizar(Evento.RES_ELIMINAR_SUSCRIPCION_BASICA_KO, null);
-		    break;
+			int exito = getSASuscripcionesBasicas().borrarSuscripcion((int) datos);
+			if (exito == 1) VistaEliminarSuscripcionBasica.actualizar(Evento.RES_ELIMINAR_SUSCRIPCION_BASICA_OK, (int) datos);
+			else VistaEliminarSuscripcionBasica.actualizar(Evento.RES_ELIMINAR_SUSCRIPCION_BASICA_KO, null);
+			break;
 		}
 		case Evento.MODIFICAR_SUSCRIPCION_BASICA: {
-		    int exitoModificar = getSASuscripcionesBasicas().actualizarSuscripcion((DTOtBasica) datos);
-		    if (exitoModificar == 1) VistaModificarSuscripcionBasica.actualizar(Evento.RES_MODIFICAR_SUSCRIPCION_BASICA_OK, null);
-		    else VistaModificarSuscripcionBasica.actualizar(Evento.RES_MODIFICAR_SUSCRIPCION_BASICA_KO, null);
-		    break;
+			int exitoModificar = getSASuscripcionesBasicas().actualizarSuscripcion((DTOtBasica) datos);
+			if (exitoModificar == 1) VistaModificarSuscripcionBasica.actualizar(Evento.RES_MODIFICAR_SUSCRIPCION_BASICA_OK, null);
+			else VistaModificarSuscripcionBasica.actualizar(Evento.RES_MODIFICAR_SUSCRIPCION_BASICA_KO, null);
+			break;
 		}
 		//SUSCRIPCIONES PREMIUM
 		case Evento.ALTA_SUSCRIPCION_PREMIUM: {
-		    int id = getSASuscripcionesPremium().altaSuscripcion((DTOtPremium) datos);
-		    ((DTOtPremium) datos).setIdSuscripcion(id);
-		    if (id != 0) VistaAnadirSuscripcionPremium.actualizar(Evento.RES_ALTA_SUSCRIPCION_PREMIUM_OK, id);
-		    else VistaAnadirSuscripcionPremium.actualizar(Evento.RES_ALTA_SUSCRIPCION_PREMIUM_KO, id);
-		    break;
+			int id = getSASuscripcionesPremium().altaSuscripcion((DTOtPremium) datos);
+			((DTOtPremium) datos).setIdSuscripcion(id);
+			if (id != 0) VistaAnadirSuscripcionPremium.actualizar(Evento.RES_ALTA_SUSCRIPCION_PREMIUM_OK, id);
+			else VistaAnadirSuscripcionPremium.actualizar(Evento.RES_ALTA_SUSCRIPCION_PREMIUM_KO, id);
+			break;
 		}
 		case Evento.MOSTRAR_SUSCRIPCION_PREMIUM: {
 			DTOtSuscripcion s = getSASuscripcionesPremium().leerSuscripcion((int) datos);
-		    VistaMostrarSuscripcionPremium.actualizar(Evento.RES_MOSTRAR_SUSCRIPCION_PREMIUM_OK, s);
-		    break;
+			if (s != null) VistaMostrarSuscripcionPremium.actualizar(Evento.RES_MOSTRAR_SUSCRIPCION_PREMIUM_OK, s);
+			else VistaMostrarSuscripcionPremium.actualizar(Evento.RES_MOSTRAR_SUSCRIPCION_PREMIUM_KO, s);
+			break;
 		}
 		case Evento.MOSTRAR_SUSCRIPCIONES_PREMIUM: {
-		    List<DTOtSuscripcion> res = getSASuscripcionesPremium().leerTodasSuscripciones();
-		    if (!res.isEmpty()) VistaMostrarSuscripcionesPremium.actualizar(Evento.RES_MOSTRAR_SUSCRIPCIONES_PREMIUM_OK, res);
-		    else VistaMostrarSuscripcionesPremium.actualizar(Evento.RES_MOSTRAR_SUSCRIPCIONES_PREMIUM_KO, null);
-		    break;
+			List<DTOtSuscripcion> res = getSASuscripcionesPremium().leerTodasSuscripciones();
+			if (!res.isEmpty()) VistaMostrarSuscripcionesPremium.actualizar(Evento.RES_MOSTRAR_SUSCRIPCIONES_PREMIUM_OK, res);
+			else VistaMostrarSuscripcionesPremium.actualizar(Evento.RES_MOSTRAR_SUSCRIPCIONES_PREMIUM_KO, null);
+			break;
 		}
 		case Evento.ELIMINAR_SUSCRIPCION_PREMIUM: {
-		    int exito = getSASuscripcionesPremium().borrarSuscripcion((int) datos);
-		    if (exito == 1) VistaEliminarSuscripcionPremium.actualizar(Evento.RES_ELIMINAR_SUSCRIPCION_PREMIUM_OK, (int) datos);
-		    else VistaEliminarSuscripcionPremium.actualizar(Evento.RES_ELIMINAR_SUSCRIPCION_PREMIUM_KO, null);
-		    break;
+			int exito = getSASuscripcionesPremium().borrarSuscripcion((int) datos);
+			if (exito == 1) VistaEliminarSuscripcionPremium.actualizar(Evento.RES_ELIMINAR_SUSCRIPCION_PREMIUM_OK, (int) datos);
+			else VistaEliminarSuscripcionPremium.actualizar(Evento.RES_ELIMINAR_SUSCRIPCION_PREMIUM_KO, null);
+			break;
 		}
 		case Evento.MODIFICAR_SUSCRIPCION_PREMIUM: {
-		    int exitoModificar = getSASuscripcionesPremium().actualizarSuscripcion((DTOtPremium) datos);
-		    if (exitoModificar == 1) VistaModificarSuscripcionPremium.actualizar(Evento.RES_MODIFICAR_SUSCRIPCION_PREMIUM_OK, null);
-		    else VistaModificarSuscripcionPremium.actualizar(Evento.RES_MODIFICAR_SUSCRIPCION_PREMIUM_KO, null);
-		    break;
+			int exitoModificar = getSASuscripcionesPremium().actualizarSuscripcion((DTOtPremium) datos);
+			if (exitoModificar == 1) VistaModificarSuscripcionPremium.actualizar(Evento.RES_MODIFICAR_SUSCRIPCION_PREMIUM_OK, null);
+			else VistaModificarSuscripcionPremium.actualizar(Evento.RES_MODIFICAR_SUSCRIPCION_PREMIUM_KO, null);
+			break;
+		}
+		//COMPRAS
+		case Evento.ALTA_COMPRA:{
+			int id = getSACompras().altaCompra((DTOtCompra) datos);
+			((DTOtCompra) datos).setId(id);
+			if(id != 0) VistaAnadirCompra.actualizar(Evento.RES_ALTA_COMPRA_OK, id);
+			else VistaAnadirCompra.actualizar(Evento.RES_ALTA_COMPRA_KO, id);
+			break;
+		}
+		case Evento.MOSTRAR_COMPRA:{
+			DTOtCompra s = getSACompras().leerCompra((int) datos);
+			if (s != null) VistaMostrarCompra.actualizar(Evento.RES_MOSTRAR_COMPRA_OK, s);
+			else VistaMostrarCompra.actualizar(Evento.RES_MOSTRAR_COMPRA_KO, s);
+			break;
+		}
+		case Evento.MOSTRAR_COMPRAS:{
+			List<DTOtSala> res = getSASalas().leerTodasSalas();
+			if (!res.isEmpty()) VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_OK, res);
+			else VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_KO, null);
+			break;
+		}
+		case Evento.ELIMINAR_COMPRA:{
+			int exito = getSASalas().borrarSala((int) datos);
+			if (exito == 1) VistaEliminarSala.actualizar(Evento.RES_ELIMINAR_SALA_OK, (int) datos);
+			else VistaEliminarSala.actualizar(Evento.RES_ELIMINAR_SALA_KO, null);
+			break;
+		}
+		case Evento.MODIFICAR_COMPRA:{
+			int exitoModificar = getSASalas().actualizarSala((DTOtSala) datos);
+			if (exitoModificar == 1) VistaModificarSala.actualizar(Evento.RES_MODIFICAR_SALA_OK, null);
+			else VistaModificarSala.actualizar(Evento.RES_MODIFICAR_SALA_KO, null);
+			break;
 		}
 		}
 	}
@@ -334,7 +376,7 @@ public class Controlador{
 			VistaEliminarFactura.open();
 			break;
 		}
-		
+
 		case Evento.VISTA_MOSTRAR_FACTURA:{ 
 			VistaMostrarFactura.open();
 			break;
@@ -389,57 +431,6 @@ public class Controlador{
 			VistaModificarSala.open();
 			break;
 		}
-		//VISTAS SUSCRIPCIONES BASICAS
-		case Evento.VISTA_SUSCRIPCIONES_BASICA: { 
-		    VistaSuscripcionesBasica.open();
-		    break;
-		}
-		case Evento.VISTA_ANADIR_SUSCRIPCION_BASICA: { 
-		    VistaAnadirSuscripcionBasica.open();
-		    break;
-		}
-		case Evento.VISTA_ELIMINAR_SUSCRIPCION_BASICA: { 
-		    VistaEliminarSuscripcionBasica.open();
-		    break;
-		}
-		case Evento.VISTA_MOSTRAR_SUSCRIPCION_BASICA: { 
-		    VistaMostrarSuscripcionBasica.open();
-		    break;
-		}
-		case Evento.VISTA_MOSTRAR_SUSCRIPCIONES_BASICA: { 
-		    VistaMostrarSuscripcionesBasica.open();
-		    break;
-		}
-		case Evento.VISTA_MODIFICAR_SUSCRIPCION_BASICA: { 
-		    VistaModificarSuscripcionBasica.open();
-		    break;
-		}
-		// VISTAS SUSCRIPCIONES PREMIUM
-		// VISTAS SUSCRIPCIONES PREMIUM
-		case Evento.VISTA_SUSCRIPCIONES_PREMIUM: { 
-		    VistaSuscripcionesPremium.open();
-		    break;
-		}
-		case Evento.VISTA_ANADIR_SUSCRIPCION_PREMIUM: { 
-		    VistaAnadirSuscripcionPremium.open();
-		    break;
-		}
-		case Evento.VISTA_ELIMINAR_SUSCRIPCION_PREMIUM: { 
-		    VistaEliminarSuscripcionPremium.open();
-		    break;
-		}
-		case Evento.VISTA_MOSTRAR_SUSCRIPCION_PREMIUM: { 
-		    VistaMostrarSuscripcionPremium.open();
-		    break;
-		}
-		case Evento.VISTA_MOSTRAR_SUSCRIPCIONES_PREMIUM: { 
-		    VistaMostrarSuscripcionesPremium.open();
-		    break;
-		}
-		case Evento.VISTA_MODIFICAR_SUSCRIPCION_PREMIUM: { 
-		    VistaModificarSuscripcionPremium.open();
-		    break;
-		}		
 		//VISTAS ACTIVIDADES
 		case Evento.VISTA_ACTIVIDADES:{ 
 			VistaActividad.open();
@@ -465,7 +456,7 @@ public class Controlador{
 			VistaModificarActividad.open();
 			break;
 		}
-		// VISTAS CATÁLOGOS
+		// VISTAS CATALOGOS
 		case Evento.VISTA_CATALOGOS: {
 			VistaCatalogos.open();
 			break;
@@ -514,8 +505,57 @@ public class Controlador{
 		case Evento.VISTA_MODIFICAR_EMPLEADO: {
 			VistaModificarEmpleado.open();
 			break;
+		}//VISTAS SUSCRIPCIONES BASICAS
+		case Evento.VISTA_SUSCRIPCIONES_BASICA: { 
+			VistaSuscripcionesBasica.open();
+			break;
 		}
-		//VISTAS FACTURAS
+		case Evento.VISTA_ANADIR_SUSCRIPCION_BASICA: { 
+			VistaAnadirSuscripcionBasica.open();
+			break;
+		}
+		case Evento.VISTA_ELIMINAR_SUSCRIPCION_BASICA: { 
+			VistaEliminarSuscripcionBasica.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_SUSCRIPCION_BASICA: { 
+			VistaMostrarSuscripcionBasica.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_SUSCRIPCIONES_BASICA: { 
+			VistaMostrarSuscripcionesBasica.open();
+			break;
+		}
+		case Evento.VISTA_MODIFICAR_SUSCRIPCION_BASICA: { 
+			VistaModificarSuscripcionBasica.open();
+			break;
+		}
+		// VISTAS SUSCRIPCIONES PREMIUM
+		case Evento.VISTA_SUSCRIPCIONES_PREMIUM: { 
+			VistaSuscripcionesPremium.open();
+			break;
+		}
+		case Evento.VISTA_ANADIR_SUSCRIPCION_PREMIUM: { 
+			VistaAnadirSuscripcionPremium.open();
+			break;
+		}
+		case Evento.VISTA_ELIMINAR_SUSCRIPCION_PREMIUM: { 
+			VistaEliminarSuscripcionPremium.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_SUSCRIPCION_PREMIUM: { 
+			VistaMostrarSuscripcionPremium.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_SUSCRIPCIONES_PREMIUM: { 
+			VistaMostrarSuscripcionesPremium.open();
+			break;
+		}
+		case Evento.VISTA_MODIFICAR_SUSCRIPCION_PREMIUM: { 
+			VistaModificarSuscripcionPremium.open();
+			break;
+		}		
+		//VISTAS COMPRAS
 		case Evento.VISTA_COMPRAS:{ 	
 			VistaCompras.open();
 			break;
@@ -528,12 +568,11 @@ public class Controlador{
 			VistaMostrarFacturas.open();
 			break;
 		}
-	
+
 		case Evento.VISTA_ELIMINAR_COMPRA:{
 			VistaEliminarFactura.open();
 			break;
 		}
-
 		case Evento.VISTA_MOSTRAR_COMPRAS:{ 
 			VistaMostrarFactura.open();
 			break;

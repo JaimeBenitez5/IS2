@@ -14,7 +14,6 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,7 +24,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.DTOtBasica;
-import negocio.DTOtCliente;
 import negocio.DTOtSuscripcion;
 import presentacion.Controlador;
 import presentacion.Evento;

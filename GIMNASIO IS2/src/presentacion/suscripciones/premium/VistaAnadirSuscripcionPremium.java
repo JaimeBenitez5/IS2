@@ -104,7 +104,6 @@ public class VistaAnadirSuscripcionPremium {
 				}
 				else {
 					idCatTF.setText("");
-
 					DTOtSuscripcion sus = new DTOtPremium(nombre, idCatalogo, dniEmp);
 					Controlador.accion(Evento.ALTA_SUSCRIPCION_PREMIUM, sus);
 				}
