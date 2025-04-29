@@ -57,16 +57,16 @@ public class VistaModificarCatalogo {
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelModificarCatalogo.add(titulo);
-		
+
 		JPanel panelCampos = new JPanel(new GridLayout(2, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
-		
+
 		JLabel idCat = new JLabel("ID de Catalogo:");
 		idCat.setForeground(Color.WHITE);
 		panelCampos.add(idCat);
 		JTextField idCatTF = new JTextField(30);
 		panelCampos.add(idCatTF);
-		
+
 		JLabel numero = new JLabel("Número de actividades:");
 		numero.setForeground(Color.WHITE);
 		panelCampos.add(numero);
@@ -76,9 +76,9 @@ public class VistaModificarCatalogo {
 		JButton numAct = UIElementFactory.crearBoton("Confirmar numero",  new Color(67, 75, 172));
 		numAct.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelCampos.add(numAct);
-		
+
 		panelModificarCatalogo.add(panelCampos);
-		
+
 		JPanel actividadesPanel = new JPanel();
 		actividadesPanel.setLayout(new BoxLayout(actividadesPanel, BoxLayout.Y_AXIS));
 		actividadesPanel.setBackground(new Color(17, 47, 69));
@@ -111,12 +111,25 @@ public class VistaModificarCatalogo {
 
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int idCat = Integer.parseInt(idCatTF.getText());
+				boolean idsCorrectos = true;
+				int idCat = 0;
+				try {
+					idCat = Integer.parseInt(idCatTF.getText());
+				}catch( NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 				String numAct = numeroTF.getText();
 				if (numAct.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Introduce el número de actividades", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				int cantidad = Integer.parseInt(numAct);
+				int cantidad = 0;
+				try {
+					cantidad = Integer.parseInt(numAct);
+				}catch( NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 				ArrayList<DTOtActividad> actividades = new ArrayList<DTOtActividad>();
 				DTOtCatalogo catalogo = new DTOtCatalogo(idCat, cantidad);
 				for (Component comp : actividadesPanel.getComponents()) {
@@ -125,16 +138,25 @@ public class VistaModificarCatalogo {
 						String tipo = ((JTextField) fields[1]).getText();
 						java.util.Date Date = (java.util.Date) ((JFormattedTextField) fields[3]).getValue();
 						java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
-						int idSala = Integer.parseInt(((JTextField) fields[5]).getText());
+						int idSala = 0;
+						try {
+							idSala =Integer.parseInt(((JTextField) fields[5]).getText());
+						}catch( NumberFormatException nfe){
+							idsCorrectos = false;
+							JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+						}
 						DTOtActividad act = new DTOtActividad(tipo, idSala, sqlDate);
 						actividades.add(act);
 					}
 				}
-				catalogo.setActividades(actividades);
-				Controlador.accion(Evento.MODIFICAR_CATALOGO, catalogo);
+				if(idsCorrectos) {
+					idCatTF.setText("");
+					catalogo.setActividades(actividades);
+					Controlador.accion(Evento.MODIFICAR_CATALOGO, catalogo);
+				}
 			}
 		});
-		
+
 		numAct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actividadesPanel.removeAll();

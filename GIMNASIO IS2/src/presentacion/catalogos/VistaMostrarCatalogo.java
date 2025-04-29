@@ -84,9 +84,18 @@ public class VistaMostrarCatalogo {
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int id = Integer.parseInt(idTF.getText());
-				idTF.setText("");
-				Controlador.accion(Evento.MOSTRAR_CATALOGO, id);
+				int id = 0;
+				boolean idsCorrectos = true;
+				try {
+					id = Integer.parseInt(idTF.getText());
+				}catch(NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				if(idsCorrectos) {
+					idTF.setText("");
+					Controlador.accion(Evento.MOSTRAR_CATALOGO, id);
+				}
 			}
 		});
 
@@ -102,10 +111,10 @@ public class VistaMostrarCatalogo {
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
 			}
 		});
-		
+
 		return menuPrincipal;
 	}
-	
+
 	public static void actualizar(int evento, DTOtCatalogo catalogo) {
 		if (evento == Evento.RES_MOSTRAR_CATALOGO_OK) {
 			JTextArea textArea = new JTextArea();

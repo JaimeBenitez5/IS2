@@ -83,8 +83,18 @@ public class VistaEliminarCatalogo {
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int id = Integer.parseInt(idTF.getText());
-				Controlador.accion(Evento.ELIMINAR_CATALOGO, id);
+				int id = 0;
+				boolean idsCorrectos = true;
+				try {
+					id = Integer.parseInt(idTF.getText());
+				}catch(NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				if(idsCorrectos) {
+					idTF.setText("");
+					Controlador.accion(Evento.ELIMINAR_CATALOGO, id);
+				}
 			}
 		});
 

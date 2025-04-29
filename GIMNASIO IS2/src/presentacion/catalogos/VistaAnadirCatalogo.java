@@ -70,9 +70,9 @@ public class VistaAnadirCatalogo {
 		JButton numAct = UIElementFactory.crearBoton("Confirmar numero",  new Color(67, 75, 172));
 		numAct.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelCampos.add(numAct);
-		
+
 		panelAnadirCatalogo.add(panelCampos);
-		
+
 		JPanel actividadesPanel = new JPanel();
 		actividadesPanel.setLayout(new BoxLayout(actividadesPanel, BoxLayout.Y_AXIS));
 		actividadesPanel.setBackground(new Color(17, 47, 69));
@@ -106,10 +106,17 @@ public class VistaAnadirCatalogo {
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String numAct = numeroTF.getText();
+				boolean idsCorrectos = true;
 				if (numAct.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Introduce el número de actividades", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				int cantidad = Integer.parseInt(numAct);
+				int cantidad = 0;
+				try {
+					cantidad = Integer.parseInt(numAct);
+				}catch( NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 				ArrayList<DTOtActividad> actividades = new ArrayList<DTOtActividad>();
 				DTOtCatalogo catalogo = new DTOtCatalogo(cantidad);
 				for (Component comp : actividadesPanel.getComponents()) {
@@ -118,16 +125,24 @@ public class VistaAnadirCatalogo {
 						String tipo = ((JTextField) fields[1]).getText();
 						java.util.Date Date = (java.util.Date) ((JFormattedTextField) fields[3]).getValue();
 						java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
-						int idSala = Integer.parseInt(((JTextField) fields[5]).getText());
+						int idSala = 0;
+						try {
+							idSala =Integer.parseInt(((JTextField) fields[5]).getText());
+						}catch( NumberFormatException nfe){
+							idsCorrectos = false;
+							JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+						}
 						DTOtActividad act = new DTOtActividad(tipo, idSala, sqlDate);
 						actividades.add(act);
 					}
 				}
-				catalogo.setActividades(actividades);
-				Controlador.accion(Evento.ALTA_CATALOGO, catalogo);
+				if(idsCorrectos) {
+					catalogo.setActividades(actividades);
+					Controlador.accion(Evento.ALTA_CATALOGO, catalogo);
+				}
 			}
 		});
-		
+
 		numAct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actividadesPanel.removeAll();
