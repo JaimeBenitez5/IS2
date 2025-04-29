@@ -200,7 +200,7 @@ INSERT INTO Suscripciones (nombre) VALUES ('suscripcion para pros');
 INSERT INTO Premium (idTipoSuscripcion, numSuscripcion, precio, duracion, dniEmpleado, idCatalogo) VALUES (1, 2, '90', '120', '1234567B', 1);
 
 
-INSERT INTO Facturas (fecha, importeTotal) VALUES ('2025-04-28', 120.00);
+INSERT INTO Facturas (fecha, importeTotal) VALUES ('2025-04-28', 30.00);
 INSERT INTO Facturas (fecha, importeTotal) VALUES ('2025-04-29', 90.00);
 INSERT INTO Facturas (fecha, importeTotal) VALUES ('2025-05-01', 90.00);
 INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (1, 'AAAAAAAAA', '2025-04-28', 'Tarjeta', 1, '1234567C');
