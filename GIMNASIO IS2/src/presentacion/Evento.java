@@ -66,7 +66,7 @@ public class Evento {
 
 	public static final int RES_MOSTRAR_FACTURAS_OK = 230;
 	public static final int RES_MOSTRAR_FACTURAS_KO = 231;
-	
+
 	public static final int RES_MOSTRAR_FACTURAS_CLIENTE_OK = 232;
 	public static final int RES_MOSTRAR_FACTURAS_CLIENTE_KO = 233;
 
@@ -137,40 +137,6 @@ public class Evento {
 
 	public static final int RES_MOSTRAR_ACTIVIDAD_OK = 430;
 	public static final int RES_MOSTRAR_ACTIVIDAD_KO = 431;
-	
-	// Eventos Salas
-	//Eventos de Vistas
-	public static final int VISTA_COMPRAS = 901;
-	public static final int VISTA_ANADIR_COMPRA = 902;
-	public static final int VISTA_ELIMINAR_COMPRA = 903;
-	public static final int VISTA_MOSTRAR_COMPRA = 904;
-	public static final int VISTA_MOSTRAR_COMPRAS = 905;
-	public static final int VISTA_MODIFICAR_COMPRA = 906;
-	//Eventos de Negocio
-	public static final int ALTA_COMPRA = 910;
-	public static final int ELIMINAR_COMPRA = 911;
-	public static final int MOSTRAR_COMPRAS = 912;
-	public static final int MODIFICAR_COMPRA = 913;
-	public static final int MOSTRAR_COMPRA = 914;
-	public static final int BUSCAR_COMPRA =915;
-	//Eventos de Respuesta
-	public static final int RES_ALTA_COMPRA_OK = 920;
-	public static final int RES_ALTA_COMPRA_KO = 921;
-
-	public static final int RES_ELIMINAR_COMPRA_OK = 922;
-	public static final int RES_ELIMINAR_COMPRA_KO = 923;
-
-	public static final int RES_BUSCAR_COMPRA_OK = 924;
-	public static final int RES_BUSCAR_COMPRA_KO = 925;
-
-	public static final int RES_MODIFICAR_COMPRA_OK = 926;
-	public static final int RES_MODIFICAR_COMPRA_KO = 927;
-
-	public static final int RES_MOSTRAR_COMPRA_OK = 928;
-	public static final int RES_MOSTRAR_COMPRA_KO = 929;
-
-	public static final int RES_MOSTRAR_COMPRAS_OK = 930;
-	public static final int RES_MOSTRAR_COMPRAS_KO = 931;
 
 	// Eventos Catálogos
 	//Eventos de Vistas
@@ -239,7 +205,7 @@ public class Evento {
 
 	public static final int RES_MOSTRAR_EMPLEADO_OK = 630;
 	public static final int RES_MOSTRAR_EMPLEADO_KO = 631;
-	
+
 	// Eventos Suscripciones Basicas
 	// Eventos de Vistas
 	public static final int VISTA_SUSCRIPCIONES_BASICA = 740;
@@ -310,6 +276,40 @@ public class Evento {
 
 	public static final int RES_MOSTRAR_SUSCRIPCIONES_PREMIUM_OK = 810;
 	public static final int RES_MOSTRAR_SUSCRIPCIONES_PREMIUM_KO = 811;
+	
+	// Eventos Compras
+	//Eventos de Vistas
+	public static final int VISTA_COMPRAS = 901;
+	public static final int VISTA_ANADIR_COMPRA = 902;
+	public static final int VISTA_ELIMINAR_COMPRA = 903;
+	public static final int VISTA_MOSTRAR_COMPRA = 904;
+	public static final int VISTA_MOSTRAR_COMPRAS = 905;
+	public static final int VISTA_MODIFICAR_COMPRA = 906;
+	//Eventos de Negocio
+	public static final int ALTA_COMPRA = 910;
+	public static final int ELIMINAR_COMPRA = 911;
+	public static final int MOSTRAR_COMPRAS = 912;
+	public static final int MODIFICAR_COMPRA = 913;
+	public static final int MOSTRAR_COMPRA = 914;
+	public static final int BUSCAR_COMPRA =915;
+	//Eventos de Respuesta
+	public static final int RES_ALTA_COMPRA_OK = 920;
+	public static final int RES_ALTA_COMPRA_KO = 921;
+
+	public static final int RES_ELIMINAR_COMPRA_OK = 922;
+	public static final int RES_ELIMINAR_COMPRA_KO = 923;
+
+	public static final int RES_BUSCAR_COMPRA_OK = 924;
+	public static final int RES_BUSCAR_COMPRA_KO = 925;
+
+	public static final int RES_MODIFICAR_COMPRA_OK = 926;
+	public static final int RES_MODIFICAR_COMPRA_KO = 927;
+
+	public static final int RES_MOSTRAR_COMPRA_OK = 928;
+	public static final int RES_MOSTRAR_COMPRA_KO = 929;
+
+	public static final int RES_MOSTRAR_COMPRAS_OK = 930;
+	public static final int RES_MOSTRAR_COMPRAS_KO = 931;
 
 
 }

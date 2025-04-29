@@ -28,15 +28,7 @@ public class SASalasImp implements SASalas {
 		int idSala = 0;
 		if (s == null) {
 			String[] empleados = sala.getDniEmpleados();
-			int i = 0;
-			boolean todosSonMantenimiento = true;
-			while (i < empleados.length && todosSonMantenimiento) {
-				String dni = empleados[i];
-				int idRolEmp = getDAOEmpleados().leerEmpleadoRol(dni);
-				if (idRolEmp != 1) todosSonMantenimiento = false;
-				i++;
-			}
-			if (todosSonMantenimiento) {
+			if (todosSonMantenimiento(empleados)) {
 				idSala = getDAOSalas().altaSala(sala);
 				sala.setId(idSala);
 				if (idSala != 0) {
@@ -47,6 +39,18 @@ public class SASalasImp implements SASalas {
 		return idSala;
 	}
 
+	private Boolean todosSonMantenimiento(String[] empleados) {
+		boolean todosSonMantenimiento = true;
+		int i = 0;
+		while (i < empleados.length && todosSonMantenimiento) {
+			String dni = empleados[i];
+			int idRolEmp = getDAOEmpleados().leerEmpleadoRol(dni);
+			if (idRolEmp != 1) todosSonMantenimiento = false;
+			i++;
+		}
+		return todosSonMantenimiento;
+	}
+	
 	public DTOtSala leerSala(final int id) {
 		return getDAOSalas().leerSala(id);
 	}

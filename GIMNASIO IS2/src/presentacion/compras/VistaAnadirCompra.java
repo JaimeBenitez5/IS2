@@ -9,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -41,7 +39,7 @@ public class VistaAnadirCompra {
 	}
 
 	private static JFrame initGUI() {
-		JFrame menuPrincipal = new JFrame("Menú Alta Compras");
+		JFrame menuPrincipal = new JFrame("Menú Alta Compra");
 		menuPrincipal.setSize(854, 500);
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,11 +68,11 @@ public class VistaAnadirCompra {
 		JTextField dniETF = new JTextField(30);
 		panelCampos.add(dniETF);
 
-		JLabel suscripciones = new JLabel("Suscripciones:");
-		suscripciones.setForeground(Color.WHITE);
-		panelCampos.add(suscripciones);
-		JTextField suscripcionesTF = new JTextField(30);
-		panelCampos.add(suscripcionesTF);
+		JLabel suscripcion = new JLabel("ID de Suscripcion:");
+		suscripcion.setForeground(Color.WHITE);
+		panelCampos.add(suscripcion);
+		JTextField suscripcionTF = new JTextField(30);
+		panelCampos.add(suscripcionTF);
 		
 		JLabel dniCliente = new JLabel("DNI cliente:");
 		dniCliente.setForeground(Color.WHITE);
@@ -94,7 +92,7 @@ public class VistaAnadirCompra {
 		JLabel metodoPago = new JLabel("Metodo de Pago:");
 		metodoPago.setForeground(Color.WHITE);
 		panelCampos.add(metodoPago);
-		JComboBox<String> comboMetodo = new JComboBox<>(new String[] { "Efectivo", "Tarjeta", "Transferencia Bancaria", "Bizum"});
+		JComboBox<String> comboMetodo = new JComboBox<>(new String[] { "Sin Asignar", "Efectivo", "Tarjeta", "Transferencia Bancaria", "Bizum"});
 		panelCampos.add(comboMetodo);
 		
 		panelAnadirCompra.add(panelCampos);
@@ -115,26 +113,22 @@ public class VistaAnadirCompra {
 
 		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
+				int idSus = Integer.parseInt(suscripcionTF.getText());
 				String dniE = dniETF.getText();
-				String[] suscripciones = suscripcionesTF.getText().split(" ");
 				String dniC = dniClienteTF.getText();
 				java.util.Date Date = (java.util.Date) fechaTF.getValue();
 				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
-				String mPago = metodoPago.getText();
-				if (dniE.isEmpty() || suscripciones.length==0 || dniC.isEmpty() || fecha==null) {
+				String mPago = comboMetodo.getSelectedItem().toString();
+				if (dniE.isEmpty() || dniC.isEmpty() || fecha==null) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
 					dniETF.setText("");
-					suscripcionesTF.setText("");
+					suscripcionTF.setText("");
 					dniClienteTF.setText("");
 					fechaTF.setText("");
-					metodoPago.setText("");
-					List<Integer> sus= new ArrayList<>();
-					for(String s: suscripciones) {
-						sus.add(Integer.parseInt(s));
-					}
-					DTOtCompra c = new DTOtCompra(dniE, 0, sus, dniC,sqlDate,mPago);
+					comboMetodo.setSelectedItem("Sin Asignar");
+					DTOtCompra c = new DTOtCompra(idSus, dniC, sqlDate, mPago, dniE);
 					Controlador.accion(Evento.ALTA_COMPRA, c);
 				}
 			}

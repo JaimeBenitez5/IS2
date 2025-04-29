@@ -36,15 +36,19 @@ public class VistaCompras {
 
 		Color colorBotones = new Color(48, 86, 119);
 		JButton botonAlta = UIElementFactory.crearBoton("Añadir Compra", colorBotones);
-		JButton botonReadAll = UIElementFactory.crearBoton("Mostrar Compra", colorBotones);
+		JButton botonReadAll = UIElementFactory.crearBoton("Mostrar Compras", colorBotones);
+		JButton botonReadAllFacturas = UIElementFactory.crearBoton("Mostrar Facturas", colorBotones);
 		JButton botonRead = UIElementFactory.crearBoton("Mostrar Compra", colorBotones);
-		JButton botonUnroll = UIElementFactory.crearBoton("Dar de Baja Compra", colorBotones);
+		JButton botonReadFactura = UIElementFactory.crearBoton("Mostrar Factura", colorBotones);
+		JButton botonUnroll = UIElementFactory.crearBoton("Eliminar Compra", colorBotones);
 		JButton botonModCompra = UIElementFactory.crearBoton("Modificar Compra", colorBotones);
 		JButton botonMainMenu = UIElementFactory.crearBotonConIcono("icons/main_menu.png");
 		
 		panel.add(botonAlta);
 		panel.add(botonReadAll);
+		panel.add(botonReadAllFacturas);
 		panel.add(botonRead);
+		panel.add(botonReadFactura);
 		panel.add(botonUnroll);
 		panel.add(botonModCompra);
 
@@ -63,13 +67,25 @@ public class VistaCompras {
 				Controlador.mostrarVista(Evento.VISTA_MOSTRAR_COMPRAS);
 			}
 		});
-
-		botonRead.addActionListener(new ActionListener () {
+		
+		botonReadAllFacturas.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				Controlador.mostrarVista(Evento.VISTA_MOSTRAR_COMPRAS);
+				Controlador.mostrarVista(Evento.VISTA_MOSTRAR_FACTURAS);
 			}
 		});
-
+		
+		botonRead.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				Controlador.mostrarVista(Evento.VISTA_MOSTRAR_COMPRA);
+			}
+		});
+		
+		botonReadFactura.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				Controlador.mostrarVista(Evento.VISTA_MOSTRAR_FACTURA);
+			}
+		});
+		
 		botonUnroll.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				Controlador.mostrarVista(Evento.VISTA_ELIMINAR_COMPRA);

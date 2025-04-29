@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,7 +27,7 @@ public class VistaMenuPrincipal{
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JPanel mainPanel = new JPanel(new GridLayout(4, 5, 25, 25));
+		JPanel mainPanel = new JPanel(new GridLayout(3, 3, 25, 25));
 		mainPanel.setPreferredSize(new Dimension(400, 400));
 		mainPanel.setBackground(new Color(88, 161, 164));
 		mainPanel.setMinimumSize(new Dimension(400, 400));
@@ -38,7 +37,6 @@ public class VistaMenuPrincipal{
 
 		Color colorBotones = new Color(48, 86, 119);
 		JButton botonCliente = UIElementFactory.crearBoton("Clientes", colorBotones);
-		JButton botonFacturas = UIElementFactory.crearBoton("Facturas",colorBotones);
 		JButton botonSalas = UIElementFactory.crearBoton("Salas", colorBotones);
 		JButton botonActividades = UIElementFactory.crearBoton("Actividades",colorBotones);
 		JButton botonEmpleados = UIElementFactory.crearBoton("Empleados",colorBotones);
@@ -50,17 +48,15 @@ public class VistaMenuPrincipal{
 		JLabel logoL = new JLabel(logo, JLabel.CENTER);
 
 		mainPanel.add(botonCliente);
-		mainPanel.add(botonFacturas);
 		mainPanel.add(botonSalas);
 		mainPanel.add(botonActividades);
 		mainPanel.add(botonCompras);
+		mainPanel.add(logoL);
 		mainPanel.add(botonEmpleados);
 		mainPanel.add(botonSuscripcionesBasicas);
 		mainPanel.add(botonSuscripcionesPremium);
 		mainPanel.add(botonCatalogos);
-		mainPanel.add(Box.createRigidArea(new Dimension(20, 20)));
-		mainPanel.add(logoL);
-
+		
 		menuPrincipal.add(mainPanel);
 		menuPrincipal.setVisible(true);
 
@@ -68,13 +64,6 @@ public class VistaMenuPrincipal{
 			public void actionPerformed (ActionEvent e) {
 				menuPrincipal.setVisible (false);
 				Controlador.mostrarVista(Evento.VISTA_CLIENTES);
-			}
-		});
-
-		botonFacturas.addActionListener(new ActionListener () {
-			public void actionPerformed (ActionEvent e) {
-				menuPrincipal.setVisible (false);
-				Controlador.mostrarVista(Evento.VISTA_FACTURAS);
 			}
 		});
 

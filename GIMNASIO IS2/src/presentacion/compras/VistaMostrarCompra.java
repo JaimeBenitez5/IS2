@@ -7,7 +7,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -35,7 +35,7 @@ public class VistaMostrarCompra {
 	}
 
 	private static JFrame initGUI() {
-		JFrame menuPrincipal = new JFrame("Menú Mostrar Sala");
+		JFrame menuPrincipal = new JFrame("Menú Mostrar Compra");
 		menuPrincipal.setSize(854, 480);
 		menuPrincipal.setLocationRelativeTo(null);
 		menuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,7 +49,7 @@ public class VistaMostrarCompra {
 
 		menuPrincipal.add(panelMostrarCompra, BorderLayout.CENTER);
 
-		JLabel titulo = new JLabel("Mostrar Sala");
+		JLabel titulo = new JLabel("Mostrar Compra");
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelMostrarCompra.add(titulo);
@@ -107,7 +107,7 @@ public class VistaMostrarCompra {
 		return menuPrincipal;
 	}
 	
-	public static void actualizar(int evento, DTOtCompra s) {
+	public static void actualizar(int evento, DTOtCompra c) {
 		if (evento == Evento.RES_MOSTRAR_COMPRA_OK) {
 			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
@@ -115,10 +115,20 @@ public class VistaMostrarCompra {
 			textArea.setWrapStyleWord(true);
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
-			String id = String.valueOf(s.getId());
-			String dniC = s.getDniCliente();
-			ArrayList<Integer> sus = (ArrayList<Integer>) s.getSuscripciones();
-			JOptionPane.showMessageDialog(null, "Id compra: " +id + " DNI cliente: " + dniC + " Suscripciones: " + sus);
+			java.sql.Date sqlDate = c.getFecha();
+			java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			String fecha = sdf.format(utilDate);
+			
+			String id = String.valueOf(c.getId());
+			String idSus = String.valueOf(c.getSuscripcion());
+			String dniCli = c.getDniCliente();
+			String metPago = c.getMetodoPago();
+			String idFac= String.valueOf(c.getIdFactura());
+			String dniEmp = c.getDniEmpleado();
+			JOptionPane.showMessageDialog(null, "ID de Compra: " + id + " ID de Suscripcion: " + idSus +
+					" DNI de Cliente: " + dniCli + " Fecha: " + fecha +  " Metodo de Pago: " + metPago +
+					" ID de Factura: " + idFac + " DNI de Empleado: " + dniEmp);
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_MOSTRAR_COMPRA_KO) {

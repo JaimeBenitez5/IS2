@@ -150,7 +150,7 @@ fecha DATE,
 metodoPago VARCHAR(255) CHECK (metodoPago IN ('Efectivo', 'Tarjeta', 'Transferencia Bancaria', 'Bizum')),
 numFactura INT NOT NULL, 
 dniEmpleado VARCHAR(9), 
-PRIMARY KEY (idCompra, numSuscripcion),
+PRIMARY KEY (idCompra),
 FOREIGN KEY (numSuscripcion) REFERENCES Suscripciones(numSuscripcion), 
 FOREIGN KEY (dniCliente) REFERENCES Clientes(dniCliente),
 FOREIGN KEY (numFactura) REFERENCES Facturas(numFactura), 
@@ -200,7 +200,13 @@ INSERT INTO Suscripciones (nombre) VALUES ('suscripcion para pros');
 INSERT INTO Premium (idTipoSuscripcion, numSuscripcion, precio, duracion, dniEmpleado, idCatalogo) VALUES (1, 2, '90', '120', '1234567B', 1);
 
 
-INSERT INTO Facturas (Fecha, ImporteTotal) VALUES ('2015-05-01', 12.22);
+INSERT INTO Facturas (fecha, importeTotal) VALUES ('2025-04-28', 120.00);
+INSERT INTO Facturas (fecha, importeTotal) VALUES ('2025-04-29', 90.00);
+INSERT INTO Facturas (fecha, importeTotal) VALUES ('2025-05-01', 90.00);
+INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (1, 'AAAAAAAAA', '2025-04-28', 'Tarjeta', 1, '1234567C');
+INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (2, 'AAAAAAAAA', '2025-04-28', 'Tarjeta', 1, '1234567C');
+INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (2, 'AAAAAAAAA', '2025-04-29', 'Transferencia Bancaria', 2, '1234567C');
+INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (2, 'BBBBBBBBB', '2025-05-01', 'Efectivo', 3, '1234567C');
 
 SELECT * FROM Salas; 
 SELECT * FROM Clientes; 

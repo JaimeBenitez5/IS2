@@ -1,10 +1,10 @@
 package negocio;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class DTOtCompra {
 	private int _idCompra;
-	private Integer[] _idSuscripciones;
+	private int _idSuscripcion;
 	private String _dniCliente;
 	private Date _fecha;
 	private String _metodoPago;
@@ -12,9 +12,9 @@ public class DTOtCompra {
 	private String _dniEmpleado;
 	private int _idFactura;
 	
-	public DTOtCompra(int idCompra, Integer[] idSuscripciones, String dniCliente, Date fecha, String metodoPago, String dniEmpleado, int idFactura) {
+	public DTOtCompra(int idCompra, int idSuscripcion, String dniCliente, Date fecha, String metodoPago, String dniEmpleado, int idFactura) {
 		_idCompra = idCompra;
-		_idSuscripciones = idSuscripciones;
+		_idSuscripcion = idSuscripcion;
 		_dniCliente = dniCliente;
 		_fecha = fecha;
 		_metodoPago = metodoPago;
@@ -22,9 +22,19 @@ public class DTOtCompra {
 		_idFactura = idFactura;
 	}
 	
-	public DTOtCompra(Integer[] idSuscripciones, String dniCliente, Date fecha, String metodoPago, String dniEmpleado, int idFactura) {
+	public DTOtCompra(int idCompra, int idSuscripcion, String dniCliente, Date fecha, String metodoPago, String dniEmpleado) {
+		_idCompra = idCompra;
+		_idSuscripcion = idSuscripcion;
+		_dniCliente = dniCliente;
+		_fecha = fecha;
+		_metodoPago = metodoPago;
+		_dniEmpleado = dniEmpleado;
+		_idFactura = 0;
+	}
+	
+	public DTOtCompra(int idSuscripcion, String dniCliente, Date fecha, String metodoPago, String dniEmpleado) {
 		_idCompra = 0;
-		_idSuscripciones = idSuscripciones;
+		_idSuscripcion = idSuscripcion;
 		_dniCliente = dniCliente;
 		_fecha = fecha;
 		_metodoPago = metodoPago;
@@ -56,8 +66,8 @@ public class DTOtCompra {
 		return _idCompra;
 	}
 	
-	public Integer[] getSuscripciones(){
-		return _idSuscripciones;
+	public int getSuscripcion(){
+		return _idSuscripcion;
 	}
 	
 	public void setFecha(Date fecha) {

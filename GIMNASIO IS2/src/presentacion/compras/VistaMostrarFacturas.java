@@ -72,7 +72,7 @@ public class VistaMostrarFacturas {
 	public static void actualizar(int evento, List<DTOtFactura> res) {
 		if (evento == Evento.RES_MOSTRAR_FACTURAS_OK) {
 			panelMostrarFacturas.removeAll();
-			String[] columnNames = {"ID", "Fecha", "Importe"};
+			String[] columnNames = {"ID de Factura", "Fecha", "Importe"};
 			String[][] data = new String[res.size()][3];
 
 			for (int i = 0; i < res.size(); i++) {
@@ -82,7 +82,7 @@ public class VistaMostrarFacturas {
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 				String fechaFormateada = sdf.format(utilDate);
 				data[i][0] = String.valueOf(f.getId());
-				data[i][1] =  fechaFormateada;
+				data[i][1] = fechaFormateada;
 				data[i][2] = String.valueOf(f.getImporte());
 			}
 

@@ -6,7 +6,6 @@ import presentacion.catalogos.*;
 import presentacion.clientes.*;
 import presentacion.compras.*;
 import presentacion.empleados.*;
-import presentacion.facturas.*;
 import presentacion.salas.*;
 import presentacion.suscripciones.basica.*;
 import presentacion.suscripciones.premium.*;
@@ -19,7 +18,6 @@ public class Controlador{
 	private static SAActividades SAActividades;
 	private static SACatalogos SACatalogos;
 	private static SAEmpleados SAEmpleados;
-	private static SAFacturas SAFacturas;
 	private static SASuscripciones SASuscripcionesBasicas;
 	private static SASuscripciones SASuscripcionesPremium;	
 	private static SACompras SACompras;
@@ -35,10 +33,6 @@ public class Controlador{
 	private static SAActividades getSAActividades() {
 		if (SAActividades == null) SAActividades = new SAActividadesImp();
 		return SAActividades;
-	}
-	private static SAFacturas getSAFacturas(){
-		if(SAFacturas == null) SAFacturas = new SAFacturasImp();
-		return SAFacturas;
 	}
 	private static SACatalogos getSACatalogos() {
 		if (SACatalogos == null) SACatalogos = new SACatalogosImp();
@@ -299,21 +293,21 @@ public class Controlador{
 			break;
 		}
 		case Evento.MOSTRAR_COMPRAS:{
-			List<DTOtSala> res = getSACompras().leerTodasCompras();
-			if (!res.isEmpty()) VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_OK, res);
-			else VistaMostrarSalas.actualizar(Evento.RES_MOSTRAR_SALAS_KO, null);
+			List<DTOtCompra> res = getSACompras().leerTodasCompras();
+			if (!res.isEmpty()) VistaMostrarCompras.actualizar(Evento.RES_MOSTRAR_COMPRAS_OK, res);
+			else VistaMostrarCompras.actualizar(Evento.RES_MOSTRAR_COMPRAS_KO, null);
 			break;
 		}
 		case Evento.ELIMINAR_COMPRA:{
-			int exito = getSACompras().borrarCompra((DTOtCompra) datos);
-			if (exito == 1) VistaEliminarSala.actualizar(Evento.RES_ELIMINAR_SALA_OK, (int) datos);
-			else VistaEliminarSala.actualizar(Evento.RES_ELIMINAR_SALA_KO, null);
+			int exito = getSACompras().borrarCompra((int) datos);
+			if (exito == 1) VistaEliminarCompra.actualizar(Evento.RES_ELIMINAR_COMPRA_OK, (int) datos);
+			else VistaEliminarCompra.actualizar(Evento.RES_ELIMINAR_COMPRA_KO, null);
 			break;
 		}
 		case Evento.MODIFICAR_COMPRA:{
 			int exitoModificar = getSACompras().actualizarCompra((DTOtCompra) datos);
-			if (exitoModificar == 1) VistaModificarSala.actualizar(Evento.RES_MODIFICAR_COMPRA_OK, null);
-			else VistaModificarSala.actualizar(Evento.RES_MODIFICAR_COMPRA_KO, null);
+			if (exitoModificar == 1) VistaModificarCompra.actualizar(Evento.RES_MODIFICAR_COMPRA_OK, null);
+			else VistaModificarCompra.actualizar(Evento.RES_MODIFICAR_COMPRA_KO, null);
 			break;
 		}
 		case Evento.MOSTRAR_FACTURA:{
@@ -528,16 +522,25 @@ public class Controlador{
 			VistaMostrarCompra.open();
 			break;
 		}
+		case Evento.VISTA_MOSTRAR_FACTURA:{ 
+			VistaMostrarFactura.open();
+			break;
+		}
+		
 		case Evento.VISTA_ELIMINAR_COMPRA:{
-			VistaEliminarFactura.open();
+			VistaEliminarCompra.open();
 			break;
 		}
 		case Evento.VISTA_MOSTRAR_COMPRAS:{ 
-			VistaMostrarFactura.open();
+			VistaMostrarCompras.open();
+			break;
+		}
+		case Evento.VISTA_MOSTRAR_FACTURAS:{ 
+			VistaMostrarFacturas.open();
 			break;
 		}
 		case Evento.VISTA_MODIFICAR_COMPRA:{ 
-			VistaMostrarFactura.open();
+			VistaModificarCompra.open();
 			break;
 		}
 		}
