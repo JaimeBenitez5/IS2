@@ -87,6 +87,7 @@ public class VistaMostrarSuscripcionesBasica {
 			}
 
 			JTable tablaSuscripciones = new JTable(data, columnNames);
+			tablaSuscripciones.setAutoCreateRowSorter(true);
 			JScrollPane scrollPane = new JScrollPane(tablaSuscripciones);
 			tablaSuscripciones.setBackground(new Color(17, 47, 69));
 			tablaSuscripciones.setForeground(Color.WHITE);

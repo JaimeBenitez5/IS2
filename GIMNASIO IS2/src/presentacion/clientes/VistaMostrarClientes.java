@@ -84,6 +84,7 @@ public class VistaMostrarClientes {
 			}
 
 			JTable tablaClientes = new JTable(data, columnNames);
+			tablaClientes.setAutoCreateRowSorter(true);
 			JScrollPane scrollPane = new JScrollPane(tablaClientes);
 			tablaClientes.setBackground(new Color(17, 47, 69));
 			tablaClientes.setForeground(Color.WHITE);

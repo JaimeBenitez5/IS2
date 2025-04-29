@@ -86,12 +86,13 @@ public class VistaMostrarFacturas {
 				data[i][2] = String.valueOf(f.getImporte());
 			}
 
-			JTable tablaClientes = new JTable(data, columnNames);
-			JScrollPane scrollPane = new JScrollPane(tablaClientes);
-			tablaClientes.setBackground(new Color(17, 47, 69));
-			tablaClientes.setForeground(Color.WHITE);
-			tablaClientes.setOpaque(false);
-			tablaClientes.setShowGrid(false);
+			JTable tablaFacturas = new JTable(data, columnNames);
+			JScrollPane scrollPane = new JScrollPane(tablaFacturas);
+			tablaFacturas.setAutoCreateRowSorter(true);
+			tablaFacturas.setBackground(new Color(17, 47, 69));
+			tablaFacturas.setForeground(Color.WHITE);
+			tablaFacturas.setOpaque(false);
+			tablaFacturas.setShowGrid(false);
 			scrollPane.setForeground(new Color(17, 47, 69));
 			scrollPane.setOpaque(false);
 			scrollPane.getViewport().setOpaque(false);

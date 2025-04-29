@@ -84,6 +84,7 @@ public class VistaMostrarEmpleados {
 
 			JTable tablaEmpleados = new JTable(data, columnNames);
 			JScrollPane scrollPane = new JScrollPane(tablaEmpleados);
+			tablaEmpleados.setAutoCreateRowSorter(true);
 			tablaEmpleados.setBackground(new Color(17, 47, 69));
 			tablaEmpleados.setForeground(Color.WHITE);
 			tablaEmpleados.setOpaque(false);

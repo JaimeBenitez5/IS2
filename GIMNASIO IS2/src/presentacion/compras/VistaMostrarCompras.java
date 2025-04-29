@@ -92,12 +92,13 @@ public class VistaMostrarCompras {
 				data[i][6] = c.getDniEmpleado();
 			}
 
-			JTable tablaClientes = new JTable(data, columnNames);
-			JScrollPane scrollPane = new JScrollPane(tablaClientes);
-			tablaClientes.setBackground(new Color(17, 47, 69));
-			tablaClientes.setForeground(Color.WHITE);
-			tablaClientes.setOpaque(false);
-			tablaClientes.setShowGrid(false);
+			JTable tablaCompras = new JTable(data, columnNames);
+			tablaCompras.setAutoCreateRowSorter(true);
+			JScrollPane scrollPane = new JScrollPane(tablaCompras);
+			tablaCompras.setBackground(new Color(17, 47, 69));
+			tablaCompras.setForeground(Color.WHITE);
+			tablaCompras.setOpaque(false);
+			tablaCompras.setShowGrid(false);
 			scrollPane.setForeground(new Color(17, 47, 69));
 			scrollPane.setOpaque(false);
 			scrollPane.getViewport().setOpaque(false);

@@ -92,6 +92,7 @@ public class VistaMostrarActividades {
 			}
 
 			JTable tablaActividades = new JTable(data, columnNames);
+			tablaActividades.setAutoCreateRowSorter(true);
 			JScrollPane scrollPane = new JScrollPane(tablaActividades);
 			tablaActividades.setBackground(new Color(17, 47, 69));
 			tablaActividades.setForeground(Color.WHITE);

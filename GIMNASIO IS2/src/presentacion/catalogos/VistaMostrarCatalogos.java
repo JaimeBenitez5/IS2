@@ -81,6 +81,7 @@ public class VistaMostrarCatalogos {
 			}
 
 			JTable tablaCatalogos = new JTable(data, columnNames);
+			tablaCatalogos.setAutoCreateRowSorter(true);
 			JScrollPane scrollPane = new JScrollPane(tablaCatalogos);
 			tablaCatalogos.setBackground(new Color(17, 47, 69));
 			tablaCatalogos.setForeground(Color.WHITE);

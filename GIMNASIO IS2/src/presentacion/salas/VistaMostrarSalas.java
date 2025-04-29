@@ -84,6 +84,7 @@ public class VistaMostrarSalas {
 			}
 
 			JTable tablaSalas = new JTable(data, columnNames);
+			tablaSalas.setAutoCreateRowSorter(true);
 			JScrollPane scrollPane = new JScrollPane(tablaSalas);
 			tablaSalas.setBackground(new Color(17, 47, 69));
 			tablaSalas.setForeground(Color.WHITE);
