@@ -39,4 +39,10 @@ public class DTOtPremium extends DTOtSuscripcion{
 	public void setDniEmpleado(String dniEmpleado) {
 		_dniEmpleado = dniEmpleado;
 	}
+	
+	public String toString() {
+		return _idSuscripcion + " " + _tipoSus + " " + _duracion + " "+ _precio + " " + _nombre +
+				" " + _idCatalogo + " " + _dniEmpleado; 
+	}
+}
 }

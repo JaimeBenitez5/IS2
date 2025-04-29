@@ -52,4 +52,9 @@ public class DTOtBasica extends DTOtSuscripcion {
 	public void setIdSala(int idSala) {
 		_idSala = idSala;
 	}
+	
+	public String toString() {
+		return _idSuscripcion + " " + _tipoSus + " " + _duracion + " "+ _precio + " " + _nombre +
+				" " + _tipoActividad + " " + _fecha.toString() + " " + _idSala; 
+	}
 }
