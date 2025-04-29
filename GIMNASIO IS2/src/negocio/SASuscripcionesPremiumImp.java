@@ -17,12 +17,13 @@ public class SASuscripcionesPremiumImp implements SASuscripciones {
 
     public int altaSuscripcion(final DTOtSuscripcion suscripcion) {
     	DTOtPremium premium = (DTOtPremium) suscripcion;
-        int numSuscripcion = getDAOSuscripciones().altaSuscripcion(premium);
+        int numSuscripcion = 0;
+        numSuscripcion = getDAOSuscripciones().altaSuscripcion(premium);
         if (numSuscripcion != 0) {
-            int resultado = getDAOSuscripciones().altaSuscripcionPremium(premium);
-            if (resultado != 0) return numSuscripcion;
+        	premium.setIdSuscripcion(numSuscripcion);
+            getDAOSuscripciones().altaSuscripcionPremium(premium);
         }
-        return 0;
+        return numSuscripcion;
     }
 
     public DTOtSuscripcion leerSuscripcion(final int id) {

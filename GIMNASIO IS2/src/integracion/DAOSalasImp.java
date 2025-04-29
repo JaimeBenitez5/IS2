@@ -23,7 +23,7 @@ public class DAOSalasImp implements DAOSalas {
         }
         return 0;
     }
-
+    
     public int altaMantenedor(final DTOtSala sala) {
         int filas = 0;
         String insertMantenedor = "INSERT INTO MANTIENEN (dniEmpleado, idSala) VALUES (?, ?)";

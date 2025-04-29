@@ -48,7 +48,6 @@ public class VistaMostrarCatalogos {
 		JButton back = UIElementFactory.crearBotonConIcono("icons/back.png");
 		JButton botonMainMenu = UIElementFactory.crearBotonConIcono("icons/main_menu.png");
 
-
 		botones.add(back);
 		botones.add(botonMainMenu);
 		GUI.add(botones, BorderLayout.SOUTH);
@@ -58,7 +57,6 @@ public class VistaMostrarCatalogos {
 				GUI.setVisible (false);
 			}
 		});
-
 
 		botonMainMenu.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
@@ -72,13 +70,14 @@ public class VistaMostrarCatalogos {
 	public static void actualizar(int evento, List<DTOtCatalogo> datos) {
 		if (evento == Evento.RES_MOSTRAR_CATALOGOS_OK) {
 			panelMostrarCatalogos.removeAll();
-			String[] columnNames = {"ID", "Numero de actividades"};
-			String[][] data = new String[datos.size()][2];
+			String[] columnNames = {"ID", "Numero de actividades", "Actividades"};
+			String[][] data = new String[datos.size()][3];
 
 			for (int i = 0; i < datos.size(); i++) {
 				DTOtCatalogo catalogo = datos.get(i);
 				data[i][0] = String.valueOf(catalogo.getId());
 				data[i][1] = String.valueOf(catalogo.getNumActividades());
+				data[i][2] = String.valueOf(catalogo.getActividades());
 			}
 
 			JTable tablaCatalogos = new JTable(data, columnNames);

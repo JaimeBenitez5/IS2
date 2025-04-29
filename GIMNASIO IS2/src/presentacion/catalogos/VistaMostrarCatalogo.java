@@ -116,7 +116,8 @@ public class VistaMostrarCatalogo {
 			scrollPane.setPreferredSize( new Dimension( 500, 200 ) );
 			int id = catalogo.getId();
 			int n = catalogo.getNumActividades();
-			JOptionPane.showMessageDialog(null,"ID: " + id + "de actividades: " + n);
+			String act = catalogo.getActividades().toString();
+			JOptionPane.showMessageDialog(null,"ID: " + id + " Numero de actividades: " + n +" Actividades " + act);
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_MOSTRAR_CATALOGO_KO) {

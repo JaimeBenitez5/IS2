@@ -128,7 +128,7 @@ duracion INT,
 dniEmpleado VARCHAR(9),
 idCatalogo INT, 
 FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado),
-FOREIGN KEY (idCatalogo) REFERENCES Catalogos(idCatalogo),
+FOREIGN KEY (idCatalogo) REFERENCES Catalogos(idCatalogo) ON DELETE CASCADE,
 FOREIGN KEY (numSuscripcion) REFERENCES Suscripciones(numSuscripcion) ON DELETE CASCADE
 );
 
@@ -138,7 +138,7 @@ tipoActividad VARCHAR(255),
 fechaActividad DATE, 
 idSala INT, 
 PRIMARY KEY(idCatalogo, tipoActividad, fechaActividad, idSala), 
-FOREIGN KEY (idCatalogo) REFERENCES Catalogos(idCatalogo),
+FOREIGN KEY (idCatalogo) REFERENCES Catalogos(idCatalogo) ON DELETE CASCADE,
 FOREIGN KEY (tipoActividad, fechaActividad, idSala) REFERENCES Actividades(tipoActividad, fecha, idSala) ON DELETE CASCADE
 );
 
@@ -182,12 +182,16 @@ INSERT INTO Clientes (nombre, dniCliente, direccion) VALUES ('Carlos', 'BBBBBBBB
 
 INSERT INTO Salas (aforo) VALUES (100);
 INSERT INTO Salas (aforo) VALUES (150); 
+INSERT INTO Salas (aforo) VALUES (100); 
 
 INSERT INTO Mantienen(dniEmpleado, idSala) VALUES ('06013483H', 1);
 INSERT INTO Mantienen(dniEmpleado, idSala) VALUES ('06013483H', 2);
+INSERT INTO Mantienen(dniEmpleado, idSala) VALUES ('06013483H', 3);
 
 INSERT INTO Actividades (tipoActividad, fecha, idSala, dniEmpleado) VALUES ('Yoga', '2025-03-19', 1, '12345678A');
 INSERT INTO Actividades (tipoActividad, fecha, idSala, dniEmpleado) VALUES ('Spinning', '2025-03-20', 2, '12345678A'); 
+INSERT INTO Actividades (tipoActividad, fecha, idSala, dniEmpleado) VALUES ('Zumba', '2025-03-19', 3, '12345678A');
+INSERT INTO Actividades (tipoActividad, fecha, idSala, dniEmpleado) VALUES ('Karate', '2025-03-20', 3, '12345678A'); 
 
 INSERT INTO Catalogos (numActividades) VALUES (2); 
 
@@ -206,8 +210,3 @@ INSERT INTO Facturas (fecha, importeTotal) VALUES ('2025-05-01', 90.00);
 INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (1, 'AAAAAAAAA', '2025-04-28', 'Tarjeta', 1, '12345678C');
 INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (2, 'AAAAAAAAA', '2025-04-28', 'Tarjeta', 2, '12345678C');
 INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (2, 'AAAAAAAAA', '2025-04-29', 'Transferencia Bancaria', 3, '12345678C');
-
-SELECT * FROM Salas; 
-SELECT * FROM Clientes; 
-SELECT * FROM Empleados;
-SELECT * FROM Facturas;

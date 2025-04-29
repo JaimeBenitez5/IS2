@@ -1,16 +1,14 @@
 package integracion;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import configFiles.BDConexion;
+import negocio.DTOtActividad;
 import negocio.DTOtCatalogo;
 
-public class DAOCatalogosImp implements DAOCatalogos{
+public class DAOCatalogosImp implements DAOCatalogos {
 
 	public int altaCatalogo(final DTOtCatalogo catalogo) {
 		String query = "INSERT INTO CATALOGOS (numActividades) VALUES (?)";
@@ -18,10 +16,7 @@ public class DAOCatalogosImp implements DAOCatalogos{
 			stmt.setInt(1, catalogo.getNumActividades());
 			stmt.executeUpdate();
 			try (ResultSet rs = stmt.getGeneratedKeys()) {
-				if (rs.next()) {
-					int idCatalogo = rs.getInt(1);
-					return idCatalogo;
-				}
+				if (rs.next()) return rs.getInt(1);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -30,48 +25,58 @@ public class DAOCatalogosImp implements DAOCatalogos{
 	}
 
 	public DTOtCatalogo leerCatalogo(final int id) {
-		String query = "SELECT * FROM CATALOGOS WHERE idCatalogo  = ?";
-		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
-			stmt.setInt(1,id);
-			ResultSet rs = stmt.executeQuery();
-			if(rs.next()) {
-				int idCatalogo = rs.getInt("idCatalogo");
-				int numActividades = rs.getInt("numActividades");
-				DTOtCatalogo s = new DTOtCatalogo(idCatalogo, numActividades);
-				return s;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
+	    String query = """
+	        SELECT c.idCatalogo, c.numActividades,
+	               a.tipoActividad, a.fecha, a.idSala, a.dniEmpleado
+	        FROM CATALOGOS c
+	        LEFT JOIN ActividadesCatalogo ac ON c.idCatalogo = ac.idCatalogo
+	        LEFT JOIN Actividades a ON ac.tipoActividad = a.tipoActividad AND ac.fechaActividad = a.fecha AND ac.idSala = a.idSala
+	        WHERE c.idCatalogo = ?
+	    """;
+	    DTOtCatalogo catalogo = null;
+	    ArrayList<DTOtActividad> actividades = new ArrayList<>();
+	    try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
+	        stmt.setInt(1, id);
+	        ResultSet rs = stmt.executeQuery();
+	        while (rs.next()) {
+	            if (catalogo == null) {
+	                int numActividades = rs.getInt("numActividades");
+	                catalogo = new DTOtCatalogo(id, numActividades);
+	            }
+	            String tipoActividad = rs.getString("tipoActividad");
+	            Date fecha = rs.getDate("fecha");
+	            int idSala = rs.getInt("idSala");
+	            String dniEmpleado = rs.getString("dniEmpleado");
+	            if (tipoActividad != null && fecha != null) {
+	                DTOtActividad actividad = new DTOtActividad(tipoActividad, idSala, fecha, dniEmpleado, id);
+	                actividades.add(actividad);
+	            }
+	        }
+	        if (catalogo != null) {
+	            catalogo.setActividades(actividades);
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return catalogo;
 	}
 
 	public int actualizarCatalogo(final DTOtCatalogo catalogo) {
 		String query = "UPDATE CATALOGOS SET numActividades = ? WHERE idCatalogo = ?";
-		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1, catalogo.getNumActividades());
 			stmt.setInt(2, catalogo.getId());
-	        return stmt.executeUpdate(); 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
-	
-	public int borrarCatalogosSala(final int idSala) {
-		String query = "DELETE FROM ACTIVIDADESCATALOGO WHERE idSala = ?";
-		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-			stmt.setInt(1, idSala);
 			return stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return 0;
 	}
-	
+
 	public int borrarCatalogo(final int id) {
-		String query1 = "DELETE FROM CATALOGOS WHERE idCatalogo = ?";
-		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query1, Statement.RETURN_GENERATED_KEYS)) {
+		String query = "DELETE FROM CATALOGOS WHERE idCatalogo = ?";
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1, id);
 			return stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -79,21 +84,70 @@ public class DAOCatalogosImp implements DAOCatalogos{
 		}
 		return 0;
 	}
-	
-	public List<DTOtCatalogo> leerTodosCatalogos() {
-		ArrayList<DTOtCatalogo> catalogos = new ArrayList<DTOtCatalogo>();
-		String query = "SELECT * FROM CATALOGOS";
-		try ( Statement stmt = BDConexion.getConnection().createStatement ()) {
-			ResultSet rs = stmt.executeQuery(query);
-			while (rs.next ()) {
-				int idCatalogo = rs.getInt("idCatalogo");
-				int numActividades = rs.getInt("numActividades");
-				DTOtCatalogo c = new DTOtCatalogo(idCatalogo, numActividades);
-				catalogos.add(c);
-			}
+
+	public int borrarCatalogosSala(final int idSala) {
+		String query = "DELETE FROM ACTIVIDADESCATALOGO WHERE idSala = ?";
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
+			stmt.setInt(1, idSala);
+			return stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return catalogos;
+		return 0;
+	}
+
+	public int borrarActividadesCatalogo(final int idCatalogo) {
+		String query = "DELETE FROM ActividadesCatalogo WHERE idCatalogo = ?";
+		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
+			stmt.setInt(1, idCatalogo);
+			return stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public List<DTOtCatalogo> leerTodosCatalogos() {
+	    List<DTOtCatalogo> catalogos = new ArrayList<>();
+	    String query = """
+	        SELECT c.idCatalogo, c.numActividades, a.tipoActividad, a.fecha, a.idSala, a.dniEmpleado
+	        FROM CATALOGOS c LEFT JOIN ActividadesCatalogo ac ON c.idCatalogo = ac.idCatalogo
+	        LEFT JOIN Actividades a ON ac.tipoActividad = a.tipoActividad AND ac.fechaActividad = a.fecha AND ac.idSala = a.idSala
+	        ORDER BY c.idCatalogo
+	    """;
+	    try (Statement stmt = BDConexion.getConnection().createStatement();
+	         ResultSet rs = stmt.executeQuery(query)) {
+	        int catalogoActual = -1;
+	        DTOtCatalogo catalogo = null;
+	        ArrayList<DTOtActividad> actividades = new ArrayList<>();
+	        while (rs.next()) {
+	            int idCatalogo = rs.getInt("idCatalogo");
+	            int numActividades = rs.getInt("numActividades");
+	            if (idCatalogo != catalogoActual) {
+	                if (catalogo != null) {
+	                    catalogo.setActividades(actividades);
+	                    catalogos.add(catalogo);
+	                }
+	                catalogo = new DTOtCatalogo(idCatalogo, numActividades);
+	                actividades = new ArrayList<>();
+	                catalogoActual = idCatalogo;
+	            }
+	            String tipoActividad = rs.getString("tipoActividad");
+	            Date fecha = rs.getDate("fecha");
+	            int idSala = rs.getInt("idSala");
+	            String dniEmpleado = rs.getString("dniEmpleado");
+	            if (tipoActividad != null && fecha != null) {
+	                DTOtActividad actividad = new DTOtActividad(tipoActividad, idSala, fecha, dniEmpleado, idCatalogo);
+	                actividades.add(actividad);
+	            }
+	        }
+	        if (catalogo != null) {
+	            catalogo.setActividades(actividades);
+	            catalogos.add(catalogo);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return catalogos;
 	}
 }

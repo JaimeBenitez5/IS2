@@ -15,6 +15,7 @@ public interface DAOCatalogos {
 	int borrarCatalogosSala(final int idSala);
 	
 	int borrarCatalogo(final int id);
+	int borrarActividadesCatalogo(final int idCatalogo);
 
 	List<DTOtCatalogo> leerTodosCatalogos();
 }
