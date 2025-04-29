@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -23,6 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import negocio.DTOtActividad;
 import negocio.DTOtCatalogo;
 import presentacion.Controlador;
 import presentacion.Evento;
@@ -47,7 +49,7 @@ public class VistaAnadirCatalogo {
 		JPanel panelAnadirCatalogo = new JPanel();
 		panelAnadirCatalogo.setLayout(new BoxLayout(panelAnadirCatalogo, BoxLayout.Y_AXIS));
 		panelAnadirCatalogo.setBackground(new Color(17, 47, 69));
-		panelAnadirCatalogo.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+		panelAnadirCatalogo.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
 		menuPrincipal.add(panelAnadirCatalogo, BorderLayout.CENTER);
 
@@ -55,11 +57,9 @@ public class VistaAnadirCatalogo {
 		titulo.setForeground(Color.WHITE);
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelAnadirCatalogo.add(titulo);
-		panelAnadirCatalogo.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(4, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(2, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
-		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
 		JLabel numero = new JLabel("Número de actividades:");
 		numero.setForeground(Color.WHITE);
@@ -67,10 +67,10 @@ public class VistaAnadirCatalogo {
 		JTextField numeroTF = new JTextField(30);
 		panelCampos.add(numeroTF);
 
-		JButton generarActividades = new JButton("Confirmar número");
-		generarActividades.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelCampos.add(generarActividades);
-
+		JButton numAct = UIElementFactory.crearBoton("Confirmar numero",  new Color(67, 75, 172));
+		numAct.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panelCampos.add(numAct);
+		
 		panelAnadirCatalogo.add(panelCampos);
 		
 		JPanel actividadesPanel = new JPanel();
@@ -78,12 +78,13 @@ public class VistaAnadirCatalogo {
 		actividadesPanel.setBackground(new Color(17, 47, 69));
 
 		JScrollPane scrollActividades = new JScrollPane(actividadesPanel);
-		scrollActividades.setPreferredSize(new Dimension(600, 200));
+		scrollActividades.setPreferredSize(new Dimension(600, 500));
 		scrollActividades.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollActividades.setBorder(BorderFactory.createTitledBorder("Actividades"));
 
 		scrollActividades.getViewport().setBackground(new Color(17, 47, 69));
-		panelAnadirCatalogo.add(generarActividades);
+		panelAnadirCatalogo.add(Box.createRigidArea(new Dimension(0, 20)));
+		panelAnadirCatalogo.add(numAct);
 		panelAnadirCatalogo.add(Box.createRigidArea(new Dimension(0, 20)));
 		panelAnadirCatalogo.add(scrollActividades);
 
@@ -104,28 +105,30 @@ public class VistaAnadirCatalogo {
 
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String n = numeroTF.getText();
-				if (n.isEmpty()) {
+				String numAct = numeroTF.getText();
+				if (numAct.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Introduce el número de actividades", "Error", JOptionPane.ERROR_MESSAGE);
-					return;
 				}
-				int cantidad = Integer.parseInt(n);
+				int cantidad = Integer.parseInt(numAct);
+				ArrayList<DTOtActividad> actividades = new ArrayList<DTOtActividad>();
 				DTOtCatalogo catalogo = new DTOtCatalogo(cantidad);
 				for (Component comp : actividadesPanel.getComponents()) {
 					if (comp instanceof JPanel actividadPanel) {
 						Component[] fields = actividadPanel.getComponents();
 						String tipo = ((JTextField) fields[1]).getText();
-						String fecha = ((JFormattedTextField) fields[3]).getText();
-						String sala = ((JTextField) fields[5]).getText();
-						// Puedes almacenar esta información como lista de objetos o DTOs, según tu modelo
-						System.out.println("Actividad -> Tipo: " + tipo + ", Fecha: " + fecha + ", Sala: " + sala);
+						java.util.Date Date = (java.util.Date) ((JFormattedTextField) fields[3]).getValue();
+						java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
+						int idSala = Integer.parseInt(((JTextField) fields[5]).getText());
+						DTOtActividad act = new DTOtActividad(tipo, idSala, sqlDate);
+						actividades.add(act);
 					}
 				}
+				catalogo.setActividades(actividades);
 				Controlador.accion(Evento.ALTA_CATALOGO, catalogo);
 			}
 		});
 		
-		generarActividades.addActionListener(new ActionListener() {
+		numAct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actividadesPanel.removeAll();
 				String n = numeroTF.getText();
@@ -151,7 +154,6 @@ public class VistaAnadirCatalogo {
 					JLabel salaLabel = new JLabel("Sala:");
 					salaLabel.setForeground(Color.WHITE);
 					JTextField salaTF = new JTextField();
-
 					actividad.add(tipoLabel);
 					actividad.add(tipoTF);
 					actividad.add(fechaLabel);
@@ -159,6 +161,7 @@ public class VistaAnadirCatalogo {
 					actividad.add(salaLabel);
 					actividad.add(salaTF);
 					actividadesPanel.add(actividad);
+					actividadesPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 				}
 				actividadesPanel.revalidate();
 				actividadesPanel.repaint();

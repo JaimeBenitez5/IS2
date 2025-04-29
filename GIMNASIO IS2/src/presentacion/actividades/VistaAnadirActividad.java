@@ -48,7 +48,7 @@ public class VistaAnadirActividad {
 		JPanel panelAnadirActividad = new JPanel();
 		panelAnadirActividad.setLayout(new BoxLayout(panelAnadirActividad, BoxLayout.Y_AXIS));
 		panelAnadirActividad.setBackground(new Color(17, 47, 69));
-		panelAnadirActividad.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+		panelAnadirActividad.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
 		menuPrincipal.add(panelAnadirActividad, BorderLayout.CENTER);
 
@@ -58,7 +58,7 @@ public class VistaAnadirActividad {
 		panelAnadirActividad.add(titulo);
 		panelAnadirActividad.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(4, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(5, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
@@ -89,6 +89,13 @@ public class VistaAnadirActividad {
 		JTextField dniEmpTF = new JTextField(30);
 		panelCampos.add(dniEmpTF);
 		
+		JLabel idCat = new JLabel("ID de Catalogo (si tiene):");
+		idCat.setForeground(Color.WHITE);
+		panelCampos.add(idCat);
+		JTextField idCatTF = new JTextField(30);
+		panelCampos.add(idCatTF);
+		
+		
 		panelAnadirActividad.add(panelCampos);
 		panelAnadirActividad.add(Box.createRigidArea(new Dimension(0, 50)));
 
@@ -112,15 +119,15 @@ public class VistaAnadirActividad {
 				java.util.Date Date = (java.util.Date) fechaTF.getValue();
 				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
 				int idSala = Integer.parseInt(idSalaTF.getText());
-				String dniEmp = dniEmpTF.getText();
-				
+				int idCat =Integer.parseInt(idCatTF.getText());
+				String dniEmp = idCatTF.getText();
 				if (tipoAct == "") {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				tipoActTF.setText("");
-				dniEmpTF.setText("");
+				idCatTF.setText("");
 				fechaTF.setValue(new java.util.Date());
-				DTOtActividad a = new DTOtActividad(tipoAct, idSala, sqlDate);
+				DTOtActividad a = new DTOtActividad(tipoAct, idSala, sqlDate, idCat);
 				if(dniEmp != "") a.setDniEmpleado(dniEmp);
 				Controlador.accion(Evento.ALTA_ACTIVIDAD, a);
 			}
