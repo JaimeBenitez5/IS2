@@ -12,7 +12,7 @@ class DAOClientesTest {
 
 	@Test
 	void Test_1() {
-		integracion.DAOClientes dao = new DAOClientesImp();
+		DAOClientes dao = new DAOClientesImp();
 		assertEquals(1,dao.altaCliente(new DTOtCliente("11111111A", "Agapito", "Casa de Agapito", true)));
 		assertEquals(2,dao.altaCliente(new DTOtCliente("22222222B", "Josefa", "Casa de Josefa", true)));
 		dao.borrarCliente("11111111A");
