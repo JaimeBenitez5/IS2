@@ -14,7 +14,7 @@ public class SASuscripcionesBasicasImp implements SASuscripciones {
         return suscripcionesDAO;
     }
 
-    public int altaSuscripcion(DTOtSuscripcion suscripcion) {
+    public int altaSuscripcion(final DTOtSuscripcion suscripcion) {
         DTOtBasica basica = (DTOtBasica) suscripcion;
         
         int numSuscripcion = getDAOSuscripciones().altaSuscripcion(basica);
@@ -26,11 +26,11 @@ public class SASuscripcionesBasicasImp implements SASuscripciones {
         return 0;
     }
 
-    public DTOtSuscripcion leerSuscripcion(int id) {
+    public DTOtSuscripcion leerSuscripcion(final int id) {
         return getDAOSuscripciones().leerSuscripcion(id);
     }
 
-    public int actualizarSuscripcion(DTOtSuscripcion suscripcion) {
+    public int actualizarSuscripcion(final DTOtSuscripcion suscripcion) {
     	DTOtBasica basica = (DTOtBasica) suscripcion;
 
         int resultadoPadre = getDAOSuscripciones().actualizarSuscripcion(basica);
@@ -40,7 +40,7 @@ public class SASuscripcionesBasicasImp implements SASuscripciones {
         return 0;
     }
 
-    public int borrarSuscripcion(int id) {
+    public int borrarSuscripcion(final int id) {
     	DTOtBasica basica = (DTOtBasica) getDAOSuscripciones().leerSuscripcion(id);
     	int exito = 0;
     	if(basica != null) exito = getDAOSuscripciones().borrarSuscripcion(id);

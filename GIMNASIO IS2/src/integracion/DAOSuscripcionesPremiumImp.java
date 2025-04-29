@@ -10,7 +10,7 @@ import negocio.DTOtSuscripcion;
 
 public class DAOSuscripcionesPremiumImp implements DAOSuscripciones {
 
-    public int altaSuscripcion(DTOtSuscripcion suscripcion) {
+    public int altaSuscripcion(final DTOtSuscripcion suscripcion) {
         String query = "INSERT INTO Suscripciones (nombre, idTipoSuscripcion) VALUES (?, ?)";
         try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, suscripcion.getNombre());
@@ -27,7 +27,7 @@ public class DAOSuscripcionesPremiumImp implements DAOSuscripciones {
         return 0;
     }
 
-    public int altaSuscripcionPremium(DTOtPremium premium) {
+    public int altaSuscripcionPremium(final DTOtPremium premium) {
         String query = "INSERT INTO Premium (idTipoSuscripcion, numSuscripcion, precio, duracion, dniEmpleado, idCatalogo) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
             stmt.setInt(1, premium.getTipoSus());
@@ -43,7 +43,7 @@ public class DAOSuscripcionesPremiumImp implements DAOSuscripciones {
         return 0;
     }
 
-    public DTOtSuscripcion leerSuscripcion(int id) {
+    public DTOtSuscripcion leerSuscripcion(final int id) {
         String query = "SELECT s.numSuscripcion, s.nombre, s.idTipoSuscripcion, p.precio, p.duracion, p.dniEmpleado, p.idCatalogo FROM Suscripciones s JOIN Premium p ON s.numSuscripcion = p.numSuscripcion WHERE s.numSuscripcion = ? ";
         try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
             stmt.setInt(1, id);
@@ -62,7 +62,7 @@ public class DAOSuscripcionesPremiumImp implements DAOSuscripciones {
         return null;
     }
 
-    public int actualizarSuscripcion(DTOtSuscripcion suscripcion) {
+    public int actualizarSuscripcion(final DTOtSuscripcion suscripcion) {
         String query = "UPDATE Suscripciones SET nombre = ?, idTipoSuscripcion = ? WHERE numSuscripcion = ?";
         try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
             stmt.setString(1, suscripcion.getNombre());
@@ -75,7 +75,7 @@ public class DAOSuscripcionesPremiumImp implements DAOSuscripciones {
         return 0;
     }
 
-    public int actualizarSuscripcionPremium(DTOtPremium premium) {
+    public int actualizarSuscripcionPremium(final DTOtPremium premium) {
         String query = "UPDATE Premium SET precio = ?, duracion = ?, dniEmpleado = ?, idCatalogo = ? WHERE numSuscripcion = ?";
         try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
             stmt.setDouble(1, premium.getPrecio());
@@ -90,7 +90,7 @@ public class DAOSuscripcionesPremiumImp implements DAOSuscripciones {
         return 0;
     }
 
-    public int borrarSuscripcion(int id) {
+    public int borrarSuscripcion(final int id) {
         String query = "DELETE FROM Suscripciones WHERE numSuscripcion = ?";
         try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
             stmt.setInt(1, id);
@@ -120,11 +120,11 @@ public class DAOSuscripcionesPremiumImp implements DAOSuscripciones {
         return lista;
     }
 
-	public int altaSuscripcionBasica(DTOtBasica basica) {
+	public int altaSuscripcionBasica(final DTOtBasica basica) {
 		return 0;
 	}
 
-	public int actualizarSuscripcionBasica(DTOtBasica basica) {
+	public int actualizarSuscripcionBasica(final DTOtBasica basica) {
 		return 0;
 	}
 }

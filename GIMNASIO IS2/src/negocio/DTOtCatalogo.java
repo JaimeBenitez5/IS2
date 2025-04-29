@@ -7,7 +7,7 @@ public class DTOtCatalogo {
 	private int _numActividades;
     private ArrayList<DTOtActividad> _actividades;
     
-    public DTOtCatalogo(final int id, final ArrayList<DTOtActividad> actividades,final int numActividades) {
+    public DTOtCatalogo(final int id, final ArrayList<DTOtActividad> actividades, final int numActividades) {
     	_id = id;
     	_actividades = actividades;
     	_numActividades = numActividades;
@@ -45,7 +45,7 @@ public class DTOtCatalogo {
     	_numActividades = numActividades;
     }
 
-    public void setActividades(ArrayList<DTOtActividad> actividades) {
+    public void setActividades(final ArrayList<DTOtActividad> actividades) {
     	_actividades = actividades;
     }
     

@@ -9,7 +9,7 @@ import negocio.DTOtCliente;
 
 public class DAOClientesImp implements DAOClientes {
 
-	public int altaCliente(DTOtCliente cliente) {
+	public int altaCliente(final DTOtCliente cliente) {
 		String query = "INSERT INTO CLIENTES (dniCliente, nombre, direccion) VALUES (?, ?, ?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setString(1, cliente.getDni());

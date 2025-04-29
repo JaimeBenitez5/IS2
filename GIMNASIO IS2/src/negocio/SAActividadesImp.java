@@ -40,7 +40,7 @@ public class SAActividadesImp implements SAActividades {
 		return getDAOActividades().leerActividad(tipoActividad, fecha, idSala);
 	}
 
-	public int actualizarActividad(DTOtActividad actividad) {
+	public int actualizarActividad(final DTOtActividad actividad) {
 		DTOtActividad a = leerActividad(actividad.getTipoActividad(), actividad.getFecha(), actividad.getIdSala());
 		int exito = 0;
 		if (a != null) {

@@ -58,7 +58,7 @@ public class SAComprasImp implements SACompras {
 		return getDAOCompras().leerCompra(id);
 	}
 
-	public int actualizarCompra(DTOtCompra compra) {
+	public int actualizarCompra(final DTOtCompra compra) {
 		int exito = 0;
 		DTOtCompra c = leerCompra(compra.getId());
 		if(c != null) {

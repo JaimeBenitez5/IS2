@@ -41,7 +41,7 @@ public class SAEmpleadosImp implements SAEmpleados {
 		return e;
 	}
 	
-	private double getSalarioPorRol(int idRol) {
+	private double getSalarioPorRol(final int idRol) {
 		double salario;
 		if(idRol == 1) salario = getDAOEmpleados().leerSalarioMantenimiento();
 		else if (idRol == 2) salario = getDAOEmpleados().leerSalarioMonitores();

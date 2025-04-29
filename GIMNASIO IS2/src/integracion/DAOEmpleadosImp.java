@@ -13,7 +13,7 @@ import negocio.DTOtRol;
 
 public class DAOEmpleadosImp implements DAOEmpleados {
 
-	public int altaEmpleado(DTOtEmpleado empleado) {
+	public int altaEmpleado(final DTOtEmpleado empleado) {
 		String insertEmpleado = "INSERT INTO Empleados (dniEmpleado, nombre) VALUES (?, ?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(insertEmpleado)){
 			stmt.setString(1, empleado.getDni());
@@ -25,7 +25,7 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 		return 0;
 	}
 	
-	public int altaEmpleadoRol(DTOtEmpleado empleado) {
+	public int altaEmpleadoRol(final DTOtEmpleado empleado) {
 		String insertRol = "INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES (?, ?)";
 		try(PreparedStatement stmt = BDConexion.getConnection().prepareStatement(insertRol)){
 			stmt.setString(1, empleado.getDni());
@@ -37,7 +37,7 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 		return 0;
 	}
 	
-	public DTOtEmpleado leerEmpleado(String dni) {
+	public DTOtEmpleado leerEmpleado(final String dni) {
 		String query = "SELECT * FROM Empleados WHERE dniEmpleado = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setString(1,dni);
@@ -106,7 +106,7 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 		return 0;
 	}
 	
-	public String leerNombreRol(int id) {
+	public String leerNombreRol(final int id) {
 		String query = "SELECT nombre FROM Roles WHERE idRol = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1, id);
@@ -120,7 +120,7 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 		return null;
 	}
 	
-	public int leerEmpleadoRol(String dni) {
+	public int leerEmpleadoRol(final String dni) {
 		String query = "SELECT idRol FROM EmpleadosRoles WHERE dniEmpleado = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setString(1, dni);
@@ -134,7 +134,7 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 		return 0;
 	}
 
-	public int actualizarEmpleado(DTOtEmpleado empleado) {
+	public int actualizarEmpleado(final DTOtEmpleado empleado) {
 		String query = "UPDATE Empleados SET nombre = ? WHERE dniEmpleado = ?";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setString(1, empleado.getNombre());
@@ -146,7 +146,7 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 		return 0;
 	}
 
-	public int borrarEmpleado(String dni) {
+	public int borrarEmpleado(final String dni) {
 		String query = "DELETE FROM Empleados WHERE dniEmpleado = ?";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setString(1, dni);

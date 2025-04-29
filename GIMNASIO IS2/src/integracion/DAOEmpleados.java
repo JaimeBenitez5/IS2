@@ -6,7 +6,7 @@ import negocio.DTOtEmpleado;
 
 public interface DAOEmpleados {
 
-    int altaEmpleado(DTOtEmpleado empleado);
+    int altaEmpleado(final DTOtEmpleado empleado);
     int altaEmpleadoRol(final DTOtEmpleado empleado);
     
     

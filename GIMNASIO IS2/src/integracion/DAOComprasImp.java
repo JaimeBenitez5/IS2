@@ -13,7 +13,7 @@ import negocio.DTOtCompra;
 
 public class DAOComprasImp implements DAOCompras {
 
-	public int altaCompra(DTOtCompra compra) {
+	public int altaCompra(final DTOtCompra compra) {
 		String insertCompra = "INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, dniEmpleado, numFactura) VALUES (?, ?, ?, ?, ?, ?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(insertCompra, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setInt(1, compra.getSuscripcion());
@@ -35,7 +35,7 @@ public class DAOComprasImp implements DAOCompras {
 		return 0;
 	}
 	
-	public DTOtCompra leerCompra(int id) {
+	public DTOtCompra leerCompra(final int id) {
 		String query = "SELECT * FROM COMPRAS WHERE idCompra = ?";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
             stmt.setInt(1, id);
@@ -57,7 +57,7 @@ public class DAOComprasImp implements DAOCompras {
 		return null;
 	}
 	
-	public int actualizarCompra(DTOtCompra compra) {
+	public int actualizarCompra(final DTOtCompra compra) {
 		String query = "UPDATE COMPRAS SET numSuscripcion = ?, dniCliente = ?, fecha = ?, metodoPago = ?, dniEmpleado = ? WHERE idCompra = ? ";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1, compra.getSuscripcion());
@@ -73,7 +73,7 @@ public class DAOComprasImp implements DAOCompras {
 		return 0;
 	}
 	
-	public int borrarCompra(int id) {
+	public int borrarCompra(final int id) {
 		String query = "DELETE FROM Compras WHERE idCompra = ?";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1, id);

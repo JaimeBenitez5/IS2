@@ -13,7 +13,7 @@ import negocio.DTOtFactura;
 
 public class DAOFacturasImp implements DAOFacturas {
 
-	public int altaFactura(DTOtFactura Factura) {
+	public int altaFactura(final DTOtFactura Factura) {
 		String query = "INSERT INTO FACTURAS (fecha, importetotal) VALUES (?, ?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setDate(1, Factura.getFecha());
@@ -31,7 +31,7 @@ public class DAOFacturasImp implements DAOFacturas {
 		return 0;
 	}
 
-	public DTOtFactura leerFactura(int id) {
+	public DTOtFactura leerFactura(final int id) {
 		String query = "SELECT * FROM FACTURAS WHERE numFactura = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1,id);
@@ -50,7 +50,7 @@ public class DAOFacturasImp implements DAOFacturas {
 		return null;
 	}
 
-	public int actualizarFactura(DTOtFactura factura) {
+	public int actualizarFactura(final DTOtFactura factura) {
 		String query = "UPDATE FACTURAS SET fecha = ?, importeTotal = ? WHERE numFactura = ? ";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setDate(1, factura.getFecha());
@@ -63,7 +63,7 @@ public class DAOFacturasImp implements DAOFacturas {
 		return 0;
 	}
 
-	public int borrarFactura(int id) {
+	public int borrarFactura(final int id) {
 		String query = "DELETE FROM FACTURAS WHERE numFactura = ?";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setInt(1, id);
@@ -92,7 +92,7 @@ public class DAOFacturasImp implements DAOFacturas {
 		return facturas;
 	}
 	
-	public List<DTOtFactura> leerFacturasCliente(int idCliente){
+	public List<DTOtFactura> leerFacturasCliente(final int idCliente){
 		ArrayList<DTOtFactura> facturas = new ArrayList<DTOtFactura>();
 		String query = "SELECT * FROM FACTURAS WHERE numFactura = (SELECT numFactura FROM Compra WHERE idCliente = ?)";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
@@ -108,7 +108,6 @@ public class DAOFacturasImp implements DAOFacturas {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return facturas;
 	}
 }

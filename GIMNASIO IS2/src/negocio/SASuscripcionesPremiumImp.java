@@ -15,7 +15,7 @@ public class SASuscripcionesPremiumImp implements SASuscripciones {
 		return suscripcionesDAO;
 	}
 
-    public int altaSuscripcion(DTOtSuscripcion suscripcion) {
+    public int altaSuscripcion(final DTOtSuscripcion suscripcion) {
     	DTOtPremium premium = (DTOtPremium) suscripcion;
         int numSuscripcion = getDAOSuscripciones().altaSuscripcion(premium);
         if (numSuscripcion != 0) {
@@ -25,18 +25,18 @@ public class SASuscripcionesPremiumImp implements SASuscripciones {
         return 0;
     }
 
-    public DTOtSuscripcion leerSuscripcion(int id) {
+    public DTOtSuscripcion leerSuscripcion(final int id) {
         return getDAOSuscripciones().leerSuscripcion(id);
     }
 
-    public int actualizarSuscripcion(DTOtSuscripcion suscripcion) {
+    public int actualizarSuscripcion(final DTOtSuscripcion suscripcion) {
     	DTOtPremium premium = (DTOtPremium) suscripcion;
     	int exito = 0;
         exito = getDAOSuscripciones().actualizarSuscripcion(premium);
         if(exito == 1) getDAOSuscripciones().actualizarSuscripcionPremium(premium);
         return exito;
     }
-    public int borrarSuscripcion(int id) {
+    public int borrarSuscripcion(final int id) {
     	//si no lees para comprobara que existen, desde premium te deja borrar basicas y viceversa
     	DTOtPremium premium = (DTOtPremium) getDAOSuscripciones().leerSuscripcion(id);
     	int exito = 0;

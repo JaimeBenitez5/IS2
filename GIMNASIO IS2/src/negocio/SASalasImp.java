@@ -46,7 +46,7 @@ public class SASalasImp implements SASalas {
 		return idSala;
 	}
 
-	private Boolean todosSonMantenimiento(String[] empleados) {
+	private Boolean todosSonMantenimiento(final String[] empleados) {
 		boolean todosSonMantenimiento = true;
 		int i = 0;
 		while (i < empleados.length && todosSonMantenimiento) {

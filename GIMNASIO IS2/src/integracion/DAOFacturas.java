@@ -6,9 +6,9 @@ import negocio.DTOtFactura;
 
 public interface DAOFacturas {
     
-    int altaFactura(DTOtFactura Factura);
+    int altaFactura(final DTOtFactura Factura);
 
-    DTOtFactura leerFactura(int id);
+    DTOtFactura leerFactura(final int id);
 
     int actualizarFactura(final DTOtFactura factura);
 

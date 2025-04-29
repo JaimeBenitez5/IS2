@@ -5,7 +5,7 @@ import negocio.DTOtCliente;
 
 public interface DAOClientes {
 	
-    int altaCliente(DTOtCliente cliente);
+    int altaCliente(final DTOtCliente cliente);
 
     DTOtCliente leerCliente(final String dni);
 

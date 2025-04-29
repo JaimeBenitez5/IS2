@@ -13,7 +13,7 @@ import negocio.DTOtActividad;
 
 public class DAOActividadesImp implements DAOActividades{
 
-	public int altaActividad(DTOtActividad actividad) {
+	public int altaActividad(final DTOtActividad actividad) {
 	    String query = "INSERT INTO ACTIVIDADES (tipoActividad, fecha, idSala, dniEmpleado) VALUES (?, ?, ?, ?)";
 	    try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 	        stmt.setString(1, actividad.getTipoActividad());
@@ -27,7 +27,7 @@ public class DAOActividadesImp implements DAOActividades{
 	    return 0;
 	}
 	
-	public int altaActividadCatalogo(int idCatalogo, DTOtActividad actividad) {
+	public int altaActividadCatalogo(final int idCatalogo, final DTOtActividad actividad) {
 	    String query = "INSERT INTO ActividadesCatalogo (idCatalogo, tipoActividad, fechaActividad, idSala) VALUES (?, ?, ?, ?)";
 	    try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 	        stmt.setInt(1, idCatalogo);
@@ -61,7 +61,7 @@ public class DAOActividadesImp implements DAOActividades{
 	    return null;
 	}
 
-	public int actualizarActividad(DTOtActividad actividad) {
+	public int actualizarActividad(final DTOtActividad actividad) {
 		String query = "UPDATE ACTIVIDADES SET dniEmpleado = ? WHERE tipoActividad  = ? AND fecha = ? AND idSala = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setString(1, actividad.getDniEmpleado());

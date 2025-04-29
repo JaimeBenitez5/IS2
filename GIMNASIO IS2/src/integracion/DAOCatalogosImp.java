@@ -12,7 +12,7 @@ import negocio.DTOtCatalogo;
 
 public class DAOCatalogosImp implements DAOCatalogos{
 
-	public int altaCatalogo(DTOtCatalogo catalogo) {
+	public int altaCatalogo(final DTOtCatalogo catalogo) {
 		String query = "INSERT INTO CATALOGOS (numActividades) VALUES (?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setInt(1, catalogo.getNumActividades());
@@ -29,7 +29,7 @@ public class DAOCatalogosImp implements DAOCatalogos{
 		return 0;
 	}
 
-	public DTOtCatalogo leerCatalogo(int id) {
+	public DTOtCatalogo leerCatalogo(final int id) {
 		String query = "SELECT * FROM CATALOGOS WHERE idCatalogo  = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1,id);
@@ -46,7 +46,7 @@ public class DAOCatalogosImp implements DAOCatalogos{
 		return null;
 	}
 
-	public int actualizarCatalogo(DTOtCatalogo catalogo) {
+	public int actualizarCatalogo(final DTOtCatalogo catalogo) {
 		String query = "UPDATE CATALOGOS SET numActividades = ? WHERE idCatalogo = ?";
 		try ( PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query)) {
 			stmt.setInt(1, catalogo.getNumActividades());
@@ -58,7 +58,7 @@ public class DAOCatalogosImp implements DAOCatalogos{
 		return 0;
 	}
 	
-	public int borrarCatalogosSala(int idSala) {
+	public int borrarCatalogosSala(final int idSala) {
 		String query = "DELETE FROM ACTIVIDADESCATALOGO WHERE idSala = ?";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setInt(1, idSala);
@@ -69,7 +69,7 @@ public class DAOCatalogosImp implements DAOCatalogos{
 		return 0;
 	}
 	
-	public int borrarCatalogo(int id) {
+	public int borrarCatalogo(final int id) {
 		String query1 = "DELETE FROM CATALOGOS WHERE idCatalogo = ?";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query1, Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setInt(1, id);

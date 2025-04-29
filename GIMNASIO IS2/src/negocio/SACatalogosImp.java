@@ -14,26 +14,26 @@ public class SACatalogosImp implements SACatalogos {
 		return catalogosDAO;
 	}
 	
-	public int altaCatalogo(DTOtCatalogo catalogo) {
+	public int altaCatalogo(final DTOtCatalogo catalogo) {
 		return getDAOCatalogos().altaCatalogo(catalogo);
 	}
 
-	public DTOtCatalogo leerCatalogo(int id) {
+	public DTOtCatalogo leerCatalogo(final int id) {
 		return getDAOCatalogos().leerCatalogo(id);
 	}
 
-	public int actualizarCatalogo(DTOtCatalogo catalogo) {
+	public int actualizarCatalogo(final DTOtCatalogo catalogo) {
 		DTOtCatalogo c = leerCatalogo(catalogo.getId());
 		int exito = 0;
 		if(c != null) exito = getDAOCatalogos().actualizarCatalogo(catalogo);
 		return exito;
 	}
 	
-	public int borrarCatalogosSala(int idSala) {
+	public int borrarCatalogosSala(final int idSala) {
 		return getDAOCatalogos().borrarCatalogosSala(idSala);
 	}
 	
-	public int borrarCatalogo(int id) {
+	public int borrarCatalogo(final int id) {
 		DTOtCatalogo c = leerCatalogo(id);
 		int exito = 0;
 		if(c != null) exito = getDAOCatalogos().borrarCatalogo(id);

@@ -6,7 +6,7 @@ import negocio.DTOtCatalogo;
 
 public interface DAOCatalogos {
 	
-	int altaCatalogo(DTOtCatalogo catalogo);
+	int altaCatalogo(final DTOtCatalogo catalogo);
 
 	DTOtCatalogo leerCatalogo(final int id);
 

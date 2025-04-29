@@ -24,7 +24,7 @@ public class DAOSalasImp implements DAOSalas {
         return 0;
     }
 
-    public int altaMantenedor(DTOtSala sala) {
+    public int altaMantenedor(final DTOtSala sala) {
         int filas = 0;
         String insertMantenedor = "INSERT INTO MANTIENEN (dniEmpleado, idSala) VALUES (?, ?)";
         try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(insertMantenedor)) {

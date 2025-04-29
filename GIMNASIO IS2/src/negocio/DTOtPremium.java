@@ -36,7 +36,7 @@ public class DTOtPremium extends DTOtSuscripcion{
 		_idCatalogo = idCatalogo;
 	}
 	
-	public void setDniEmpleado(String dniEmpleado) {
+	public void setDniEmpleado(final String dniEmpleado) {
 		_dniEmpleado = dniEmpleado;
 	}
 	

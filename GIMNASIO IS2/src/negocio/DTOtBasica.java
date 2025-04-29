@@ -41,15 +41,15 @@ public class DTOtBasica extends DTOtSuscripcion {
 		return _idSala;
 	}
 	
-	public void setFecha(Date fecha) {
+	public void setFecha(final Date fecha) {
 		_fecha = fecha;
 	}
 
-	public void setTipoActividad(String tipoActividad) {
+	public void setTipoActividad(final String tipoActividad) {
 		_tipoActividad = tipoActividad;
 	}
 
-	public void setIdSala(int idSala) {
+	public void setIdSala(final int idSala) {
 		_idSala = idSala;
 	}
 	

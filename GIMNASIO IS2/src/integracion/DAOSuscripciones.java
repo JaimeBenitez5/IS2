@@ -9,15 +9,15 @@ import negocio.DTOtSuscripcion;
 
 public interface DAOSuscripciones {
 	
-	int altaSuscripcion(DTOtSuscripcion suscripcion);
-	int altaSuscripcionBasica(DTOtBasica basica);
-	int altaSuscripcionPremium(DTOtPremium premium);
+	int altaSuscripcion(final DTOtSuscripcion suscripcion);
+	int altaSuscripcionBasica(final DTOtBasica basica);
+	int altaSuscripcionPremium(final DTOtPremium premium);
 	
     DTOtSuscripcion leerSuscripcion(final int id);
 
     int actualizarSuscripcion(final DTOtSuscripcion suscripcion);
-    int actualizarSuscripcionBasica(DTOtBasica basica);
-    int actualizarSuscripcionPremium(DTOtPremium premium);
+    int actualizarSuscripcionBasica(final DTOtBasica basica);
+    int actualizarSuscripcionPremium(final DTOtPremium premium);
     
     int borrarSuscripcion(final int id);
 
