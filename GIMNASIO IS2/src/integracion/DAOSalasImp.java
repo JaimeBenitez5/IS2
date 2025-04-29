@@ -74,7 +74,7 @@ public class DAOSalasImp implements DAOSalas {
     }
 
     public int actualizarMantenedor(final DTOtSala sala) {
-       //PARA AHORRA COMPARAR EL ARRAY VIEJO Y EL NUEVO SE BORRAN TODOS LOS MANTENEDORES ANTIGUOS Y SE INSERTAN LOS NUEVOS
+       //PARA AHORRAR COMPARAR EL ARRAY VIEJO Y EL NUEVO SE BORRAN TODOS LOS MANTENEDORES ANTIGUOS Y SE INSERTAN LOS NUEVOS
         borrarMantenedoresSala(sala.getId());
         return altaMantenedor(sala);
     }
@@ -100,8 +100,6 @@ public class DAOSalasImp implements DAOSalas {
         }
         return 0;
     }
-    
-    
     
     public List<DTOtSala> leerTodasSalas() {
         List<DTOtSala> salas = new ArrayList<>();

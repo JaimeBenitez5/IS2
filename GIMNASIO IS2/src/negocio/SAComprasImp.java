@@ -6,12 +6,16 @@ import integracion.DAOCompras;
 import integracion.DAOComprasImp;
 import integracion.DAOFacturas;
 import integracion.DAOFacturasImp;
-
+import integracion.DAOSuscripciones;
+import integracion.DAOSuscripcionesBasicasImp;
+import integracion.DAOSuscripcionesPremiumImp;
 
 public class SAComprasImp implements SACompras {
 
 	private static DAOCompras comprasDao = null;
 	private static DAOFacturas facturasDao = null;
+	private static DAOSuscripciones suscripcionesBasicasDAO = null;
+	private static DAOSuscripciones suscripcionesPremiumDAO = null;
 
 	//USADO PATRON SINGLETON
 	public static DAOCompras getDAOCompras(){
@@ -22,17 +26,32 @@ public class SAComprasImp implements SACompras {
 		if(facturasDao == null) facturasDao = new DAOFacturasImp();
 		return facturasDao;
 	}
+	public static DAOSuscripciones getDAOSuscripcionesBasicas() {
+		if (suscripcionesBasicasDAO == null) suscripcionesBasicasDAO = new DAOSuscripcionesBasicasImp();
+		return suscripcionesBasicasDAO;
+	}
+	public static DAOSuscripciones getDAOSuscripcionesPremium(){
+		if(suscripcionesPremiumDAO == null) suscripcionesPremiumDAO = new DAOSuscripcionesPremiumImp();
+		return suscripcionesPremiumDAO;
+	}
 
 	public int altaCompra(final DTOtCompra compra) {
-		//FALTA CALCULAR EL NUEVO IMPORTE DE LA FACTURA
-		DTOtCompra c = leerCompra(compra.getId());
-		int exito = 0;
-		if(c == null) exito = getDAOCompras().altaCompra(compra);
-		if(exito == 1) {
-			DTOtFactura = new DTOtFactura(compra.getIdFactura(), compra.getFecha(), compra);
-			getDAOFacturas().altaFactura(compra.get);
+		int idCompra = 0;
+		if(leerCompra(compra.getId()) == null) {
+			int idFact = 0;
+			int idSus = compra.getSuscripcion();
+			DTOtFactura factura;
+			DTOtSuscripcion susBasica = getDAOSuscripcionesBasicas().leerSuscripcion(idSus);
+			if(susBasica != null) factura = new DTOtFactura(compra.getFecha(), susBasica.getPrecio());
+			else {
+				DTOtSuscripcion susPremium = getDAOSuscripcionesPremium().leerSuscripcion(idSus);
+				factura = new DTOtFactura(compra.getFecha(), susPremium.getPrecio());
+			}
+			idFact = getDAOFacturas().altaFactura(factura);
+			compra.setIdFactura(idFact);
+			idCompra = getDAOCompras().altaCompra(compra);
 		}
-		return exito;
+		return idCompra;
 	}
 
 	public DTOtCompra leerCompra(final int id) {
@@ -40,24 +59,30 @@ public class SAComprasImp implements SACompras {
 	}
 
 	public int actualizarCompra(DTOtCompra compra) {
-		//FALTA CALCULAR LA NUEVA FECHA Y EL NUEVO IMPORTE DE LA FACTURA
 		int exito = 0;
-		exito = getDAOCompras().actualizarCompra(compra);
-		if(exito == 1) {
-			DTOtFactura f = leerFactura(compra.getIdFactura());
-			if(f != null) exito = getDAOFacturas().actualizarFactura(f);
-			else exito = 0;
+		DTOtCompra c = leerCompra(compra.getId());
+		if(c != null) {
+			int idSus = compra.getSuscripcion();
+			DTOtFactura factura;
+			DTOtSuscripcion susBasica = getDAOSuscripcionesBasicas().leerSuscripcion(idSus);
+			if(susBasica != null) factura = new DTOtFactura(c.getIdFactura(), compra.getFecha(), susBasica.getPrecio());	
+			else {
+				DTOtSuscripcion susPremium = getDAOSuscripcionesPremium().leerSuscripcion(idSus);
+				factura = new DTOtFactura(compra.getIdFactura(), compra.getFecha(), susPremium.getPrecio());
+			}
+			exito = getDAOFacturas().actualizarFactura(factura);
+			if(exito == 1) exito = getDAOCompras().actualizarCompra(compra);
 		}
 		return exito;
 	}
-	
+
 	public int borrarCompra(final int id) {
 		DTOtCompra c = leerCompra(id);
 		int exito = 0;
-		if(c != null) exito = getDAOCompras().borrarCompra(id);
-		DTOtFactura f = leerFactura(c.getIdFactura());
-		if(f != null) {
-			exito = getDAOFacturas().borrarFactura(f.getId());
+		if(c != null) {
+			exito = getDAOCompras().borrarCompra(id);
+			DTOtFactura f = leerFactura(c.getIdFactura());
+			if(f != null) exito = getDAOFacturas().borrarFactura(f.getId());
 		}
 		return exito;
 	}

@@ -10,28 +10,25 @@ import java.util.List;
 
 import configFiles.BDConexion;
 import negocio.DTOtCompra;
-import negocio.DTOtFactura;
 
 public class DAOComprasImp implements DAOCompras {
 
 	public int altaCompra(DTOtCompra compra) {
-		String insertCompra = "INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (?, ?, ?, ?, ?, ?)";
+		String insertCompra = "INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, dniEmpleado, numFactura) VALUES (?, ?, ?, ?, ?, ?)";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(insertCompra, Statement.RETURN_GENERATED_KEYS)) {
-			stmt.setString(1, null);
+			stmt.setInt(1, compra.getSuscripcion());
 			stmt.setString(2, compra.getDniCliente());
 			stmt.setDate(3, compra.getFecha());
 			stmt.setString(4, compra.getMetodoPago());
-			stmt.setInt(5, compra.getIdFactura());
-			stmt.setString(6,compra.getDniEmpleado());
-
+			stmt.setString(5, compra.getDniEmpleado());
+			stmt.setInt(6, compra.getIdFactura());
+			stmt.executeUpdate();
 			try (ResultSet rs = stmt.getGeneratedKeys()) {
 				if (rs.next()) {
 					int idSuscripcion = rs.getInt(1);
 					return idSuscripcion;
 				}
 			}
-			stmt.executeUpdate();
-			return stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

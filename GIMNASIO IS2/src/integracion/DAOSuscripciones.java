@@ -8,6 +8,7 @@ import negocio.DTOtSuscripcion;
 
 
 public interface DAOSuscripciones {
+	
 	int altaSuscripcion(DTOtSuscripcion suscripcion);
 	int altaSuscripcionBasica(DTOtBasica basica);
 	int altaSuscripcionPremium(DTOtPremium premium);

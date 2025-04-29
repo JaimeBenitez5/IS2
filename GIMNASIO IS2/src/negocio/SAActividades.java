@@ -11,8 +11,6 @@ public interface SAActividades {
 
     int actualizarActividad(final DTOtActividad actividad);
     
-    int borrarActividadesSala(int idSala);
-    
     int borrarActividad(final String tipoActividad, final Date fecha, final int idSala);
 
     List<DTOtActividad> leerTodasActividades();

@@ -2,6 +2,8 @@ package negocio;
 
 import java.util.List;
 
+import integracion.DAOCatalogos;
+import integracion.DAOCatalogosImp;
 import integracion.DAOEmpleados;
 import integracion.DAOEmpleadosImp;
 import integracion.DAOSalas;
@@ -11,6 +13,7 @@ public class SASalasImp implements SASalas {
 
 	private static DAOSalas salasDAO = null;
 	private static DAOEmpleados empleadosDAO = null;
+	private static DAOCatalogos catalogosDAO = null;
 
 	//USADO PATRON SINGLETON
 	public static DAOSalas getDAOSalas(){
@@ -20,6 +23,10 @@ public class SASalasImp implements SASalas {
 	public static DAOEmpleados getDAOEmpleados(){
 		if(empleadosDAO == null) empleadosDAO = new DAOEmpleadosImp();
 		return empleadosDAO;
+	}
+	public static DAOCatalogos getDAOCatalogos(){
+		if(catalogosDAO == null) catalogosDAO = new DAOCatalogosImp();
+		return catalogosDAO;
 	}
 
 	public int altaSala(final DTOtSala sala) {
@@ -69,13 +76,10 @@ public class SASalasImp implements SASalas {
 		DTOtSala s = leerSala(id);
 		int exito = 0;
 		if(s != null) {
-			SACatalogos cat = new SACatalogosImp();
-			SAActividades act = new SAActividadesImp();
-			//NS COMO SERIA PARA ACCEDER AL METODO DE LA SA, DE MOMENTO LO DEJO ASI
 			//EL ORDEN DE BORRADO DE AQUI ABAJO ES IMPORTANTE
-			cat.borrarCatalogosSala(id);
-			act.borrarActividadesSala(id);
-			exito = getDAOSalas().borrarSala(id);
+			exito = getDAOCatalogos().borrarCatalogosSala(id);
+			//LAS ACTIVIDADEDS SE BORRAN CON ON CASCADE
+			if(exito == 1) exito = getDAOSalas().borrarSala(id);
 		}
 		return exito;
 	}

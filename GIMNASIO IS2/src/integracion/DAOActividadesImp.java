@@ -61,17 +61,6 @@ public class DAOActividadesImp implements DAOActividades{
 		return 0;
 	}
 
-	public int borrarActividadesSala(int idSala) {
-		String query = "DELETE FROM ACTIVIDADES WHERE idSala = ?";
-		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-			stmt.setInt(1, idSala);
-			return stmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
-	
 	public int borrarActividad(final String tipoActividad, final Date fecha, final int idSala) {
 		String query = "DELETE FROM ACTIVIDADES WHERE tipoActividad = ? AND fecha = ? AND idSala = ?";
 		try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {

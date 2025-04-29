@@ -45,11 +45,7 @@ public class SAActividadesImp implements SAActividades {
 		if(a != null) exito = getDAOActividades().actualizarActividad(actividad);
 		return exito;
 	}
-	
-	public int borrarActividadesSala(int idSala) {
-		return getDAOActividades().borrarActividadesSala(idSala);
-	}
-	
+
 	public int borrarActividad(final String tipoActividad, final Date fecha, final int idSala) {
 		DTOtActividad a = leerActividad(tipoActividad, fecha, idSala);
 		int exito = 0;

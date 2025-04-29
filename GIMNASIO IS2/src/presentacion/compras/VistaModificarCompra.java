@@ -133,7 +133,6 @@ public class VistaModificarCompra {
 					dniETF.setText("");
 					suscripcionTF.setText("");
 					dniClienteTF.setText("");
-					fechaTF.setText("");
 					comboMetodo.setSelectedItem("Sin Asignar");
 					DTOtCompra c = new DTOtCompra(idCompra, idSus, dniC, sqlDate, mPago, dniE);
 					Controlador.accion(Evento.MODIFICAR_COMPRA, c);
@@ -159,7 +158,7 @@ public class VistaModificarCompra {
 
 	public static void actualizar(int evento, Object datos) {
 		if (evento == Evento.RES_MODIFICAR_COMPRA_OK) {
-			JTextArea textArea = new JTextArea(datos.toString());
+			JTextArea textArea = new JTextArea();
 			textArea.setLineWrap(true);
 			textArea.setEditable(false);
 			textArea.setWrapStyleWord(true);
