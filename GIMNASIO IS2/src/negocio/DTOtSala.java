@@ -46,6 +46,11 @@ public class DTOtSala {
     }
     
     public String toString() {
-        return _id + " " + _aforo;
+    	StringBuilder sb = new StringBuilder();
+        sb.append(_id).append(" ").append(_aforo).append(" Empleados: ");
+        for(String s: _dniEmpleados) {
+        	sb.append(s).append(" ");
+        }
+        return sb.toString();   
     }
 }
