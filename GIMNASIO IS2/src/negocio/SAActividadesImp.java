@@ -23,14 +23,15 @@ public class SAActividadesImp implements SAActividades {
 	}
 	
 	public int altaActividad(final DTOtActividad actividad) {
-		//compruebo que no existe
 		DTOtActividad a = leerActividad(actividad.getTipoActividad(), actividad.getFecha(), actividad.getIdSala());
 		int exito = 0;
-		if(a == null) {
+		if (a == null) {
 			int idRolEmp = getDAOEmpleados().leerEmpleadoRol(actividad.getDniEmpleado());
-			if(idRolEmp == 2) {
+			if (idRolEmp == 2) {
 				exito = getDAOActividades().altaActividad(actividad);
-			} 
+				// Si tiene idCatalogo válido, también la asociamos al catálogo
+				if (exito != 0 && actividad.getIdCatalogo() > 0) exito = getDAOActividades().altaActividadCatalogo(actividad.getIdCatalogo(), actividad);
+			}
 		}
 		return exito;
 	}
@@ -42,7 +43,9 @@ public class SAActividadesImp implements SAActividades {
 	public int actualizarActividad(DTOtActividad actividad) {
 		DTOtActividad a = leerActividad(actividad.getTipoActividad(), actividad.getFecha(), actividad.getIdSala());
 		int exito = 0;
-		if(a != null) exito = getDAOActividades().actualizarActividad(actividad);
+		if (a != null) {
+			exito = getDAOActividades().actualizarActividad(actividad);
+		}
 		return exito;
 	}
 

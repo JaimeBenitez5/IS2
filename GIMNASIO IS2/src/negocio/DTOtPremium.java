@@ -45,4 +45,3 @@ public class DTOtPremium extends DTOtSuscripcion{
 				" " + _idCatalogo + " " + _dniEmpleado; 
 	}
 }
-}

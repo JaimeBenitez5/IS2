@@ -148,8 +148,12 @@ public class VistaMostrarActividad {
 			String fecha = sdf.format(utilDate);
 			String idSala = String.valueOf(a.getIdSala());
 			String dniEmp = a.getDniEmpleado();
+			String idCatalogo;
+			int idCat = a.getIdCatalogo();
+			if(idCat == 0) idCatalogo = "no tiene";
+			else idCatalogo = String.valueOf(a.getIdCatalogo());
 			JOptionPane.showMessageDialog(null, "Tipo de actividad: " + tipoAct + " ID de sala: " + idSala +
-					" fecha: " + fecha + " DNI de empleado: " + dniEmp);
+					" fecha: " + fecha + " DNI de empleado: " + dniEmp + " ID de Catalogo: " + idCatalogo);
 			GUI.setVisible(false);
 		} 
 		else if (evento == Evento.RES_MOSTRAR_ACTIVIDAD_KO) {

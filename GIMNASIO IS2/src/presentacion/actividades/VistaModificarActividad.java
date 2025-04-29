@@ -57,7 +57,7 @@ public class VistaModificarActividad {
 		panelModActividad.add(titulo);
 		panelModActividad.add(Box.createRigidArea(new Dimension(0, 30)));
 
-		JPanel panelCampos = new JPanel(new GridLayout(4, 2, 20, 20));
+		JPanel panelCampos = new JPanel(new GridLayout(5, 2, 20, 20));
 		panelCampos.setBackground(new Color(17, 47, 69));
 		panelCampos.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
@@ -87,6 +87,7 @@ public class VistaModificarActividad {
 		panelCampos.add(dniEmp);
 		JTextField dniEmpTF = new JTextField(30);
 		panelCampos.add(dniEmpTF);
+		
 
 		panelModActividad.add(panelCampos);
 		panelModActividad.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -118,7 +119,7 @@ public class VistaModificarActividad {
 				tipoActTF.setText("");
 				dniEmpTF.setText("");
 				fechaTF.setValue(new java.util.Date());
-				DTOtActividad a = new DTOtActividad(tipoAct, dniEmp, idSala, sqlDate);
+				DTOtActividad a = new DTOtActividad(tipoAct, idSala, sqlDate, dniEmp);
 				Controlador.accion(Evento.MODIFICAR_ACTIVIDAD, a);
 			}
 		});

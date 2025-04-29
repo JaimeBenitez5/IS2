@@ -8,6 +8,7 @@ import negocio.DTOtActividad;
 public interface DAOActividades {
 	
 	int altaActividad(DTOtActividad actividad);
+	int altaActividadCatalogo(int idCatalogo, DTOtActividad actividad);
 
 	DTOtActividad leerActividad(final String tipoActividad, final Date fecha, final int idSala);
 

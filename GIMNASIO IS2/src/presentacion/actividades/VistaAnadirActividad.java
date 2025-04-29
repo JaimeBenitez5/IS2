@@ -118,17 +118,21 @@ public class VistaAnadirActividad {
 				String tipoAct = tipoActTF.getText();
 				java.util.Date Date = (java.util.Date) fechaTF.getValue();
 				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
+				String dniEmp = dniEmpTF.getText();
 				int idSala = Integer.parseInt(idSalaTF.getText());
-				int idCat =Integer.parseInt(idCatTF.getText());
-				String dniEmp = idCatTF.getText();
+				int idCat = 0;
+				try {
+					idCat =Integer.parseInt(idCatTF.getText());
+				}catch( NumberFormatException nfe){
+					
+				}
 				if (tipoAct == "") {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				tipoActTF.setText("");
 				idCatTF.setText("");
 				fechaTF.setValue(new java.util.Date());
-				DTOtActividad a = new DTOtActividad(tipoAct, idSala, sqlDate, idCat);
-				if(dniEmp != "") a.setDniEmpleado(dniEmp);
+				DTOtActividad a = new DTOtActividad(tipoAct, idSala, sqlDate, dniEmp, idCat);
 				Controlador.accion(Evento.ALTA_ACTIVIDAD, a);
 			}
 		});

@@ -70,8 +70,8 @@ public class VistaMostrarActividades {
 	public static void actualizar(int evento, List<DTOtActividad> res) {
 		if (evento == Evento.RES_MOSTRAR_ACTIVIDADES_OK) {
 			panelMostrarActividades.removeAll();
-			String[] columnNames = {"Tipo de actividad", "ID de Sala" , "Fecha", "ID de Empleado"};
-			String[][] data = new String[res.size()][4];
+			String[] columnNames = {"Tipo de actividad", "ID de Sala" , "Fecha", "ID de Empleado", "ID de Catalogo"};
+			String[][] data = new String[res.size()][5];
 
 			for (int i = 0; i < res.size(); i++) {
 				DTOtActividad a = res.get(i);
@@ -84,6 +84,11 @@ public class VistaMostrarActividades {
 				data[i][1] = String.valueOf(a.getIdSala());
 				data[i][2] = fechaFormateada;
 				data[i][3] = a.getDniEmpleado();
+				String idCatalogo;
+				int idCat = a.getIdCatalogo();
+				if(idCat == 0) idCatalogo = "";
+				else idCatalogo = String.valueOf(a.getIdCatalogo());
+				data[i][4] = idCatalogo;
 			}
 
 			JTable tablaActividades = new JTable(data, columnNames);
