@@ -21,18 +21,19 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.DTOtCliente;
+import presentacion.Comprobaciones;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
 
 public class VistaModificarCliente {
 	private static JFrame GUI = null;
-	
+
 	public static void open() {
 		if(GUI == null) GUI = initGUI();
 		GUI.setVisible(true);
 	}
-	
+
 	private static JFrame initGUI() {
 		JFrame menuPrincipal = new JFrame("Menú Modificar Cliente");
 		menuPrincipal.setSize(854, 480);
@@ -96,17 +97,22 @@ public class VistaModificarCliente {
 		save.addActionListener(
 				new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
-						String dni = dniTF.getText();
+						String dni = dniTF.getText().trim();
 						String nombre = nombreTF.getText();
 						String dir = dirTF.getText();
-						if (dni.isEmpty() || nombre.isEmpty() || dir.isEmpty()) {
+						if (!Comprobaciones.esDNIValido(dni)) {
+							JOptionPane.showMessageDialog(null, "DNI no valido. Debe tener 8 numeros y una letra al final", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+						else if (dni.isEmpty() || nombre.isEmpty() || dir.isEmpty()) {
 							JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 						}
-						DTOtCliente c = new DTOtCliente(dni, nombre, dir, true);
-						dniTF.setText("");
-						nombreTF.setText("");
-						dirTF.setText("");
-						Controlador.accion(Evento.MODIFICAR_CLIENTE, c);
+						else {
+							dniTF.setText("");
+							nombreTF.setText("");
+							dirTF.setText("");
+							DTOtCliente c = new DTOtCliente(dni, nombre, dir, true);
+							Controlador.accion(Evento.MODIFICAR_CLIENTE, c);
+						}
 					}
 				}
 				);
@@ -127,7 +133,7 @@ public class VistaModificarCliente {
 		menuPrincipal.pack();
 		return menuPrincipal;
 	}
-	
+
 
 	public static void actualizar(int evento, Object datos) {
 		if (evento == Evento.RES_MODIFICAR_CLIENTE_OK) {

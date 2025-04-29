@@ -80,12 +80,17 @@ public class VistaEliminarSuscripcionBasica {
 		panelBajaSuscripcion.add(botones);
 		menuPrincipal.setVisible(true);
 
-
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int id = Integer.parseInt(idTF.getText());
-				idTF.setText("");
-				Controlador.accion(Evento.ELIMINAR_SUSCRIPCION_BASICA, id);
+				int id = 0;
+				boolean idsCorrectos = true;
+				try {
+					id = Integer.parseInt(idTF.getText());
+				}catch(NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				if(idsCorrectos) Controlador.accion(Evento.ELIMINAR_SUSCRIPCION_BASICA, id);
 			}
 		});
 

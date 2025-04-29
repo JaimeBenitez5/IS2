@@ -66,7 +66,7 @@ public class VistaEliminarActividad {
 		panelCampos.add(tipoAct);
 		JTextField tipoActTF = new JTextField(30);
 		panelCampos.add(tipoActTF);
-		
+
 		JLabel fecha = new JLabel("Fecha:");
 		fecha.setForeground(Color.WHITE);
 		panelCampos.add(fecha);
@@ -75,7 +75,7 @@ public class VistaEliminarActividad {
 		fechaTF.setColumns(10);
 		fechaTF.setValue(new java.util.Date());
 		panelCampos.add(fechaTF);
-		
+
 		JLabel idSala = new JLabel("ID Sala:");
 		idSala.setForeground(Color.WHITE);
 		panelCampos.add(idSala);
@@ -99,15 +99,26 @@ public class VistaEliminarActividad {
 		panelEliminarActividad.add(botones);
 		menuPrincipal.setVisible(true);
 
-
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				String tipoAct = tipoActTF.getText();
 				java.util.Date Date = (java.util.Date) fechaTF.getValue();
 				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
-				int idSala = Integer.parseInt(idSalaTF.getText());
-				DTOtActividad a = new DTOtActividad(tipoAct, idSala, sqlDate);
-				Controlador.accion(Evento.ELIMINAR_ACTIVIDAD, a);
+				int idSala = 0;
+				boolean idsCorrectos = true;
+				try {
+					idSala = Integer.parseInt(idSalaTF.getText());
+				}catch( NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				if (idsCorrectos) {
+					tipoActTF.setText("");
+					fechaTF.setValue(new java.util.Date());
+					idSalaTF.setText("");
+					DTOtActividad a = new DTOtActividad(tipoAct, idSala, sqlDate);
+					Controlador.accion(Evento.ELIMINAR_ACTIVIDAD, a);
+				}
 			}
 		});
 
@@ -123,7 +134,7 @@ public class VistaEliminarActividad {
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
 			}
 		});
-		
+
 		return menuPrincipal;
 	}
 

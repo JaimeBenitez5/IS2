@@ -158,9 +158,9 @@ FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado)
 );
 
 INSERT INTO Empleados (dniEmpleado, nombre) VALUES ('06013483H', 'Nicolas'); 
-INSERT INTO Empleados (dniEmpleado, nombre) VALUES ('1234567A', 'Jaime'); 
-INSERT INTO Empleados (dniEmpleado, nombre) VALUES ('1234567B', 'Juan'); 
-INSERT INTO Empleados (dniEmpleado, nombre) VALUES ('1234567C', 'Gabriel'); 
+INSERT INTO Empleados (dniEmpleado, nombre) VALUES ('12345678A', 'Jaime'); 
+INSERT INTO Empleados (dniEmpleado, nombre) VALUES ('12345678B', 'Juan'); 
+INSERT INTO Empleados (dniEmpleado, nombre) VALUES ('12345678C', 'Gabriel'); 
 
 INSERT INTO Roles (nombre) VALUES ('Mantenimiento');
 INSERT INTO Roles (nombre) VALUES ('Monitor');
@@ -168,9 +168,9 @@ INSERT INTO Roles (nombre) VALUES ('Nutricionista');
 INSERT INTO Roles (nombre) VALUES ('Recepcion');
 
 INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('06013483H', 1);
-INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('1234567A', 2);
-INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('1234567B', 3);
-INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('1234567C', 4);
+INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('12345678A', 2);
+INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('12345678B', 3);
+INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('12345678C', 4);
 
 INSERT INTO Mantenimiento (idRol, salario) VALUES (1, 2400);
 INSERT INTO Monitores (idRol, salario) VALUES (2, 2100);
@@ -186,8 +186,8 @@ INSERT INTO Salas (aforo) VALUES (150);
 INSERT INTO Mantienen(dniEmpleado, idSala) VALUES ('06013483H', 1);
 INSERT INTO Mantienen(dniEmpleado, idSala) VALUES ('06013483H', 2);
 
-INSERT INTO Actividades (tipoActividad, fecha, idSala, dniEmpleado) VALUES ('Yoga', '2025-03-19', 1, '1234567A');
-INSERT INTO Actividades (tipoActividad, fecha, idSala, dniEmpleado) VALUES ('Spinning', '2025-03-20', 2, '1234567A'); 
+INSERT INTO Actividades (tipoActividad, fecha, idSala, dniEmpleado) VALUES ('Yoga', '2025-03-19', 1, '12345678A');
+INSERT INTO Actividades (tipoActividad, fecha, idSala, dniEmpleado) VALUES ('Spinning', '2025-03-20', 2, '12345678A'); 
 
 INSERT INTO Catalogos (numActividades) VALUES (2); 
 
@@ -197,15 +197,15 @@ INSERT INTO ActividadesCatalogo VALUES (1, 'Spinning', '2025-03-20', 2);
 INSERT INTO Suscripciones (nombre, idTipoSuscripcion) VALUES ('suscripcion para novatos', 1);
 INSERT INTO Basica (idTipoSuscripcion, numSuscripcion, precio, duracion, tipoActividad, fecha, idSala) VALUES (1, 1, '30', '30', 'Yoga', '2025-03-19', 1);
 INSERT INTO Suscripciones (nombre) VALUES ('suscripcion para pros'); 
-INSERT INTO Premium (idTipoSuscripcion, numSuscripcion, precio, duracion, dniEmpleado, idCatalogo) VALUES (1, 2, '90', '120', '1234567B', 1);
+INSERT INTO Premium (idTipoSuscripcion, numSuscripcion, precio, duracion, dniEmpleado, idCatalogo) VALUES (1, 2, '90', '120', '12345678B', 1);
 
 
 INSERT INTO Facturas (fecha, importeTotal) VALUES ('2025-04-28', 30.00);
 INSERT INTO Facturas (fecha, importeTotal) VALUES ('2025-04-29', 90.00);
 INSERT INTO Facturas (fecha, importeTotal) VALUES ('2025-05-01', 90.00);
-INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (1, 'AAAAAAAAA', '2025-04-28', 'Tarjeta', 1, '1234567C');
-INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (2, 'AAAAAAAAA', '2025-04-28', 'Tarjeta', 2, '1234567C');
-INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (2, 'AAAAAAAAA', '2025-04-29', 'Transferencia Bancaria', 3, '1234567C');
+INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (1, 'AAAAAAAAA', '2025-04-28', 'Tarjeta', 1, '12345678C');
+INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (2, 'AAAAAAAAA', '2025-04-28', 'Tarjeta', 2, '12345678C');
+INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (2, 'AAAAAAAAA', '2025-04-29', 'Transferencia Bancaria', 3, '12345678C');
 
 SELECT * FROM Salas; 
 SELECT * FROM Clientes; 

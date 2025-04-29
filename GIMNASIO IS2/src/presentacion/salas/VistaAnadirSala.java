@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.DTOtSala;
+import presentacion.Comprobaciones;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -63,7 +64,7 @@ public class VistaAnadirSala {
 		panelCampos.add(aforo);
 		JTextField aforoTF = new JTextField(30);
 		panelCampos.add(aforoTF);
-		
+
 		JLabel dniEmp = new JLabel("DNIs de Empleados de Mantenimiento:");
 		dniEmp.setForeground(Color.WHITE);
 		panelCampos.add(dniEmp);
@@ -89,15 +90,31 @@ public class VistaAnadirSala {
 
 		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int aforo = Integer.parseInt(aforoTF.getText());
+				int aforo = 0;
 				String[] dniEmps = dniEmpTF.getText().split(" ");
+				int i = 0;
+				boolean dniCorrectos = true;
+				while(i < dniEmps.length && dniCorrectos) {
+					dniCorrectos = Comprobaciones.esDNIValido(dniEmps[i]);
+					if(!dniCorrectos) JOptionPane.showMessageDialog(null, "DNI no valido. Debe tener 8 numeros y una letra al final", "Error", JOptionPane.ERROR_MESSAGE);
+					i++;
+				}
+				boolean idsCorrectos = true;
+				try {
+					aforo = Integer.parseInt(aforoTF.getText());
+				}catch( NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 				if (aforoTF.getText() == "" || dniEmps.length == 0) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				aforoTF.setText("");
-				dniEmpTF.setText("");
-				DTOtSala s = new DTOtSala(aforo, dniEmps);
-				Controlador.accion(Evento.ALTA_SALA, s);
+				else if (idsCorrectos && dniCorrectos) {
+					aforoTF.setText("");
+					dniEmpTF.setText("");
+					DTOtSala s = new DTOtSala(aforo, dniEmps);
+					Controlador.accion(Evento.ALTA_SALA, s);
+				}
 			}
 		});
 

@@ -59,7 +59,6 @@ public class VistaMostrarEmpleados {
 			}
 		});
 
-
 		botonMainMenu.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				GUI.setVisible (false);

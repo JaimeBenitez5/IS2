@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.DTOtCliente;
+import presentacion.Comprobaciones;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -84,9 +85,14 @@ public class VistaMostrarCliente {
 
 		mostrar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String id = dniTF.getText();
-				dniTF.setText("");
-				Controlador.accion(Evento.MOSTRAR_CLIENTE, id);
+				String dni = dniTF.getText().trim();
+				if (!Comprobaciones.esDNIValido(dni)) {
+					JOptionPane.showMessageDialog(null, "DNI no válido. Debe tener 8 numeros y una letra al final", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					dniTF.setText("");
+					Controlador.accion(Evento.MOSTRAR_CLIENTE, dni);
+				}
 			}
 		});
 
@@ -102,10 +108,10 @@ public class VistaMostrarCliente {
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
 			}
 		});
-		
+
 		return menuPrincipal;
 	}
-	
+
 	public static void actualizar(int evento, DTOtCliente cliente) {
 		if (evento == Evento.RES_MOSTRAR_CLIENTE_OK) {
 			JTextArea textArea = new JTextArea();

@@ -99,21 +99,29 @@ public class VistaMostrarActividad {
 		panelMostrarActividad.add(botones);
 		menuPrincipal.setVisible(true);
 
-
 		mostrar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				String tipoAct = tipoActTF.getText();
 				java.util.Date Date = (java.util.Date) fechaTF.getValue();
 				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
-				int idSala = Integer.parseInt(idSalaTF.getText());
-
+				int idSala = 0;
+				boolean idsCorrectos = true;
+				try {
+					idSala = Integer.parseInt(idSalaTF.getText());
+				}catch( NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 				if (tipoAct == "") {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				tipoActTF.setText("");
-				fechaTF.setValue(new java.util.Date());
-				DTOtActividad a = new DTOtActividad(tipoAct, idSala, sqlDate);
-				Controlador.accion(Evento.MOSTRAR_ACTIVIDAD, a);
+				else if(idsCorrectos) {
+					tipoActTF.setText("");
+					fechaTF.setValue(new java.util.Date());
+					idSalaTF.setText("");
+					DTOtActividad a = new DTOtActividad(tipoAct, idSala, sqlDate);
+					Controlador.accion(Evento.MOSTRAR_ACTIVIDAD, a);
+				}
 			}
 		});
 

@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import presentacion.Comprobaciones;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -83,8 +84,11 @@ public class VistaEliminarEmpleado {
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String dniEmp = dniTF.getText();
-				Controlador.accion(Evento.ELIMINAR_EMPLEADO, dniEmp);
+				String dniEmp = dniTF.getText().trim();
+				if (!Comprobaciones.esDNIValido(dniEmp)) {
+				    JOptionPane.showMessageDialog(null, "DNI no valido. Debe tener 8 numeros y una letra al final", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else Controlador.accion(Evento.ELIMINAR_EMPLEADO, dniEmp);
 			}
 		});
 

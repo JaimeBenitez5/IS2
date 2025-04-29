@@ -171,7 +171,6 @@ public class DAOEmpleadosImp implements DAOEmpleados {
 				DTOtEmpleado emp = new DTOtEmpleado(dni, nombre, dtoRol);
 				empleados.add(emp);
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

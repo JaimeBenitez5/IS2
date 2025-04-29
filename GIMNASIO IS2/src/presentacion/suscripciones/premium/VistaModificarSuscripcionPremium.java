@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 
 import negocio.DTOtPremium;
 import negocio.DTOtSuscripcion;
+import presentacion.Comprobaciones;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -101,15 +102,29 @@ public class VistaModificarSuscripcionPremium {
 
 		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int idSus = Integer.parseInt(idTF.getText());
+				int idSus = 0;
+				int idCatalogo = 0;
 				String nombre = nombreTF.getText();
-				int idCatalogo = Integer.parseInt(idCatTF.getText());
 				String dniEmp = dniEmpTF.getText();
+				boolean idsCorrectos = true;
+				try {
+					idSus = Integer.parseInt(idTF.getText());
+					idCatalogo = Integer.parseInt(idCatTF.getText());
+				}catch(NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 				if (nombre.isEmpty() ) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				else {
+				if (!Comprobaciones.esDNIValido(dniEmp)) {
+				    JOptionPane.showMessageDialog(null, "DNI no valido. Debe tener 8 numeros y una letra al final", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else if (idsCorrectos){
+					idTF.setText("");
 					nombreTF.setText("");
+					idCatTF.setText("");
+					dniEmpTF.setText("");
 					DTOtSuscripcion sus = new DTOtPremium(idSus, nombre, idCatalogo, dniEmp);
 					Controlador.accion(Evento.MODIFICAR_SUSCRIPCION_PREMIUM, sus);
 				}

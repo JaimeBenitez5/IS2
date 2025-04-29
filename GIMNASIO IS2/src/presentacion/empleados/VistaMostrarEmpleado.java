@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.DTOtEmpleado;
+import presentacion.Comprobaciones;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -84,8 +85,11 @@ public class VistaMostrarEmpleado {
 
 		mostrar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String dniEmpleado = dniEmpTF.getText();
-				Controlador.accion(Evento.MOSTRAR_EMPLEADO, dniEmpleado);
+				String dniEmpleado = dniEmpTF.getText().trim();
+				if (!Comprobaciones.esDNIValido(dniEmpleado)) {
+				    JOptionPane.showMessageDialog(null, "DNI no valido. Debe tener 8 numeros y una letra al final", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else Controlador.accion(Evento.MOSTRAR_EMPLEADO, dniEmpleado);
 			}
 		});
 

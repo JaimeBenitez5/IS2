@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.DTOtSala;
+import presentacion.Comprobaciones;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -76,7 +77,6 @@ public class VistaModificarSala {
 		JTextField dniEmpTF = new JTextField(300);
 		panelCampos.add(dniEmpTF);
 
-
 		panelModificarSala.add(panelCampos);
 		panelModificarSala.add(Box.createRigidArea(new Dimension(0, 50)));
 
@@ -96,11 +96,34 @@ public class VistaModificarSala {
 
 		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int id = Integer.parseInt(idTF.getText());
-				int aforo = Integer.parseInt(aforoTF.getText());
+				int id = 0;
+				int aforo = 0;
 				String[] dniEmps = dniEmpTF.getText().split(" ");
-				DTOtSala s = new DTOtSala(id, aforo, dniEmps);
-				Controlador.accion(Evento.MODIFICAR_SALA, s);
+				int i = 0;
+				boolean dniCorrectos = true;
+				while(i < dniEmps.length && dniCorrectos) {
+					dniCorrectos = Comprobaciones.esDNIValido(dniEmps[i]);
+					if(!dniCorrectos) JOptionPane.showMessageDialog(null, "DNI no valido. Debe tener 8 numeros y una letra al final", "Error", JOptionPane.ERROR_MESSAGE);
+					i++;
+				}
+				boolean idsCorrectos = true;
+				try {
+					aforo = Integer.parseInt(aforoTF.getText());
+					id = Integer.parseInt(idTF.getText());
+				}catch( NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				if (aforoTF.getText() == "" || dniEmps.length == 0) {
+					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else if (idsCorrectos && dniCorrectos) {
+					idTF.setText("");
+					aforoTF.setText("");
+					dniEmpTF.setText("");
+					DTOtSala s = new DTOtSala(id, aforo, dniEmps);
+					Controlador.accion(Evento.MODIFICAR_SALA, s);
+				}	
 			}
 		});
 
@@ -118,10 +141,8 @@ public class VistaModificarSala {
 		});
 		
 		menuPrincipal.setResizable(false);
-		menuPrincipal.pack();
 		return menuPrincipal;
 	}
-
 
 	public static void actualizar(int evento, Object datos) {
 		if (evento == Evento.RES_MODIFICAR_SALA_OK) {

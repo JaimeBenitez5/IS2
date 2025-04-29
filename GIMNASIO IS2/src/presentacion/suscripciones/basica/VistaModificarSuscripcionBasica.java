@@ -114,18 +114,29 @@ public class VistaModificarSuscripcionBasica {
 
 		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int idSus = Integer.parseInt(idTF.getText());
+				int idSus = 0;
+				int idSala = 0;
 				String nombre = nombreTF.getText();
 				String tipoAct = tipoActTF.getText();
 				java.util.Date Date = (java.util.Date) fechaTF.getValue();
 				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
-				int idSala = Integer.parseInt(idSalaTF.getText());
-				if (nombre.isEmpty() ) {
+				boolean idsCorrectos = true;
+				try {
+					idSus = Integer.parseInt(idTF.getText());
+					idSala = Integer.parseInt(idSalaTF.getText());
+				}catch(NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				if (nombre.isEmpty() || tipoAct.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				else {
+				else if(idsCorrectos){
+					idTF.setText("");
 					nombreTF.setText("");
 					tipoActTF.setText("");
+					fechaTF.setValue(new java.util.Date());
+					idSalaTF.setText("");
 					DTOtSuscripcion sus = new DTOtBasica(idSus, nombre, tipoAct, sqlDate, idSala);
 					Controlador.accion(Evento.MODIFICAR_SUSCRIPCION_BASICA, sus);
 				}

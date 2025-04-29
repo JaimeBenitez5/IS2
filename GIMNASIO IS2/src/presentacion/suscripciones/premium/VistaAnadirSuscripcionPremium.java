@@ -97,14 +97,23 @@ public class VistaAnadirSuscripcionPremium {
 		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				String nombre = nombreTF.getText();
-				int idCatalogo = Integer.parseInt(idCatTF.getText());
 				String dniEmp = dniEmpTF.getText();
+				int idCat = 0;
+				boolean idsCorrectos = true;
+				try {
+					idCat = Integer.parseInt(idCatTF.getText());
+				}catch(NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 				if (dniEmpTF.getText() == "" || idCatTF.getText() == "" ) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				else {
+				else if(idsCorrectos){
+					nombreTF.setText("");
 					idCatTF.setText("");
-					DTOtSuscripcion sus = new DTOtPremium(nombre, idCatalogo, dniEmp);
+					dniEmpTF.setText("");
+					DTOtSuscripcion sus = new DTOtPremium(nombre, idCat, dniEmp);
 					Controlador.accion(Evento.ALTA_SUSCRIPCION_PREMIUM, sus);
 				}
 			}

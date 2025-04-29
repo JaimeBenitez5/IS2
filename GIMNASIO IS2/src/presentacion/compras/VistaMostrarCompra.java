@@ -85,9 +85,18 @@ public class VistaMostrarCompra {
 
 		mostrar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int id = Integer.parseInt(idTF.getText());
-				idTF.setText("");
-				Controlador.accion(Evento.MOSTRAR_COMPRA, id);
+				int id = 0;
+				boolean idsCorrectos = true;
+				try {
+					id = Integer.parseInt(idTF.getText());
+				}catch( NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				if(idsCorrectos){
+					idTF.setText("");
+					Controlador.accion(Evento.MOSTRAR_COMPRA, id);
+				}
 			}
 		});
 
@@ -103,10 +112,10 @@ public class VistaMostrarCompra {
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
 			}
 		});
-		
+
 		return menuPrincipal;
 	}
-	
+
 	public static void actualizar(int evento, DTOtCompra c) {
 		if (evento == Evento.RES_MOSTRAR_COMPRA_OK) {
 			JTextArea textArea = new JTextArea();
@@ -119,7 +128,7 @@ public class VistaMostrarCompra {
 			java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			String fecha = sdf.format(utilDate);
-			
+
 			String id = String.valueOf(c.getId());
 			String idSus = String.valueOf(c.getSuscripcion());
 			String dniCli = c.getDniCliente();

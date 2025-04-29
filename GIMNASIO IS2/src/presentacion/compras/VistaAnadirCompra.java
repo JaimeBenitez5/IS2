@@ -25,6 +25,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.DTOtCompra;
+import presentacion.Comprobaciones;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -113,20 +114,30 @@ public class VistaAnadirCompra {
 
 		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int idSus = Integer.parseInt(suscripcionTF.getText());
+				int idSus = 0;
 				String dniE = dniETF.getText();
 				String dniC = dniClienteTF.getText();
 				java.util.Date Date = (java.util.Date) fechaTF.getValue();
 				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
 				String mPago = comboMetodo.getSelectedItem().toString();
-				if (dniE.isEmpty() || dniC.isEmpty() || fecha==null) {
+				boolean idsCorrectos = true;
+				try {
+					idSus = Integer.parseInt(suscripcionTF.getText());
+				}catch( NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				if (!Comprobaciones.esDNIValido(dniE) || !Comprobaciones.esDNIValido(dniC) ) {
+				    JOptionPane.showMessageDialog(null, "DNI no valido. Debe tener 8 numeros y una letra al final", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else if (dniE.isEmpty() || dniC.isEmpty() || fecha == null) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				else {
+				else if(idsCorrectos){
 					dniETF.setText("");
+					dniClienteTF.setText("");
 					suscripcionTF.setText("");
 					dniClienteTF.setText("");
-					fechaTF.setText("");
 					comboMetodo.setSelectedItem("Sin Asignar");
 					DTOtCompra c = new DTOtCompra(idSus, dniC, sqlDate, mPago, dniE);
 					Controlador.accion(Evento.ALTA_COMPRA, c);

@@ -24,6 +24,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.DTOtActividad;
+import presentacion.Comprobaciones;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -87,7 +88,7 @@ public class VistaModificarActividad {
 		panelCampos.add(dniEmp);
 		JTextField dniEmpTF = new JTextField(30);
 		panelCampos.add(dniEmpTF);
-		
+
 
 		panelModActividad.add(panelCampos);
 		panelModActividad.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -111,16 +112,29 @@ public class VistaModificarActividad {
 				String tipoAct = tipoActTF.getText();
 				java.util.Date Date = (java.util.Date) fechaTF.getValue();
 				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
-				int idSala = Integer.parseInt(idSalaTF.getText());
-				String dniEmp = dniEmpTF.getText();
+				String dniEmp = dniEmpTF.getText().trim();
+				int idSala = 0;
+				boolean idsCorrectos = true;
+				try {
+					idSala = Integer.parseInt(idSalaTF.getText());
+				}catch( NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				if (!Comprobaciones.esDNIValido(dniEmp)) {
+				    JOptionPane.showMessageDialog(null, "DNI no valido. Debe tener 8 numeros y una letra al final", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 				if (tipoAct == "") {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				tipoActTF.setText("");
-				dniEmpTF.setText("");
-				fechaTF.setValue(new java.util.Date());
-				DTOtActividad a = new DTOtActividad(tipoAct, idSala, sqlDate, dniEmp);
-				Controlador.accion(Evento.MODIFICAR_ACTIVIDAD, a);
+				else if (idsCorrectos){
+					tipoActTF.setText("");
+					dniEmpTF.setText("");
+					idSalaTF.setText("");
+					fechaTF.setValue(new java.util.Date());
+					DTOtActividad a = new DTOtActividad(tipoAct, idSala, sqlDate, dniEmp);
+					Controlador.accion(Evento.MODIFICAR_ACTIVIDAD, a);
+				}
 			}
 		});
 

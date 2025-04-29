@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JFormattedTextField;
 
 import negocio.DTOtActividad;
+import presentacion.Comprobaciones;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -67,7 +68,7 @@ public class VistaAnadirActividad {
 		panelCampos.add(tipoAct);
 		JTextField tipoActTF = new JTextField(30);
 		panelCampos.add(tipoActTF);
-		
+
 		JLabel fecha = new JLabel("Fecha:");
 		fecha.setForeground(Color.WHITE);
 		panelCampos.add(fecha);
@@ -76,26 +77,26 @@ public class VistaAnadirActividad {
 		fechaTF.setColumns(10);
 		fechaTF.setValue(new java.util.Date());
 		panelCampos.add(fechaTF);
-		
+
 		JLabel idSala = new JLabel("ID Sala:");
 		idSala.setForeground(Color.WHITE);
 		panelCampos.add(idSala);
 		JTextField idSalaTF = new JTextField(30);
 		panelCampos.add(idSalaTF);
-		
+
 		JLabel dniEmp = new JLabel("DNI Empleado:");
 		dniEmp.setForeground(Color.WHITE);
 		panelCampos.add(dniEmp);
 		JTextField dniEmpTF = new JTextField(30);
 		panelCampos.add(dniEmpTF);
-		
+
 		JLabel idCat = new JLabel("ID de Catalogo (si tiene):");
 		idCat.setForeground(Color.WHITE);
 		panelCampos.add(idCat);
 		JTextField idCatTF = new JTextField(30);
 		panelCampos.add(idCatTF);
-		
-		
+
+
 		panelAnadirActividad.add(panelCampos);
 		panelAnadirActividad.add(Box.createRigidArea(new Dimension(0, 50)));
 
@@ -118,22 +119,32 @@ public class VistaAnadirActividad {
 				String tipoAct = tipoActTF.getText();
 				java.util.Date Date = (java.util.Date) fechaTF.getValue();
 				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
-				String dniEmp = dniEmpTF.getText();
-				int idSala = Integer.parseInt(idSalaTF.getText());
+				String dniEmp = dniEmpTF.getText().trim();
+				int idSala = 0;
 				int idCat = 0;
+				boolean idsCorrectos = true;
 				try {
-					idCat =Integer.parseInt(idCatTF.getText());
+					idSala = Integer.parseInt(idSalaTF.getText());
+					if(!idCatTF.getText().isEmpty()) idCat = Integer.parseInt(idCatTF.getText());
 				}catch( NumberFormatException nfe){
-					
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				if (tipoAct == "") {
+				if (!Comprobaciones.esDNIValido(dniEmp)) {
+				    JOptionPane.showMessageDialog(null, "DNI no valido. Debe tener 8 numeros y una letra al final", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else if (tipoAct == "") {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				tipoActTF.setText("");
-				idCatTF.setText("");
-				fechaTF.setValue(new java.util.Date());
-				DTOtActividad a = new DTOtActividad(tipoAct, idSala, sqlDate, dniEmp, idCat);
-				Controlador.accion(Evento.ALTA_ACTIVIDAD, a);
+				else if (idsCorrectos) {
+					tipoActTF.setText("");
+					fechaTF.setValue(new java.util.Date());
+					dniEmpTF.setText("");
+					idSalaTF.setText("");
+					idCatTF.setText(""); 
+					DTOtActividad a = new DTOtActividad(tipoAct, idSala, sqlDate, dniEmp, idCat);
+					Controlador.accion(Evento.ALTA_ACTIVIDAD, a);
+				}
 			}
 		});
 

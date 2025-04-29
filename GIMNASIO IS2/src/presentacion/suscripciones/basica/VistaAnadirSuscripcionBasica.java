@@ -112,13 +112,22 @@ public class VistaAnadirSuscripcionBasica {
 				String tipoAct = tipoActTF.getText();
 				java.util.Date Date = (java.util.Date) fechaTF.getValue();
 				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
-				int idSala = Integer.parseInt(idSalaTF.getText());
+				int idSala = 0;
+				boolean idsCorrectos = true;
+				try {
+					idSala = Integer.parseInt(idSalaTF.getText());
+				}catch(NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 				if (nombre.isEmpty() ) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				else {
+				else if(idsCorrectos){
 					nombreTF.setText("");
 					tipoActTF.setText("");
+					fechaTF.setValue(new java.util.Date());
+					idSalaTF.setText("");
 					DTOtSuscripcion sus = new DTOtBasica(nombre, tipoAct, sqlDate, idSala);
 					Controlador.accion(Evento.ALTA_SUSCRIPCION_BASICA, sus);
 				}

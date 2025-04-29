@@ -13,7 +13,6 @@ public class DAOSalasImp implements DAOSalas {
         try (PreparedStatement stmt = BDConexion.getConnection().prepareStatement(insertSala, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, sala.getAforo());
             stmt.executeUpdate();
-
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
                     return rs.getInt(1);
@@ -104,8 +103,8 @@ public class DAOSalasImp implements DAOSalas {
     public List<DTOtSala> leerTodasSalas() {
         List<DTOtSala> salas = new ArrayList<>();
         String query = "SELECT s.idSala, s.aforo, m.dniEmpleado FROM SALAS s LEFT JOIN MANTIENEN m ON s.idSala = m.idSala ORDER BY s.idSala";
-        try (Statement stmt = BDConexion.getConnection().createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
+        try (Statement stmt = BDConexion.getConnection().createStatement()){
+            ResultSet rs = stmt.executeQuery(query);
             int lastSalaId = -1;
             DTOtSala salaActual = null;
             List<String> empleados = new ArrayList<>();
@@ -122,14 +121,12 @@ public class DAOSalasImp implements DAOSalas {
                     salaActual = new DTOtSala(idSala, aforo, new String[0]);
                     lastSalaId = idSala;
                 }
-                if (dniEmpleado != null)
-                    empleados.add(dniEmpleado);
+                if (dniEmpleado != null) empleados.add(dniEmpleado);
             }
             if (salaActual != null) {
                 salaActual.setDniEmpleados(empleados.toArray(new String[0]));
                 salas.add(salaActual);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

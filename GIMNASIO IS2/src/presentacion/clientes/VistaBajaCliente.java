@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import presentacion.Comprobaciones;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -83,9 +84,14 @@ public class VistaBajaCliente {
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String dni = dniTF.getText();
-				dniTF.setText("");
-				Controlador.accion(Evento.ELIMINAR_CLIENTE, dni);
+				String dni = dniTF.getText().trim();
+				if (!Comprobaciones.esDNIValido(dni)) {
+					JOptionPane.showMessageDialog(null, "DNI no valido. Debe tener 8 numeros y una letra al final", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					dniTF.setText("");
+					Controlador.accion(Evento.ELIMINAR_CLIENTE, dni);
+				}
 			}
 		});
 
@@ -101,7 +107,7 @@ public class VistaBajaCliente {
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
 			}
 		});
-		
+
 		return menuPrincipal;
 	}
 

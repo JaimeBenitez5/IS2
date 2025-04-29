@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 
 import negocio.DTOtEmpleado;
 import negocio.DTOtRol;
+import presentacion.Comprobaciones;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -74,9 +75,7 @@ public class VistaAnadirEmpleado {
 		JLabel rolLabel = new JLabel("Rol:");
 		rolLabel.setForeground(Color.WHITE);
 		panelCampos.add(rolLabel);
-		JComboBox<String> comboRol = new JComboBox<>(new String[] {
-			    "SIN ASIGNAR", "MANTENIMIENTO", "RECEPCION", "NUTRICIONISTA", "MONITOR"
-			});
+		JComboBox<String> comboRol = new JComboBox<>(new String[] {"Sin Asignar", "Mantenimiento", "Recepcion", "Nutricionista", "Monitor"});
 		panelCampos.add(comboRol);
 
 		panelAltaEmpleado.add(panelCampos);
@@ -98,17 +97,19 @@ public class VistaAnadirEmpleado {
 
 		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String dni = dniTF.getText();
+				String dni = dniTF.getText().trim();
 				String nombre = nombreTF.getText();
 				String rol = (String) comboRol.getSelectedItem();
-
-				if (dni.isEmpty() || nombre.isEmpty()) {
+				if (!Comprobaciones.esDNIValido(dni)) {
+				    JOptionPane.showMessageDialog(null, "DNI no valido. Debe tener 8 numeros y una letra al final", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else if (dni.isEmpty() || nombre.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				} 
 				else {
 					dniTF.setText("");
 					nombreTF.setText("");
-					comboRol.setSelectedItem("SIN ASIGNAR");
+					comboRol.setSelectedItem("Sin Asignar");
 					DTOtRol dtoRol = new DTOtRol(rol);
 					DTOtEmpleado emp = new DTOtEmpleado(dni, nombre, dtoRol);
 					Controlador.accion(Evento.ALTA_EMPLEADO, emp);

@@ -118,17 +118,25 @@ public class VistaModificarCompra {
 
 		save.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int idCompra = Integer.parseInt(idTF.getText());
-				int idSus = Integer.parseInt(suscripcionTF.getText());
+				int idCompra = 0;
+				int idSus = 0;
 				String dniE = dniETF.getText();
 				String dniC = dniClienteTF.getText();
 				java.util.Date Date = (java.util.Date) fechaTF.getValue();
 				java.sql.Date sqlDate = new java.sql.Date(Date.getTime());
 				String mPago = comboMetodo.getSelectedItem().toString();
+				boolean idsCorrectos = true;
+				try {
+					idCompra = Integer.parseInt(idTF.getText());
+					idSus = Integer.parseInt(suscripcionTF.getText());
+				}catch( NumberFormatException nfe){
+					idsCorrectos = false;
+					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 				if (dniE.isEmpty() || dniC.isEmpty() || fecha==null) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				else {
+				else if(idsCorrectos){
 					idTF.setText("");
 					dniETF.setText("");
 					suscripcionTF.setText("");

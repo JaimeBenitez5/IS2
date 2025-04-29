@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import negocio.DTOtEmpleado;
+import presentacion.Comprobaciones;
 import presentacion.Controlador;
 import presentacion.Evento;
 import presentacion.UIElementFactory;
@@ -89,16 +90,17 @@ public class VistaModificarEmpleado {
 
 		save.addActionListener( new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String dni = dniTF.getText();
-				String nombre = nombreTF.getText();
-				
+				String dni = dniTF.getText().trim();
+				String nombre = nombreTF.getText().trim();
+				if (!Comprobaciones.esDNIValido(dni) || !Comprobaciones.esDNIValido(nombre)) {
+				    JOptionPane.showMessageDialog(null, "DNI no valido. Debe tener 8 numeros y una letra al final", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 				if (dni.isEmpty() || nombre.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 				} 
 				else {
 					dniTF.setText("");
 					nombreTF.setText("");
-
 					DTOtEmpleado emp = new DTOtEmpleado(dni, nombre, null);
 					Controlador.accion(Evento.MODIFICAR_EMPLEADO, emp);
 				}
