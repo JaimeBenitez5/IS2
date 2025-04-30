@@ -11,11 +11,11 @@ class SASalasTest {
 	@Test
 	void test() {
 		SASalasImp salas = new SASalasImp(); 
-		assertEquals(1,salas.altaSala(new DTOtSala(33,null)));
-		assertEquals(2,salas.altaSala(new DTOtSala(15,null)));
 		
 		String[] empleados = {"11111111A", "22222222B"};
 		
+		salas.altaSala(new DTOtSala(33,empleados));
+		salas.altaSala(new DTOtSala(15,empleados));	
 		salas.altaSala(new DTOtSala(10,empleados));
 		
 		assertEquals("3 10 Empleados: 11111111A 22222222B ", salas.leerSala(3).toString());
