@@ -20,7 +20,7 @@ public class SAClientesImp implements SAClientes {
 		if(c == null) exito = getDAOClientes().altaCliente(cliente); 
 		else if (!c.getActivo()) {
 			cliente.setActivo(true);
-			exito = getDAOClientes().actualizarCliente(cliente);;
+			exito = getDAOClientes().actualizarCliente(cliente);
 		}
 		return exito;
 	}

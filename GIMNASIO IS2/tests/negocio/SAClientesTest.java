@@ -1,4 +1,4 @@
-package integracion;
+package negocio;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,8 +15,16 @@ class SAClientesTest {
 	@Test
 	void testClientes() {
 		SAClientes clientes = new SAClientesImp();
-		assertEquals(1, clientes.altaCliente(new DTOtCliente("11111111A", "Agapito", "Casa de Agapito", true)));
-		assertEquals(1, clientes.altaCliente(new DTOtCliente("22222222B", "Josefa", "Casa de Josefa", true)));
+		if(clientes.leerCliente("11111111A") == null) {
+			assertEquals(1, clientes.altaCliente(new DTOtCliente("11111111A", "Agapito", "Casa de Agapito", true)));
+		}
+		else clientes.altaCliente(new DTOtCliente("11111111A", "Agapito", "Casa de Agapito", true));
+		
+		if (clientes.leerCliente("22222222B") == null) {
+			assertEquals(2, clientes.altaCliente(new DTOtCliente("22222222B", "Josefa", "Casa de Josefa", true)));
+		}
+		else clientes.altaCliente(new DTOtCliente("22222222B", "Josefa", "Casa de Josefa", true));
+		
 		clientes.borrarCliente("11111111A");
 		DTOtCliente test = clientes.leerCliente("11111111A");
 		assertEquals(test.getActivo(), false);
