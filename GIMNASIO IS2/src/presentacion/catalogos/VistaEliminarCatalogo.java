@@ -83,17 +83,22 @@ public class VistaEliminarCatalogo {
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				int id = 0;
-				boolean idsCorrectos = true;
-				try {
-					id = Integer.parseInt(idTF.getText());
-				}catch(NumberFormatException nfe){
-					idsCorrectos = false;
-					JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
-				}
-				if(idsCorrectos) {
-					idTF.setText("");
-					Controlador.accion(Evento.ELIMINAR_CATALOGO, id);
+				int n = JOptionPane.showOptionDialog(menuPrincipal, "🚨 Advertencia, borrar un catalogo asociado a una suscripcion premium tambien elimina esta. Estas seguro? 🚨", "Advertencia",
+						JOptionPane.YES_NO_OPTION, JOptionPane.DEFAULT_OPTION, null, null, null);
+
+				if (n == 0) {
+					int id = 0;
+					boolean idsCorrectos = true;
+					try {
+						id = Integer.parseInt(idTF.getText());
+					}catch(NumberFormatException nfe){
+						idsCorrectos = false;
+						JOptionPane.showMessageDialog(null, "Los IDs solo pueden contener numeros", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					if(idsCorrectos) {
+						idTF.setText("");
+						Controlador.accion(Evento.ELIMINAR_CATALOGO, id);
+					}
 				}
 			}
 		});
@@ -110,7 +115,7 @@ public class VistaEliminarCatalogo {
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
 			}
 		});
-		
+
 		return menuPrincipal;
 	}
 
