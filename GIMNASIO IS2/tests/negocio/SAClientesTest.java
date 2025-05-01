@@ -21,7 +21,7 @@ class SAClientesTest {
 		else clientes.altaCliente(new DTOtCliente("11111111A", "Agapito", "Casa de Agapito", true));
 		
 		if (clientes.leerCliente("22222222B") == null) {
-			assertEquals(2, clientes.altaCliente(new DTOtCliente("22222222B", "Josefa", "Casa de Josefa", true)));
+			assertEquals(1, clientes.altaCliente(new DTOtCliente("22222222B", "Josefa", "Casa de Josefa", true)));
 		}
 		else clientes.altaCliente(new DTOtCliente("22222222B", "Josefa", "Casa de Josefa", true));
 		

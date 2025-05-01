@@ -37,6 +37,6 @@ public class DTOtEmpleado {
     
     
     public String toString() {
-        return  _dni + " " + _nombre + _rolEmpleado.toString();
+        return  _dni + " " + _nombre +" "+ _rolEmpleado.toString();
     }
 }
