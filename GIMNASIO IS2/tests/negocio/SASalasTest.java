@@ -44,7 +44,7 @@ class SASalasTest {
 		
 		assertEquals( idSala3 + " 10 Empleados: 66666666Z 77777777V ", salas.leerSala(idSala3).toString());
 		
-		salas.actualizarSala(new DTOtSala(3,5,emplea1));
+		salas.actualizarSala(new DTOtSala(idSala3,5,emplea1));
 		
 		assertEquals(idSala3 + " 5 Empleados: 66666666Z 77777777V ",salas.leerSala(idSala3).toString());
 		
