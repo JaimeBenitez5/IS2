@@ -27,8 +27,8 @@ class SAActividadesTest {
 		salas = new SASalasImp();
 		empleados = new SAEmpleadosImp();
 		
-		d1 = new Date(1,1,1);
-		d2 = new Date(2,2,2);
+		d1 = Date.valueOf("2025-1-1");
+		d2 = Date.valueOf("2025-1-2");
 		
 	}
 	
@@ -56,11 +56,11 @@ class SAActividadesTest {
 		actividades.altaActividad(new DTOtActividad("Pilates", idSala2, d1,"88888888K", 2));
 		actividades.altaActividad(new DTOtActividad("Crossfit", idSala1, d2,"99999999X", 1));
 		
-		assertEquals(actividades.leerActividad("Yoga", d1, idSala1).toString(), "Yoga 1 99999999X 1901-02-01");
+		assertEquals(actividades.leerActividad("Yoga", d1, idSala1).toString(), "Yoga 1 99999999X 2025-01-01");
 		
 		actividades.actualizarActividad(new DTOtActividad("Yoga",idSala1, d1,"88888888K",1));
 		
-		assertEquals(actividades.leerActividad("Yoga", d1, idSala1),"Yoga 1 88888888K 1901-02-01");
+		assertEquals(actividades.leerActividad("Yoga", d1, idSala1).toString(),"Yoga 1 88888888K 2025-01-01");
 		
 		actividades.borrarActividad("Crossfit", d2, idSala1);
 		
@@ -74,8 +74,8 @@ class SAActividadesTest {
 			else if(e.toString().equals("Pilates " + idSala2 + " 88888888K " + d1.toString())) b = true;
 		}
 		
-		assertEquals(a,true);
-		assertEquals(b,true);
+		assertTrue(a);
+		assertTrue(b);
 		
 	}
 

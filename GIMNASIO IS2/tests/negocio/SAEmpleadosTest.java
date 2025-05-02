@@ -54,9 +54,8 @@ class SAEmpleadosTest {
 			else if(e.toString().equals("22222222B Manuel 4 Recepcion 1500.0")) b = true;
 		}
 		
-		assertEquals(a,true);
-		assertEquals(b,true);
-		
+		assertTrue(a);
+		assertTrue(b);
 	}
 
 }

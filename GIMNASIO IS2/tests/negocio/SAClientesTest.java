@@ -42,8 +42,8 @@ class SAClientesTest {
 			else if(e.toString().equals("22222222B Carlitos Casa de Carlitos false")) b = true;
 		}
 		
-		assertEquals(a,true);
-		assertEquals(b,true);
+		assertTrue(a);
+		assertTrue(b);
 		
 	}
 }

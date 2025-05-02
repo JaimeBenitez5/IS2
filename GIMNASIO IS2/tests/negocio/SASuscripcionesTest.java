@@ -42,6 +42,17 @@ class SASuscripcionesTest {
 		
 		List<DTOtSuscripcion> list = premium.leerTodasSuscripciones();
 		
+		boolean a = false;
+		boolean b = false;
+		
+		for(DTOtSuscripcion e : list) {
+			if (e.toString().equals("2 2 90 120 Manuel 2 22222222B")) a = true;
+			else if(e.toString().equals("")) b = true;
+		}
+		
+		assertTrue(a);
+		assertTrue(b);
+		
 		assertEquals("2 2 90 120 Manuel 2 22222222B", list.get(0).toString());
 	}
 

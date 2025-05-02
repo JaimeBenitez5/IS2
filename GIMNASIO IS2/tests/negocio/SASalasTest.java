@@ -66,9 +66,8 @@ class SASalasTest {
 			else if(e.toString().equals(idSala3 + " 5 Empleados: 66666666Z ")) b = true;
 		}
 		
-		assertEquals(a,true);
-		assertEquals(b,true);
-	
+		assertTrue(a);
+		assertTrue(b);
 	}
 
 }
