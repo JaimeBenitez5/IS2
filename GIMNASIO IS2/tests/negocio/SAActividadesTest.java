@@ -5,33 +5,62 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.sql.Date;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class SAActividadesTest {
+	
+	static SAActividades actividades;
+	static SASalas salas;
+	static SAEmpleados empleados;
+	static Date d1;
+	static Date d2;
+	static int idSala1;
+	static int idSala2;
+	String[] emp1 = {"77777777V"};
+	String[] emp2 = {"66666666Z"};
+	
+	@BeforeAll
+	static void init() {
+		actividades = new SAActividadesImp();
+		salas = new SASalasImp();
+		empleados = new SAEmpleadosImp();
+		
+		d1 = new Date(1,1,1);
+		d2 = new Date(2,2,2);
+		
+	}
+	
+	@AfterAll
+	static void limpia() {
+		empleados.borrarEmpleado("99999999X");
+		empleados.borrarEmpleado("88888888K");
+		empleados.borrarEmpleado("77777777V");
+		empleados.borrarEmpleado("66666666Z");
+		salas.borrarSala(idSala1);
+		salas.borrarSala(idSala2);
+	}
 
 	@Test
 	void test() {
-		SAActividades actividades = new SAActividadesImp();
-		SASalas salas = new SASalasImp();
-		SAEmpleados empleados = new SAEmpleadosImp();
-		
-		Date d1 = new Date(1,1,1);
-		Date d2 = new Date(2,2,2);
-		
 		empleados.altaEmpleado(new DTOtEmpleado("99999999X", "Test1", new DTOtRol("Monitor")));
 		empleados.altaEmpleado(new DTOtEmpleado("88888888K", "Test2", new DTOtRol("Monitor")));
 		empleados.altaEmpleado(new DTOtEmpleado("77777777V", "Test3", new DTOtRol("Mantenimiento")));
 		empleados.altaEmpleado(new DTOtEmpleado("66666666Z", "Test4", new DTOtRol("Mantenimiento")));
 		
-		int exito = actividades.altaActividad(new DTOtActividad("Yoga", 1, d1,"99999999X", 1));
-		actividades.altaActividad(new DTOtActividad("Pilates", 2, d1,"88888888K", 2));
-		actividades.altaActividad(new DTOtActividad("Crossfit", 1, d2,"99999999X", 1));
+		idSala1 = salas.altaSala(new DTOtSala(15,emp1));
+		idSala2 = salas.altaSala(new DTOtSala(10,emp2));
 		
-		assertEquals(actividades.leerActividad("Yoga", d1, 1).toString(), new DTOtActividad("Yoga", 1, d1, "99999999X", 1).toString());
+		actividades.altaActividad(new DTOtActividad("Yoga", idSala1, d1,"99999999X", 1));
+		actividades.altaActividad(new DTOtActividad("Pilates", idSala2, d1,"88888888K", 2));
+		actividades.altaActividad(new DTOtActividad("Crossfit", idSala1, d2,"99999999X", 1));
+		
+		assertEquals(actividades.leerActividad("Yoga", d1, 1).toString(), "Yoga 1 99999999X 1901-02-01");
 		
 		actividades.actualizarActividad(new DTOtActividad("Yoga",1, d1,"88888888K",1));
 		
-		assertEquals(actividades.leerActividad("Yoga", d1, 1),new DTOtActividad("Yoga",1,d1,"88888888K",1));
+		assertEquals(actividades.leerActividad("Yoga", d1, 1),"Yoga 1 88888888K 1901-02-01");
 		
 		actividades.borrarActividad("Crossfit", d2, 1);
 		
@@ -41,8 +70,8 @@ class SAActividadesTest {
 		boolean b = false;
 		
 		for(DTOtActividad e : list) {
-			if (e.toString().equals("Yoga 1 88888888K ")) a = true;
-			else if(e.toString().equals("Pilates 2 88888888K")) b = true;
+			if (e.toString().equals("Yoga " + idSala1 + " 88888888K ")) a = true;
+			else if(e.toString().equals("Pilates " + idSala2 + " 88888888K")) b = true;
 		}
 		
 		assertEquals(a,true);
