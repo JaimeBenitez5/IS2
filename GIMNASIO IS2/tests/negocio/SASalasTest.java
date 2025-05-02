@@ -62,7 +62,7 @@ class SASalasTest {
 		boolean b = false;
 		
 		for(DTOtSala e : list) {
-			if (e.toString().equals(idSala2 + " 15 Empleados: 66666666Z 77777777V")) a = true;
+			if (e.toString().equals(idSala2 + " 15 Empleados: 66666666Z 77777777V ")) a = true;
 			else if(e.toString().equals(idSala3 + " 5 Empleados: 66666666Z ")) b = true;
 		}
 		
