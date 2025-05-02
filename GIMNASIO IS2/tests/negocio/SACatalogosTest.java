@@ -35,6 +35,17 @@ class SACatalogosTest {
 		
 		List<DTOtCatalogo> list = catalogos.leerTodosCatalogos();
 		
+		boolean a = false;
+		boolean b = false;
+		
+		for(DTOtCatalogo e : list) {
+			if (e.toString().equals("me da error")) a = true;
+			else if(e.toString().equals("me da error")) b = true;
+		}
+		
+		assertEquals(a,true);
+		assertEquals(b,true);
+		
 		assertEquals(new DTOtCatalogo(2,actividades,7), list.get(0));
 		assertEquals(new DTOtCatalogo(3,actividades,5),list.get(1));
 	}
