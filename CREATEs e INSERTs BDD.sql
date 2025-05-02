@@ -156,6 +156,7 @@ FOREIGN KEY (dniCliente) REFERENCES Clientes(dniCliente),
 FOREIGN KEY (numFactura) REFERENCES Facturas(numFactura), 
 FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado)
 );
+
 INSERT INTO Roles (nombre) VALUES ('Mantenimiento');
 INSERT INTO Roles (nombre) VALUES ('Monitor');
 INSERT INTO Roles (nombre) VALUES ('Nutricionista');

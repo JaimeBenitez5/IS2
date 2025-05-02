@@ -16,7 +16,10 @@ class SASalasTest {
 		
 		int idSala1 = salas.altaSala(new DTOtSala(33, empleados));
 		int idSala2 = salas.altaSala(new DTOtSala(15, empleados));	
-		int idSala3 = salas.altaSala(new DTOtSala(10, empleados));
+		int idSala3 = salas.altaSala(new DTOtSala(10, empleados));		
+		
+		empleados.altaEmpleado(new DTOtEmpleado("99999999X", "Test1", new DTOtRol("Monitor")));
+		empleados.altaEmpleado(new DTOtEmpleado("88888888K", "Test2", new DTOtRol("Monitor")));
 		
 		assertEquals( idSala3 + "10 Empleados: 11111111A 22222222B ", salas.leerSala(idSala3).toString());
 		

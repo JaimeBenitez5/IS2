@@ -20,16 +20,16 @@ public class DTOtRol {
 	private int castIdRol(final String nombreRol) {
 		int idRol = 0; 
 		
-		if(nombreRol == "MANTENIMIENTO") {
+		if(nombreRol == "Mantenimiento") {
 			idRol = 1;
 		}
-		else if(nombreRol == "MONITOR") {
+		else if(nombreRol == "Monitor") {
 			idRol = 2;
 		}
-		else if(nombreRol == "NUTRICIONISTA") {
+		else if(nombreRol == "Nutricionista") {
 			idRol = 3;
 		}
-		else if(nombreRol == "RECEPCION") {
+		else if(nombreRol == "Recepcion") {
 			idRol = 4;
 		}
 		return idRol;
