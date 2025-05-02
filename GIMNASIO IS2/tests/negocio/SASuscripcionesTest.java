@@ -14,8 +14,8 @@ class SASuscripcionesTest {
 
 	@Test
 	void test() {
-		SASuscripcionesBasicasImp basicas = new SASuscripcionesBasicasImp();
-		SASuscripcionesPremiumImp premium = new SASuscripcionesPremiumImp();
+		SASuscripciones basicas = new SASuscripcionesBasicasImp();
+		SASuscripciones premium = new SASuscripcionesPremiumImp();
 		
 		DAOSuscripciones daoBas = SASuscripcionesBasicasImp.getDAOSuscripciones();
 		DAOSuscripciones daoPrem = SASuscripcionesPremiumImp.getDAOSuscripciones();

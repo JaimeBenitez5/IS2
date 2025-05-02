@@ -12,7 +12,7 @@ class SACatalogosTest {
 
 	@Test
 	void test() {
-		SACatalogosImp catalogos = new SACatalogosImp();
+		SACatalogos catalogos = new SACatalogosImp();
 		
 		ArrayList<DTOtActividad> actividades = new ArrayList();
 		actividades.add(new DTOtActividad("Yoga",1,new Date(1,1,1),"11111111A"));

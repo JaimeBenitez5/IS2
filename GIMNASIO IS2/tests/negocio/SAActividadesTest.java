@@ -41,16 +41,12 @@ class SAActividadesTest {
 		boolean b = false;
 		
 		for(DTOtActividad e : list) {
-			if (e.toString().equals("Yoga 1 88888888K ") a = true;
-			else if(e.toString().equals("Pilates 2 88888888K") b = true;
+			if (e.toString().equals("Yoga 1 88888888K ")) a = true;
+			else if(e.toString().equals("Pilates 2 88888888K")) b = true;
 		}
 		
 		assertEquals(a,true);
 		assertEquals(b,true);
-	
-		
-		assertEquals(new DTOtActividad("Yoga",1,d1,"88888888K",1),list.get(0));
-		assertEquals(new DTOtActividad("Pilates",2,d1, "88888888K",2),list.get(1));
 		
 	}
 

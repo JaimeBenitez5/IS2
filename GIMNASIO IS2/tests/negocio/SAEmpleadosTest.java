@@ -4,18 +4,29 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class SAEmpleadosTest {
-
-	@Test
-	void test() {
-		SAEmpleados empleados = new SAEmpleadosImp();
-		
+	
+	static SAEmpleados empleados;
+	
+	@BeforeAll
+	static void init() {
+		empleados = new SAEmpleadosImp();
+	}
+	
+	@AfterAll
+	static void limpia() {
 		empleados.borrarEmpleado("11111111A");
 		empleados.borrarEmpleado("22222222B");
 		empleados.borrarEmpleado("33333333C");
 		empleados.borrarEmpleado("44444444D");
+	}
+
+	@Test
+	void test() {
 		
 		empleados.altaEmpleado(new DTOtEmpleado("11111111A", "Agapito", new DTOtRol("Mantenimiento")));
 		empleados.altaEmpleado(new DTOtEmpleado("22222222B", "Manuel", new DTOtRol("Recepcion")));
@@ -34,7 +45,6 @@ class SAEmpleadosTest {
 		empleados.borrarEmpleado("44444444D");
 		
 		List<DTOtEmpleado> list = empleados.leerTodosEmpleados();
-		//METER UN RECORRIDO QUE HAGA QUE LOS BUSQUE EN LA LISTA, ASI SI HAY MAS AÑADIDOS NO PETA
 		
 		boolean a = false;
 		boolean b = false;
