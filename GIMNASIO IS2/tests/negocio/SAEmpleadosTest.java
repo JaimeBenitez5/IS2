@@ -21,23 +21,28 @@ class SAEmpleadosTest {
 		empleados.altaEmpleado(C);
 		empleados.altaEmpleado(D);
 		
+<<<<<<< Updated upstream
 		assertEquals(A.toString(),empleados.leerEmpleado("11111111A").toString());
 		assertEquals(B.toString(),empleados.leerEmpleado("22222222B").toString());
 		assertEquals(C.toString(),empleados.leerEmpleado("33333333C").toString());
 		assertEquals(D.toString(),empleados.leerEmpleado("44444444D").toString());
+=======
+		assertEquals("11111111A Agapito 1 Mantenimiento 2400.0", empleados.leerEmpleado("11111111A").toString());
+		assertEquals("22222222B Manuel 4 Recepcion 1500.0",empleados.leerEmpleado("22222222B").toString());
+		assertEquals("33333333C Josefa 2 Monitor 2100.0",empleados.leerEmpleado("33333333C").toString());
+		assertEquals("44444444D Anastasia 3 Nutricionista 1300.0",empleados.leerEmpleado("44444444D").toString());
+>>>>>>> Stashed changes
 		
-		empleados.actualizarEmpleado(new DTOtEmpleado("11111111A", "Arturo",new DTOtRol("MANTENIMIENTO")));
-		assertEquals("11111111A Arturo 1 MANTENIMIENTO 0.0",empleados.leerEmpleado("11111111A").toString());
+		empleados.actualizarEmpleado(new DTOtEmpleado("11111111A", "Arturo",new DTOtRol("Mantenimiento")));
+		assertEquals("11111111A Arturo 1 Mantenimiento 2400.0",empleados.leerEmpleado("11111111A").toString());
 		
 		empleados.borrarEmpleado("33333333C");
 		empleados.borrarEmpleado("44444444D");
 		
-		empleados.actualizarEmpleado(new DTOtEmpleado("22222222B", "Joaquin", new DTOtRol("MONITOR")));
-		
 		List<DTOtEmpleado> list = empleados.leerTodosEmpleados();
 		
-		assertEquals("11111111A Arturo 1 MANTENIMIENTO 0.0",list.get(0).toString());
-		assertEquals("22222222B Joaquin 2 MONITOR 0.0",list.get(1).toString());
+		assertEquals("11111111A Arturo 1 Mantenimiento 2400.0",list.get(0).toString());
+		assertEquals("22222222B Manuel 4 Recepcion 1500.0",list.get(1).toString());
 		
 	}
 
