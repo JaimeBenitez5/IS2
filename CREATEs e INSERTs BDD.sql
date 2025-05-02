@@ -116,7 +116,7 @@ duracion INT,
 tipoActividad VARCHAR(255), 
 fecha DATE, 
 idSala INT NOT NULL,
-FOREIGN KEY (tipoActividad, fecha, idSala) REFERENCES Actividades(tipoActividad, fecha, idSala),
+FOREIGN KEY (tipoActividad, fecha, idSala) REFERENCES Actividades(tipoActividad, fecha, idSala) ON DELETE CASCADE,
 FOREIGN KEY (numSuscripcion) REFERENCES Suscripciones(numSuscripcion) ON DELETE CASCADE
 );
 
