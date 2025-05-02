@@ -21,7 +21,7 @@ class SAComprasTest {
 
 	@Test
 	void test() {
-		compras.altaCompra(new DTOtCompra(idSuscripcion, "11111111A",d1,"Efectivo","99999999K"))
+		compras.altaCompra(new DTOtCompra(idSuscripcion, "11111111A",d1,"Efectivo","99999999K"));
 	}
 
 }
