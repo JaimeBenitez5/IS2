@@ -156,26 +156,25 @@ FOREIGN KEY (dniCliente) REFERENCES Clientes(dniCliente),
 FOREIGN KEY (numFactura) REFERENCES Facturas(numFactura), 
 FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado)
 );
+INSERT INTO Roles (nombre) VALUES ('Mantenimiento');
+INSERT INTO Roles (nombre) VALUES ('Monitor');
+INSERT INTO Roles (nombre) VALUES ('Nutricionista');
+INSERT INTO Roles (nombre) VALUES ('Recepcion');
+
+INSERT INTO Mantenimiento (idRol, salario) VALUES (1, 2400);
+INSERT INTO Monitores (idRol, salario) VALUES (2, 2100);
+INSERT INTO Nutricionistas (idRol, salario) VALUES (3, 1300);
+INSERT INTO Recepcion (idRol, salario) VALUES (4, 1500);
 
 INSERT INTO Empleados (dniEmpleado, nombre) VALUES ('06013483H', 'Nicolas'); 
 INSERT INTO Empleados (dniEmpleado, nombre) VALUES ('12345678A', 'Jaime'); 
 INSERT INTO Empleados (dniEmpleado, nombre) VALUES ('12345678B', 'Juan'); 
 INSERT INTO Empleados (dniEmpleado, nombre) VALUES ('12345678C', 'Gabriel'); 
 
-INSERT INTO Roles (nombre) VALUES ('Mantenimiento');
-INSERT INTO Roles (nombre) VALUES ('Monitor');
-INSERT INTO Roles (nombre) VALUES ('Nutricionista');
-INSERT INTO Roles (nombre) VALUES ('Recepcion');
-
 INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('06013483H', 1);
 INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('12345678A', 2);
 INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('12345678B', 3);
 INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('12345678C', 4);
-
-INSERT INTO Mantenimiento (idRol, salario) VALUES (1, 2400);
-INSERT INTO Monitores (idRol, salario) VALUES (2, 2100);
-INSERT INTO Nutricionistas (idRol, salario) VALUES (3, 1300);
-INSERT INTO Recepcion (idRol, salario) VALUES (4, 1500);
 
 INSERT INTO Clientes (nombre, dniCliente, direccion) VALUES ('Marlon', 'AAAAAAAAA' ,'Gran Via 4'); 
 INSERT INTO Clientes (nombre, dniCliente, direccion) VALUES ('Carlos', 'BBBBBBBBB' ,'Las Tablas'); 
