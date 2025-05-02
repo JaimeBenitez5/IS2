@@ -12,16 +12,19 @@ class SAComprasTest {
 	static SACompras compras;
 	static int idSuscripcion;
 	static Date d1;
+	static Date d2;
 	
 	@BeforeAll
 	static void init() {
 		compras = new SAComprasImp();
 		d1 = new Date(25,25,25);
+		d2 = new Date(33,33,33);
 	}
 
 	@Test
 	void test() {
 		compras.altaCompra(new DTOtCompra(idSuscripcion, "11111111A",d1,"Efectivo","99999999K"));
+		compras.altaCompra(new DTOtCompra(idSuscripcion, "22222222A", d2, "Tarjeta","99999999K" ));
 	}
 
 }
