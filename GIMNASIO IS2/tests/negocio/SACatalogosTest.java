@@ -71,14 +71,14 @@ class SACatalogosTest {
 		
 		assertEquals(idCatalogo1 + " 3 Yoga " + idSala1 + " 99999999X " + d1.toString() + 
 				" Pilates " + idSala2 + " 88888888K " + d1.toString() + 
-				" Crossfit " + idSala1 + " 99999999X " +d1.toString(),catalogos.leerCatalogo(idCatalogo1).toString());
+				" Crossfit " + idSala1 + " 99999999X " + d1.toString(),catalogos.leerCatalogo(idCatalogo1).toString());
 		
 		actividades.remove(2);
 		
 		catalogos.actualizarCatalogo(new DTOtCatalogo(idCatalogo1,actividades,3));
 		
 		assertEquals(idCatalogo1 + " 3 Yoga " + idSala1 + " 99999999X " + d1.toString() + 
-				" Crossfit " + idSala1 + " 99999999X " +d1.toString(), catalogos.leerCatalogo(idCatalogo1).toString());
+				" Crossfit " + idSala1 + " 99999999X " + d1.toString(), catalogos.leerCatalogo(idCatalogo1).toString());
 		
 		catalogos.borrarCatalogo(idCatalogo1);
 		
