@@ -4,41 +4,70 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class SASalasTest {
+	
+	static int idSala1;
+	static int idSala2;
+	static int idSala3;
+	static SASalas salas;
+	static SAEmpleados empleados;
+	
+	@BeforeAll
+	static void inicia() {
+		salas = new SASalasImp();
+		empleados = new SAEmpleadosImp();
+		empleados.altaEmpleado(new DTOtEmpleado("77777777V", "Test3", new DTOtRol("Mantenimiento")));
+		empleados.altaEmpleado(new DTOtEmpleado("66666666Z", "Test4", new DTOtRol("Mantenimiento")));
+	}
+	
+	@AfterAll
+	static void limpia() {
+		salas.borrarSala(idSala1);
+		salas.borrarSala(idSala2);
+		salas.borrarSala(idSala3);
+		empleados.borrarEmpleado("77777777V");
+		empleados.borrarEmpleado("66666666Z");
+	}
 
 	@Test
-	void test() {
-		SASalasImp salas = new SASalasImp(); 
+	void test() {		
 		
-		String[] empleados = {"11111111A", "22222222B"};
+		String[] emplea1 = {"66666666Z", "77777777V"};
 		
-		int idSala1 = salas.altaSala(new DTOtSala(33, empleados));
-		int idSala2 = salas.altaSala(new DTOtSala(15, empleados));	
-		int idSala3 = salas.altaSala(new DTOtSala(10, empleados));		
+		idSala1 = salas.altaSala(new DTOtSala(33, emplea1));
+		idSala2 = salas.altaSala(new DTOtSala(15, emplea1));	
+		idSala3 = salas.altaSala(new DTOtSala(10, emplea1));		
 		
-		empleados.altaEmpleado(new DTOtEmpleado("99999999X", "Test1", new DTOtRol("Monitor")));
-		empleados.altaEmpleado(new DTOtEmpleado("88888888K", "Test2", new DTOtRol("Monitor")));
+		assertEquals( idSala3 + " 10 Empleados: 66666666Z 77777777V ", salas.leerSala(idSala3).toString());
 		
-		assertEquals( idSala3 + "10 Empleados: 11111111A 22222222B ", salas.leerSala(idSala3).toString());
+		salas.actualizarSala(new DTOtSala(3,5,emplea1));
 		
-		salas.actualizarSala(new DTOtSala(3,5,empleados));
+		assertEquals(idSala3 + " 5 Empleados: 66666666Z 77777777V ",salas.leerSala(idSala3).toString());
 		
-		assertEquals(idSala3 + "5 Empleados: 11111111A 22222222B ",salas.leerSala(idSala3).toString());
+		String[] emplea2 = {"66666666Z"};
 		
-		String[] emplea2 = {"22222222B", "33333333C"};
+		SASalasImp.getDAOSalas().actualizarMantenedor(new DTOtSala(idSala3, 5, emplea2));
 		
-		SASalasImp.getDAOSalas().actualizarMantenedor(new DTOtSala(3, 5, emplea2));
-		
-		assertEquals(idSala3 + "5 Empleados: 22222222B 33333333C ",salas.leerSala(idSala3).toString()); 
+		assertEquals(idSala3 + " 5 Empleados: 66666666Z ",salas.leerSala(idSala3).toString()); 
 		
 		salas.borrarSala(idSala1);
 		
 		List<DTOtSala> list = salas.leerTodasSalas();
 		
-		assertEquals(idSala2 + "15 Empleados: ", list.get(0).toString());
-		assertEquals(idSala3 + "5 Empleados: 22222222B 33333333C ", list.get(1).toString());
+		boolean a = false;
+		boolean b = false;
+		
+		for(DTOtSala e : list) {
+			if (e.toString().equals(idSala2 + " 15 Empleados: 66666666Z 77777777V")) a = true;
+			else if(e.toString().equals(idSala3 + " 5 Empleados: 66666666Z ")) b = true;
+		}
+		
+		assertEquals(a,true);
+		assertEquals(b,true);
 	
 	}
 

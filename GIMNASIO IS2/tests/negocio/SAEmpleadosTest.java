@@ -36,8 +36,16 @@ class SAEmpleadosTest {
 		List<DTOtEmpleado> list = empleados.leerTodosEmpleados();
 		//METER UN RECORRIDO QUE HAGA QUE LOS BUSQUE EN LA LISTA, ASI SI HAY MAS AÑADIDOS NO PETA
 		
-		assertEquals("11111111A Arturo 1 Mantenimiento 2400.0",list.get(0).toString());
-		assertEquals("22222222B Manuel 4 Recepcion 1500.0",list.get(1).toString());
+		boolean a = false;
+		boolean b = false;
+		
+		for(DTOtEmpleado e : list) {
+			if (e.toString().equals("11111111A Arturo 1 Mantenimiento 2400.0")) a = true;
+			else if(e.toString().equals("22222222B Manuel 4 Recepcion 1500.0")) b = true;
+		}
+		
+		assertEquals(a,true);
+		assertEquals(b,true);
 		
 	}
 

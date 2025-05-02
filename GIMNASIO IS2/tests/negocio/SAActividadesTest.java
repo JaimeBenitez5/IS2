@@ -20,6 +20,8 @@ class SAActividadesTest {
 		
 		empleados.altaEmpleado(new DTOtEmpleado("99999999X", "Test1", new DTOtRol("Monitor")));
 		empleados.altaEmpleado(new DTOtEmpleado("88888888K", "Test2", new DTOtRol("Monitor")));
+		empleados.altaEmpleado(new DTOtEmpleado("77777777V", "Test3", new DTOtRol("Mantenimiento")));
+		empleados.altaEmpleado(new DTOtEmpleado("66666666Z", "Test4", new DTOtRol("Mantenimiento")));
 		
 		int exito = actividades.altaActividad(new DTOtActividad("Yoga", 1, d1,"99999999X", 1));
 		actividades.altaActividad(new DTOtActividad("Pilates", 2, d1,"88888888K", 2));
@@ -34,6 +36,18 @@ class SAActividadesTest {
 		actividades.borrarActividad("Crossfit", d2, 1);
 		
 		List<DTOtActividad> list = actividades.leerTodasActividades();
+		
+		boolean a = false;
+		boolean b = false;
+		
+		for(DTOtActividad e : list) {
+			if (e.toString().equals("Yoga 1 88888888K ") a = true;
+			else if(e.toString().equals("Pilates 2 88888888K") b = true;
+		}
+		
+		assertEquals(a,true);
+		assertEquals(b,true);
+	
 		
 		assertEquals(new DTOtActividad("Yoga",1,d1,"88888888K",1),list.get(0));
 		assertEquals(new DTOtActividad("Pilates",2,d1, "88888888K",2),list.get(1));

@@ -34,8 +34,16 @@ class SAClientesTest {
 		
 		List<DTOtCliente> list = clientes.leerTodosClientes();
 		
-		assertEquals("11111111A Agapito Casa de Agapito true", list.get(0).toString());
-		assertEquals("22222222B Carlitos Casa de Carlitos false", list.get(1).toString());
+		boolean a = false;
+		boolean b = false;
+		
+		for(DTOtCliente e : list) {
+			if (e.toString().equals("11111111A Agapito Casa de Agapito true")) a = true;
+			else if(e.toString().equals("22222222B Carlitos Casa de Carlitos false")) b = true;
+		}
+		
+		assertEquals(a,true);
+		assertEquals(b,true);
 		
 	}
 }
