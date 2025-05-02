@@ -11,6 +11,13 @@ import integracion.DAOSuscripciones;
 import integracion.DAOSuscripcionesBasicasImp;
 
 class SASuscripcionesTest {
+	
+	static Date d1;
+	
+	@BeforeAll
+	static void init() {
+		d1 = Date.valueOf("2025-1-1");
+	}
 
 	@Test
 	void test() {
@@ -20,19 +27,19 @@ class SASuscripcionesTest {
 		DAOSuscripciones daoBas = SASuscripcionesBasicasImp.getDAOSuscripciones();
 		DAOSuscripciones daoPrem = SASuscripcionesPremiumImp.getDAOSuscripciones();
 		
-		int numBas = basicas.altaSuscripcion(new DTOtBasica("Agapito", "Yoga",new Date(1,1,1), 1));
+		int numBas = basicas.altaSuscripcion(new DTOtBasica("Agapito", "Yoga",d1, 1));
 		int numPrem = premium.altaSuscripcion(new DTOtPremium("Anacleto",1,"11111111A"));
 		
-		daoBas.altaSuscripcionBasica(new DTOtBasica(numBas,"Agapito", "Yoga",new Date(1,1,1), 1));
+		daoBas.altaSuscripcionBasica(new DTOtBasica(numBas,"Agapito", "Yoga",d1, 1));
 		daoPrem.altaSuscripcionPremium(new DTOtPremium(numPrem,"Anacleto",1,"11111111A"));
 		
-		Date d = new Date(1,1,1);
+		Date d = d1;
 		
 		assertEquals("1 1 30 30 Agapito Yoga " + d.toString() + " 1", basicas.leerSuscripcion(1).toString());
 		assertEquals("2 2 90 120 Anacleto 1 11111111A", premium.leerSuscripcion(2));
 		
-		basicas.actualizarSuscripcion(new DTOtBasica(numBas,"Josefa", "Crossfit", new Date(1,1,1), 1));
-		daoBas.actualizarSuscripcionBasica(new DTOtBasica(numBas,"Josefa", "Crossfit", new Date(1,1,1), 1));
+		basicas.actualizarSuscripcion(new DTOtBasica(numBas,"Josefa", "Crossfit", d1, 1));
+		daoBas.actualizarSuscripcionBasica(new DTOtBasica(numBas,"Josefa", "Crossfit",d1, 1));
 		
 		assertEquals("1 1 30 30 Josefa Crossfit " + d.toString() + " 1", basicas.leerSuscripcion(1));
 		basicas.borrarSuscripcion(1);
