@@ -51,9 +51,9 @@ public class DTOtCatalogo {
     
     public String toString() {
     	StringBuilder sb =new StringBuilder();
-    	sb.append(_id).append(" ").append(_numActividades).append(" ");
+    	sb.append(_id).append(" ").append(_numActividades);
         for(DTOtActividad a : _actividades) {
-        	sb.append(a.toString()).append(" ");
+        	sb.append(" ").append(a.toString());
         }
         return sb.toString();
     }
