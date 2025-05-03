@@ -56,11 +56,11 @@ class SAActividadesTest {
 		actividades.altaActividad(new DTOtActividad("Pilates", idSala2, d1,"88888888K", 2));
 		actividades.altaActividad(new DTOtActividad("Crossfit", idSala1, d2,"99999999X", 1));
 		
-		assertEquals(actividades.leerActividad("Yoga", d1, idSala1).toString(), "Yoga 1 99999999X 2025-01-01");
+		assertEquals(actividades.leerActividad("Yoga", d1, idSala1).toString(), "Yoga " + idSala1 + " 99999999X 2025-01-01");
 		
 		actividades.actualizarActividad(new DTOtActividad("Yoga",idSala1, d1,"88888888K",1));
 		
-		assertEquals(actividades.leerActividad("Yoga", d1, idSala1).toString(),"Yoga 1 88888888K 2025-01-01");
+		assertEquals(actividades.leerActividad("Yoga", d1, idSala1).toString(),"Yoga " + idSala1 + " 88888888K 2025-01-01");
 		
 		actividades.borrarActividad("Crossfit", d2, idSala1);
 		
