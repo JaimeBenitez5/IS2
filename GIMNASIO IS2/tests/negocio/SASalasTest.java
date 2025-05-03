@@ -46,13 +46,13 @@ class SASalasTest {
 		
 		salas.actualizarSala(new DTOtSala(idSala3,5,emplea1));
 		
-		assertEquals(idSala3 + " 5 Empleados: 66666666Z 77777777V ",salas.leerSala(idSala3).toString());
+		assertEquals(idSala3 + " 5 Empleados: 66666666Z 77777777V ", salas.leerSala(idSala3).toString());
 		
 		String[] emplea2 = {"66666666Z"};
 		
 		SASalasImp.getDAOSalas().actualizarMantenedor(new DTOtSala(idSala3, 5, emplea2));
 		
-		assertEquals(idSala3 + " 5 Empleados: 66666666Z ",salas.leerSala(idSala3).toString()); 
+		assertEquals(idSala3 + " 5 Empleados: 66666666Z ", salas.leerSala(idSala3).toString()); 
 		
 		salas.borrarSala(idSala1);
 		

@@ -6,9 +6,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import negocio.DTOtCliente;
-import negocio.SAClientes;
-import negocio.SAClientesImp;
 
 class SAClientesTest {
 

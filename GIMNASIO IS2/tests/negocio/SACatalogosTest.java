@@ -67,7 +67,7 @@ class SACatalogosTest {
 		
 		for(DTOtActividad a : act) actividades.altaActividad(a);
 		
-		idCatalogo1 = catalogos.altaCatalogo(new DTOtCatalogo(idCatalogo1, act, 3));
+		idCatalogo1 = catalogos.altaCatalogo(new DTOtCatalogo(0, act, 3));
 		
 		assertEquals(idCatalogo1 + " 3 Crossfit " + idSala1 + " 99999999X " + d2.toString() +
 				" Pilates " + idSala2 + " 88888888K " + d1.toString() + 
@@ -82,8 +82,8 @@ class SACatalogosTest {
 		
 		catalogos.borrarCatalogo(idCatalogo1);
 		
-		idCatalogo1 = catalogos.altaCatalogo(new DTOtCatalogo(idCatalogo1, act, 7));
-		idCatalogo2 = catalogos.altaCatalogo(new DTOtCatalogo(idCatalogo2, act, 5));
+		idCatalogo1 = catalogos.altaCatalogo(new DTOtCatalogo(0, act, 7));
+		idCatalogo2 = catalogos.altaCatalogo(new DTOtCatalogo(0, act, 5));
 		
 		List<DTOtCatalogo> list = catalogos.leerTodosCatalogos();
 		
