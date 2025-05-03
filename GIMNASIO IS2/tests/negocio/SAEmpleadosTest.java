@@ -15,6 +15,10 @@ class SAEmpleadosTest {
 	@BeforeAll
 	static void init() {
 		empleados = new SAEmpleadosImp();
+		empleados.borrarEmpleado("11111111A");
+		empleados.borrarEmpleado("22222222B");
+		empleados.borrarEmpleado("33333333C");
+		empleados.borrarEmpleado("44444444D");
 	}
 	
 	@AfterAll

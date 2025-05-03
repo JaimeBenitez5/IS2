@@ -322,10 +322,6 @@ public class Controlador{
 			else VistaMostrarFacturas.actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, null);
 			break;
 		}
-		case Evento.MOSTRAR_FACTURAS_CLIENTE:{ 
-			//TODO
-			break;
-		}
 		}
 	}
 

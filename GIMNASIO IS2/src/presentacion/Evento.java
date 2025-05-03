@@ -50,7 +50,6 @@ public class Evento {
 	public static final int MOSTRAR_FACTURA = 212;
 	public static final int MODIFICAR_FACTURA = 213;
 	public static final int MOSTRAR_FACTURAS = 214;
-	public static final int MOSTRAR_FACTURAS_CLIENTE = 216;
 	//Eventos de Respuesta
 	public static final int RES_ALTA_FACTURA_OK = 220;
 	public static final int RES_ALTA_FACTURA_KO = 221;

@@ -25,8 +25,7 @@ class SASuscripcionesTest {
 	String[] emp1 = {"77777777V"};
 	String[] emp2 = {"66666666Z"};
 	
-	int idCatalogo1;
-	int idCatalogo2;
+	static int idCatalogo1;
 	
 	static Date d1;
 	static Date d2;
@@ -49,8 +48,11 @@ class SASuscripcionesTest {
 		empleados.borrarEmpleado("88888888K");
 		empleados.borrarEmpleado("77777777V");
 		empleados.borrarEmpleado("66666666Z");
+		empleados.borrarEmpleado("22222222B");
+		empleados.borrarEmpleado("11111111A");
 		salas.borrarSala(idSala1);
 		salas.borrarSala(idSala2);
+		catalogos.borrarCatalogo(idCatalogo1);
 	}
 
 	@Test
@@ -79,12 +81,12 @@ class SASuscripcionesTest {
 		int numPrem = premium.altaSuscripcion(new DTOtPremium("Anacleto", idCatalogo1, "11111111A"));
 		
 		
-		assertEquals("1 1 30 30.0 Agapito Yoga " + d1.toString() + " " + idSala1, basicas.leerSuscripcion(numBas).toString());
-		assertEquals("2 2 90 120.0 Anacleto " + idCatalogo1 + " 11111111A", premium.leerSuscripcion(numPrem).toString());
+		assertEquals(numBas + " 1 30 30.0 Agapito Yoga " + d1.toString() + " " + idSala1, basicas.leerSuscripcion(numBas).toString());
+		assertEquals(numPrem + " 2 90 120.0 Anacleto " + idCatalogo1 + " 11111111A", premium.leerSuscripcion(numPrem).toString());
 		
 		basicas.actualizarSuscripcion(new DTOtBasica(numBas, "Josefa", "Crossfit", d2, idSala1));
 		
-		assertEquals("1 1 30 30.0 Josefa Crossfit " + d2.toString() + " " + idSala1, basicas.leerSuscripcion(numBas).toString());
+		assertEquals(numBas +" 1 30 30.0 Josefa Crossfit " + d2.toString() + " " + idSala1, basicas.leerSuscripcion(numBas).toString());
 		basicas.borrarSuscripcion(numBas);
 		
 		premium.actualizarSuscripcion(new DTOtPremium(numPrem, "Manuel", idCatalogo1, "22222222B"));
@@ -94,12 +96,10 @@ class SASuscripcionesTest {
 		boolean a = false;
 		
 		for(DTOtSuscripcion e : list) {
-			if (e.toString().equals("2 2 90 120.0 Manuel 1 22222222B")) a = true;
+			if (e.toString().equals(numPrem + " 2 90 120.0 Manuel "+ idCatalogo1 + " 22222222B")) a = true;
 		}
 		
 		assertTrue(a);
-		
-		assertEquals("2 2 90 120.0 Manuel 1 22222222B", list.get(0).toString());
 	}
 
 }

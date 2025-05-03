@@ -22,8 +22,8 @@ class SACatalogosTest {
 	String[] emp1 = {"77777777V"};
 	String[] emp2 = {"66666666Z"};
 	
-	int idCatalogo1;
-	int idCatalogo2;
+	static int idCatalogo1;
+	static int idCatalogo2;
 	
 	static Date d1;
 	static Date d2;
@@ -47,7 +47,8 @@ class SACatalogosTest {
 		empleados.borrarEmpleado("66666666Z");
 		salas.borrarSala(idSala1);
 		salas.borrarSala(idSala2);
-		
+		catalogos.borrarCatalogo(idCatalogo1);
+		catalogos.borrarCatalogo(idCatalogo2);
 	}
 	
 	@Test

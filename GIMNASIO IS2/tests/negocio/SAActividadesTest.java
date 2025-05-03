@@ -3,6 +3,7 @@ package negocio;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
@@ -14,10 +15,12 @@ class SAActividadesTest {
 	static SAActividades actividades;
 	static SASalas salas;
 	static SAEmpleados empleados;
+	static SACatalogos catalogos;
 	static Date d1;
 	static Date d2;
 	static int idSala1;
 	static int idSala2;
+	static int idCatalogo;
 	String[] emp1 = {"77777777V"};
 	String[] emp2 = {"66666666Z"};
 	
@@ -26,6 +29,7 @@ class SAActividadesTest {
 		actividades = new SAActividadesImp();
 		salas = new SASalasImp();
 		empleados = new SAEmpleadosImp();
+		catalogos = new SACatalogosImp();
 		
 		d1 = Date.valueOf("2025-1-1");
 		d2 = Date.valueOf("2025-1-2");
@@ -40,6 +44,7 @@ class SAActividadesTest {
 		empleados.borrarEmpleado("66666666Z");
 		salas.borrarSala(idSala1);
 		salas.borrarSala(idSala2);
+		catalogos.borrarCatalogo(idCatalogo);
 	}
 
 	@Test
@@ -52,9 +57,17 @@ class SAActividadesTest {
 		idSala1 = salas.altaSala(new DTOtSala(15,emp1));
 		idSala2 = salas.altaSala(new DTOtSala(10,emp2));
 		
-		actividades.altaActividad(new DTOtActividad("Yoga", idSala1, d1,"99999999X", 1));
-		actividades.altaActividad(new DTOtActividad("Pilates", idSala2, d1,"88888888K", 2));
-		actividades.altaActividad(new DTOtActividad("Crossfit", idSala1, d2,"99999999X", 1));
+		actividades.altaActividad(new DTOtActividad("Yoga", idSala1, d1,"99999999X"));
+		actividades.altaActividad(new DTOtActividad("Pilates", idSala2, d1,"88888888K"));
+		actividades.altaActividad(new DTOtActividad("Crossfit", idSala1, d2,"99999999X"));
+		
+		ArrayList<DTOtActividad> act = new ArrayList<DTOtActividad>();
+		act.add(new DTOtActividad("Yoga", idSala1, d1, "99999999X"));
+		act.add(new DTOtActividad("Pilates", idSala2, d1, "88888888K"));
+		act.add(new DTOtActividad("Crossfit", idSala1, d2, "99999999X"));
+		
+		idCatalogo = catalogos.altaCatalogo(new DTOtCatalogo(0, act, 3));
+		
 		
 		assertEquals(actividades.leerActividad("Yoga", d1, idSala1).toString(), "Yoga " + idSala1 + " 99999999X 2025-01-01");
 		

@@ -42,7 +42,7 @@ class SASalasTest {
 		idSala2 = salas.altaSala(new DTOtSala(15, emplea1));	
 		idSala3 = salas.altaSala(new DTOtSala(10, emplea1));		
 		
-		assertEquals( idSala3 + " 10 Empleados: 66666666Z 77777777V ", salas.leerSala(idSala3).toString());
+		assertEquals(idSala3 + " 10 Empleados: 66666666Z 77777777V ", salas.leerSala(idSala3).toString());
 		
 		salas.actualizarSala(new DTOtSala(idSala3,5,emplea1));
 		

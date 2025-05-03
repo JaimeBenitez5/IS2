@@ -88,7 +88,7 @@ CREATE TABLE Mantienen(
 dniEmpleado VARCHAR(9), 
 idSala INT NOT NULL, 
 PRIMARY KEY (dniEmpleado, idSala), 
-FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado),
+FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado) ON DELETE CASCADE,
 FOREIGN KEY (idSala) REFERENCES Salas(idSala) ON DELETE CASCADE
 );
 
@@ -99,7 +99,7 @@ idSala INT NOT NULL,
 dniEmpleado VARCHAR(9),
 PRIMARY KEY (tipoActividad, fecha, idSala), 
 FOREIGN KEY (idSala) REFERENCES Salas(idSala) ON DELETE CASCADE,
-FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado)
+FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado) ON DELETE CASCADE
 ); 
 
 CREATE TABLE Suscripciones(
@@ -127,7 +127,7 @@ precio DECIMAL(10, 2) NOT NULL,
 duracion INT,
 dniEmpleado VARCHAR(9),
 idCatalogo INT, 
-FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado),
+FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado) ON DELETE CASCADE,
 FOREIGN KEY (idCatalogo) REFERENCES Catalogos(idCatalogo) ON DELETE CASCADE,
 FOREIGN KEY (numSuscripcion) REFERENCES Suscripciones(numSuscripcion) ON DELETE CASCADE
 );
@@ -151,10 +151,10 @@ metodoPago VARCHAR(255) CHECK (metodoPago IN ('Efectivo', 'Tarjeta', 'Transferen
 numFactura INT NOT NULL, 
 dniEmpleado VARCHAR(9), 
 PRIMARY KEY (idCompra),
-FOREIGN KEY (numSuscripcion) REFERENCES Suscripciones(numSuscripcion), 
+FOREIGN KEY (numSuscripcion) REFERENCES Suscripciones(numSuscripcion) ON DELETE CASCADE, 
 FOREIGN KEY (dniCliente) REFERENCES Clientes(dniCliente),
 FOREIGN KEY (numFactura) REFERENCES Facturas(numFactura), 
-FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado)
+FOREIGN KEY (dniEmpleado) REFERENCES Empleados(dniEmpleado) ON DELETE CASCADE
 );
 
 INSERT INTO Roles (nombre) VALUES ('Mantenimiento');

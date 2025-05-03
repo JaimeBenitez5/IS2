@@ -84,11 +84,16 @@ public class VistaEliminarEmpleado {
 
 		delete.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String dniEmp = dniTF.getText().trim();
-				if (!Comprobaciones.esDNIValido(dniEmp)) {
-				    JOptionPane.showMessageDialog(null, "DNI no valido. Debe tener 8 numeros y una letra al final", "Error", JOptionPane.ERROR_MESSAGE);
+				int n = JOptionPane.showOptionDialog(menuPrincipal, "🚨 Advertencia, si el empleado a borrar esta asociado a una sala, actividad, suscripcion premium o compra, esta tambien se eliminara. Estas seguro? 🚨", "Advertencia",
+						JOptionPane.YES_NO_OPTION, JOptionPane.DEFAULT_OPTION, null, null, null);
+
+				if (n == 0) {
+					String dniEmp = dniTF.getText().trim();
+					if (!Comprobaciones.esDNIValido(dniEmp)) {
+						JOptionPane.showMessageDialog(null, "DNI no valido. Debe tener 8 numeros y una letra al final", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					else Controlador.accion(Evento.ELIMINAR_EMPLEADO, dniEmp);
 				}
-				else Controlador.accion(Evento.ELIMINAR_EMPLEADO, dniEmp);
 			}
 		});
 
@@ -104,7 +109,7 @@ public class VistaEliminarEmpleado {
 				Controlador.mostrarVista(Evento.VISTA_MENU_PRINCIPAL);
 			}
 		});
-		
+
 		return menuPrincipal;
 	}
 
