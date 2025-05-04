@@ -77,7 +77,7 @@ public class SASalasImp implements SASalas {
 		int exito = 0;
 		if(s != null) {
 			//EL ORDEN DE BORRADO DE AQUI ABAJO ES IMPORTANTE
-			getDAOCatalogos().borrarCatalogosSala(id);	
+			//getDAOCatalogos().borrarCatalogosSala(id);	
 			//LAS ACTIVIDADEDS SE BORRAN CON ON CASCADE
 			exito = getDAOSalas().borrarSala(id);
 		}
