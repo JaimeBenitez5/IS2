@@ -92,8 +92,8 @@ class SAComprasTest {
 		int idBas = basicas.altaSuscripcion(new DTOtBasica("Agapito", "Yoga", d1, idSala1));
 		int idPrem = premium.altaSuscripcion(new DTOtPremium("Anacleto", idCatalogo1, "11111111A"));
 		
-		int idCompra1 = compras.altaCompra(new DTOtCompra(1,idBas,"12345678A",d1,"Efectivo","33333333C"));
-		int idCompra2 = compras.altaCompra(new DTOtCompra(2,idPrem,"87654321B",d2,"Tarjeta","44444444D"));
+		int idCompra1 = compras.altaCompra(new DTOtCompra(0,idBas,"12345678A",d1,"Efectivo","33333333C"));
+		int idCompra2 = compras.altaCompra(new DTOtCompra(0,idPrem,"87654321B",d2,"Tarjeta","44444444D"));
 		
 		DTOtCompra compra1 = compras.leerCompra(idCompra1);
 		DTOtCompra compra2 = compras.leerCompra(idCompra2);
@@ -109,6 +109,17 @@ class SAComprasTest {
 		
 		assertEquals(idFactura1 + " " + d1.toString() + " " + precio1, compras.leerFactura(idFactura1).toString());
 		assertEquals(idFactura2 + " " + d2.toString() + " " + precio2, compras.leerFactura(idFactura2).toString());
-	}
+		
+		compra1.setDniEmpleado("44444444D");
+		compra1.setFecha(d2);
+		compra1.setMetodoPago("Bizum");
+		
+		compras.actualizarCompra(compra1);
+		
+		assertEquals(idCompra1 + " " + idBas + " 12345678A " + d2.toString() + " Bizum 44444444D " + idFactura1, compras.leerCompra(idCompra1).toString());
+		assertEquals(idFactura1 + " " + d2.toString() + " " + precio1, compras.leerFactura(idFactura1).toString());
+		
+		
+	} 
 
 }
