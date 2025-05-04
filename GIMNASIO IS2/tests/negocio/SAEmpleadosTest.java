@@ -33,20 +33,26 @@ class SAEmpleadosTest {
 	void test() {
 		
 		assertEquals(1,empleados.altaEmpleado(new DTOtEmpleado("11111111A", "Agapito", new DTOtRol("Mantenimiento"))));
-		empleados.altaEmpleado(new DTOtEmpleado("22222222B", "Manuel", new DTOtRol("Recepcion")));
-		empleados.altaEmpleado(new DTOtEmpleado("33333333C", "Josefa", new DTOtRol("Monitor")));
-		empleados.altaEmpleado(new DTOtEmpleado("44444444D", "Anastasia", new DTOtRol("Nutricionista")));
+		assertEquals(1,empleados.altaEmpleado(new DTOtEmpleado("22222222B", "Manuel", new DTOtRol("Recepcion"))));
+		assertEquals(1,empleados.altaEmpleado(new DTOtEmpleado("33333333C", "Josefa", new DTOtRol("Monitor"))));
+		assertEquals(1,empleados.altaEmpleado(new DTOtEmpleado("44444444D", "Anastasia", new DTOtRol("Nutricionista"))));
+		
+		assertEquals(0,empleados.altaEmpleado(new DTOtEmpleado("11111111A", "Agapito", new DTOtRol("Mantenimiento"))));
 		
 		assertEquals("11111111A Agapito 1 Mantenimiento 2400.0", empleados.leerEmpleado("11111111A").toString());
 		assertEquals("22222222B Manuel 4 Recepcion 1500.0", empleados.leerEmpleado("22222222B").toString());
 		assertEquals("33333333C Josefa 2 Monitor 2100.0", empleados.leerEmpleado("33333333C").toString());
 		assertEquals("44444444D Anastasia 3 Nutricionista 1300.0", empleados.leerEmpleado("44444444D").toString());
 		
-		empleados.actualizarEmpleado(new DTOtEmpleado("11111111A", "Arturo",new DTOtRol("Mantenimiento")));
+		assertEquals(1,empleados.actualizarEmpleado(new DTOtEmpleado("11111111A", "Arturo",new DTOtRol("Mantenimiento"))));
+		assertEquals(0,empleados.actualizarEmpleado(new DTOtEmpleado("13264839A", "JoseManuel",new DTOtRol("Mantenimiento"))));
 		assertEquals("11111111A Arturo 1 Mantenimiento 2400.0", empleados.leerEmpleado("11111111A").toString());
 		
-		empleados.borrarEmpleado("33333333C");
-		empleados.borrarEmpleado("44444444D");
+		assertEquals(1,empleados.borrarEmpleado("33333333C"));
+		assertEquals(0,empleados.borrarEmpleado("33333333C"));
+		assertNull(empleados.leerEmpleado("33333333C"));
+		assertEquals(1,empleados.borrarEmpleado("44444444D"));
+		assertNull(empleados.leerEmpleado("44444444D"));
 		
 		List<DTOtEmpleado> list = empleados.leerTodosEmpleados();
 		

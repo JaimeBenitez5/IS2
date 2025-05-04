@@ -76,12 +76,15 @@ class SACatalogosTest {
 		
 		act.remove(1);
 		
-		catalogos.actualizarCatalogo(new DTOtCatalogo(idCatalogo1, act, 3));
+		assertEquals(1,catalogos.actualizarCatalogo(new DTOtCatalogo(idCatalogo1, act, 3)));
+		assertEquals(0,catalogos.actualizarCatalogo(new DTOtCatalogo(6538234, act, 3)));
 		
 		assertEquals(idCatalogo1 + " 3 Crossfit " + idSala1 + " 99999999X " + d2.toString() +
 				 " Yoga " + idSala1 + " 99999999X " + d1.toString(), catalogos.leerCatalogo(idCatalogo1).toString());
 		
-		catalogos.borrarCatalogo(idCatalogo1);
+		assertEquals(1,catalogos.borrarCatalogo(idCatalogo1));
+		assertEquals(0,catalogos.borrarCatalogo(idCatalogo1));
+		assertNull(catalogos.leerCatalogo(idCatalogo1));
 		
 		idCatalogo1 = catalogos.altaCatalogo(new DTOtCatalogo(0, act, 7));
 		idCatalogo2 = catalogos.altaCatalogo(new DTOtCatalogo(0, act, 5));

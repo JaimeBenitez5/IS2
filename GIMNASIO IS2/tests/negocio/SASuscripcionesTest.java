@@ -77,26 +77,29 @@ class SASuscripcionesTest {
 		
 		idCatalogo1 = catalogos.altaCatalogo(new DTOtCatalogo(0, act, 7));
 		
-		int numBas = basicas.altaSuscripcion(new DTOtBasica("Agapito", "Yoga", d1, idSala1));
-		int numPrem = premium.altaSuscripcion(new DTOtPremium("Anacleto", idCatalogo1, "11111111A"));
+		int idBas = basicas.altaSuscripcion(new DTOtBasica("Agapito", "Yoga", d1, idSala1));
+		int idPrem = premium.altaSuscripcion(new DTOtPremium("Anacleto", idCatalogo1, "11111111A"));
 		
+		assertEquals(idBas + " 1 30 30.0 Agapito Yoga " + d1.toString() + " " + idSala1, basicas.leerSuscripcion(idBas).toString());
+		assertEquals(idPrem + " 2 90 120.0 Anacleto " + idCatalogo1 + " 11111111A", premium.leerSuscripcion(idPrem).toString());
 		
-		assertEquals(numBas + " 1 30 30.0 Agapito Yoga " + d1.toString() + " " + idSala1, basicas.leerSuscripcion(numBas).toString());
-		assertEquals(numPrem + " 2 90 120.0 Anacleto " + idCatalogo1 + " 11111111A", premium.leerSuscripcion(numPrem).toString());
+		assertEquals(1,basicas.actualizarSuscripcion(new DTOtBasica(idBas, "Josefa", "Crossfit", d2, idSala1)));
 		
-		basicas.actualizarSuscripcion(new DTOtBasica(numBas, "Josefa", "Crossfit", d2, idSala1));
+		assertEquals(idBas +" 1 30 30.0 Josefa Crossfit " + d2.toString() + " " + idSala1, basicas.leerSuscripcion(idBas).toString());
+		assertEquals(1,basicas.borrarSuscripcion(idBas));
+		assertNull(basicas.leerSuscripcion(idBas));
 		
-		assertEquals(numBas +" 1 30 30.0 Josefa Crossfit " + d2.toString() + " " + idSala1, basicas.leerSuscripcion(numBas).toString());
-		basicas.borrarSuscripcion(numBas);
+		assertEquals(1,premium.actualizarSuscripcion(new DTOtPremium(idPrem, "Manuel", idCatalogo1, "22222222B")));
 		
-		premium.actualizarSuscripcion(new DTOtPremium(numPrem, "Manuel", idCatalogo1, "22222222B"));
+		assertEquals(0,basicas.actualizarSuscripcion(new DTOtBasica(724828,"TesTeo", "Yoga", d1, idSala1)));
+		assertEquals(0,premium.actualizarSuscripcion(new DTOtPremium(74218, "TesTeo", idCatalogo1, "22222222B")));
 		
 		List<DTOtSuscripcion> list = premium.leerTodasSuscripciones();
 		
 		boolean a = false;
 		
 		for(DTOtSuscripcion e : list) {
-			if (e.toString().equals(numPrem + " 2 90 120.0 Manuel "+ idCatalogo1 + " 22222222B")) a = true;
+			if (e.toString().equals(idPrem + " 2 90 120.0 Manuel "+ idCatalogo1 + " 22222222B")) a = true;
 		}
 		
 		assertTrue(a);

@@ -99,6 +99,7 @@ class SAComprasTest {
 		DTOtCompra compra1 = compras.leerCompra(idCompra1);
 		DTOtCompra compra2 = compras.leerCompra(idCompra2);
 		
+		
 		int idFactura1 = compra1.getIdFactura();
 		int idFactura2 = compra2.getIdFactura();
 		
@@ -115,7 +116,7 @@ class SAComprasTest {
 		compra1.setFecha(d2);
 		compra1.setMetodoPago("Bizum");
 		
-		compras.actualizarCompra(compra1);
+		assertEquals(1, compras.actualizarCompra(compra1));
 		
 		assertEquals(idCompra1 + " " + idBas + " 12345678A " + d2.toString() + " Bizum 44444444D " + idFactura1, compras.leerCompra(idCompra1).toString());
 		assertEquals(idFactura1 + " " + d2.toString() + " " + precio1, compras.leerFactura(idFactura1).toString());
@@ -127,22 +128,23 @@ class SAComprasTest {
 		boolean b = false;
 		
 		for(DTOtCompra c : listCompras) {
-			if (c.toString().equals(idCompra1 + " " + idBas + " 12345678A " + d2.toString() + " Bizum 44444444D " + idFactura1)) a =true;
-			else if (c.toString().equals(idCompra2 + " " + idPrem + " 87654321B " + d2.toString() + " Tarjeta 44444444D " + idFactura2)) b= true;
+			if (c.toString().equals(idCompra1 + " " + idBas + " 12345678A " + d2.toString() + " Bizum 44444444D " + idFactura1)) a = true;
+			else if (c.toString().equals(idCompra2 + " " + idPrem + " 87654321B " + d2.toString() + " Tarjeta 44444444D " + idFactura2)) b = true;
 		}
 		
 		assertTrue(a); a = false;
 		assertTrue(b); b = false;
 		
 		for(DTOtFactura f : listFacturas) {
-			if(f.toString().equals(idFactura1 + " " + d2.toString() + " " + precio1)) a= true;
+			if(f.toString().equals(idFactura1 + " " + d2.toString() + " " + precio1)) a = true;
 			else if (f.toString().equals(idFactura2 + " " + d2.toString() + " " + precio2)) b = true;
 		}
 		
 		assertTrue(a);
 		assertTrue(b);
 		
-		compras.borrarCompra(idCompra1);
+		assertEquals(1,compras.borrarCompra(idCompra1));
+		assertEquals(0,compras.borrarCompra(idCompra1));
 		
 		assertNull(compras.leerCompra(idCompra1));
 		assertNull(compras.leerFactura(idFactura1));

@@ -57,9 +57,10 @@ class SAActividadesTest {
 		idSala1 = salas.altaSala(new DTOtSala(15,emp1));
 		idSala2 = salas.altaSala(new DTOtSala(10,emp2));
 		
-		actividades.altaActividad(new DTOtActividad("Yoga", idSala1, d1,"99999999X"));
-		actividades.altaActividad(new DTOtActividad("Pilates", idSala2, d1,"88888888K"));
-		actividades.altaActividad(new DTOtActividad("Crossfit", idSala1, d2,"99999999X"));
+		assertEquals(1,actividades.altaActividad(new DTOtActividad("Yoga", idSala1, d1, "99999999X")));
+		assertEquals(1,actividades.altaActividad(new DTOtActividad("Pilates", idSala2, d1, "88888888K")));
+		assertEquals(1,actividades.altaActividad(new DTOtActividad("Crossfit", idSala1, d2, "99999999X")));
+		assertEquals(0,actividades.altaActividad(new DTOtActividad("Yoga", idSala1, d1, "99999999X")));
 		
 		ArrayList<DTOtActividad> act = new ArrayList<DTOtActividad>();
 		act.add(new DTOtActividad("Yoga", idSala1, d1, "99999999X"));
@@ -70,11 +71,13 @@ class SAActividadesTest {
 				
 		assertEquals(actividades.leerActividad("Yoga", d1, idSala1).toString(), "Yoga " + idSala1 + " 99999999X 2025-01-01");
 		
-		actividades.actualizarActividad(new DTOtActividad("Yoga",idSala1, d1,"88888888K",1));
+		assertEquals(1, actividades.actualizarActividad(new DTOtActividad("Yoga", idSala1, d1, "88888888K", 1)));
 		
 		assertEquals(actividades.leerActividad("Yoga", d1, idSala1).toString(),"Yoga " + idSala1 + " 88888888K 2025-01-01");
 		
-		actividades.borrarActividad("Crossfit", d2, idSala1);
+		assertEquals(1,actividades.borrarActividad("Crossfit", d2, idSala1));
+		assertEquals(0,actividades.borrarActividad("Crossfit", d2, idSala1));
+		assertNull(actividades.leerActividad("Crossfit", d2, idSala1));
 		
 		List<DTOtActividad> list = actividades.leerTodasActividades();
 		
