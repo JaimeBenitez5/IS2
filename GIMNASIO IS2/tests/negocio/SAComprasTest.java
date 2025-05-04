@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -119,7 +120,32 @@ class SAComprasTest {
 		assertEquals(idCompra1 + " " + idBas + " 12345678A " + d2.toString() + " Bizum 44444444D " + idFactura1, compras.leerCompra(idCompra1).toString());
 		assertEquals(idFactura1 + " " + d2.toString() + " " + precio1, compras.leerFactura(idFactura1).toString());
 		
+		List<DTOtCompra> listCompras = compras.leerTodasCompras();
+		List<DTOtFactura> listFacturas = compras.leerTodasFacturas();
 		
+		boolean a = false;
+		boolean b = false;
+		
+		for(DTOtCompra c : listCompras) {
+			if (c.toString().equals(idCompra1 + " " + idBas + " 12345678A " + d2.toString() + " Bizum 44444444D " + idFactura1)) a =true;
+			else if (c.toString().equals(idCompra2 + " " + idPrem + " 87654321B " + d2.toString() + " Tarjeta 44444444D " + idFactura2)) b= true;
+		}
+		
+		assertTrue(a); a = false;
+		assertTrue(b); b = false;
+		
+		for(DTOtFactura f : listFacturas) {
+			if(f.toString().equals(idFactura1 + " " + d2.toString() + " " + precio1)) a= true;
+			else if (f.toString().equals(idFactura2 + " " + d2.toString() + " " + precio2)) b = true;
+		}
+		
+		assertTrue(a);
+		assertTrue(b);
+		
+		compras.borrarCompra(idCompra1);
+		
+		assertNull(compras.leerCompra(idCompra1));
+		assertNull(compras.leerFactura(idFactura1));
 	} 
 
 }
