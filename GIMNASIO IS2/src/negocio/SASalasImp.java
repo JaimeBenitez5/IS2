@@ -67,7 +67,7 @@ public class SASalasImp implements SASalas {
 		int exito = 0;
 		if(s != null) {
 			exito = getDAOSalas().actualizarSala(sala);
-			if(exito != 0) getDAOSalas().actualizarMantenedor(sala);
+			if(exito != 0 && todosSonMantenimiento(sala.getDniEmpleados())) getDAOSalas().actualizarMantenedor(sala);
 		}
 		return exito;
 	}
@@ -77,9 +77,9 @@ public class SASalasImp implements SASalas {
 		int exito = 0;
 		if(s != null) {
 			//EL ORDEN DE BORRADO DE AQUI ABAJO ES IMPORTANTE
-			exito = getDAOCatalogos().borrarCatalogosSala(id);	
+			getDAOCatalogos().borrarCatalogosSala(id);	
 			//LAS ACTIVIDADEDS SE BORRAN CON ON CASCADE
-			if(exito == 1) exito = getDAOSalas().borrarSala(id);
+			exito = getDAOSalas().borrarSala(id);
 		}
 		return exito;
 	}
