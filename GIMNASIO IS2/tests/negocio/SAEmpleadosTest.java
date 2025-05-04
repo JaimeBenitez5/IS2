@@ -32,7 +32,7 @@ class SAEmpleadosTest {
 	@Test
 	void test() {
 		
-		empleados.altaEmpleado(new DTOtEmpleado("11111111A", "Agapito", new DTOtRol("Mantenimiento")));
+		assertEquals(1,empleados.altaEmpleado(new DTOtEmpleado("11111111A", "Agapito", new DTOtRol("Mantenimiento"))));
 		empleados.altaEmpleado(new DTOtEmpleado("22222222B", "Manuel", new DTOtRol("Recepcion")));
 		empleados.altaEmpleado(new DTOtEmpleado("33333333C", "Josefa", new DTOtRol("Monitor")));
 		empleados.altaEmpleado(new DTOtEmpleado("44444444D", "Anastasia", new DTOtRol("Nutricionista")));

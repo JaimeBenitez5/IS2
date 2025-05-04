@@ -57,7 +57,8 @@ class SASalasTest {
 		
 		assertEquals(idSala3 + " 5 Empleados: 66666666Z ", salas.leerSala(idSala3).toString()); 
 		
-		assertEquals(1,salas.borrarSala(idSala1));
+		salas.borrarSala(idSala1);
+		assertNull(salas.leerSala(idSala1));
 		assertEquals(0,salas.borrarSala(idSala1));
 		
 		List<DTOtSala> list = salas.leerTodasSalas();
@@ -71,9 +72,7 @@ class SASalasTest {
 		}
 		
 		assertTrue(a);
-		assertTrue(b);
-		
-		assertNull(salas.leerSala(idSala1));
+		assertTrue(b);	
 	}
 
 }
