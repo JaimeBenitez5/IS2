@@ -93,4 +93,9 @@ public class DTOtCompra {
 	public void setDniEmpleado(final String dniEmpleado) {
 		this._dniEmpleado = dniEmpleado;
 	}
+	
+	public String toString() {
+		return _idCompra + " " + _idSuscripcion + " " + _dniCliente + " "+
+			   _fecha.toString() + " " + _metodoPago + " " + _dniEmpleado + " " + _idFactura;
+	}
 }
