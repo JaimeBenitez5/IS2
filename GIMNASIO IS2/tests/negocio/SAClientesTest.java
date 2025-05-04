@@ -22,12 +22,15 @@ class SAClientesTest {
 		}
 		else clientes.altaCliente(new DTOtCliente("22222222B", "Josefa", "Casa de Josefa", true));
 		
-		clientes.borrarCliente("11111111A");
+		assertEquals(1,clientes.borrarCliente("11111111A"));
+		assertEquals(0,clientes.borrarCliente("11111111A"));
 		DTOtCliente test = clientes.leerCliente("11111111A");
+		assertNull(clientes.leerCliente("88888888K"));
 		assertEquals(test.getActivo(), false);
 		clientes.actualizarCliente(new DTOtCliente("22222222B", "Carlitos", "Casa de Carlitos", false));
 		assertEquals("22222222B Carlitos Casa de Carlitos false", clientes.leerCliente("22222222B").toString());
-		clientes.actualizarCliente(new DTOtCliente("11111111A", "Agapito", "Casa de Agapito", true));
+		clientes.altaCliente(new DTOtCliente("11111111A", "Agapito", "Casa de Agapito", true));
+		assertEquals(0, clientes.altaCliente(new DTOtCliente("11111111A", "Agapito", "Casa de Agapito", true)));
 		
 		List<DTOtCliente> list = clientes.leerTodosClientes();
 		

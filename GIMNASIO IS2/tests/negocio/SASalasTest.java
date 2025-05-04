@@ -42,6 +42,9 @@ class SASalasTest {
 		idSala2 = salas.altaSala(new DTOtSala(15, emplea1));	
 		idSala3 = salas.altaSala(new DTOtSala(10, emplea1));		
 		
+		assertNull(salas.leerSala(-1));
+		assertEquals(0,salas.altaSala(new DTOtSala(idSala1,33,emplea1)));
+		
 		assertEquals(idSala3 + " 10 Empleados: 66666666Z 77777777V ", salas.leerSala(idSala3).toString());
 		
 		salas.actualizarSala(new DTOtSala(idSala3,5,emplea1));
@@ -54,7 +57,8 @@ class SASalasTest {
 		
 		assertEquals(idSala3 + " 5 Empleados: 66666666Z ", salas.leerSala(idSala3).toString()); 
 		
-		salas.borrarSala(idSala1);
+		assertEquals(1,salas.borrarSala(idSala1));
+		assertEquals(0,salas.borrarSala(idSala1));
 		
 		List<DTOtSala> list = salas.leerTodasSalas();
 		
@@ -68,6 +72,8 @@ class SASalasTest {
 		
 		assertTrue(a);
 		assertTrue(b);
+		
+		assertNull(salas.leerSala(idSala1));
 	}
 
 }

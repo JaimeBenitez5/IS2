@@ -67,8 +67,7 @@ class SAActividadesTest {
 		act.add(new DTOtActividad("Crossfit", idSala1, d2, "99999999X"));
 		
 		idCatalogo = catalogos.altaCatalogo(new DTOtCatalogo(0, act, 3));
-		
-		
+				
 		assertEquals(actividades.leerActividad("Yoga", d1, idSala1).toString(), "Yoga " + idSala1 + " 99999999X 2025-01-01");
 		
 		actividades.actualizarActividad(new DTOtActividad("Yoga",idSala1, d1,"88888888K",1));
