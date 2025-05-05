@@ -200,13 +200,14 @@ INSERT INTO ActividadesCatalogo VALUES (1, 'Spinning', '2025-03-20', 2);
 
 INSERT INTO Suscripciones (nombre, idTipoSuscripcion) VALUES ('suscripcion para novatos', 1);
 INSERT INTO Basica (idTipoSuscripcion, numSuscripcion, precio, duracion, tipoActividad, fecha, idSala) VALUES (1, 1, '30', '30', 'Yoga', '2025-03-19', 1);
-INSERT INTO Suscripciones (nombre) VALUES ('suscripcion para pros'); 
-INSERT INTO Premium (idTipoSuscripcion, numSuscripcion, precio, duracion, dniEmpleado, idCatalogo) VALUES (1, 2, '90', '120', '12345678B', 1);
+INSERT INTO Suscripciones (nombre, idTipoSuscripcion) VALUES ('suscripcion para pros', 2); 
+INSERT INTO Premium (idTipoSuscripcion, numSuscripcion, precio, duracion, dniEmpleado, idCatalogo) VALUES (2, 2, '90', '120', '12345678B', 1);
 
 
 INSERT INTO Facturas (fecha, importeTotal) VALUES ('2025-04-28', 30.00);
 INSERT INTO Facturas (fecha, importeTotal) VALUES ('2025-04-29', 90.00);
 INSERT INTO Facturas (fecha, importeTotal) VALUES ('2025-05-01', 90.00);
+
 INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (1, '11111111A', '2025-04-28', 'Tarjeta', 1, '12345678C');
 INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (2, '11111111A', '2025-04-28', 'Tarjeta', 2, '12345678C');
 INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (2, '22222222A', '2025-04-29', 'Transferencia Bancaria', 3, '12345678C');
