@@ -177,8 +177,8 @@ INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('12345678A', 2);
 INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('12345678B', 3);
 INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('12345678C', 4);
 
-INSERT INTO Clientes (nombre, dniCliente, direccion) VALUES ('Marlon', '111111111A' ,'Gran Via 4'); 
-INSERT INTO Clientes (nombre, dniCliente, direccion) VALUES ('Carlos', '222222222A' ,'Las Tablas'); 
+INSERT INTO Clientes (nombre, dniCliente, direccion) VALUES ('Marlon', '11111111A' ,'Gran Via 4'); 
+INSERT INTO Clientes (nombre, dniCliente, direccion) VALUES ('Carlos', '22222222A' ,'Las Tablas'); 
 
 INSERT INTO Salas (aforo) VALUES (100);
 INSERT INTO Salas (aforo) VALUES (150); 
@@ -207,6 +207,6 @@ INSERT INTO Premium (idTipoSuscripcion, numSuscripcion, precio, duracion, dniEmp
 INSERT INTO Facturas (fecha, importeTotal) VALUES ('2025-04-28', 30.00);
 INSERT INTO Facturas (fecha, importeTotal) VALUES ('2025-04-29', 90.00);
 INSERT INTO Facturas (fecha, importeTotal) VALUES ('2025-05-01', 90.00);
-INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (1, 'AAAAAAAAA', '2025-04-28', 'Tarjeta', 1, '12345678C');
-INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (2, 'AAAAAAAAA', '2025-04-28', 'Tarjeta', 2, '12345678C');
-INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (2, 'AAAAAAAAA', '2025-04-29', 'Transferencia Bancaria', 3, '12345678C');
+INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (1, '11111111A', '2025-04-28', 'Tarjeta', 1, '12345678C');
+INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (2, '11111111A', '2025-04-28', 'Tarjeta', 2, '12345678C');
+INSERT INTO Compras (numSuscripcion, dniCliente, fecha, metodoPago, numFactura, dniEmpleado) VALUES (2, '22222222A', '2025-04-29', 'Transferencia Bancaria', 3, '12345678C');
