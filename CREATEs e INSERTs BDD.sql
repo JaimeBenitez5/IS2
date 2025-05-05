@@ -177,8 +177,8 @@ INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('12345678A', 2);
 INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('12345678B', 3);
 INSERT INTO EmpleadosRoles (dniEmpleado, idRol) VALUES ('12345678C', 4);
 
-INSERT INTO Clientes (nombre, dniCliente, direccion) VALUES ('Marlon', 'AAAAAAAAA' ,'Gran Via 4'); 
-INSERT INTO Clientes (nombre, dniCliente, direccion) VALUES ('Carlos', 'BBBBBBBBB' ,'Las Tablas'); 
+INSERT INTO Clientes (nombre, dniCliente, direccion) VALUES ('Marlon', '111111111A' ,'Gran Via 4'); 
+INSERT INTO Clientes (nombre, dniCliente, direccion) VALUES ('Carlos', '222222222A' ,'Las Tablas'); 
 
 INSERT INTO Salas (aforo) VALUES (100);
 INSERT INTO Salas (aforo) VALUES (150); 
